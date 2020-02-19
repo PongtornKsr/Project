@@ -28,43 +28,35 @@
           </div>
         </div>
         <div class="item">
-          <p>เรื่อง</p>
-          <div>
-            <input type="text" name="major" />
-          </div>
-        </div>
-        <div class="item">
-          <p>เรียนถึง</p>
-          <div>
-            <input type="text" name="major" />
-          </div>
-        </div>
-        <div class="item">
-          <p>ข้อความ</p>
-          <textarea rows="5"></textarea>
-        </div>
-        <div class="item">
           <p>วันที่</p>
           <input type="date" name="name" required/>
           <i class="fas fa-calendar-alt"></i>
         </div>
         <div class="item">
-          <p>งบประมาณที่ได้รับ</p>
+          <p>เครื่องยี่ห้อ</p>
           <div>
             <input type="text" name="major" />
           </div>
         </div>
         <div class="item">
-          <p>งบประมาณที่ขอ</p>
+          <p>รุ่น</p>
           <div>
             <input type="text" name="major" />
           </div>
         </div>
         <div class="item">
-          <p>คงเหลือ</p>
+          <p>รหัส</p>
           <div>
             <input type="text" name="major" />
           </div>
+        </div>
+        <div class="item">
+            <input type="radio" name="reason" id="">สมควรจ้าง
+            <input type="radio" name="reason" id="">ไม่สมควรจ้าง
+        </div>
+        <div class="item">
+          <p>เหตุผล</p>
+          <textarea rows="5"></textarea>
         </div>
         <!-- <div class="item">
           <p>Your department</p>
@@ -78,11 +70,15 @@
           </select>
         </div> -->
         <div class="item">
-          <p>หัวหน้าสาขา</p>
+          <p>ประธานกรรมการ</p>
           <input type="text" name="name"/>
         </div>
         <div class="item">
-          <p>หัวหน้าสาขา</p>
+          <p>กรรมการ</p>
+          <input type="text" name="name"/>
+        </div>
+        <div class="item">
+          <p>กรรมการและเลขานุการ</p>
           <input type="text" name="name"/>
         </div>
        
