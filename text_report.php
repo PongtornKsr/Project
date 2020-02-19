@@ -63,10 +63,7 @@
           <p>จึงเรียนเพื่อโปรจพิจารณาอนุมัติ</p>
           <textarea rows="5"></textarea>
         </div>
-        <div class="item">
-          <p>Signature</p>
-          <textarea rows="5"></textarea>
-        </div>
+       
         <div class="btn-block">
           <button type="submit" href="/">Send</button>
         </div>

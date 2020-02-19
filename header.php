@@ -24,6 +24,7 @@
                         <div class="dropdown-menu">
                           <a href="text_report.php" class="dropdown-item">พิมพ์บันทึกข้อความ</a>
                           <a href="p4_report.php" class="dropdown-item">พิมพ์พ.ส.4</a>
+                          <a href="check_report.php" class="dropdown-item">พิมพ์ใบตรวจสอบครุภัณฑ์</a>
                         </div>
                     </li>
                     <li class="nav-item">

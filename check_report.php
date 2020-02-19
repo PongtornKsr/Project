@@ -20,7 +20,7 @@
 <?php require 'nav.php'; ?>
 <div class="testbox">
       <form action="/">
-        <h1>พิมพ์เอกสาร พ.ส.4 </h1>
+        <h1>พิมพ์เอกสารตรวจสอบครุภัณฑ์</h1>
         <div class="item">
           <p>สาขา/แผนก</p>
           <div>
@@ -82,7 +82,7 @@
           <input type="text" name="name"/>
         </div>
         <div class="item">
-          <p>ผู้ขออนุมัติ</p>
+          <p>หัวหน้าสาขา</p>
           <input type="text" name="name"/>
         </div>
        
