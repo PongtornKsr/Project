@@ -15,6 +15,7 @@
   transform: translate(-50%, -50%);
 }
     </style>
+    
 </head>
 <body>
 <?php require 'nav.php'; ?>
@@ -50,15 +51,11 @@
             <input type="text" name="major" />
           </div>
         </div>
-        <div class="item">
-            <input type="radio" name="reason" id="">สมควรจ้าง
-            <input type="radio" name="reason" id="">ไม่สมควรจ้าง
-        </div>
-        <div class="item">
+       <!-- <div class="item">
           <p>เหตุผล</p>
           <textarea rows="5"></textarea>
         </div>
-        <!-- <div class="item">
+         <div class="item">
           <p>Your department</p>
           <select>
             <option value="">*Please select*</option>

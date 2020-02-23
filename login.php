@@ -32,26 +32,34 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
+
 					<form action = "login2.php" method="POST">
+					<div class="input-group mb-2">
+						
+						<div class="input-group-append">
+						<span class="input-group-text"><i class="fas fa-user"></i></span>
+					</div>
+					<input type="Text" name = "uname" class="form-control input_pass" value="" placeholder="USERNAME">
+					</div>
 						<div class="input-group mb-3">
 						
-							<input type="text" name = "email" class="form-control input_user" value="" placeholder="Email">
-						</div>
-						<div class="input-group mb-2">
-						
-								<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							<input type="Text" name = "fname" class="form-control input_pass" value="" placeholder="username">
+							<input type="password" name = "password" class="form-control input_user" value="" placeholder="PASSWORD">
 						</div>
 						
+						<a style = "float: right"href="Setnewpass.php">ลืมรหัสผ่าน</a>
 						</div>
+						
 							<div class="d-flex justify-content-center mt-3 login_container">
 				 	<button type="submit" class="btn btn-success">Login</button>
 					&nbsp&nbsp
-					<button type="button" onclick = "window.location = '<?php echo $loginURL ; ?>'" class="btn btn-danger">G-MAIL</button>
+					<button type="submit" value = "regist" name = "submit">Register</button>
+					&nbsp&nbsp
+					<button type="button" onclick = "window.location = '<?php echo $loginURL ; ?>'" class="btn btn-danger">Google-Login</button>
 				   </div>
+				   <br><br>
+				   <center><b style="color: red;font-size: 30px;"><?php if(!isset($_GET['error'])){ }elseif(isset($_GET['error'])){ echo "ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกับข้อมูลที่มีอยู่ในระบบ";} ?></b></center>
 					</form>
+				
 				</div>
 				</div>
 			</div>

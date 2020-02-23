@@ -21,23 +21,23 @@
         </div>
         <div class="item">
           <p>โทร</p>
-          <input type="text" name="name"/>
+          <input type="text" name="tel"/>
         </div>
         <div class="item">
-          <p>เลขที่</p>
+          <p>ฉบับที่</p>
           <div>
-            <input type="text" name="major" />
+            <input type="text" name="number" />
           </div>
         </div>
         <div class="item">
           <p>เรียนถึง</p>
           <div>
-            <input type="text" name="major" />
+            <input type="text" name="to" />
           </div>
         </div>
         <div class="item">
           <p>วันที่</p>
-          <input type="date" name="name" required/>
+          <input type="date" name="tdate" required/>
           <i class="fas fa-calendar-alt"></i>
         </div>
         <!-- <div class="item">
@@ -53,15 +53,15 @@
         </div> -->
         <div class="item">
           <p>หัวหน้าสาขา</p>
-          <input type="text" name="name"/>
+          <input type="text" name="hmajor"/>
         </div>
         <div class="item">
           <p>ข้อความ</p>
-          <textarea rows="5"></textarea>
+          <textarea name="text" rows="5"></textarea>
         </div>
         <div class="item">
           <p>จึงเรียนเพื่อโปรจพิจารณาอนุมัติ</p>
-          <textarea rows="5"></textarea>
+          <textarea name="approve_text" rows="5"></textarea>
         </div>
        
         <div class="btn-block">
