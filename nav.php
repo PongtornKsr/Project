@@ -23,6 +23,7 @@
                         <div class="dropdown-menu">
                           <a href="AccountManage.php" class="dropdown-item">ค้นหาและจัดการผู้ใช้</a>
                           <a href="userinsert.php" class="dropdown-item">เพิ่มผู้ใช้ใหม่</a>
+                          <a href="profile_edit.php" class="dropdown-item">แก้ไขข้อมูลส่วนตัว</a>
                         </div>
                     </li>
                     <li class="nav-item">

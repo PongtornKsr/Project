@@ -3,7 +3,23 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!DOCTYPE html><?php SESSION_START(); ?>
 <html lang="en">
-<?php require 'managepageheader.php'; ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<?php  require 'connect.php';
+       $sqla = "SELECT * FROM userdata WHERE name = '".$_SESSION['Account']."'";
+       $result = $conn->query($sqla);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+           if($row['profile_ID']==2){ $_SESSION['editop'] = 2; require 'Userheader.php'; }
+           elseif($row['profile_ID']==1){ $_SESSION['editop'] = 1; require 'managepageheader.php'; }
+            }
+        }
+?>
 
   <?php require 'searchbox.php'; ?>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -24,7 +40,9 @@
   </thead>
   <tbody>
         <?php
+       // var_dump($_SESSION['Account']);
        require 'connect.php';
+      
             $s = $_POST['search'];
             $clause = " WHERE ";
             $sql="SELECT * FROM asset natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room ";//Query stub
@@ -113,8 +131,10 @@
                         <td>".$row['asset_stat_name']."</td>
                         <td>".$row['dstat']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['asset_number']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a>";
+                        if($_SESSION['editop'] == 1){
                         echo "<a href='edit.php?asset_number=".$row['asset_number']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a>               
-                         <input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >";
+                         <input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >"; }
+                        
                         
                 
                 echo "</td></tr>";

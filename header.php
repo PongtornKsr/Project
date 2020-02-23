@@ -3,7 +3,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="Css/BG.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
@@ -33,6 +33,7 @@
                         <div class="dropdown-menu">
                           <a href="AccountManage.php" class="dropdown-item">ค้นหาและจัดการผู้ใช้</a>
                           <a href="userinsert.php" class="dropdown-item">เพิ่มผู้ใช้ใหม่</a>
+                          <a href="profile_edit.php" class="dropdown-item">แก้ไขข้อมูลส่วนตัว</a>
                         </div>
                     </li>
                     <li class="nav-item">

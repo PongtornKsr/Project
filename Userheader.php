@@ -1,14 +1,4 @@
-<head>
-    <title>management</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="Css/management.css"> 
-    <link rel="stylesheet" href="Css/BG.css"> 
-</head>
-  <body background="img/BG.png">
+<body background="img/BG.png">
           <nav class="navbar navbar-light" style="background-color: #B3EE3A;">
             
             <a class="navbar-brand" href="Home.html">
@@ -28,11 +18,9 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                    <div class="nav-item dropdown">
+                      <div class="nav-item dropdown">
                         <a href="insert.html" class="nav-link dropdown-toggle" data-toggle="dropdown">AccountManage</a>
                         <div class="dropdown-menu">
-                          <a href="AccountManage.php" class="dropdown-item">ค้นหาและจัดการผู้ใช้</a>
-                          <a href="userinsert.php" class="dropdown-item">เพิ่มผู้ใช้ใหม่</a>
                           <a href="profile_edit.php" class="dropdown-item">แก้ไขข้อมูลส่วนตัว</a>
                         </div>
                     </li>
@@ -40,9 +28,6 @@
                       <div class="nav-item dropdown">
                         <a href="insert.html" class="nav-link dropdown-toggle" data-toggle="dropdown">AssetManage</a>
                         <div class="dropdown-menu">
-                          <a href="assetinsert.php" class="dropdown-item">เพิ่มครุภัณฑ์เดี่ยว</a>
-                          <a href="multi_insert_form.php" class="dropdown-item">เพิ่มครุภัณฑ์ชุด</a>
-                          <a href="" class="dropdown-item">เพิ่มครุภัณฑ์ติดอาคาร</a>
                           <a href="Search.php" class="dropdown-item">ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>
                         </div>
                     </li>
