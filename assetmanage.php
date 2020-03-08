@@ -6,6 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/management.css"> 
+    <link rel="stylesheet" href="CSS/fixedthead.css">
+    <link rel="stylesheet" href="CSS/submitstyle.css">
     <title>Document</title>
 </head>
 <body>
@@ -15,27 +18,24 @@
        $result = $conn->query($sqla);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-           if($row['profile_ID']==2){ $_SESSION['editop'] = 2; require 'Userheader.php'; }
-           elseif($row['profile_ID']==1){ $_SESSION['editop'] = 1; require 'managepageheader.php'; }
+           if($row['profile_ID']==2){ $_SESSION['editop'] = 2; require 'nav.php'; }
+           elseif($row['profile_ID']==1){ $_SESSION['editop'] = 1; require 'nav.php'; }
             }
         }
 ?>
 
   <?php require 'searchbox.php'; ?>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+  <form action="asset_update.php" method="post">
+    <div style="text-align:center">
     <table class="table table-striped table-dark">
   <thead>
     <tr>
-        <th scope="col">รหัสครุภัณฑ์</th>
-        <th scope="col">รุ่น/แบบ</th>
-        <th scope="col">สถานที่ตั้ง</th>
-	    <th scope="col">ห้องที่จัดเก็บ</th>
-        <th scope="col">ผู้รับผิดชอบ</th>
-        <th scope="col">วิธีการที่ได้รับ</th> 
-        <th scope="col">ประเภทครุภัณฑ์</th>
-	    <th scope="col">สถานะการใช้งาน</th>
-        <th scope="col">ประเภทการใช้งาน</th>
-	    <th scope="col">edit</th>
+        <th></th>
+        <th>รหัสครุภัณฑ์</th>
+        <th>ชื่อครุภัณฑ์</th>
+        <th>ชื่อเรียก</th>
+        <th>ประเภทครุภัณฑ์</th>
+	    <th>edit</th>
     </tr>
   </thead>
   <tbody>
@@ -121,21 +121,14 @@
 
                 echo
                     "<tr>
+                        <td><input type='checkbox' name='id[]' id='' value = '".$row['id']."'></td>
                         <td>".$row['asset_ID']."</td>
-                        <td>".$row['model']."</td>
-                        <td>".$row['asset_location']."</td>
-                        <td>".$row['room']."</td>
-                        <td>".$row['resper_firstname']."".$row['resper_lastname']."</td>
-                        <td>".$row['method']."</td>
+                        <td>".$row['asset_name']."</td>
+                        <td>".$row['asset_nickname']."</td>
                         <td>".$row['asset_type_name']."</td>
-                        <td>".$row['asset_stat_name']."</td>
-                        <td>".$row['dstat']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['asset_number']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a>";
                         if($_SESSION['editop'] == 1){
-                        echo "<a href='edit.php?asset_number=".$row['asset_number']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a>               
-                         <input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >"; }
-                        
-                        
+                        echo "<a href='edit.php?asset_number=".$row['asset_number']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a>"; } //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
                 echo "</td></tr>";
         
@@ -155,7 +148,9 @@
         ?>
     </tbody>
 </table>
+<input type="submit" name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
+<input type="submit" name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
 </div>
-
+</form>
 <?php require 'footer.php'; ?>
 </html>

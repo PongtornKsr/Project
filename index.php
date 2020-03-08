@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php require 'Userheader.php'; ?>
+    <?php require 'nav.php'; ?>
     
     <?php require 'footer.php'; ?>
 </body>

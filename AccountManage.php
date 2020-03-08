@@ -3,7 +3,17 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!DOCTYPE html><?php SESSION_START(); ?>
 <html lang="en">
-<?php require 'managepageheader.php'; ?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/management.css"> 
+    <title>Document</title>
+</head>
+<body>
+    
+
+<?php require 'nav.php'; ?>
 <form action="AccountManageSearch.php" method="post">
 <?php require 'accsearchbox.php'; ?>
 </form>
@@ -26,7 +36,7 @@
         require 'connect.php';
         $fname = $_SESSION['userData']['givenName'];
         $ffname = $_SESSION['Uname'];
-        $sql = "SELECT * FROM userdata natural join userstat natural join userprofile WHERE givenName NOT IN ('$fname') and givenName NOT IN ('$ffname') ";
+        $sql = "SELECT * FROM userdata natural join userstat natural join userprofile  WHERE givenName NOT IN ('$fname') and givenName NOT IN ('$ffname') ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -36,15 +46,15 @@
                         <td>".$row['givenName']."</td>
                         <td>".$row['familyName']."</td>
                         <td>".$row['email']."</td>
-                        <td>".$row['stat']."</td>
+                        <td>".$row['stat_name']."</td>
                         <td>".$row['profile_name']."</td>
                         <td>".$row['last_update']."</td>
-                        <td><a href='usermanage.php?ID=".$row['ID']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Delete</button></a>";
-                        if($row['ID_stat']==1){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>Block</button></a>";}                       
-                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' style='background-color:black; border-color:White; color:white'>Active</button></a>";}
+                        <td>";
+                        if($row['ID_stat']==1){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' style='background-color:red; border-color:White; color:white'>DELETE</button></a>";}                       
+                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' style='background-color:green; border-color:White; color:white'>Active</button></a>";}
                         
-                        if($row['profile_ID']==2){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' style='background-color:blue; border-color:White; color:white'>Roleup</button></a>";}                       
-                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' style='background-color:blue; border-color:White; color:white'>Roledown</button></a>";}
+                        if($row['profile_ID']==2){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' style='background-color:blue; border-color:White; color:white'>SET TO ADMIN</button></a>";}                       
+                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' style='background-color:black; border-color:White; color:white'>SET TO GUEST</button></a>";}
                 
                 echo "</td></tr>";
         

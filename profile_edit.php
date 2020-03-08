@@ -16,6 +16,7 @@
 
 </style>
 <body background="img/BG.png">
+<?php require 'nav.php'; ?>
 <?php  require 'connect.php';
         $email ="";
         $fname = "";
@@ -28,7 +29,7 @@
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
            if($row['profile_ID']==2){ 
-               $_SESSION['editop'] = 2; require 'Userheader.php';
+               $_SESSION['editop'] = 2; 
                $GLOBALS['email'] = $row['email'];
                $GLOBALS['fname'] = $row['givenName'];
                $GLOBALS['lname'] = $row['familyName'];
@@ -36,10 +37,10 @@
                $GLOBALS['uid'] = $row['ID'];
                $GLOBALS['pass'] = base64_decode($row['password']);
         }
-           elseif($row['profile_ID']==1){ $_SESSION['editop'] = 1; require 'nav.php';
-            $GLOBALS['email'] = $row['email'];
-               $GLOBALS['fname'] = $row['givenname'];
-               $GLOBALS['lname'] = $row['familyname'];
+           elseif($row['profile_ID']==1){ $_SESSION['editop'] = 1;
+               $GLOBALS['email'] = $row['email'];
+               $GLOBALS['fname'] = $row['givenName'];
+               $GLOBALS['lname'] = $row['familyName'];
                $GLOBALS['uname'] = $row['username'];
                $GLOBALS['uid'] = $row['ID'];
                $GLOBALS['pass'] = base64_decode($row['password']);

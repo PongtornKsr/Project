@@ -1,0 +1,26 @@
+body{
+    align-items: center;
+}
+table tbody, table thead
+{
+    display: block;
+}
+table tbody 
+{
+   overflow: auto;
+   height: 350px;
+}
+th
+{
+    width: 72px;
+}
+td
+{
+    width: 72px;
+}
+table th:nth-child(1), td:nth-child(1) { min-width: 150px;  max-width: 150px; text-align: center;}
+table th:nth-child(2), td:nth-child(2) { min-width: 300px;  max-width: 300px; text-align: center;}
+table th:nth-child(3), td:nth-child(3) { min-width: 500px;  max-width: 500px; text-align: center;}
+table th:nth-child(4), td:nth-child(4) { min-width: 420px;  max-width: 420px; text-align: center;}
+table th:nth-child(5), td:nth-child(5) { min-width: 250px;  max-width: 250px; text-align: center;}
+table th:nth-child(6), td:nth-child(6) { min-width: 200px;  max-width: 200px; text-align: center;}

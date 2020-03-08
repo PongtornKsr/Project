@@ -3,7 +3,16 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!DOCTYPE html><?php SESSION_START(); ?>
 <html lang="en">
-<?php require 'managepageheader.php'; 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Css/management.css"> 
+  <title>Document</title>
+</head>
+<body>
+  
+
+<?php require 'nav.php'; 
 $Search = $_POST['search'];
 ?>
 

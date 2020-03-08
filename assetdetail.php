@@ -5,16 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="CSS/formstyle.css">
+    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
+    <link rel="stylesheet" href="CSS/submitstyle.css">
     <title>Document</title>
 </head>
 <?php
       require 'connect.php';
  ?>
 <body>
+<?php require 'nav.php'; ?>
 
-<form action='assetmanage.php'>
-<button type="submit">BACK</button>
-</form>
+<form class="box" action='assetmanage.php'>
+<div class="head">รายละเอียดครุภัณฑ์</div>
+<br><br>
 <?php 
 $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE asset_number = '".$_GET['asset_number']."'";
  $result = $conn->query($sql);
@@ -39,6 +46,7 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 }
 }
 ?>
-
+</form>
+<?php require 'footer.php'; ?>
 </body>
 </html>
