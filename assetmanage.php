@@ -23,8 +23,12 @@
             }
         }
 ?>
-
-  <?php require 'searchbox.php'; ?>
+<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
+					</div>
+				</div>
+  <?php // require 'searchbox.php'; ?>
   <form action="asset_update.php" method="post">
     <div style="text-align:center">
     <table class="table table-striped table-dark">
@@ -45,7 +49,7 @@
       
             $s = $_POST['search'];
             $clause = " WHERE ";
-            $sql="SELECT * FROM asset natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room ";//Query stub
+            $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room ";//Query stub
             if(isset($_POST['submit'])){
             if(isset($_POST['soption'])){
             foreach($_POST['soption'] as $c){
@@ -121,12 +125,12 @@
 
                 echo
                     "<tr>
-                        <td><input type='checkbox' name='id[]' id='' value = '".$row['id']."'></td>
+                        <td><input type='checkbox' name='id[]' id= 'cbx' onclick='checkboxes()' value = '".$row['id']."'></td>
                         <td>".$row['asset_ID']."</td>
                         <td>".$row['asset_name']."</td>
                         <td>".$row['asset_nickname']."</td>
                         <td>".$row['asset_type_name']."</td>
-                        <td><a href='assetdetail.php?asset_number=".$row['asset_number']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a>";
+                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a>";
                         if($_SESSION['editop'] == 1){
                         echo "<a href='edit.php?asset_number=".$row['asset_number']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a>"; } //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
@@ -148,9 +152,51 @@
         ?>
     </tbody>
 </table>
-<input type="submit" name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
-<input type="submit" name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
+<?php if($_SESSION['editop'] == 2){ }
+else if($_SESSION['editop'] == 1){ ?>
+<p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>
+<div style = "text-align: center">
+<input style= "text-align: center" type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
+<input style= "text-align: center" type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
+</div>
+<?php } ?>
 </div>
 </form>
 <?php require 'footer.php'; ?>
 </html>
+
+<script type="text/javascript"> 
+
+window.onload = function(){
+    document.getElementById('x').disabled = true;
+    document.getElementById('y').disabled = true;
+    checkboxes();
+}
+function checkboxes()
+      {
+          
+       var inputElems = document.getElementsByTagName("input"),
+        count = 0;
+
+        for (var i=0; i<inputElems.length; i++) {       
+           if (inputElems[i].type == "checkbox" && inputElems[i].checked == true){
+                count++;
+                
+           }
+
+        }
+        if(count > 0){
+                  
+                document.getElementById('x').disabled = false;
+                document.getElementById('y').disabled = false;
+                document.getElementById('q').style.display = 'none';
+                }
+                else if(count <= 0){
+                    document.getElementById('x').disabled = true;
+                    document.getElementById('y').disabled = true;
+                    document.getElementById('q').style.display = 'block';
+                }
+       
+     }
+
+</script>

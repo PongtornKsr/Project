@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
-<html><?php SESSION_START(); require 'connect.php'; ?>
+<html><?php SESSION_START(); require 'connect.php';  ?>
  <head>
  <title>Multi-insert</title>  
             
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-           
+           <link rel="stylesheet" href="CSS/formstyle.css">
  </head>
  <body> 
  <?php require 'nav.php'; ?>
@@ -17,9 +17,9 @@
    <br />
    <h4 align="center">Enter Item Details</h4>
    <br />
-   <form name="add_detail" id="add_detail" method = "POST">  
+   <form class = "whitebox" action= "multi_insert.php" name="add_detail" id="add_detail" method = "POST" >  
                           <div class="table-responsive">  
-                               <table class="table table-bordered" id="dynamic_field">  
+                               <table class="table table-borderless"  id="dynamic_field">  
                                     <tr>  
                                          <td>
                                          <input type="hidden" name="num[]" value="A">
@@ -30,6 +30,14 @@
                 </td>
                 <td>
                     <input type="text" name = "order_number[]" width="50">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    วันที่:
+                </td>
+                <td>
+                    <input type="date" name = "addin_date[]" width="50">
                 </td>
             </tr>
             <tr>
@@ -92,10 +100,34 @@
             </tr>
             <tr>
                 <td>
+                    จำนวน: 
+                </td>
+                <td>    
+                    <input type="text" name="quantity[]">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ชื่อชุดครุภัณฑ์:
+                </td>
+                <td>
+                    <input type="text" name = "asset_setname[]" width="50">
+                </td>
+            </tr>
+            <tr>
+                <td>
                     ชื่อครุภัณฑ์:
                 </td>
                 <td>
                     <input type="text" name = "asset_name[]" width="50">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ชื่อเรียกครุภัณฑ์:
+                </td>
+                <td>
+                    <input type="text" name = "asset_nickname[]" width="50">
                 </td>
             </tr>
             <tr>
@@ -259,14 +291,6 @@
                 </td><td>
                 
                 </td></tr>
-                <tr>
-                <td>
-                    จำนวน: 
-                </td>
-                <td>    
-                    <input type="text" name="quantity[]">
-                </td>
-            </tr>
             <tr>
                 <td>
                     ราคาต่อหน่วย: 
@@ -288,7 +312,7 @@
                                          <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>  
                                     </tr>  
                                </table>  
-                               <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />  
+                               <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />  
                           </div>  
                      </form>  
   </div>
@@ -418,38 +442,27 @@ $(document).ready(function(){
            var html = '';
   html += '<input type="hidden" name="num[]" value="">';
   html += '<table Align = "center">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "order_number[]" width="50"> </td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td> <input type="radio" name="atype'+i+'" value="1"><select name = "assettype[]"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select>'; 
+  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "order_number[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td> <input type="radio" name="atype'+i+'" value="1"><select name = "assettype[]"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select>'; 
   html += '</td></tr><tr> <td></td><td><input type="radio" name="atype'+i+'" value="2"><input type="text" name = "type[]" width="50"> </td></tr><tr><td>ลักษณะการติดตั้ง: </td><td> <input type="radio" name="dtype'+i+'" value="1"><select name = "dstat_ID[]"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select>'; 
-  html += '</td></tr><tr><td></td><td><input type="radio" name="dtype'+i+'" value="2"><input type="text" name = "detype[]" width="50"></td></tr><tr><td>รหัสครุภัณฑ์: </td><td><input type="text" name="asset_ID[]">/<input type="text" name="asset_Set[]"><input type="text" name="assetid[]"></td></tr>';
-  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
+  html += '</td></tr><tr><td></td><td><input type="radio" name="dtype'+i+'" value="2"><input type="text" name = "detype[]" width="50"></td></tr><tr><td>รหัสครุภัณฑ์: </td><td><input type="text" name="asset_ID[]">/<input type="text" name="asset_Set[]"><input type="text" name="assetid[]"></td></tr><tr><td>จำนวน: </td><td> <input type="text" name="quantity[]"></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" width="50"></td></tr>';
+  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
   html += '<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "asset_order[]" width="50"></td></tr><tr><td>สถานที่ตั้ง / หน่วยงานที่รับผิดชอบ:</td><td><input type="radio" name="aslo'+i+'" value="1"><select name = "assetloca[]"><option value="0">---หน่วยงาน/สถานที่ตั้ง---</option><?php echo select_location(); ?></select>';
   html += '</td></tr><tr> <td></td><td><input type="radio" name="aslo'+i+'" value="2"><input type="text" name = "asloc[]" width="50"></td></tr><tr><td>ผู้รับผิดชอบ :</td><td><input type="radio" name="res'+i+'" value="1"><select name = "resid[]"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select>';
   html += '</td></tr><tr> <td></td><td><input type="radio" name="res'+i+'" value="2">ชื่อ: <input type="text" name = "resfname[]" width="50">นามสกุล: <input type="text" name = "reslname[]" width="50"></td></tr><tr><td>ห้องที่จัดเก็บ :</td><td><input type="radio" name="rm'+i+'" value="1"><select name = "rmid[]"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select>';
   html += '</td></tr><tr> <td></td><td><input type="radio" name="rm'+i+'" value="2">ห้อง: <input type="text" name = "rmname[]" width="50"></td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td><input type="radio" name="voption'+i+'" value="1"><select name = "asven[]"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
   html += '</td></tr><tr> <td></td><td><input type="radio" name="voption'+i+'" value="2">ชื่อบริษัท :<input type="text" name = "vendor_company[]" width="50"></td></tr><tr><td></td><td>ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" width="50"></td></tr>';
   html += '<tr><td></td><td>โทรศัพท์ :<input type="text" name = "vendor_tel[]" width="50"></td></tr><tr><td></td><td>โทรสาร :<input type="text" name = "fax[]" width="50"></td></tr>';
-  html += '<tr><td>วิธีการได้มา : </td><td><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select>รายได้ปี: <input type="text" placeholder="เงินนอกงบประมาณ"> อื่นๆ: <input type="text" name="els[]" placeholder="วิธีการอื่นๆที่ได้รับมา"></td></tr><tr><td>จำนวน: </td><td> <input type="text" name="quantity[]"></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
+  html += '<tr><td>วิธีการได้มา : </td><td><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select>รายได้ปี: <input type="text" placeholder="เงินนอกงบประมาณ"> อื่นๆ: <input type="text" name="els[]" placeholder="วิธีการอื่นๆที่ได้รับมา"></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
            $('#dynamic_field').append('<tr id="row'+i+'"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
       });  
       $(document).on('click', '.btn_remove', function(){  
            var button_id = $(this).attr("id");   
-           $('#row'+button_id+'').remove();  
-      });  
+           $('#row'+button_id+'').remove();
+      });
 
- $('#submit').click(function(){            
-           $.ajax({  
-                url:"multi_insert.php",
-                method:"POST",  
-                data:$('#add_detail').serialize(),  
-                success:function(data)  
-                {  
-                    alert(data);  
-                     $('#add_detail')[0].reset();  
-                }  
-           });  
-      });  
+ 
 
 
  

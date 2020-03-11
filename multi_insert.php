@@ -1,10 +1,9 @@
 <?php
 //insert.php;
-
+SESSION_START();
 require 'connect.php';
 $connect = mysqli_connect("localhost", "admin", "1234", "prodata");  
  $number = count($_POST['num']);  
- $report = '';
  $sqlm = array();
  $qtyr = array();
  $break = false;
@@ -23,6 +22,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
       for($count=0; $count<$number; $count++)  
       {  
         $order_number = $_POST['order_number'][$count];
+        $adate = $_POST['addin_date'][$count];
         $atype = $_POST['atype'][$count];
         $assettype = $_POST['assettype'][$count];
         $type = $_POST['type'][$count];
@@ -30,6 +30,8 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         $asset_Set = $_POST['asset_Set'][$count];
         $assetid = $_POST['assetid'][$count];
         $asset_name =  $_POST['asset_name'][$count];
+        $aset_name = $_POST['asset_setname'][$count];
+        $anick_name = $_POST['asset_nickname'][$count];
         $property = $_POST['property'][$count];
         $model = $_POST['model'][$count];
         $aslo = $_POST['aslo'][$count];
@@ -56,11 +58,9 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         $asset_order = $_POST['asset_order'][$count];
         $note = $_POST['note'][$count];
         $dstat_ID = $_POST['dstat_ID'][$count];
+        $a = array();
     
-    
-        $tid = 0;
-        $lid = 0;
-        $vid = 0;
+
         $get = "" ; 
     
         if($atype == 2)
@@ -163,12 +163,16 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
             else if($gmet == 9 && ($els == '' || $els == null )){
             $report .= 'asset number '.$count.' กรุณาระบุวิธีการอื่นๆที่ได้รับ '; $break = true; break;
             }else if($break == false){
-
+                ini_set('memory_limit', '-1');
                 $c = 1;
                 while($c <= $qty){
-                    array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`, `model`, `asset_order`, `property`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `asset_stat_ID`, `get_method`, `note`, `dstat_ID`) VALUES 
-                    ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$model."','".$asset_order."','".$property."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','1','".$get."','".$note."','".$dstat_ID."')"); 
+                    
+                    array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `get_method`, `note`, `dstat_ID`) VALUES 
+                    ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$adate."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$get."','".$note."','".$dstat_ID."')"); 
+                    array_push($a,"$asset_Set".".$c");
                     $c++;
+                }
+                   
                 }
                         
             
@@ -192,18 +196,35 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                // mysqli_query($connect, $sqlm[$i]);
                 $sqlq= $sqlm[$i];          
                 if ($conn->query($sqlq) == TRUE) {                     
-
-                }
             
-       echo $sqlm[$i];
+            echo $sqlm[$i];
+            }
         }
-    }
+        for($x = 0; $x< count($a); $x++){
+            $q = $a[$x];
+            $sqlst = "SELECT * FROM asset WHERE asset_number = $q";
+            $result = $conn->query($sqlst);
+            if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$row['id']."',1)";
+                if ($conn->query($sqlsta) == TRUE) {
+                
+                }
+            }
+        }
+
+        }
       } 
     
        
 
       echo var_dump($number);
-      echo "Data Inserted";  /*
+      echo "Data Inserted";
+      print_r($a);
+      echo $sqlst;
+      echo $sqlsta;
+      header('Location: assetmanage.php');
+      /*
       echo $_POST['asset_name'];
       echo $_POST['num'];
       var_dump($_POST['num']);

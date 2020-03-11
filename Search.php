@@ -27,6 +27,11 @@
     <br>
     <br>
     <center>
+    <div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
+					</div>
+				</div>
     <div class="center">
     <form action="assetmanage.php" method="post"><input type="search" name="search" id="">
     <input type="submit" name = "submit" value="ค้นหา">

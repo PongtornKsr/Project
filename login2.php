@@ -1,7 +1,6 @@
 <?php
 
 SESSION_START();
-if(!isset($_POST['submit'])){
 require 'connect.php';
 $name = $_SESSION['userData']['name'];
 $eml = $_SESSION['userData']['email'];
@@ -15,14 +14,14 @@ if ($result->num_rows > 0) {
     if($row['profile_ID'] == 1){
         header("location: indexAdmin.php");
     }
-    else if ($row['profile_ID'] == 2 and $row['ID_stat'] == 1){
+    else if ($row['profile_ID'] == 2 && $row['ID_stat'] == 1){
         header("location: index.php");
-    }
-    else if ($row['profile_ID'] == 2 and $row['ID_stat'] == 2){
+    } 
+    else if ($row['profile_ID'] == 2 && $row['ID_stat'] == 2){
         header("location: Blockwarning.php");
     }
     }
-} elseif(isset($_POST['uname'])and isset($_POST['password'])){
+} else if(isset($_POST['uname']) || isset($_POST['password'])){
     header('location: login.php?error=y');
 }
 else {
@@ -36,13 +35,6 @@ else {
     
 }
 $conn->close();
-}
-else if(isset($_POST['submit']))
-{
-    if($_POST['submit'] == "regist")
-    {
-        header("location: Register.php");
-    }
-}
+
 
 ?>

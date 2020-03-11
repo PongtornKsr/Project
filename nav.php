@@ -3,8 +3,17 @@
   background-attachment: fixed; ">
          
           <nav class="navbar navbar-light" style="background-color: #B3EE3A;">
-            
-            <a class="navbar-brand" href="Home.html">
+          <?php SESSION_START();
+                          require 'connect.php';
+                          $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                          if($row['profile_ID'] == 1 ){ echo "<a class='navbar-brand' href='indexAdmin.php'>";} 
+                            elseif($row['profile_ID'] == 2){ echo "<a class='navbar-brand' href='index.php'>"; }
+                          }
+                        }
+                          ?>
                     <img src="img/logomini.png" width="80" height="30" alt="">
             </a>
             <ul class="nav justify-content-end">
@@ -21,18 +30,19 @@
                         }
                           ?>
                     </li>
-                    <li class="nav-item">
+                    
+                    <!--<li class="nav-item">
                       <div class="nav-item dropdown">
                         <a href = "" class="nav-link dropdown-toggle" data-toggle="dropdown">รายงาน</a>
                         <div class="dropdown-menu">
                           <a href="text_report.php" class="dropdown-item">พิมพ์ทะเบียนคุมทรัพย์สิน</a>
                         </div>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                       <div class="nav-item dropdown">
                         <a href="insert.html" class="nav-link dropdown-toggle" data-toggle="dropdown">จัดการบัญชีผู้ใช้</a>
                         <div class="dropdown-menu">
-                          <?php 
+                          <?php SESSION_START();
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -53,15 +63,14 @@
                       <div class="nav-item dropdown">
                         <a href="insert.html" class="nav-link dropdown-toggle" data-toggle="dropdown">จัดการครุภัณฑ์</a>
                         <div class="dropdown-menu">
-                        <?php
+                        <?php SESSION_START();
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
                           if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                          if($row['profile_ID'] == 1 ){ echo "<a href='assetinsert.php' class='dropdown-item'>เพิ่มครุภัณฑ์เดี่ยว</a>
-                            <a href='multi_insert_form.php' class='dropdown-item'>เพิ่มครุภัณฑ์ชุด</a>
-                            <a href='' class='dropdown-item'>เพิ่มครุภัณฑ์ติดอาคาร</a>
+                          if($row['profile_ID'] == 1 ){ //echo "<a href='assetinsert.php' class='dropdown-item'>เพิ่มครุภัณฑ์เดี่ยว</a>";
+                           echo "<a href='multi_insert_form.php' class='dropdown-item'>เพิ่มครุภัณฑ์</a>
                             <a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>"; } 
                             elseif($row['profile_ID'] == 2){ echo "<a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>"; }
                           }

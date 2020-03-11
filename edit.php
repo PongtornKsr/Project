@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="CSS/input.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="CSS/formstyle.css">
+    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
+    <link rel="stylesheet" href="CSS/submitstyle.css">
     <title>Document</title>
 </head>
 
 <?php
       require 'connect.php';
+      require 'nav.php';
        ?>
 <body>
-<form action='assetmanage.php'>
-<button type="submit">BACK</button>
-</form><br>
+<br>
 <?php 
 $asnum = $_GET['asset_number'];
 $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE asset_number = '".$_GET['asset_number']."'";
@@ -24,8 +29,12 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     $set = $row['asset_Set'];
     $O_N = $row['order_number'];
     $asid = $row['asset_ID'];
+    $a_sn = $row['asset_setname'];
+    $a_nn = $row['asset_nickname'];
     $asname = $row['asset_name'];
     $mod = $row['model'];
+    $a_or = $row['asset_order'];
+    $a_pp =$row['property'];
     $aslo = $row['asset_location'];
     $asloid = $row['asset_location_ID'];
     $rmid = $row['room_ID'];
@@ -44,12 +53,19 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 }
 }
 ?>
-<form action="edit2.php" method="POST">
+<form class="box" style="height: 800px;" action="edit2.php" method="POST">
+<div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
+<br><br>
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
 <input id= "tx "type="text" value = "<?php echo $O_N; ?>" disabled> <br>
 <input id= "tx "type="text" value = "<?php echo $asid; ?>" disabled> <br>
+<input type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id=""> <br>
+<input type="text" name="a_nnf" value="<?php echo $a_nn; ?>" > <br>
 <input id= "tx "type="text" value = "<?php echo $asname; ?>" disabled> <br>
 <input id = "tx"type="text" value = "<?php echo $mod; ?>" disabled> <br>
+<input type="text" name = "a_orf" value ="<?php echo $a_or; ?>"><br>
+<input type="text" name ="a_ppf" value = "<?php echo $a_pp?>"> <br>
+
 <input id= "tx" type="text" value = "<?php echo $aslo; ?>" disabled> <br>
 <select name="lo" id="">
     <?php $sql = "SELECT * FROM asset_location WHERE asset_location_ID = '".$asloid."'";
@@ -94,20 +110,6 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     }     }  ?>
     </select><br>
 <input id= "tx" type="text" value = "<?php echo $dstat; ?>"disabled> <br>
-<select name="utype" id="">
-    <?php $sql = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$statid."'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_stat_ID'].">".$row['asset_stat_name']."</option>";
-                    }     } 
-                    $sql = "SELECT * FROM assetstat WHERE asset_stat_ID NOT IN ('".$statid."')";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_stat_ID'].">".$row['asset_stat_name']."</option>";
-                    }     }?>   
-    </select><br>
 <input id = "tx"type="text" value = "<?php echo $astype; ?>" disabled> <br>
 <input id = "tx" type="text" value = "<?php echo $get_met; ?>"disabled> <br>
 <input id = "tx" type="text" value = "<?php echo $vcom; ?>" disabled> <br>
@@ -143,9 +145,10 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     while($row = $result->fetch_assoc()) {
                     echo "<option value=".$row['asset_number'].">".$row['asset_number']."</option>";
                     }     }?>   
-    </select><button type="submit" name = "action" value = "Multi" class="btn btn-danger">แก้ไขหลายรายการ</button>
+    </select>
+    <button type="submit" name = "action" value = "Multi" class="btn btn-danger">แก้ไขหลายรายการ</button>
 </form>
-
+<?php require 'footer.php'; ?>
 </body>
 <script>
 function resizable (el, factor) {

@@ -14,10 +14,30 @@
 
 <body>
     <?php require 'nav.php'; ?>
-    <?php if(isset($_POST['stat_update'])){ ?>
+    <?php if(isset($_POST['stat_update'])){ 
+        require 'connect.php';
+        $_SESSION['id'] = $_POST['id'];
+        ?>
         
-    <form class="box" action="" method="post">
+    <form class="box" action="rm_update_back.php" method="post">
     <div class="head">แก้ไขสถานะครุภัณฑ์</div>
+    <br><br><br>
+        <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
+        <div class="thsarabunnew"style="font-size:24px">เปลี่ยนสถานะเป็น <?php  
+        echo "<select id = 'select' onchange='checkselecttion()' name = 'stid'>
+        <option value='0'>---สถานะครุภัณฑ์---</option>";
+            $sql = "SELECT * FROM assetstat ";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row['asset_stat_ID'].">".$row['asset_stat_name']."</option>";
+            }     }
+       echo  "</select>";
+        ?></div>
+     <br><br><br>
+     <input id= "a"style = "width:100px;height: 50px;"type="submit" name = "StatUpdate" onclick="chackselecttion()"value="Update">
+     
+     <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกสถานะใหม่ของครุภัณฑ์ที่ต้องการเปลี่ยน</p>
     </form>
     <?php } ?>
 
@@ -27,7 +47,7 @@
 
     <?php if(isset($_POST['room_update'])){ 
         require 'connect.php';
-        $_SESSION['rm'] = $_POST['id'];
+        $_SESSION['id'] = $_POST['id'];
        
 
         ?>
@@ -50,8 +70,8 @@
         
      <!-- <input type="button" value="Cancel" onclick="window.location.href = '<?php //echo $_SERVER['HTTP_REFERER'] ?>';"> -->
      <br><br><br>
-     <input id= "a"style = "width:100px;height: 50px;"type="submit" onclick="chackselecttion()"value="update">
-     <p id="hint1" style="font-color: red;">กรุณาเลือกห้องที่ต้องการเปลี่ยนเพื่อจัดเก็บครุภัณฑ์</p>
+     <input id= "a"style = "width:100px;height: 50px;"type="submit" name = "RoomUpdate" onclick="chackselecttion()"value="Update">
+     <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกห้องที่ต้องการเปลี่ยนเพื่อจัดเก็บครุภัณฑ์</p>
     </form>
     <?php } ?>
     <?php require 'footer.php'; ?>
@@ -60,22 +80,20 @@
 <script type="text/javascript"> 
 
 window.onload = function(){
-    document.getElementById('hint1').style.display='none';
-    var x = document.getElementById('select').value;
-    if (x == 0){
-        document.getElementById('a').disabled = true;
-        document.getElementById('hint1').style.display='none';
-    }
+    checkselecttion();
 }
 function checkselecttion(){ 
     var x = document.getElementById('select').value;
     if (x == 0){
         document.getElementById('a').disabled = true;
+        document.getElementById('a1').disabled = true;
         document.getElementById('hint1').style.display='block';
     }
     else if(x>0){
         document.getElementById('a').disabled = false;
+        document.getElementById('a1').disabled = false;
         document.getElementById('hint1').style.display='none';
+        
     }
 }
 
