@@ -56,32 +56,18 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 <form class="box" style="height: 800px;" action="edit2.php" method="POST">
 <div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
 <br><br>
-<input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
-<input id= "tx "type="text" value = "<?php echo $O_N; ?>" disabled> <br>
-<input id= "tx "type="text" value = "<?php echo $asid; ?>" disabled> <br>
-<input type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id=""> <br>
-<input type="text" name="a_nnf" value="<?php echo $a_nn; ?>" > <br>
-<input id= "tx "type="text" value = "<?php echo $asname; ?>" disabled> <br>
-<input id = "tx"type="text" value = "<?php echo $mod; ?>" disabled> <br>
-<input type="text" name = "a_orf" value ="<?php echo $a_or; ?>"><br>
-<input type="text" name ="a_ppf" value = "<?php echo $a_pp?>"> <br>
-
-<input id= "tx" type="text" value = "<?php echo $aslo; ?>" disabled> <br>
-<select name="lo" id="">
-    <?php $sql = "SELECT * FROM asset_location WHERE asset_location_ID = '".$asloid."'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_location_ID']." >".$row['asset_location']."</option>";
-                    }     }
-                    $sql = "SELECT * FROM asset_location WHERE asset_location_ID NOT IN ('".$asloid."')";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_location_ID']." >".$row['asset_location']."</option>";
-                    }     }  ?>
-    </select><br>
-<select name="rm" id="">
+<div align = "center">
+<table>
+<tr><td>รายการที่ : </td><td><input id= "tx "type="text" value = "<?php echo $O_N; ?>" disabled></td></tr>
+<tr><td>รหัสครุภัณฑ์ :</td><td><input id= "tx "type="text" value = "<?php echo $asid; ?>" disabled> </td></tr>
+<tr><td>ชื่อชุดครุภัณฑ์ :</td><td><input type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id="" ></td></tr>
+<tr><td>ชื่อเรียกครุภัณฑ์ :</td><td><input type="text" name="a_nnf" value="<?php echo $a_nn; ?>"  ></td></tr>
+<tr><td>ชื่อครุภัณฑ์ :</td><td><input id= "tx "type="text" value = "<?php echo $asname; ?>" ></td></tr>
+<tr><td>รุ่น/แบบ : </td><td><input type="text" value = "<?php echo $mod; ?>" disabled></td></tr>
+<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "a_orf" value ="<?php echo $a_or; ?>"  disabled></td></tr>
+<tr><td>คุณลักษณะ :</td><td><input type="text" name ="a_ppf" value = "<?php echo $a_pp?>"  disabled> </td></tr>
+<tr><td>สถานที่ :</td><td><input id= "tx" type="text" value = "<?php echo $aslo; ?>" disabled></td></tr>
+<tr><td>ห้องที่จัดเก็บ :</td><td><select name="rm" id="">
     <?php $sql = "SELECT * FROM room WHERE room_ID = '".$rmid."'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -94,8 +80,8 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     while($row = $result->fetch_assoc()) {
                     echo "<option value=".$row['room_ID']." >".$row['room']."</option>";
                     }     }  ?>
-    </select><br>
-<select name="rsid" id="">
+    </select></td></tr>
+<tr><td>ผู้รับผิดชอบ :</td><td><select name="rsid" id="">
     <?php $sql = "SELECT * FROM respon_per WHERE resper_ID = '".$respid."'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -108,13 +94,17 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     while($row = $result->fetch_assoc()) {
                     echo "<option value=".$row['resper_ID']." >".$row['resper_firstname']." ".$row['resper_lastname']."</option>";
                     }     }  ?>
-    </select><br>
-<input id= "tx" type="text" value = "<?php echo $dstat; ?>"disabled> <br>
-<input id = "tx"type="text" value = "<?php echo $astype; ?>" disabled> <br>
-<input id = "tx" type="text" value = "<?php echo $get_met; ?>"disabled> <br>
-<input id = "tx" type="text" value = "<?php echo $vcom; ?>" disabled> <br>
-<input id = "tx" type="text" value = "<?php echo $vtel; ?>"disabled> <br>
-<input type="text " id ="tx" value = "<?php echo $vfax; ?>"disabled> <br>
+    </select></td></tr>
+<tr><td>สถานะการติดตั้ง :</td><td><input id= "tx" type="text" value = "<?php echo $dstat; ?>"disabled></td></tr>
+<tr><td>ประเภทครุภัณฑ์ :</td><td><input id = "tx"type="text" value = "<?php echo $astype; ?>" disabled> </td></tr>
+<tr><td>วิธีการได้รับ :</td><td><input id = "tx" type="text" value = "<?php echo $get_met; ?>"disabled></td></tr>
+<tr><td>บริษัทผู้ขาย :</td><td><input  type="text" value = "<?php echo $vcom; ?>" disabled></td></tr>
+<tr><td>เบอร์โทรศัพท์ติดต่อ :</td><td><input id = "tx" type="text" value = "<?php echo $vtel; ?>"disabled></td></tr>
+<tr><td>โทรสาร :</td><td><input type="text " id ="tx" value = "<?php echo $vfax; ?>"disabled></td></tr>
+</table><br>    
+</div>
+<input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
+
 <button type="submit" name = "action" value = "Single" class="btn btn-success">แก้ไขรายการเดียว</button>
 <!-- <a href="edit2.php?asnum=<?php # echo $asnum; ?>"><button type="button">แก้ไขรายการเดียว</button></a> -->
 <br>

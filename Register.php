@@ -33,12 +33,12 @@
 		</p>
 		<p>
 			<label for="password" class="floatLabel">Password</label>
-			<input id="password" onkeyup = "passcount()" name="password" type="password">
+			<input id="password" onkeyup = "passcount()" name="password" type="password" required>
 			<span id = "hint1">Enter a password longer than 8 characters</span>
 		</p>
 		<p>
 			<label for="confirm_password" class="floatLabel">Confirm Password</label>
-			<input id="confirm_password" onkeyup= "passcheck()" name="confirm_password" type="password">
+			<input id="confirm_password" onkeyup= "passcheck()" name="confirm_password" type="password" required>
 			<span id = "hint2">Your passwords do not match</span>
 		</p>
 		<p>

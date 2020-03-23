@@ -7,7 +7,7 @@ echo $_POST['num1'];
    echo $a;
    echo $b;
    echo "OK";
-$sql = "UPDATE asset SET room_ID ='".$_POST['rm']."' , asset_location_ID = '".$_POST['lo']."', resper_ID = '".$_POST['rsid']."' , asset_stat_ID = '".$_POST['utype']."' WHERE asset_number = '".$_POST['num1']."' OR asset_number = '".$_POST['num2']."' OR (asset_number >  '".$_POST['num1']."' AND  asset_number <  '".$_POST['num2']."') ";
+$sql = "UPDATE asset SET room_ID ='".$_POST['rm']."' , asset_nickname = '".$_POST['a_nnf']."' , asset_setname ='".$_POST['a_snf']."',asset_order='".$_POST['a_orf']."' , property = '".$_POST['a_ppf']."',asset_location_ID = '".$_POST['lo']."', resper_ID = '".$_POST['rsid']."' , asset_stat_ID = '".$_POST['utype']."' WHERE asset_number = '".$_POST['num1']."' OR asset_number = '".$_POST['num2']."' OR (asset_number >  '".$_POST['num1']."' AND  asset_number <  '".$_POST['num2']."') ";
 
 /*if ($conn->query($sql) === TRUE) {
    // header('Location: assetmanage.php');
