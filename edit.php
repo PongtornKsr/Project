@@ -32,6 +32,7 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     $a_sn = $row['asset_setname'];
     $a_nn = $row['asset_nickname'];
     $asname = $row['asset_name'];
+    $date = $row['addin_date'];
     $mod = $row['model'];
     $a_or = $row['asset_order'];
     $a_pp =$row['property'];
@@ -55,18 +56,19 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 ?>
 <form class="box" style="height: 800px;" action="edit2.php" method="POST">
 <div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
-<br><br>
+<br>
 <div align = "center">
 <table>
 <tr><td>รายการที่ : </td><td><input id= "tx "type="text" value = "<?php echo $O_N; ?>" disabled></td></tr>
+<tr><td>วันที่</td><td><input type="date" name="dte" id="" value = "<?php echo $date; ?>"></td></tr>
 <tr><td>รหัสครุภัณฑ์ :</td><td><input id= "tx "type="text" value = "<?php echo $asid; ?>" disabled> </td></tr>
 <tr><td>ชื่อชุดครุภัณฑ์ :</td><td><input type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id="" ></td></tr>
 <tr><td>ชื่อเรียกครุภัณฑ์ :</td><td><input type="text" name="a_nnf" value="<?php echo $a_nn; ?>"  ></td></tr>
-<tr><td>ชื่อครุภัณฑ์ :</td><td><input id= "tx "type="text" value = "<?php echo $asname; ?>" ></td></tr>
-<tr><td>รุ่น/แบบ : </td><td><input type="text" value = "<?php echo $mod; ?>" disabled></td></tr>
-<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "a_orf" value ="<?php echo $a_or; ?>"  disabled></td></tr>
-<tr><td>คุณลักษณะ :</td><td><input type="text" name ="a_ppf" value = "<?php echo $a_pp?>"  disabled> </td></tr>
-<tr><td>สถานที่ :</td><td><input id= "tx" type="text" value = "<?php echo $aslo; ?>" disabled></td></tr>
+<tr><td>ชื่อครุภัณฑ์ :</td><td><input id= "tx "type="text" name = "a_nf" value = "<?php echo $asname; ?>" ></td></tr>
+<tr><td>รุ่น/แบบ : </td><td><input name = "mod" type="text" value = "<?php echo $mod; ?>" ></td></tr>
+<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "a_orf" value ="<?php echo $a_or; ?>" ></td></tr>
+<tr><td>คุณลักษณะ :</td><td><input type="text" name ="a_ppf" value = "<?php echo $a_pp?>" > </td></tr>
+<tr><td>สถานที่ :</td><td><input id= "tx" type="text" value = "<?php echo $aslo; ?>" ></td></tr>
 <tr><td>ห้องที่จัดเก็บ :</td><td><select name="rm" id="">
     <?php $sql = "SELECT * FROM room WHERE room_ID = '".$rmid."'";
                     $result = $conn->query($sql);
@@ -96,13 +98,13 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     }     }  ?>
     </select></td></tr>
 <tr><td>สถานะการติดตั้ง :</td><td><input id= "tx" type="text" value = "<?php echo $dstat; ?>"disabled></td></tr>
-<tr><td>ประเภทครุภัณฑ์ :</td><td><input id = "tx"type="text" value = "<?php echo $astype; ?>" disabled> </td></tr>
+<tr><td>ประเภทครุภัณฑ์ :</td><td><input id = "tx"type="text" value = "<?php echo $astype; ?>" disabled > </td></tr>
 <tr><td>วิธีการได้รับ :</td><td><input id = "tx" type="text" value = "<?php echo $get_met; ?>"disabled></td></tr>
 <tr><td>บริษัทผู้ขาย :</td><td><input  type="text" value = "<?php echo $vcom; ?>" disabled></td></tr>
 <tr><td>เบอร์โทรศัพท์ติดต่อ :</td><td><input id = "tx" type="text" value = "<?php echo $vtel; ?>"disabled></td></tr>
 <tr><td>โทรสาร :</td><td><input type="text " id ="tx" value = "<?php echo $vfax; ?>"disabled></td></tr>
-</table><br>    
-</div>
+</table>
+</div><br>
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
 
 <button type="submit" name = "action" value = "Single" class="btn btn-success">แก้ไขรายการเดียว</button>

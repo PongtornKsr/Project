@@ -1,5 +1,6 @@
 <?php 
-SESSION_START();
+
+/*SESSION_START();
 require 'connect.php';
 $email = $_POST['email'];
 $uname = $_POST['uname'];
@@ -20,5 +21,13 @@ if ($result->num_rows > 0) {
 else{
     header("location: Setnewpass.php?error=y");
 
-}
+}*/
+
+$to = "goodbye_baby@hotmailmail.co.th";
+$subject = "My subject";
+$txt = "Hello world! test";
+$headers = "From: Assetwebmaster@example.com" . "\r\n" .
+"CC: somebodyelse@example.com";
+
+mail($to,$subject,$txt,$headers);
 ?>

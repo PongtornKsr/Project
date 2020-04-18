@@ -46,7 +46,7 @@
         <?php
        // var_dump($_SESSION['Account']);
        require 'connect.php';
-      
+            $sortway = "";
             $s = $_POST['search'];
             $clause = " WHERE ";
             $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room ";//Query stub
@@ -59,48 +59,55 @@
                     $r = $_POST['loc'];
                     $sql .= $clause."`".$c."` = {$r}";
                     $clause = " and " ; 
+                    $sortway.= $c." = ".$r;
                 }
                 else if($c ==  'room_ID')
                 {
                     $r = $_POST['rm'];
                     $sql .= $clause."`".$c."` = {$r} ";
                     $clause = " and ";
+                    $sortway.= $c." = ".$r;
                 }
                else if($c == 'asset_type_ID')
                 {
                     $r = $_POST['atype'];
                     $sql .= $clause."`".$c."` = {$r} ";
                     $clause = " and ";
+                    $sortway.= $c." = ".$r;
                 }
                 else if($c == 'asset_stat_ID')
                 {
                     $r = $_POST['utype'];
                     $sql .= $clause."`".$c."` = {$r} ";
                     $clause = " and ";
+                    $sortway.= $c." = ".$r;
                 }
                 else if($c == 'dstat_ID')
                 {
                     $r = $_POST['dtype'];
                     $sql .= $clause."`".$c."` = {$r} ";
                     $clause = " and ";
+                    $sortway.= $c." = ".$r;
                 }
                 else if($c == 'resper_ID')
                 {
                     $r = $_POST['resper_ID'];
                     $sql .= $clause."`".$c."` = {$r} ";
                     $clause = " and ";
+                    $sortway.= $c." = ".$r;
                 }
                 else if($c == 'get_method')
                 {
                     $r = $_POST['method'];
                     $sql .= $clause."`".$c."` LIKE '%{$r}%' ";
                     $clause = " and ";
+                    $sortway.= $c." = ".$r;
                 }
                else if($c == 'asset_ID'){
                    
                 $sql .= $clause."`".$c."` LIKE '%{$s}%' OR asset_name LIKE '%{$s}%'";
                 $clause = " and ";//Change  to OR after 1st WHERE
-            
+                $sortway.= $c." = ".$s;
                }
                
                
@@ -152,6 +159,7 @@
         ?>
     </tbody>
 </table>
+<div><?php echo $sortway; ?></div>
 <?php if($_SESSION['editop'] == 2){ }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>
