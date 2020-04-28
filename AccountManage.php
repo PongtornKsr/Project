@@ -9,15 +9,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css/management.css"> 
+    <link rel="stylesheet" href="Css/BG.css"> 
     <title>Document</title>
-   
+    <!--ทำให้หัวตารางไม่เลื่อน-->
+    <style>
+    body{
+    align-items: center;
+    
+}
+table tbody, table thead
+{
+    display: block;
+}
+table tbody 
+{
+    align-items: center;
+   overflow: auto;
+   height: 450px;
+   width: 100%;
+}
+th
+{
+    width: 72px;
+    
+}
+td
+{
+    width: 72px;
+}
+table th:nth-child(1), td:nth-child(1) { min-width: 150px;  max-width: 150px; text-align: center;}
+table th:nth-child(2), td:nth-child(2) { min-width: 300px;  max-width: 300px; text-align: center;}
+table th:nth-child(3), td:nth-child(3) { min-width: 500px;  max-width: 500px; text-align: center;}
+table th:nth-child(4), td:nth-child(4) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(5), td:nth-child(5) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(6), td:nth-child(6) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; text-align: center;}
+    </style>
 </head>
 
 <body>
     
 <?php require 'nav.php'; ?>
 <!-- action กับ method ห้ามเปลี่ยน-->
-<form action="AccountManage.php?sch=search" method="GET">
+<form>
 <center>
 <div class="brand_logo_container">
          
@@ -32,13 +66,10 @@
                           <div class="col-md-12">
                                   <div class="input-group" id="adv-search">
                                   <!-- name ห้ามเปลี่ยน , textbox กับ ปุ่มกดต้องอยู่ form เดียวกัน และปุ่มทุกปุ่มต้องเป็น type submit-->
-                                      <input type="text" class="form-control" placeholder="search" name = "search">
-                                      <div class="input-group-btn">
-                                          <div class="btn-group" role="group">
-                                              
-                                              <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
-                                          </div>
-                                      </div>
+                                  
+                                  <span class="input-group-text">Search</span>
+                                 <input type="text" name="search_text" id="search_text" placeholder="Search Keyword" class="form-control" />
+                                </div>
                                   </div>
                                 </div>
                               </div>
@@ -46,8 +77,8 @@
                       </div>
                     
                     <br><br>
-</form>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+    <div >
     <table class="table table-striped table-dark" width="100%">
   <thead>
     <tr>
@@ -62,84 +93,15 @@
     </tr>
   </thead>
 
-  <tbody>
-        <?php
-        // ดึงค่าจากดาต้าเบส มาวนลูปแสดงใน table ไปทีละ row
-        if(isset($_GET['search']) || !empty($_GET['search']) ){
-            require 'connect.php';
-            $sch = $_GET['search'];
-        $fname = $_SESSION['userData']['givenName'];
-        $sql = "SELECT * FROM userdata natural join userstat natural join userprofile WHERE (givenName NOT IN ('$fname')) AND  (givenName LIKE '%$sch%' or familyName  LIKE '%$sch%' or email  LIKE '%$sch%')";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-
-                echo
-                    "<tr>
-                        <td>".$row['givenName']."</td>
-                        <td>".$row['familyName']."</td>
-                        <td>".$row['email']."</td>
-                        <td>".$row['stat']."</td>
-                        <td>".$row['profile_name']."</td>
-                        <td>".$row['last_update']."</td>
-                        <td><a href='usermanage.php?ID=".$row['ID']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Delete</button></a>";
-                        if($row['ID_stat']==1){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>Block</button></a>";}                       
-                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' style='background-color:black; border-color:White; color:white'>Active</button></a>";}
-                        
-                        if($row['profile_ID']==2){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' style='background-color:blue; border-color:White; color:white'>Roleup</button></a>";}                       
-                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' style='background-color:blue; border-color:White; color:white'>Roledown</button></a>";}
-                
-                echo "</td></tr>";
-        
-
-
-            }
-        }
-        else { echo "<tr><td colspan='7' align ='center'>ไม่พบผลลัพท์การค้นหา</td></tr>"; }
-       
-        
-         }
-        else if(!isset($_GET['search']) || empty($_GET['search']) ){ 
-            require 'connect.php';
-        $fname = $_SESSION['userData']['givenName'];
-        $ffname = $_SESSION['Uname'];
-        $sql = "SELECT * FROM userdata natural join userstat natural join userprofile  WHERE givenName NOT IN ('$fname') and givenName NOT IN ('$ffname') ";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-
-                echo
-                    "<tr>
-                        <td>".$row['givenName']."</td>
-                        <td>".$row['familyName']."</td>
-                        <td>".$row['email']."</td>
-                        <td>".$row['stat_name']."</td>
-                        <td>".$row['profile_name']."</td>
-                        <td>".$row['last_update']."</td>
-                        <td>";
-                        if($row['ID_stat']==1){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' style='background-color:red; border-color:White; color:white'>DELETE</button></a>";}                       
-                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' style='background-color:green; border-color:White; color:white'>Active</button></a>";}
-                        
-                        if($row['profile_ID']==2){ echo "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' style='background-color:blue; border-color:White; color:white'>SET TO ADMIN</button></a>";}                       
-                        else {echo "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' style='background-color:black; border-color:White; color:white'>SET TO GUEST</button></a>";}
-                
-                echo "</td></tr>";
-        
-
-
-            }
-        }
-        else { echo "<tr><td colspan='7' align ='center'>ไม่พบผลลัพท์การค้นหา</td></tr>"; }
-       
-        }
-
-        
-        ?>
+  <tbody id = "result">
+      
         
     </tbody>
 </table>
 </div>
 <br><br>
-
+</form>
 <?php require 'footer.php'; ?>
 </html>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="javascript/accmanage.js"></script>

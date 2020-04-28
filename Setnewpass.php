@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/RegistCSS.css">
+    <link rel="stylesheet" href="CSS/RegistCSS.css"> <!--ใช้ CSS เดียวกับ หน้า register -->
 	<link rel="stylesheet" href="Css/BG.css">
     <title>Document</title>
 </head>
@@ -13,32 +13,30 @@
 <center>
 	    <img src="image/LOGOxx.png" class="brand_logo" alt="Logo">
 </center>
-<form action="Setnewpass_backend.php" method="post">
-  <h2>Set new Password</h2>
-    
-		<p>
-			<label for="Email" class="floatLabel">Email</label>
-			<input id="Email" name="email" type="text" required>
-        </p>
-        <p>
-			<label  class="floatLabel">Username</label>
-			<input  name="uname" type="text" required>
-		</p>
-		<p>
-			<label for="password" class="floatLabel">New Password</label>
-			<input id="password" onkeyup = "passcount()" name="password" type="password" required>
-			<span id = "hint1">Enter a password longer than 8 characters</span>
-		</p>
-		<p>
-			<label for="confirm_password" class="floatLabel">Confirm New Password</label>
-			<input id="confirm_password" onkeyup= "passcheck()" name="confirm_password" type="password" required>
-			<span id = "hint2">Your passwords do not match</span>
-        </p>
-        <b style="text-align: center;font-size: 20px;color: red;"><?php if(!isset($_GET['error'])){ }elseif(isset($_GET['error'])){ echo "อีเมลหรือชื่อผู้ใช้ไม่ตรงกับข้อมูลที่มีอยู่ในระบบ";}  ?></b>      
-		<p>
-			<input type="submit" value="Set new Password" id="submit">
-		</p>
+<form id = "regist_form">
+<h1>Set new password</h1>
+		<div id="error_msg"></div>
+		<div>
+			<input type="text" name="email" placeholder="Email" id="email"><br>
+			<span></span>
+		</div>
+		<div>
+			<input type="text" name="username" placeholder="Username" id="username"><br>
+			<span></span>
+		</div>
+		<div>
+			<input type="password" name="password" placeholder="Password" id="password"><br>
+			<span></span>
+		</div>
+		<div>
+			<input type="password" name="password2" placeholder="Confirm_Password" id="password2"><br>
+			<span></span>
+		</div>
+		<div>
+			<button type="button"  id="reg_btn">Set new password</button>
+		</div>
 	</form>
 </body>
 </html>
-<script type="text/javascript" src="javascript/Regist.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="javascript/recoverypass.js"></script>

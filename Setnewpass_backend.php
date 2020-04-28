@@ -1,33 +1,45 @@
 <?php 
+$db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
 
-/*SESSION_START();
-require 'connect.php';
-$email = $_POST['email'];
-$uname = $_POST['uname'];
-$pass = base64_encode($_POST['password']);
-$sql = "SELECT * FROM userdata WHERE email = '".$email."' and username = '".$uname."'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $sql = "UPDATE userdata SET password = '".$pass."' WHERE email = '".$email."' and username = '".$uname."'";
-        if ($conn->query($sql) === TRUE) {
-            header("location: login.php");
-        }
-        else {
-        echo "Error updating record: " . $conn->error;
-        }
+if (isset($_POST['username_check'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $sql = "SELECT * FROM userdata WHERE username = '$username' and email = '$email' ";
+    $results = mysqli_query($db, $sql);
+    if (mysqli_num_rows($results) > 0) {
+        echo 'exist';
+    } else {
+        echo 'not_exist';
+    }
+    exit();
+}
+
+if (isset($_POST['email_check'])) {
+    $email = $_POST['email'];
+    $sql = "SELECT * FROM userdata WHERE email = '$email' ";
+    $results = mysqli_query($db, $sql);
+    if (mysqli_num_rows($results) > 0) {
+        echo 'exist';
+    } else {
+        echo 'not_exist';
+    }
+    exit();
+}
+
+if (isset($_POST['save'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = base64_encode($_POST['password']);
+    $sql = "SELECT * FROM userdata WHERE username = '$username' and email = '$email'";
+    $results = mysqli_query($db, $sql);
+    if (mysqli_num_rows($results) > 0) {
+        $query = "UPDATE userdata SET password='$password',last_update=(NOW()) WHERE email = '$email'";
+        $results = mysqli_query($db, $query);
+        echo 'Saved';
+        exit();
+    }  else {
+        echo 'not_exist';
+        exit();
     }
 }
-else{
-    header("location: Setnewpass.php?error=y");
-
-}*/
-
-$to = "goodbye_baby@hotmailmail.co.th";
-$subject = "My subject";
-$txt = "Hello world! test";
-$headers = "From: Assetwebmaster@example.com" . "\r\n" .
-"CC: somebodyelse@example.com";
-
-mail($to,$subject,$txt,$headers);
 ?>
