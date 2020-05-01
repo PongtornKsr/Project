@@ -69,6 +69,7 @@ table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; te
                                   
                                   <span class="input-group-text">Search</span>
                                  <input type="text" name="search_text" id="search_text" placeholder="Search Keyword" class="form-control" />
+                                 
                                 </div>
                                   </div>
                                 </div>
@@ -78,22 +79,22 @@ table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; te
                     
                     <br><br>
 
-    <div >
+    <div id="sort_table" style="height: 450px">
     <table class="table table-striped table-dark" width="100%">
   <thead>
     <tr>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Email</th>
-	  <th scope="col">Start</th>
-      <th scope="col">Profile</th>
-      <th scope="col">Lastupdate</th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" style="color:white">First Name</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc" href="#" style="color:white">Last Name</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="desc" href="#" style="color:white">Email</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc" href="#" style="color:white">Status</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc" href="#" style="color:white">Profile</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc" href="#" style="color:white">Lastupdate</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>
   </thead>
 
-  <tbody id = "result">
+  <tbody>
       
         
     </tbody>

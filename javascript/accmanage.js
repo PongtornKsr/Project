@@ -10,7 +10,7 @@ function load_acc_search(query)
    data:{ 'nmsearch' : 1,'query':query},
    success:function(data)
    {
-    $('#result').html(data);
+    $('#sort_table').html(data);
    }
   });
  }
@@ -29,4 +29,22 @@ function load_acc_search(query)
  });
 
 
+
+});
+
+$(document).on('click', '.column_sort', function () {
+  var column_name = $(this).attr("id");
+  var order = $(this).data("order");
+  var arrow = "";
+  if(order == 'desc'){ arrow = "&nbsp;<span>V</span>"; }
+  else{ arrow = "&nbsp;<span>^</span>"}
+  $.ajax({
+    url:"Accmanagebackend.php",
+    method : "POST",
+    data:{'sort' : 1 ,'column_name':column_name,'order' : order},
+    success:function(data){
+      $('#sort_table').html(data);
+      $('#'+column_name+'').append(arrow);
+    }
+  })
 });
