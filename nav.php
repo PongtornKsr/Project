@@ -14,8 +14,8 @@
                           }
                         }
                           ?>
-                    <img src="img/logomini.png" width="80" height="30" alt="">
-            </a>
+                    <img src="img/logomini.png" width="80" height="30" alt=""></a>
+                    <?php echo $_SESSION['Account']; ?>
             <ul class="nav justify-content-end">
                     <li class="nav-item">
                     <?php SESSION_START();
