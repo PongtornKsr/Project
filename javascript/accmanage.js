@@ -36,8 +36,8 @@ $(document).on('click', '.column_sort', function () {
   var column_name = $(this).attr("id");
   var order = $(this).data("order");
   var arrow = "";
-  if(order == 'desc'){ arrow = "&nbsp;<span>V</span>"; }
-  else{ arrow = "&nbsp;<span>^</span>"}
+  if(order == 'desc'){ arrow = "&nbsp;<span>&#8595;</span>"; }
+  else{ arrow = "&nbsp;<span>&#8593;</span>"}
   $.ajax({
     url:"Accmanagebackend.php",
     method : "POST",

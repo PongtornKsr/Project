@@ -166,9 +166,9 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 ini_set('memory_limit', '-1');
                 $c = 1;
                 while($c <= $qty){
-                    
+                    $datestring = date("d/m/Y", strtotime($adate));
                     array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `get_method`, `note`, `dstat_ID`) VALUES 
-                    ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$adate."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$get."','".$note."','".$dstat_ID."')"); 
+                    ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$get."','".$note."','".$dstat_ID."')"); 
                     array_push($a,"$asset_Set".".$c");
                     $c++;
                 }
