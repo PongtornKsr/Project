@@ -9,6 +9,16 @@
            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
            <link rel="stylesheet" href="CSS/formstyle.css">
            <link rel="stylesheet" href="CSS/BG.css">
+    <style>
+    
+    #treport_td{ border: 1px solid black; }
+    #treport_tds{ 
+        border: 1px solid black;
+       
+                    border-top: none;
+    }
+    </style>
+
  </head>
  <body> 
  <?php require 'nav.php'; ?>
@@ -30,7 +40,7 @@
                     รายการที่ :
                 </td>
                 <td>
-                    <input type="text" name = "order_number[]" width="50">
+                    <input type="text" name = "on[]" width="50">
                 </td>
             </tr>
             <tr>
@@ -78,7 +88,7 @@
                     }     }
                echo  "</select>";
                 ?>
-                เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="4" name = "detype[]" width="50">
+                เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="4" name = "dtype[]" width="50">
                 </td>
             </tr>
             <tr>
@@ -234,7 +244,18 @@
                     <input type="text" name = "fax[]" id ="10" width="50">
                 </td></tr>
                 <tr>
-                <td>วิธีการได้มา : </td><td> 
+                <td>วิธีการได้มา : </td>
+                <td> 
+                <input type="radio" id="ft" name="get[]" value="1">
+                <label>เงินงบประมาณ(งปม.)</label>
+                <input type="radio" id="sd" name="get[]" value="2">
+                <label>เงินนอกงบประมาณ</label>
+                <input type="radio" id="trd" name="get[]" value="3">
+                <label>เงินบริจาค/เงินช่วยเหลือ</label>
+                <input type="radio" id="frt" name="get[]" value="4">
+                <label>อื่นๆ</label>
+                <br>
+
                 <select name = "getmet[]" ><option value="0">---วิธีได้รับ---</option> 
                 <?php
                 /*
@@ -247,7 +268,7 @@
                         else {
                     echo "<input type='radio' name='gmet0' value=".$row['getMethod_ID'].">".$row['method'];
                     }}     } */ 
-                    $sql = "SELECT * FROM getmethod";
+                    $sql = "SELECT * FROM getmethod WHERE getMethod_ID NOT IN ('1', '2', '3','9');";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
@@ -256,7 +277,7 @@
 
                     ?>
                 </select>
-            รายได้ปี: <input type="text" placeholder="เงินนอกงบประมาณ"> อื่นๆ: <input type="text" name="els[]" placeholder="วิธีการอื่นๆที่ได้รับมา">
+                <br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>
                 </td><td>
                 
                 </td></tr>
@@ -281,7 +302,80 @@
                                          <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>  
                                     </tr>  
                                </table>  
-                               <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />  
+                               <table id = "treport">
+                               <thead>
+                               <tr id ="treport_tr">
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>วัน/เดือน/ปี</div>
+                                    </td>
+                                    <td id ="treport_td" rowspan="2">
+                                        <div>ที่เอกสาร</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>รายการ</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>จำนวนหน่วย</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>ราคาต่อ หน่วย/ชุด/กลุ่ม</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>มูลค่ารวม</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>อายุการใช้งาน</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>อัตรค่าเสื่อมราคา(%)</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>ค่าเสื่อมราคาประจำปี</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>ค่าเสื่อมราคาสะสม</div>
+                                    </td>
+                                    <td id = "treport_td" rowspan="2">
+                                        <div>มูลค่าสุทธิ</div>
+                                    </td>
+                                    <td id = "treport_td" colspan="2">
+                                        <div>รายการเปลี่ยนแปลงการเคลื่อนย้ายสถานภาพ</div>
+                                    </td>
+                               </tr>
+                               <tr>
+                                 <td id = "treport_td"><div>รายการเปลี่ยน</div> </td>
+                                 <td id = "treport_td"><div>รายการเลขที่เอกสาร</div> </td>
+                               </tr>
+                               </thead>
+                               <tbody id = "tbody">
+                                <tr id = "report_ta">
+                                  <td id = "treport_td" ><input name = "report_date[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_NO[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_order[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "unit[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "price_per_unit[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "summary[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "sum_Depreciation" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>
+                                 </tr>
+                                 
+                                 
+                                 
+                                 
+
+                                 
+                               </tbody>
+                               </table>
+                               
+                               <div style = "float:right;"><button style = "width:50%" type="button" id = "minus" class="btn btn-danger">-</button><button style = "width:50%" type="button" id = "plus" class="btn btn-success">+</button></div>
+                               <br>
+                               <input type = "hidden" id = "count_re" name ="count_re">
+                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit"/> </center> 
                           </div>  
                      </form>  
   </div>
@@ -392,7 +486,7 @@ function select_getmethod()
                     $i+=1;
                     */
                 
-                    $sql = "SELECT * FROM getmethod";
+                    $sql = "SELECT * FROM getmethod WHERE getMethod_ID NOT IN ('1', '2', '3','9')";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
@@ -452,7 +546,7 @@ $(document).ready(function(){
   html += '<input type="hidden" name="num[]" value="">';
   html += '<hr width=80% size=3 style="color:black">';
   html += '<table Align = "center">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "order_number[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
+  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
   html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "detype[]" width="50">'; 
   html += '</td></tr><tr><td>รหัสครุภัณฑ์: </td><td><input type="text" name="asset_ID[]" id = "ida" >/<input type="text" name="asset_Set[]" id = "idb" ><input type="text" name="assetid[]" id = "idc" ></td></tr><tr><td>จำนวน: </td><td> <input type="text" name="quantity[]" id = "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" width="50"></td></tr>';
   html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
@@ -462,7 +556,7 @@ $(document).ready(function(){
   html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
   html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
   html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td>วิธีการได้มา : </td><td><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select>รายได้ปี: <input type="text" placeholder="เงินนอกงบประมาณ"> อื่นๆ: <input type="text" name="els[]" placeholder="วิธีการอื่นๆที่ได้รับมา"></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
+  html += '<tr><td>วิธีการได้มา : </td><td><input type="radio" id="ft" name="get[]" value="1"><label>เงินงบประมาณ(งปม.)</label><input type="radio" id="sd" name="get[]" value="2"><label>เงินนอกงบประมาณ</label><input type="radio" id="trd" name="get[]" value="3"><label>เงินบริจาค/เงินช่วยเหลือ</label><input type="radio" id="frt" name="get[]" value="9"><label>อื่นๆ</label><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
            $('#dynamic_field').append('<tr id="'+i+'"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
@@ -559,7 +653,52 @@ $(document).ready(function(){
         }
         
     });
- 
+    var tra = [0];
+    $("#count_re").val(tra[0]);
+    $(document).on('click','#plus',function(){
+        var a = tra[tra.length-1]+1;
+
+        tra.push(a);
+        $("#count_re").val(tra[tra.length-1]);
+        //var ss = $(this).parent().parent().siblings().children().attr('rowspan');
+        //var q = parseInt(ss);
+        //var s = q+1;
+        //$(this).parent().parent().siblings().children().attr('rowspan',s);
+        var html = '';
+        html +='<tr id = "'+tra[tra.length-1]+'s">';
+        html += '<td id = "treport_tds" ><input name = "report_date[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_NO[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_order[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "unit[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "price_per_unit[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "summary[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "sum_Depreciation" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>';
+        html +='</tr>';
+        $('#tbody').append(html);
+
+    });
+    $(document).on('click','#minus',function(){
+        
+        var a = tra[tra.length-1] ;
+        
+        if(a == 0){ }
+        else if(a > 0){tra.pop();
+        $('#'+a+'s').remove();}
+        $("#count_re").val(tra[tra.length-1]);
+        /*var ss = $(this).parent().parent().siblings().children().attr('rowspan');
+        var q = parseInt(ss);
+        if(q <=1 ){ }
+        else{
+        var s = q-1;
+        $(this).parent().parent().siblings().children().attr('rowspan',s);
+        }*/
+    });
 
       $(document).on('change' , '#kk select' ,function(){
    
@@ -596,6 +735,21 @@ $(document).on('blur' , '#kk input' ,function(){
        $('#'+id).attr('disabled',false);
    }
 
+});
+$(document).on('change' , 'input[type=radio]',function(){
+    var value =$(this).attr('id');
+    if(value == "frt"){
+        $(this).siblings('input[id=els]').attr('disabled',false);
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+    }else if (value == "sd"){
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',false);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+
+    }
+    else{
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+    }
 });
  
 });
