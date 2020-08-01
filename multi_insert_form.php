@@ -31,9 +31,9 @@
    <form class = "whitebox" action= "multi_insert.php" name="add_detail" id="add_detail" method = "POST" >  
                           <div class="table-responsive">  
                                <table class="table table-borderless"  id="dynamic_field">  
-                                    <tr id = "0">  
+                                    <tr id = "0t">  
                                          <td>
-                                         <input type="hidden" name="num[]" value="A">
+                                         <input type="hidden" name="num[]">
                                          <table Align = "center">
             <tr>
                 <td>
@@ -246,6 +246,19 @@
                 <tr>
                 <td>วิธีการได้มา : </td>
                 <td> 
+                <select name="get[]" id = "gmt">
+                <option value="0">---ประเภทเงิน---</option> 
+                <?php 
+                $sql = "SELECT * FROM money_type";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo '<option value="'.$row["mid"].'">'.$row["money_type"].'</option>';
+                }     }
+
+                ?>
+                </select>
+                <!--
                 <input type="radio" id="ft" name="get[]" value="1">
                 <label>เงินงบประมาณ(งปม.)</label>
                 <input type="radio" id="sd" name="get[]" value="2">
@@ -253,7 +266,7 @@
                 <input type="radio" id="trd" name="get[]" value="3">
                 <label>เงินบริจาค/เงินช่วยเหลือ</label>
                 <input type="radio" id="frt" name="get[]" value="4">
-                <label>อื่นๆ</label>
+                <label>อื่นๆ</label> -->
                 <br>
 
                 <select name = "getmet[]" ><option value="0">---วิธีได้รับ---</option> 
@@ -358,7 +371,7 @@
                                   <td id = "treport_td" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>
                                   <td id = "treport_td" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>
                                   <td id = "treport_td" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "sum_Depreciation" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text"></td>
                                   <td id = "treport_td" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>
                                   <td id = "treport_td" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>
                                   <td id = "treport_td" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>
@@ -398,7 +411,20 @@ function select_atype()
 
  return $output;
 }
+function get_money_type(){
+    require 'connect.php';
+    $output = '';
+    $sql = "SELECT * FROM money_type";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $output .= '<option value="'.$row["mid"].'">'.$row["money_type"].'</option>';
+                }     }
+    return $output;
 
+
+
+}
 function select_dtype()
 { 
 	require 'connect.php';
@@ -543,7 +569,7 @@ $(document).ready(function(){
         array.push(numb);
             }
            var html = '';
-  html += '<input type="hidden" name="num[]" value="">';
+  html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
   html += '<table Align = "center">';
   html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
@@ -556,10 +582,10 @@ $(document).ready(function(){
   html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
   html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
   html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td>วิธีการได้มา : </td><td><input type="radio" id="ft" name="get[]" value="1"><label>เงินงบประมาณ(งปม.)</label><input type="radio" id="sd" name="get[]" value="2"><label>เงินนอกงบประมาณ</label><input type="radio" id="trd" name="get[]" value="3"><label>เงินบริจาค/เงินช่วยเหลือ</label><input type="radio" id="frt" name="get[]" value="9"><label>อื่นๆ</label><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
+  html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
-           $('#dynamic_field').append('<tr id="'+i+'"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+           $('#dynamic_field').append('<tr id="'+i+'t"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr>');  
            i++;
       });  
       $(document).on('click', '.btn_remove', function(){  
@@ -567,7 +593,7 @@ $(document).ready(function(){
            $('#'+button_id+'').remove();
       });
       $(document).on('keyup','input[id=ida]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id');
+    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
         var ele = document.getElementsByClassName("idx");
         var a = $(this).val();
         var b = $(this).siblings('input[id=idb]').val();
@@ -591,7 +617,7 @@ $(document).ready(function(){
         
     });
     $(document).on('keyup','input[id=idb]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id');
+    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
         var ele = document.getElementsByClassName("idx");
         var a = $(this).siblings('input[id=ida]').val();
         var b = $(this).val();
@@ -612,7 +638,7 @@ $(document).ready(function(){
         
     });
     $(document).on('keyup','input[id=idc]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id');
+    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
         var ele = document.getElementsByClassName("idx");
         var a = $(this).siblings('input[id=ida]').val();
         var b = $(this).siblings('input[id=idb]').val();
@@ -633,7 +659,7 @@ $(document).ready(function(){
         
     });
     $(document).on('keyup','input[id=idq]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id');
+    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
         var ele = document.getElementsByClassName("idx");
         var a = $(this).parents().parents().siblings().children().children('input[id=ida]').val();
         var b = $(this).parents().parents().siblings().children().children('input[id=idb]').val();
@@ -675,7 +701,7 @@ $(document).ready(function(){
         html +='<td id = "treport_tds" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>';
         html +='<td id = "treport_tds" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>';
         html +='<td id = "treport_tds" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "sum_Depreciation" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text"></td>';
         html +='<td id = "treport_tds" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>';
         html +='<td id = "treport_tds" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>';
         html +='<td id = "treport_tds" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>';
@@ -750,6 +776,23 @@ $(document).on('change' , 'input[type=radio]',function(){
         $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
         $(this).siblings('input[id=els]').attr('disabled',true);
     }
+});
+
+$(document).on('change' , '#gmt', function(){
+    var value =$(this).val();
+    if(value == 4){
+        $(this).siblings('input[id=els]').attr('disabled',false);
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+    }else if (value == 2){
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',false);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+
+    }
+    else{
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+    }
+
 });
  
 });

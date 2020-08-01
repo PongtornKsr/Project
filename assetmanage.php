@@ -165,7 +165,7 @@
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-
+                $an = $row['asset_number'];
                 echo
                     "<tr>
                         <td><input type='checkbox' name='id[]' id= 'cbx' onClick='checkboxes()' value = '".$row['id']."'></td>
@@ -173,9 +173,11 @@
                         <td>".$row['asset_name']."</td>
                         <td>".$row['asset_nickname']."</td>
                         <td>".$row['asset_type_name']."</td>
-                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a>";
+                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a><br>";
                         if($_SESSION['editop'] == 1){
-                        echo "<a href='edit.php?asset_number=".$row['asset_number']."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a>"; } //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
+                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>ทะเบียนคุมทรัพย์สิน</button></a><br>";
+                        echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a><br>"; }
+                        else { echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a><br>"; } //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
                 echo "</td></tr>";
         

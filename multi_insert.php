@@ -3,13 +3,14 @@
 SESSION_START();
 require 'connect.php';
 $connect = mysqli_connect("localhost", "admin", "1234", "prodata");  
- $number = count($_POST['num']);  
+ $numberss = count($_POST['num']); 
  $sqlm = array();
  $qtyr = array();
  $idA = array();
  $idB = array();
+ $a = array();
  $break = false;
- if($number >= 0)  
+ if($numberss >= 0)  
  {  
     $NO = 0;
     $sql = "SELECT MAX(No) FROM asset";
@@ -21,7 +22,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         else if ($row['MAX(No)']!=NULL){ $NO = $row['MAX(No)'] + 1; }
     }
     }
-      for($count=0; $count<$number; $count++)  
+      for($count=0; $count<$numberss; $count++)  
       {  
         $order_number = $_POST['on'][$count];
         $adate = $_POST['addin_date'][$count];//วัน
@@ -62,7 +63,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         $note = $_POST['note'][$count];//หมายเหตุ
         $dstat_ID = $_POST['dstat_ID'][$count];//ดรอปดาวลักษณะการติดตั้ง
         $dtype = $_POST['dtype'][$count];//ลักษณะการติดตั้งที่เพิ่มใหม่
-        $a = array();
+       
     
 
         $get = "" ; 
@@ -178,7 +179,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 $gmet = 10;
 
             }
-            echo "'".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$qty." ".$assetid."','".$asset_Set."','".$asset_Set.".".$qty."','".$asset_name."','".$model."','".$asset_order."','".$property."','".$assetloca."','".$rmid."'.'".$resid."','".$asven."','".$assettype."','1','".$price."','1','".$get."','".$note."','".$dstat_ID."'";
+            //echo "'".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$qty." ".$assetid."','".$asset_Set."','".$asset_Set.".".$qty."','".$asset_name."','".$model."','".$asset_order."','".$property."','".$assetloca."','".$rmid."'.'".$resid."','".$asven."','".$assettype."','1','".$price."','1','".$get."','".$note."','".$dstat_ID."'";
             
           
                 
@@ -208,17 +209,19 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 ('".mysqli_real_escape_string($connect, $_POST["name"][$i])."')";  
                 mysqli_query($connect, $sql);  */
            }
-          
+          //print_r($sqlm);
            for ($i = 0; $i < count($sqlm); $i++) {
             
                // mysqli_query($connect, $sqlm[$i]);
-                $sqlq= $sqlm[$i];          
+                $sqlq = $sqlm[$i];          
                 if ($conn->query($sqlq) == TRUE) {                     
             
-            echo $sqlm[$i];
+            //echo $sqlm[$i];
             }
         }
-        
+       // echo count($sqlm);
+        print_r($a);
+        echo "count : a :".count($a);
         for($x = 0; $x< count($a); $x++){
             $q = $a[$x];
             $sqlst = "SELECT * FROM asset WHERE asset_number = $q";
@@ -229,7 +232,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 array_push($idA,$assetnum);
                 $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."',1)";
                 if ($conn->query($sqlsta) == TRUE) {
-                
+                //echo $sqlsta;
                 }
             }
         }
@@ -255,8 +258,8 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
     
     $sql = "INSERT INTO `asset_report`( `date`, `report_NO`, `report_order`, `unit`, `price_per_unit`, `summary`, `life_time`, `Depreciation_rate`, `year_Depreciation`, `sum_Depreciation`, `net_value`, `Change_order`, `report_number`) VALUES ('".$date."','".$report_NO."','".$report_order."','".$unit."','".$price_per_unit."','".$summary."','".$life_time."','".$Depreciation_rate."','".$year_Depreciation."','".$sum_Depreciation."','".$net_value."','".$Change_order."','".$report_number."')";
     if ($conn->query($sql) == TRUE) {
-           $sql = "SELECT aid FROM `asset_report` WHERE `date` = $date and report_NO = $report_NO and report_order = $report_order and unit = $unit and price_per_unit = $price_per_unit and summary = $summary and life_time = $life_time and Depreciation_rate = $Depreciation_rate and year_Depreciation = $year_Depreciation and sum_Depreciation = $sum_Depreciation and net_value = $net_value and Change_order = $Change_order and  report_number = $report_number" ;
-           $result = $conn->query($sqlst);
+           $sql = "SELECT aid FROM asset_report WHERE (date = '".$date."') and (report_NO = '".$report_NO."') and (report_order = '".$report_order."') and (unit = '".$unit."') and (price_per_unit = '".$price_per_unit."') and (summary = '".$summary."') and (life_time = '".$life_time."') and (Depreciation_rate = '".$Depreciation_rate."') and (year_Depreciation = '".$year_Depreciation."') and (sum_Depreciation = '".$sum_Depreciation."') and (net_value = '".$net_value."') and (Change_order = '".$Change_order."') and  (report_number = '".$report_number."')" ;
+           $result = $conn->query($sql);
            if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
             $repid = $row['aid'];
@@ -267,21 +270,26 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         }
   
     }
- 
+    //print_r($idA);
+    //print_r($idB);
+    //print_r($sqlm);
 
 
-    for($i = 0 ; $i < count($idA); $i++){
-        for($z = 0 ; $z < count($idB) ; $z++){
+    for($i = 0 ; $i <count($idA); $i++){
+        for($z = 0 ; $z <count($idB) ; $z++){
             $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$idA[$i]."','".$idB[$z]."')";
-            if ($conn->query($sql) == TRUE) {
-            
+            if ($conn->query($sqll) == TRUE) {
+            echo $sqll;
             }
 
         }
 
     }
-    
-
+    //echo "number".count($_POST['num']);
+    //echo "a".count($a);
+    echo " ".$idA;
+    echo " ".$idB;
+    //echo count($sqlm);
 
 
 
@@ -290,11 +298,11 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
 
        
 
-      echo var_dump($number);
-      echo "Data Inserted";
-      print_r($a);
-      echo $sqlst;
-      echo $sqlsta;
+      //echo var_dump($number);
+      //echo "Data Inserted";
+      //print_r($a);
+      //echo $sqlst;
+      //echo $sqlsta;
       header('Location: assetmanage.php');
       /*
       echo $_POST['asset_name'];

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/submitstyle.css">
+    <link rel="stylesheet" href="CSS/BG.css">
     <title>Document</title>
 </head>
 <?php

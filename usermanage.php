@@ -25,7 +25,7 @@ else if($Fuction == 6||$Option ==6){
 function RoleUp(){
     require 'connect.php';
     $ID = $_GET['ID'];
-    $sql = "UPDATE `userdata` SET `profile_ID`= 1 , last_update = (NOW()) WHERE ID= ".$ID." ";
+    $sql = "UPDATE `userdata` SET `profile_ID`= 1 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$ID." ";
     if ($conn->query($sql) === TRUE) {  
         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
         $result = $conn->query($sql); 
@@ -47,7 +47,7 @@ function RoleUp(){
 
 function RoleDown(){
     require 'connect.php';
-    $sql = "UPDATE `userdata` SET `profile_ID`= 2 , last_update = (NOW()) WHERE ID= ".$_GET['ID']." ";
+    $sql = "UPDATE `userdata` SET `profile_ID`= 2 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$_GET['ID']." ";
     if ($conn->query($sql) === TRUE) {  
         $ID = $_GET['ID'];
         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
@@ -70,7 +70,7 @@ function RoleDown(){
 
 function useractive(){
     require 'connect.php';
-    $sql = "UPDATE `userdata` SET `ID_stat`= 1 , last_update = (NOW()) WHERE ID= ".$_GET['ID']." ";
+    $sql = "UPDATE `userdata` SET `ID_stat`= 1 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$_GET['ID']." ";
     if ($conn->query($sql) === TRUE) {  
         $ID = $_GET['ID'];
         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
@@ -94,7 +94,7 @@ function useractive(){
 function userinsert(){
     require 'connect.php';
     $name = $_POST['fname']." ".$_POST['lname']; 
-    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."',(NOW()),'".$_POST['Type']."','1')";
+    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')),'".$_POST['Type']."','1')";
     if ($conn->query($sqla) === TRUE) {
         $log = new Log();
         $log->Write('log/test.txt','#### '.date("l jS \of F Y h:i:s A").' ####');
@@ -139,7 +139,7 @@ function usblock(){
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if($row['profile_ID'] == 2){
-                $sql = "UPDATE `userdata` SET `ID_stat`= 2 , last_update = (NOW()) WHERE ID= ".$_GET['ID']." ";
+                $sql = "UPDATE `userdata` SET `ID_stat`= 2 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$_GET['ID']." ";
                     if ($conn->query($sql) === TRUE) {
                         $ID = $_GET['ID'];
                         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
