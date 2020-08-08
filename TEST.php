@@ -1,5 +1,5 @@
 <?php
-
+require 'connect.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
@@ -60,21 +60,56 @@ ob_start();
 <p>ส่วนราชการ สถาบันเทคโนโลยีราชมงคล <Br>
 หน่วยงานวิทยาเขตเทคนิคกรุงเทพฯ </p>
 </div>
+
 <?php
 
+
+$as = $_GET['asset_number'];
+$mt = "";
+$getm = "";
+$C = "";
+$set ="";
+$sql = "SELECT asset_Set FROM asset WHERE asset_number = '".$as."'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while($row = $result->fetch_assoc()) {
+$set = $row['asset_Set'];
+}
+}
+
+$sql = "SELECT MIN(asset_ID) From asset WHERE asset_Set like '".$set."'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while($row = $result->fetch_assoc()) {
+$C .= $row['MIN(asset_ID)'];
+}
+}
+$sql = "SELECT MAX(asset_number) From asset WHERE asset_Set like '".$set."'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while($row = $result->fetch_assoc()) {
+$C .= "- ".$row['MAX(asset_number)'];
+}
+}
+$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_number = '".$as."'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while($row = $result->fetch_assoc()) {
+$mt = $row['mid'];
+$getm = $row['getMethod_ID'];
 $Dot = "...............";
-$A = "25/8";
-$B = "หน่วยครุภัณฑ์คอมพิวเตอร์";
-$C = "7440-010-0001-04-58/8.1-8.2วท";
-$D = "";
-$E = "";
+$A = $row['order_number'];
+$B = $row['asset_type_name'];
 
-$F = "คณะวิทยาศาสตร์และเทคโนโลยี";
-$G = "บริษัทเจนแมเนจเม้น กรุ๊ป จำกัด";
+$D = $row['property'];
+$E = $row['model'];
 
-$H = "432/42 ถนนทรงวาด แขวงจักรวรรดิ เขตสัมพันธวงศ์ กรุงเทพมหานคร 10100";
-$I = "086-5110204";
-$J = "-";
+$F = $row['asset_location'];
+$G = $row['vendor_company'];
+
+$H = $row['vendor_location'];
+$I = $row['vendor_tel'];
+$J = $row['fax'];
 
 echo "รายการที่" .$Dot. $A .$Dot;  
 echo "<br>"  ;
@@ -91,7 +126,9 @@ echo"โทรศัพท์ ".$Dot. $I.$Dot ;
 echo "โทรสาร".$Dot.$J.$Dot;   
 echo "<br>"  ;
 echo "<br>"  ;
-  ?>
+}
+}
+?>
   <table class='table borderless'>
 
    <col width="250"> 
@@ -100,22 +137,24 @@ echo "<br>"  ;
    <col width="250"> 
    <tr>
    <td></td>
-   <td><input type="RADIO" name="chkColor1" value="1" align = "center">&nbsp; &nbsp;  เงินงบประมาณ(งปม.) </td>
-   <td><input type="RADIO" name="chkColor1" value="Blue"> &nbsp; &nbsp; เงินนอกงบประมาณ </td>
-   <td><input type="RADIO" name="chkColor1" value="Green"&nbsp; &nbsp; >&nbsp; &nbsp; เงินบริจาคช่วยเหลือ   </td>
-   <td><input type="RADIO" name="chkColor1" value="Green"> &nbsp; &nbsp; อื่นๆ  <br></td>
+   <td><input type="RADIO" name="chkColor1" value="1" align = "center" <?php if($mt == 1){ echo "checked='checked'"; } ?> >&nbsp; &nbsp;  เงินงบประมาณ(งปม.) </td>
+   <td><input type="RADIO" name="chkColor1" value="Blue" <?php if($mt == 2){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; เงินนอกงบประมาณ </td>
+   <td><input type="RADIO" name="chkColor1" value="Green" <?php if($mt == 3){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; เงินบริจาคช่วยเหลือ   </td>
+   <td><input type="RADIO" name="chkColor1" value="Green" <?php if($mt == 4){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; อื่นๆ  <br></td>
    </tr>
     <tr>
     <td> <p>วิธีที่ได้รับมา </p></td>
-    <td><input type="RADIO" name="chkColor1" value="Blue"> &nbsp; &nbsp; ตกลงราคา  </td>
-    <td> <input type="RADIO" name="chkColor1" value="Green">&nbsp; &nbsp; สอบราคา  </td>
-    <td> <input type="RADIO" name="chkColor1" value="Green">&nbsp; &nbsp; ประกวดราคา E-auction  </td>
-    <td><input type="RADIO" name="chkColor1" value="Green">&nbsp; &nbsp; วิธีพิเศษ  </td>
-    <td> <input type="RADIO" name="chkColor1" value="Green">&nbsp; &nbsp; รับบริจาค  </td>
+    <td><input type="RADIO" name="chkColor2" value="Blue" <?php if($getm == 4){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; ตกลงราคา  </td>
+    <td> <input type="RADIO" name="chkColor2" value="Green" <?php if($getm == 5){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; สอบราคา  </td>
+    <td> <input type="RADIO" name="chkColor2" value="Green" <?php if($getm == 6){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; ประกวดราคา E-auction  </td>
+    <td><input type="RADIO" name="chkColor2" value="Green" <?php if($getm == 7){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; วิธีพิเศษ  </td>
+    <td> <input type="RADIO" name="chkColor2" value="Green" <?php if($getm == 8){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; รับบริจาค  </td>
    </tr>
    </table>
-   <label><Input class="radio" type = 'Radio' checked Name ='target' value= 'r1'>Enable </label>
-   <label><Input class="radio" type = 'Radio' Name ='target' value= 'r2'>Disable </label><br /><br />
+   
+  <br>
+  <br>
+   
   <table class="table table-bordered"> 
   <tr>
     <th rowspan=2>วัน/เดือน/ปี</th>
@@ -125,6 +164,7 @@ echo "<br>"  ;
     <th align="center" rowspan=2>ราคาต่อ หน่วย/ชุด/กลุ่ม</th>
     <th rowspan=2>มูลค่ารวม</th>
     <th rowspan=2>อายุใช้งาน</th>
+    <th rowspan=2>อัตราค่าเสื่อมราคา(%)</th>
     <th rowspan=2>ค่าเสื่อมราคาประจำปี</th>
     <th rowspan=2>ค่าเสื่อมราคาสะสม</th>
     <th rowspan=2>มูลค่าสุทธิ</th>
@@ -135,74 +175,35 @@ echo "<br>"  ;
   <th align="center">รายการเปลี่ยน</th>
   <th align="center">เลขที่เอกสาร</th>
 </tr>
+<?php 
+                                    
+  $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_number = '".$as."' ";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+ echo '
+<tr>
+    <td align="center">'.$row['date'].'</td> <!--วันที่-->
+    <td align="center">'.$row['report_NO'].'</td> <!--เลขเอกสาร-->
+    <td align="center">'.$row['report_order'].'</td> <!--รายการ-->
+    <td align="center">'.$row['unit'].'</td>  <!--จำนวนชุด-->
+    <td align="center">'.$row['price_per_unit'].'</td>  <!--ราคาต่อหน่วย-->
+    <td align="center">'.$row['summary'].'</td>  <!--ราคารวม-->
+    <td align="center">'.$row['life_time'].'</td>  <!--ค่าเสื่อมประจำปี-->
+    <td align="center">'.$row['Depreciation_rate'].'</td>  <!--ค่าเสื่อมประจำปี-->
+    <td align="center">'.$row['year_Depreciation'].'</td> <!--ค่าเสื่อมสะสม-->
+    <td align="center">'.$row['sum_Depreciation'].'</td> <!--มูลค่าสุทธื-->
+    <td align="center">'.$row['net_value'].'</td> <!--มูลค่าสุทธื-->
+    <td align="center">'.$row['Change_order'].'</td>  <!--รายการเปลี่ยนแปลง-->
+    <td align="center">'.$row['report_number'].'</td>  <!--เลขที่เอกสาร-->   
 
-  <tr>
-    <td align="center">21 มค 58</td> <!--วันที่-->
-    <td align="center">วท.2/2558</td> <!--เลขเอกสาร-->
-    <td align="center">เครื่องคอมพิวเตอร์สำหรับการสอน</td> <!--รายการ-->
-    <td align="center">2 ชุด</td>  <!--จำนวนชุด-->
-    <td align="center"> 80,000</td>  <!--ราคาต่อหน่วย-->
-    <td align="center">160,000</td>  <!--ราคารวม-->
-    <td align="center">3 ปี</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">16.7</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">10,000</td> <!--ค่าเสื่อมสะสม-->
-    <td align="center">120,000</td> <!--มูลค่าสุทธื-->
-    <td align="center">2</td>  <!--รายการเปลี่ยนแปลง-->
-    <td align="center">2/59</td>  <!--เลขที่เอกสาร-->   
-
-  </tr>
-
-  <tr>
-    <td align="center">21 มค 58</td> <!--วันที่-->
-    <td align="center">วท.2/2558</td> <!--เลขเอกสาร-->
-    <td align="center">เครื่องคอมพิวเตอร์สำหรับการสอน</td> <!--รายการ-->
-    <td align="center">2 ชุด</td>  <!--จำนวนชุด-->
-    <td align="center"> 80,000</td>  <!--ราคาต่อหน่วย-->
-    <td align="center">160,000</td>  <!--ราคารวม-->
-    <td align="center">3 ปี</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">16.7</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">10,000</td> <!--ค่าเสื่อมสะสม-->
-    <td align="center">120,000</td> <!--มูลค่าสุทธื-->
-    <td align="center">2</td>  <!--รายการเปลี่ยนแปลง-->
-    <td align="center">2/59</td>  <!--เลขที่เอกสาร-->
-    
-    
-  </tr>
-  <tr>
-    <td align="center">21 มค 58</td> <!--วันที่-->
-    <td align="center">วท.2/2558</td> <!--เลขเอกสาร-->
-    <td align="center">เครื่องคอมพิวเตอร์สำหรับการสอน</td> <!--รายการ-->
-    <td align="center">2 ชุด</td>  <!--จำนวนชุด-->
-    <td align="center"> 80,000</td>  <!--ราคาต่อหน่วย-->
-    <td align="center">160,000</td>  <!--ราคารวม-->
-    <td align="center">3 ปี</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">16.7</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">10,000</td> <!--ค่าเสื่อมสะสม-->
-    <td align="center">120,000</td> <!--มูลค่าสุทธื-->
-    <td align="center">2</td>  <!--รายการเปลี่ยนแปลง-->
-    <td align="center">2/59</td>  <!--เลขที่เอกสาร-->   
-
-  </tr>
-
-  <tr>
-    <td align="center">21 มค 58</td> <!--วันที่-->
-    <td align="center">วท.2/2558</td> <!--เลขเอกสาร-->
-    <td align="center">เครื่องคอมพิวเตอร์สำหรับการสอน</td> <!--รายการ-->
-    <td align="center">2 ชุด</td>  <!--จำนวนชุด-->
-    <td align="center"> 80,000</td>  <!--ราคาต่อหน่วย-->
-    <td align="center">160,000</td>  <!--ราคารวม-->
-    <td align="center">3 ปี</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">16.7</td>  <!--ค่าเสื่อมประจำปี-->
-    <td align="center">10,000</td> <!--ค่าเสื่อมสะสม-->
-    <td align="center">120,000</td> <!--มูลค่าสุทธื-->
-    <td align="center">2</td>  <!--รายการเปลี่ยนแปลง-->
-    <td align="center">2/59</td>  <!--เลขที่เอกสาร-->
-    
-    
-  </tr>
+  </tr>';}      }
+ ?>
+ 
  </table>
 
 <?php
+
 
     $mpdf->SetDisplayMode('fullwidth'); 
     $mpdf->AddPage('A4-L'); // ตั้งค่ากระดาษ
@@ -210,6 +211,6 @@ echo "<br>"  ;
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
     $mpdf->Output("MyReport.pdf"); // ส่งไปที่ไฟล์Myreport   
     ob_end_flush();
-   
+    
 ?>
 <center><a href="MyReport.pdf"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
