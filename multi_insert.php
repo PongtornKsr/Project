@@ -255,10 +255,10 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
     $net_value = $_POST['net_value'][$h];
     $Change_order = $_POST['Change_order'][$h];
     $report_number = $_POST['report_number'][$h];
-    
-    $sql = "INSERT INTO `asset_report`( `date`, `report_NO`, `report_order`, `unit`, `price_per_unit`, `summary`, `life_time`, `Depreciation_rate`, `year_Depreciation`, `sum_Depreciation`, `net_value`, `Change_order`, `report_number`) VALUES ('".$date."','".$report_NO."','".$report_order."','".$unit."','".$price_per_unit."','".$summary."','".$life_time."','".$Depreciation_rate."','".$year_Depreciation."','".$sum_Depreciation."','".$net_value."','".$Change_order."','".$report_number."')";
+    $t = time();
+    $sql = "INSERT INTO `asset_report`( `date`,`time_now`, `report_NO`, `report_order`, `unit`, `price_per_unit`, `summary`, `life_time`, `Depreciation_rate`, `year_Depreciation`, `sum_Depreciation`, `net_value`, `Change_order`, `report_number`) VALUES ('".$date."','".$t.$h."','".$report_NO."','".$report_order."','".$unit."','".$price_per_unit."','".$summary."','".$life_time."','".$Depreciation_rate."','".$year_Depreciation."','".$sum_Depreciation."','".$net_value."','".$Change_order."','".$report_number."')";
     if ($conn->query($sql) == TRUE) {
-           $sql = "SELECT aid FROM asset_report WHERE (date = '".$date."') and (report_NO = '".$report_NO."') and (report_order = '".$report_order."') and (unit = '".$unit."') and (price_per_unit = '".$price_per_unit."') and (summary = '".$summary."') and (life_time = '".$life_time."') and (Depreciation_rate = '".$Depreciation_rate."') and (year_Depreciation = '".$year_Depreciation."') and (sum_Depreciation = '".$sum_Depreciation."') and (net_value = '".$net_value."') and (Change_order = '".$Change_order."') and  (report_number = '".$report_number."')" ;
+           $sql = "SELECT aid FROM asset_report WHERE time_now = '".$t.$h."'" ;
            $result = $conn->query($sql);
            if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {

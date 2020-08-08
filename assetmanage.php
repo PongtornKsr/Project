@@ -174,10 +174,11 @@
                         <td>".$row['asset_nickname']."</td>
                         <td>".$row['asset_type_name']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a><br>";
+                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:blue; border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a><br>"; 
                         if($_SESSION['editop'] == 1){
-                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>ทะเบียนคุมทรัพย์สิน</button></a><br>";
+                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a><br>";
                         echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a><br>"; }
-                        else { echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a><br>"; } //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
+                         //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
                 echo "</td></tr>";
         

@@ -34,7 +34,7 @@ $st= "";
         $st.=$row['asset_stat_name']." ";
     }
     }
-$sql = "SELECT * FROM asset  natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE id = '".$number."'";
+$sql = "SELECT * FROM asset  natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor natural join money_type natural join getmethod WHERE id = '".$number."'";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {
@@ -52,7 +52,7 @@ $sql = "SELECT * FROM asset  natural join assettype natural join asset_location 
     echo "สถานะการติดตั้ง :".$row['dstat']."<br>";
     echo "สถานะการใช้งาน :".$st."<br>";
     echo "ประเภทครุภัณฑ์ :".$row['asset_type_name']."<br>";
-    echo "วิธีการได้รับ :".$row['get_method']."<br>";
+    echo "วิธีการได้รับ :".$row['money_type'].": ".$row['method']."<br>";
     echo "ชื่อบริษัทผู้ขาย :".$row['vendor_company']."<br>";
     echo "ที่อยู่บริษัท :".$row['vendor_location']."<br>";
     echo "เบอร์โทรบริษัท :".$row['vendor_tel']."<br>";
