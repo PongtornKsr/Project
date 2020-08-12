@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="CSS/fixedthead.css">
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="Css/BG.css">
-    <title>Document</title>
+    <style>
+    
+    </style>
+    <title>CS_Asset</title>
 </head>
 <body background="img/BG.png">
     
@@ -32,7 +35,7 @@
             $sortway = "";
             $s = $_POST['searchtxt'];
             $clause = " WHERE ";
-            $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room ";//Query stub
+            $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat";//Query stub
             if($_POST['searchtxt'] != ''){
                 $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
                    $c = "asset_ID";
@@ -130,9 +133,9 @@
                             $search_word .= " [วิธีได้รับ: ".$row['method']."] ";
                         }
                     }
-                    $r = $_POST['method'];
-                    $c = "get_method";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` LIKE '%{$r}%' ";
+                    $r = $_POST['gm'];
+                    $c = "getMethod_ID";
+                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
                     $clause = " and ";
                     $sortway.= $c." = ".$r;
                 }
@@ -148,7 +151,7 @@
   <form action="search.php" method="post" style ="text-align:center"><div><?php echo $search_word; ?></div><button type= "submit" >ค้นหาใหม่</button></form>
   <form action="asset_update.php" method="post">
     <div style="text-align:center">
-    <table class="table table-striped table-dark">
+    <table class="table bg-light text-dark table-bordered table-striped">
   <thead>
     <tr>
         <th><input type='checkbox' class='checkall' onClick='toggle(this)' /></th>
@@ -174,7 +177,7 @@
                         <td>".$row['asset_nickname']."</td>
                         <td>".$row['asset_type_name']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a><br>";
-                        echo "<a href='test.php?asset_number=".$an."'><button type='button' style='background-color:blue; border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a><br>"; 
+                        echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' style='background-color:blue; border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a><br>"; 
                         if($_SESSION['editop'] == 1){
                         echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a><br>";
                         echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a><br>"; }

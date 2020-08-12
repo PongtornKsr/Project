@@ -5,14 +5,14 @@ $ffname = $_SESSION['Uname'];
 $db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
 $output= "";
 if(isset($_POST['nmsearch'])){
-    $output .='<table class="table table-striped table-dark" width="100%"> <thead>
+    $output .='<table class="table bg-light text-dark table-bordered table-striped" width="100%"> <thead>
     <tr>
-      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" style="color:white">First Name</a></th>
-      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc"  href="#" style="color:white">Last Name</a></th>
-      <th scope="col"><a class= "column_sort" id="email" data-order="desc"  href="#" style="color:white">Email</a></th>
-	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc"  href="#" style="color:white">Status</a></th>
-      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc"  href="#" style="color:white">Profile</a></th>
-      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc"  href="#" style="color:white">Lastupdate</a></th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc"  href="#" >Last Name</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="desc"  href="#" >Email</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc"  href="#" >Status</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc"  href="#">Profile</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc"  href="#" >Lastupdate</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>
@@ -67,14 +67,14 @@ if(isset($_POST['sort'])){
     $query = $_SESSION['query'];
     $query .= "ORDER BY ".$_POST["column_name"]." ".$_POST['order']."";
     $result = mysqli_query($db,$query);
-    $output .='<table class="table table-striped table-dark" width="100%"> <thead> 
+    $output .='<table class="table bg-light text-dark table-bordered table-striped" width="100%"> <thead> 
     <tr>
-      <th scope="col"><a class= "column_sort" id="givenName" data-order="'.$order.'" href="#" style="color:white">First Name</a></th>
-      <th scope="col"><a class= "column_sort" id="familyName" data-order="'.$order.'"  href="#" style="color:white">Last Name</a></th>
-      <th scope="col"><a class= "column_sort" id="email" data-order="'.$order.'"  href="#" style="color:white">Email</a></th>
-	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="'.$order.'"  href="#" style="color:white">Status</a></th>
-      <th scope="col"><a class= "column_sort" id="profile_name" data-order="'.$order.'"  href="#" style="color:white">Profile</a></th>
-      <th scope="col"><a class= "column_sort" id="last_update" data-order="'.$order.'"  href="#" style="color:white">Lastupdate</a></th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="'.$order.'" href="#" >First Name</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="'.$order.'"  href="#" >Last Name</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="'.$order.'"  href="#" >Email</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="'.$order.'"  href="#" >Status</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="'.$order.'"  href="#" >Profile</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="'.$order.'"  href="#" >Lastupdate</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>

@@ -71,8 +71,10 @@
                           while($row = $result->fetch_assoc()) {
                           if($row['profile_ID'] == 1 ){ //echo "<a href='assetinsert.php' class='dropdown-item'>เพิ่มครุภัณฑ์เดี่ยว</a>";
                            echo "<a href='multi_insert_form.php' class='dropdown-item'>เพิ่มครุภัณฑ์</a>
-                            <a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>"; } 
-                            elseif($row['profile_ID'] == 2){ echo "<a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>"; }
+                            <a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>";
+                            echo "<a href='Order_print.php' class='dropdown-item'>พิมพ์รายการครุภัณฑ์</a>"; } 
+                            elseif($row['profile_ID'] == 2){ echo "<a href='Search.php' class='dropdown-item'>ค้นหาและตรวจสอบข้อมูลครุภัณฑ์</a>";
+                              echo "<a href='Order_print.php' class='dropdown-item'>พิมพ์รายการครุภัณฑ์</a>"; }
                           }
                         }
                           ?>

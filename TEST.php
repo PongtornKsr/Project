@@ -34,7 +34,7 @@ ob_start();
 <head>   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MPDF</title>
+    <title>CS_Asset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -88,7 +88,7 @@ $sql = "SELECT MAX(asset_number) From asset WHERE asset_Set like '".$set."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
-$C .= "- ".$row['MAX(asset_number)'];
+$C .= "-".$row['MAX(asset_number)'];
 }
 }
 $sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_number = '".$as."'";
@@ -211,6 +211,9 @@ echo "<br>"  ;
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
     $mpdf->Output("MyReport.pdf"); // ส่งไปที่ไฟล์Myreport   
     ob_end_flush();
-    
+    header("Location:MyReport.pdf");
 ?>
-<center><a href="MyReport.pdf"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
+<center><a  href="MyReport.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
+
+</body>
+</html>

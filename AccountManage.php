@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css/management.css"> 
     <link rel="stylesheet" href="Css/BG.css"> 
-    <title>Document</title>
+    <title>CS_Asset</title>
     <!--ทำให้หัวตารางไม่เลื่อน-->
     <style>
     body{
@@ -80,15 +80,15 @@ table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; te
                     <br><br>
 
     <div id="sort_table" style="height: 450px">
-    <table class="table table-striped table-dark" width="100%">
+    <table class="table bg-light text-dark table-bordered table-striped" width="100%">
   <thead>
     <tr>
-      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" style="color:white">First Name</a></th>
-      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc" href="#" style="color:white">Last Name</a></th>
-      <th scope="col"><a class= "column_sort" id="email" data-order="desc" href="#" style="color:white">Email</a></th>
-	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc" href="#" style="color:white">Status</a></th>
-      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc" href="#" style="color:white">Profile</a></th>
-      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc" href="#" style="color:white">Lastupdate</a></th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc" href="#" >Last Name</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="desc" href="#" >Email</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc" href="#" >Status</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc" href="#" >Profile</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc" href="#" >Lastupdate</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>

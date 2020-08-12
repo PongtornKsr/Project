@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include('search_backend.php'); ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="Css/BG.css">
     <link rel="stylesheet" href="CSS/search.css">
+    <link rel="stylesheet" href="CSS/Checckbox.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>CS_Asset</title>
 
@@ -24,7 +25,7 @@
    
     <center>
     <div id= "bodytext">
-    <form class="searchbox" id="sbox" action ="assetmanage.php" method= "post">
+    <form class="searchbox" id="sbox" action ="Order_print_back.php" method= "post" target= "_bank">
     <div class="form__group">
     <input type="text" class="form__input" name ="searchtxt"id="searchtxt" placeholder="รหัสครุภัณฑ์/ชื่อครุภัณฑ์" />
     <label style="text-align:center" for="name" class="form__label">รหัสครุภัณฑ์/ชื่อครุภัณฑ์</label>
@@ -42,7 +43,7 @@
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                        echo "<option value=".$row['getMethod_ID'].">".$row['method']."</option>";
+                        echo "<option value=".$row['method'].">".$row['method']."</option>";
                         }     }
                     ?>
                 </select>
@@ -120,6 +121,42 @@
                 </select>
             </div>
         </td>
+    </tr>
+    </table>
+    <table>
+    <tr>
+    <td><input type="checkbox" class="hidden-box" id="a" name="asid" value = "qqq" />
+    <label for="a" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">รหัสครุภัณฑ์</span>
+    </label></td>
+    <td><input type="checkbox" class="hidden-box" id="b" name ="nkn"/>
+    <label for="b" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">ชื่อเรียก</span>
+    </label></td>
+    <td><input type="checkbox" class="hidden-box" id="s" name = "ustat" />
+    <label for="s" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">สถานะการใช้งาน</span>
+    </label></td>
+    </tr>
+    <tr>
+    <td><input type="checkbox" class="hidden-box" id="q" name = "astyp" />
+    <label for="q" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">ประเภทของครุภัณฑ์</span>
+    </label></td>
+    <td><input type="checkbox" class="hidden-box" id="w" name = "asroom"/>
+    <label for="w" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">ห้องที่จัดเก็บครุภัณฑ์</span>
+    </label></td>
+    <td><input type="checkbox" class="hidden-box" id="e" name = "respers"/>
+    <label for="e" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">ชื่อผู้รับผิดชอบ</span>
+    </label></td>
     </tr>
     </table>
     <table style="text-align:center">
