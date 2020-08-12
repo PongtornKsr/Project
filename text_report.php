@@ -24,7 +24,7 @@
     }
     </style>
 
-    <title>Document</title>
+<title>CS_Asset</title>
 </head>
 <body>
 <?php require 'nav.php'; ?>

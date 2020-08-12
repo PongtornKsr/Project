@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="CSS/BG.css">
-    <title>Document</title>
+    <title>CS_Asset</title>
 </head>
 <?php
       require 'connect.php';

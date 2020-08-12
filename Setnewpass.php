@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/RegistCSS.css"> <!--ใช้ CSS เดียวกับ หน้า register -->
 	<link rel="stylesheet" href="Css/BG.css">
-    <title>Document</title>
+    <title>CS_Asset</title>
 </head>
 <body background="image/BG.png">
 

@@ -2,7 +2,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed; ">
          
-          <nav class="navbar navbar-light" style="background-color: #B3EE3A;">
+          <nav class="navbar navbar-light" style="background-color: #B3EE3A;" width = "100%">
           <?php SESSION_START();
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";

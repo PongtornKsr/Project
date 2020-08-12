@@ -1,25 +1,23 @@
+
+<?php require 'connect.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="CSS/input.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="CSS/formstyle.css">
-    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
+     <link rel="stylesheet" href="CSS/formstyle.css"> 
+     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/submitstyle.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="Css/BG.css">
+    <title>CS_Asset</title>
 </head>
-
-<?php
-      require 'connect.php';
-      require 'nav.php';
-       ?>
-<body>
-<br>
+<?php require 'nav.php'; ?>
+<div>
+<br><br>
 <?php 
 $asnum = $_GET['asset_number'];
 $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE asset_number = '".$_GET['asset_number']."'";
@@ -54,6 +52,7 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 }
 }
 ?>
+<br>
 <form class="box" style="height: 800px;" action="edit2.php" method="POST">
 <div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
 <br>
@@ -108,9 +107,9 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
 
 <button type="submit" name = "action" value = "Single" class="btn btn-success">แก้ไขรายการเดียว</button>
-<!-- <a href="edit2.php?asnum=<?php # echo $asnum; ?>"><button type="button">แก้ไขรายการเดียว</button></a> -->
+
 <br>
-<!-- <a href="edit2.php"><button type="button">แก้ไขหลายรายการ</button></a> -->
+
 <select name="num1" id="">
     <?php $sql = "SELECT asset_number FROM asset WHERE asset_number = '".$asnum."'";
                     $result = $conn->query($sql);
@@ -140,17 +139,11 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     </select>
     <button type="submit" name = "action" value = "Multi" class="btn btn-danger">แก้ไขหลายรายการ</button>
 </form>
-<?php require 'footer.php'; ?>
-</body>
-<script>
-function resizable (el, factor) {
-    var int = Number(factor) || 7.7;
-    function resize() {el.style.width = ((el.value.length+2) * int) + 'px'}
-    var e = 'keyup,keypress,focus,blur,change'.split(',');
-    for (var i in e) el.addEventListener(e[i],resize,false);
-    resize();
-  }
-  resizable(document.getElementById('tx'),7);
-</script>
+</div>
 
+
+</body>
 </html>
+<?php require 'footer.php'; ?>
+
+

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/submitstyle.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="Css/BG.css">
+    <title>CS_Assert</title>
 </head>
 
 <body>

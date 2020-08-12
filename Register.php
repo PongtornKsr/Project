@@ -15,7 +15,7 @@
 	    <img src="image/LOGOxx.png" class="brand_logo" alt="Logo">
 </center>
 	<form id="regist_form">
-		<h1>Register</h1>
+	<title>CS_Asset</title>
 		<div id="error_msg"></div>
 		<div>
 			<input type="text" name="fname" placeholder="firstname" id="fname">
