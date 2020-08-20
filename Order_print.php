@@ -158,6 +158,13 @@
       <span class="check--label-text">ชื่อผู้รับผิดชอบ</span>
     </label></td>
     </tr>
+    <tr>
+    <td><input type="checkbox" class="hidden-box" id="f" name = "asname"/>
+    <label for="f" class="check--label">
+      <span class="check--label-box"></span>
+      <span class="check--label-text">ชื่อครุภัณฑ์</span>
+    </label></td>
+    </tr>
     </table>
     <table style="text-align:center">
         <tr>

@@ -55,7 +55,7 @@
 					&nbsp&nbsp
 					<button type="button" onclick = "window.location ='Register.php'">Register</button>
 					&nbsp&nbsp
-					<button type="button" onclick = "window.location = '<?php echo $loginURL ; ?>'" class="btn btn-danger">Google-Login</button>
+					 <!-- <button type="button" onclick = "window.location = '<?php // echo $loginURL ; ?>'" class="btn btn-danger">Google-Login</button -->
 				   </div>
 				   <br><br>
 				   <center><b style="color: red;font-size: 30px;"><?php if(!isset($_GET['error'])){ }elseif(isset($_GET['error'])){ echo "ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกับข้อมูลที่มีอยู่ในระบบ";} ?></b></center>

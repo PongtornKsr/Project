@@ -172,19 +172,22 @@ ob_start();
        $astyp = $_POST['astyp'];
        $asroom = $_POST['asroom'];
        $respers = $_POST['respers'];
+       $asname = $_POST['asname'];
          $se = array();
        $head = "";
        //echo "show ".$asids;
 
-       if(isset($asids)){ $head .= "<th>รหัสครุภัณฑ์</th>"; array_push($se,"asset_ID");}
-      if(isset($nkn)){ $head .= "<th>ชื่อเรียกครุภัณฑ์</th>"; array_push($se,"asset_nickname");}
-      if(isset($ustat)){ $head .= "<th>สถานะครุภัณฑ์</th>"; array_push($se, "asset_stat_name");}
-      if(isset($astyp)){ $head .= "<th>ประเภทครุภัณฑ์</th>"; array_push($se, "asset_type_name");}
-      if(isset($asroom)){ $head .= "<th>ห้องที่จัดเก็บ</th>"; array_push($se, "room");}
-      if(isset($respers)){ $head .= "<th>ผู้รับผิดชอบ</th>"; array_push($se,"resper_firstname|resper_lastname");}
+       if(isset($asids)){ $head .= "<th align='center'>รหัสครุภัณฑ์</th>"; array_push($se,"asset_ID");}
+       if(isset($asname)){ $head .= "<th align='center'>ชื่อครุภัณฑ์</th>"; array_push($se , "asset_name"); }
+      if(isset($nkn)){ $head .= "<th align='center'>ชื่อเรียกครุภัณฑ์</th>"; array_push($se,"asset_nickname");}
+      if(isset($ustat)){ $head .= "<th align='center'>สถานะครุภัณฑ์</th>"; array_push($se, "asset_stat_name");}
+      if(isset($astyp)){ $head .= "<th align='center'>ประเภทครุภัณฑ์</th>"; array_push($se, "asset_type_name");}
+      if(isset($asroom)){ $head .= "<th align='center'>ห้องที่จัดเก็บ</th>"; array_push($se, "room");}
+      if(isset($respers)){ $head .= "<th align='center'>ผู้รับผิดชอบ</th>"; array_push($se,"resper_firstname|resper_lastname");}
+     
 ?>
-<table class="table table-bordered" >
-<thead>
+<table class="table table-bordered" width = "100%" style = "text-align:center">
+<thead align='center'>
 <tr>
 <?php echo $head; ?>
 </tr>
@@ -217,11 +220,11 @@ ob_start();
     $mpdf->AddPage('P'); // ตั้งค่ากระดาษ
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
-    $mpdf->Output("Asset_Order_List.pdf"); // ส่งไปที่ไฟล์Myreport   
+    $mpdf->Output("pdf/Asset_Order_List.pdf"); // ส่งไปที่ไฟล์Myreport   
     ob_end_flush();
    
     ?>
     <center><a  href="Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
 </body>
 </html>
-<?php header("Location:Asset_Order_List.pdf"); ?>
+<?php header("Location:pdf/Asset_Order_List.pdf"); ?>

@@ -10,7 +10,7 @@
         $_SESSION['access_token'] = $token;
 
     }else {
-        header("location : index.php");
+        header("location : login.php");
 
     }
 

@@ -93,13 +93,27 @@
             </tr>
             <tr>
                 <td>
-                    รหัสครุภัณฑ์เริ่มต้น: 
+                    ครุภัณฑ์
                 </td>
-                <td>    
-                    <input type="text" name="asset_ID[]" id = "ida" class = "">/<input type="text" name="asset_Set[]" id = "idb" class = ""><input type="text" name="assetid[]" id= "idc" class = "">
+                <td>
+                    <select name="setof[]" id="so">
+                        <option value="more">ครุภัณฑ์แบบชุด</option>
+                        <option value="one">ครุภัณฑ์แบบเดี่ยว</option>
+                    </select>
                 </td>
             </tr>
             <tr>
+                <td>
+                    การรันเลขรหัสครุภัณฑ์
+                </td>
+                <td>
+                    <select name="runnumber[]" id="rn">
+                        <option value="default">ไล่ลำดับหมายเลขครุภัณฑ์</option>
+                        <option value="notdefault">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option>
+                    </select>
+                </td>
+            </tr>
+             <tr>
                 <td>
                     จำนวน: 
                 </td>
@@ -107,6 +121,15 @@
                     <input type="text" name="quantity[]" id= "idq" ><span style="float:right;"  class = "idx"></span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    รหัสครุภัณฑ์เริ่มต้น: 
+                </td>
+                <td id ="keyy">    
+                    <input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = "">
+                </td>
+            </tr>
+           
             <tr>
                 <td>
                     ชื่อชุดครุภัณฑ์:
@@ -394,6 +417,463 @@
   </div>
  </body>
 </html>
+
+<!-- <script src="javascript/multi_insert_form_js.js"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+<script>
+
+$(document).ready(function(){  
+    
+    var array = [1,2,3,4,5,6,7,8,9,10];
+    var num = 0;
+      var i=1;  
+      
+      function checknum() {
+        return num;
+        }
+
+        function check() {
+        if(array.find(checknum) >= 0){
+            return 1;
+        }
+        else{ return 0; }
+        
+        }
+      $('#add').click(function(){  
+             
+           for(var di = 1 ; di <= 10 ; di ++){
+     	var q = false;
+        var w = false;
+		var numa = 0;
+        var numb = 0;
+        do {
+  		numa = Math.round(Math.random() * 1000);
+        numb =numa + 1;
+        num = numa;
+        if(check() == 0){
+        	q = true;
+            num = numb;
+            if(check() == 0){
+            w = true;
+            
+            }else{w = false;
+            numa = Math.round(Math.random() * 1000);
+        	numb =numa + 1;
+            }
+        }else{ q = false; 
+        numa = Math.round(Math.random() * 1000);
+        numb =numa + 1;}
+        }while(q == false && w == false)
+        array.push(numa);
+        array.push(numb);
+            }
+           var html = '';
+  html += '<input type="hidden" name="num[]" >';
+  html += '<hr width=80% size=3 style="color:black">';
+  html += '<table Align = "center">';
+  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
+  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "detype[]" width="50">'; 
+  html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การรันเลขรหัสครุภัณฑ</td><td><select name="runnumber[]" id="rn"><option value="default">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefault">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: </td><td>    <input type="text" name="quantity[]" id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: </td><td id ="keyy"><input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" width="50"></td></tr>';
+  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
+  html += '<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "asset_order[]" width="50"></td></tr><tr><td>สถานที่ตั้ง / หน่วยงานที่รับผิดชอบ:</td><td><input type="text" value="คณะวิทยาศาสตร์และเทคโนโลยี" name = "assetloca[]" disabled>';
+  html += '</td></tr><tr><td>ผู้รับผิดชอบ :</td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> ชื่อ: <input type="text" name = "resfname[]" id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]" id ="'+array[array.length - 5]+'" width="50">';
+  html += '</td></tr><tr><td>ห้องที่จัดเก็บ :</td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> ห้อง: <input type="text" name = "rmname[]" id ="'+array[array.length -3]+'" width="50">';
+  html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
+  html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
+  html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
+  html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
+  html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
+  //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
+           $('#dynamic_field').append('<tr id="'+i+'t"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr>');  
+           i++;
+      });  
+      $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#'+button_id+'').remove();
+      });
+      $(document).on('keyup','input[id=ida]' , function(){
+        var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
+        if(asd == "one"){
+
+
+        }
+        else if( asd == "more"){
+            var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
+            if(run == "default"){ 
+                
+                var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+        var ele = document.getElementsByClassName("idx");
+        var a = $(this).val();
+        var b = $(this).siblings('input[id=idb]').val();
+        var c = $(this).siblings('input[id=idc]').val();
+        var d = $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+        
+        if(d == 1){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c;
+        }
+        else if(d > 1){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
+        }
+        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
+
+        if(a == "" && b == "" && c == "" && d =="")
+        {
+        	ele[q].innerHTML= ""; 
+        }
+                
+            }
+            else if(run == "notdefault"){ }
+        }
+    	
+        
+        
+       
+        
+    });
+    $(document).on('keyup','input[id=idb]' , function(){
+        var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
+        if(asd == "one"){
+
+
+        }
+        else if( asd == "more"){
+            var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
+            if(run == "default"){ 
+               
+                    var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+        var ele = document.getElementsByClassName("idx");
+        var a = $(this).siblings('input[id=ida]').val();
+        var b = $(this).val();
+        var c = $(this).siblings('input[id=idc]').val();
+        var d = $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+        
+        if(d == 1){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c;
+        }
+        else if(d > 1){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
+        }
+        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
+
+        if(a == "" && b == "" && c == "" && d =="")
+        {
+        	ele[q].innerHTML= ""; 
+        }
+                
+
+            }
+            else if(run == "notdefault"){ }
+        }
+    	
+        
+    });
+    $(document).on('keyup','input[id=idc]' , function(){
+        var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
+        if(asd == "one"){
+
+
+        }
+        else if( asd == "more"){
+            var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
+            if(run == "default"){ 
+               
+        var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+        var ele = document.getElementsByClassName("idx");
+        var a = $(this).siblings('input[id=ida]').val();
+        var b = $(this).siblings('input[id=idb]').val();
+        var c = $(this).val();
+        var d = $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+        
+        if(d == 1){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c;
+        }
+        else if(d > 1){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
+        }
+        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
+
+        if(a == "" && b == "" && c == "" && d =="")
+        {
+        	ele[q].innerHTML= ""; 
+        }
+            } 
+        
+            else if(run == "notdefault"){ }
+        }
+    	
+        
+    });
+    $(document).on('keyup','input[id=idq]' , function(){
+        var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
+        if(asd == "one"){
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+            var idq = parseInt($(this).val());
+            var htmlq = "";
+            if(idq > 0){for(var i = 0;i<=idq-1;i++){
+                htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+            }
+            
+              $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
+              else{ htmlq+= '<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = "">';
+              $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+              $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+            }
+            
+
+        }
+        else if( asd == "more"){
+            var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
+            if(run == "default"){ 
+                
+                var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+        var ele = document.getElementsByClassName("idx");
+        var a = $(this).parents().parents().siblings().children().children('input[id=ida]').val();
+        var b = $(this).parents().parents().siblings().children().children('input[id=idb]').val();
+        var c = $(this).parents().parents().siblings().children().children('input[id=idc]').val();
+        var d = $(this).val();
+        
+            if(d == 1){
+                if(a != "" && b!=""){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c;}
+        }
+        else if(d > 1){
+            if(a != "" && b!=""){
+        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;}
+        }
+        else { if(a != "" && b!=""){ele[q].innerHTML= a+"/"+b+".1 "+c;} }
+
+        if(a == "" && b == "" && c == "" && d =="")
+        {
+        	ele[q].innerHTML= ""; 
+        }
+    
+         }
+            else if(run == "notdefault"){ 
+                var idq = parseInt($(this).val());
+                var htmlq = "";
+                if(idq > 0){
+                    $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+                for(var i = 0;i<=idq-1;i++){
+                    
+                    htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n[]" ><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+                }
+                
+                  $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
+                  else{ htmlq+= '<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n[]" ><input style="width:50px" type="text" name="assetid[]" id= "idc" class = "">';
+                  $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+                  $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+                }
+            }
+        }
+    	
+        
+    });
+    var tra = [0];
+    $("#count_re").val(tra[0]);
+    $(document).on('click','#plus',function(){
+        var a = tra[tra.length-1]+1;
+
+        tra.push(a);
+        $("#count_re").val(tra[tra.length-1]);
+        //var ss = $(this).parent().parent().siblings().children().attr('rowspan');
+        //var q = parseInt(ss);
+        //var s = q+1;
+        //$(this).parent().parent().siblings().children().attr('rowspan',s);
+        var html = '';
+        html +='<tr id = "'+tra[tra.length-1]+'s">';
+        html += '<td id = "treport_tds" ><input name = "report_date[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_NO[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_order[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "unit[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "price_per_unit[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "summary[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>';
+        html +='</tr>';
+        $('#tbody').append(html);
+
+    });
+    $(document).on('click','#minus',function(){
+        
+        var a = tra[tra.length-1] ;
+        
+        if(a == 0){ }
+        else if(a > 0){tra.pop();
+        $('#'+a+'s').remove();}
+        $("#count_re").val(tra[tra.length-1]);
+        /*var ss = $(this).parent().parent().siblings().children().attr('rowspan');
+        var q = parseInt(ss);
+        if(q <=1 ){ }
+        else{
+        var s = q-1;
+        $(this).parent().parent().siblings().children().attr('rowspan',s);
+        }*/
+    });
+
+      $(document).on('change' , '#kk select' ,function(){
+   
+   var id = parseInt($(this).attr('id'));
+   var op = id + 1;
+   var value = $('#'+id).val();
+   $('#test').html(op);
+   if(value !="0"){
+       $(this).siblings('input').attr('disabled',true);
+       $('[id='+op+']').slice().prop("disabled", true);
+   }
+   else{ $(this).siblings('input').attr('disabled',false);
+    $('[id='+op+']').slice().prop("disabled", false);}
+
+});
+$(document).on('keyup' , '#kk input' ,function(){
+      var value = $(this).val();
+   var id = parseInt($(this).attr('id')) - 1;
+   if(value != ""){
+       $('#'+id).attr('disabled',true);
+   }
+   else{
+       $('#'+id).attr('disabled',false);
+   }
+
+});
+$(document).on('blur' , '#kk input' ,function(){
+      var value = $(this).val();
+   var id = parseInt($(this).attr('id')) - 1;
+   if(value != ""){
+       $('#'+id).attr('disabled',true);
+   }
+   else{
+       $('#'+id).attr('disabled',false);
+   }
+
+});
+$(document).on('change' , 'input[type=radio]',function(){
+    var value =$(this).attr('id');
+    if(value == "frt"){
+        $(this).siblings('input[id=els]').attr('disabled',false);
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+    }else if (value == "sd"){
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',false);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+
+    }
+    else{
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+    }
+});
+
+$(document).on('change' , '#gmt', function(){
+    var value =$(this).val();
+    if(value == 4){
+        $(this).siblings('input[id=els]').attr('disabled',false);
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+    }else if (value == 2){
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',false);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+
+    }
+    else{
+        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
+        $(this).siblings('input[id=els]').attr('disabled',true);
+    }
+
+});
+
+$(document).on('change' , '#so',function(){
+    var value = $(this).val();
+    var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+    var ele = document.getElementsByClassName("idx");
+    ele[q].innerHTML= ""; 
+    
+    if(value == "more"){
+        $(this).parents().parents().siblings().children().children('select[id=rn]').prop('disabled', false);
+        var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
+        if(run == "notdefault"){
+            var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+        htmlq ="";
+        htmlq+= '<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n[]" ><input style="width:50px" type="text" name="assetid[]" id= "idc" class = "">';
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        
+        var htmlq = "";
+        if(idq > 0){
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        for(var i = 0;i<=idq-1;i++){
+            
+            htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n[]" ><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+        }$(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+    }
+        }
+    }
+    else if(value == "one"){
+        $(this).parents().parents().siblings().children().children('select[id=rn]').prop('disabled', true);
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        htmlq="";
+        htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+          $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+          $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+          var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+          if(idq > 0){
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+            for(var i = 0;i<=idq-1;i++){
+            htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+        }
+        
+          $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
+        
+        
+        
+    }
+
+
+});
+
+$(document).on('change','#rn',function(){
+    var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+    var value =$(this).val();
+    var ele = document.getElementsByClassName("idx");
+    ele[q].innerHTML= "";
+     var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+    if(value =="default"){
+        htmlq = "";
+        htmlq+= '<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid[]" id= "idc" class = "">';
+          $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+          $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+
+
+    }    
+    else if(value == "notdefault"){
+        
+    
+        var htmlq = "";
+        htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n[]" ><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+        if(idq > 0){
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        for(var i = 0;i<=idq-1;i++){
+            
+            htmlq+='<input type="text" name="asset_ID[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n[]" ><input style="width:50px" type="text" name="assetid[]" id= "idc" class = ""><br>';
+          
+        }  $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+    }
+
+    }
+
+});
+ 
+});
+
+
+</script>
 <?php
 //index.php
 
@@ -523,281 +1003,3 @@ function select_getmethod()
 
 
 ?>
-<script>
-$(document).ready(function(){  
-    var array = [1,2,3,4,5,6,7,8,9,10];
-    var num = 0;
-      var i=1;  
-      
-      function checknum() {
-        return num;
-        }
-
-        function check() {
-        if(array.find(checknum) >= 0){
-            return 1;
-        }
-        else{ return 0; }
-        
-        }
-      $('#add').click(function(){  
-             
-           for(var di = 1 ; di <= 10 ; di ++){
-     	var q = false;
-        var w = false;
-		var numa = 0;
-        var numb = 0;
-        do {
-  		numa = Math.round(Math.random() * 1000);
-        numb =numa + 1;
-        num = numa;
-        if(check() == 0){
-        	q = true;
-            num = numb;
-            if(check() == 0){
-            w = true;
-            
-            }else{w = false;
-            numa = Math.round(Math.random() * 1000);
-        	numb =numa + 1;
-            }
-        }else{ q = false; 
-        numa = Math.round(Math.random() * 1000);
-        numb =numa + 1;}
-        }while(q == false && w == false)
-        array.push(numa);
-        array.push(numb);
-            }
-           var html = '';
-  html += '<input type="hidden" name="num[]" >';
-  html += '<hr width=80% size=3 style="color:black">';
-  html += '<table Align = "center">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
-  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "detype[]" width="50">'; 
-  html += '</td></tr><tr><td>รหัสครุภัณฑ์: </td><td><input type="text" name="asset_ID[]" id = "ida" >/<input type="text" name="asset_Set[]" id = "idb" ><input type="text" name="assetid[]" id = "idc" ></td></tr><tr><td>จำนวน: </td><td> <input type="text" name="quantity[]" id = "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" width="50"></td></tr>';
-  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
-  html += '<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "asset_order[]" width="50"></td></tr><tr><td>สถานที่ตั้ง / หน่วยงานที่รับผิดชอบ:</td><td><input type="text" value="คณะวิทยาศาสตร์และเทคโนโลยี" name = "assetloca[]" disabled>';
-  html += '</td></tr><tr><td>ผู้รับผิดชอบ :</td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> ชื่อ: <input type="text" name = "resfname[]" id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]" id ="'+array[array.length - 5]+'" width="50">';
-  html += '</td></tr><tr><td>ห้องที่จัดเก็บ :</td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> ห้อง: <input type="text" name = "rmname[]" id ="'+array[array.length -3]+'" width="50">';
-  html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
-  html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
-  html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
-  //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
-           $('#dynamic_field').append('<tr id="'+i+'t"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr>');  
-           i++;
-      });  
-      $(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#'+button_id+'').remove();
-      });
-      $(document).on('keyup','input[id=ida]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
-        var ele = document.getElementsByClassName("idx");
-        var a = $(this).val();
-        var b = $(this).siblings('input[id=idb]').val();
-        var c = $(this).siblings('input[id=idc]').val();
-        var d = $(this).parents().parents().siblings().children().children('input[id=idq]').val();
-        if(d == 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c;
-        }
-        else if(d > 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
-        }
-        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
-
-        if(a == "" && b == "" && c == "" && d =="")
-        {
-        	ele[q].innerHTML= ""; 
-        }
-        
-        
-       
-        
-    });
-    $(document).on('keyup','input[id=idb]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
-        var ele = document.getElementsByClassName("idx");
-        var a = $(this).siblings('input[id=ida]').val();
-        var b = $(this).val();
-        var c = $(this).siblings('input[id=idc]').val();
-        var d = $(this).parents().parents().siblings().children().children('input[id=idq]').val();
-        if(d == 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c;
-        }
-        else if(d > 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
-        }
-        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
-
-        if(a == "" && b == "" && c == "" && d =="")
-        {
-        	ele[q].innerHTML= ""; 
-        }
-        
-    });
-    $(document).on('keyup','input[id=idc]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
-        var ele = document.getElementsByClassName("idx");
-        var a = $(this).siblings('input[id=ida]').val();
-        var b = $(this).siblings('input[id=idb]').val();
-        var c = $(this).val();
-        var d = $(this).parents().parents().siblings().children().children('input[id=idq]').val();
-        if(d == 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c;
-        }
-        else if(d > 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
-        }
-        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
-
-        if(a == "" && b == "" && c == "" && d =="")
-        {
-        	ele[q].innerHTML= ""; 
-        }
-        
-    });
-    $(document).on('keyup','input[id=idq]' , function(){
-    	var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
-        var ele = document.getElementsByClassName("idx");
-        var a = $(this).parents().parents().siblings().children().children('input[id=ida]').val();
-        var b = $(this).parents().parents().siblings().children().children('input[id=idb]').val();
-        var c = $(this).parents().parents().siblings().children().children('input[id=idc]').val();
-        var d = $(this).val();
-        if(d == 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c;
-        }
-        else if(d > 1){
-        	ele[q].innerHTML= a+"/"+b+".1 "+c+" - "+a+"/"+b+"."+d+" "+c;
-        }
-        else { ele[q].innerHTML= a+"/"+b+".1 "+c; }
-
-        if(a == "" && b == "" && c == "" && d =="")
-        {
-        	ele[q].innerHTML= ""; 
-        }
-        
-    });
-    var tra = [0];
-    $("#count_re").val(tra[0]);
-    $(document).on('click','#plus',function(){
-        var a = tra[tra.length-1]+1;
-
-        tra.push(a);
-        $("#count_re").val(tra[tra.length-1]);
-        //var ss = $(this).parent().parent().siblings().children().attr('rowspan');
-        //var q = parseInt(ss);
-        //var s = q+1;
-        //$(this).parent().parent().siblings().children().attr('rowspan',s);
-        var html = '';
-        html +='<tr id = "'+tra[tra.length-1]+'s">';
-        html += '<td id = "treport_tds" ><input name = "report_date[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "report_NO[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "report_order[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "unit[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "price_per_unit[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "summary[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>';
-        html +='</tr>';
-        $('#tbody').append(html);
-
-    });
-    $(document).on('click','#minus',function(){
-        
-        var a = tra[tra.length-1] ;
-        
-        if(a == 0){ }
-        else if(a > 0){tra.pop();
-        $('#'+a+'s').remove();}
-        $("#count_re").val(tra[tra.length-1]);
-        /*var ss = $(this).parent().parent().siblings().children().attr('rowspan');
-        var q = parseInt(ss);
-        if(q <=1 ){ }
-        else{
-        var s = q-1;
-        $(this).parent().parent().siblings().children().attr('rowspan',s);
-        }*/
-    });
-
-      $(document).on('change' , '#kk select' ,function(){
-   
-   var id = parseInt($(this).attr('id'));
-   var op = id + 1;
-   var value = $('#'+id).val();
-   $('#test').html(op);
-   if(value !="0"){
-       $(this).siblings('input').attr('disabled',true);
-       $('[id='+op+']').slice().prop("disabled", true);
-   }
-   else{ $(this).siblings('input').attr('disabled',false);
-    $('[id='+op+']').slice().prop("disabled", false);}
-
-});
-$(document).on('keyup' , '#kk input' ,function(){
-      var value = $(this).val();
-   var id = parseInt($(this).attr('id')) - 1;
-   if(value != ""){
-       $('#'+id).attr('disabled',true);
-   }
-   else{
-       $('#'+id).attr('disabled',false);
-   }
-
-});
-$(document).on('blur' , '#kk input' ,function(){
-      var value = $(this).val();
-   var id = parseInt($(this).attr('id')) - 1;
-   if(value != ""){
-       $('#'+id).attr('disabled',true);
-   }
-   else{
-       $('#'+id).attr('disabled',false);
-   }
-
-});
-$(document).on('change' , 'input[type=radio]',function(){
-    var value =$(this).attr('id');
-    if(value == "frt"){
-        $(this).siblings('input[id=els]').attr('disabled',false);
-        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
-    }else if (value == "sd"){
-        $(this).siblings('input[id=incomeyrd]').attr('disabled',false);
-        $(this).siblings('input[id=els]').attr('disabled',true);
-
-    }
-    else{
-        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
-        $(this).siblings('input[id=els]').attr('disabled',true);
-    }
-});
-
-$(document).on('change' , '#gmt', function(){
-    var value =$(this).val();
-    if(value == 4){
-        $(this).siblings('input[id=els]').attr('disabled',false);
-        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
-    }else if (value == 2){
-        $(this).siblings('input[id=incomeyrd]').attr('disabled',false);
-        $(this).siblings('input[id=els]').attr('disabled',true);
-
-    }
-    else{
-        $(this).siblings('input[id=incomeyrd]').attr('disabled',true);
-        $(this).siblings('input[id=els]').attr('disabled',true);
-    }
-
-});
- 
-});
-
-</script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

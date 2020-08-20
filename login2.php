@@ -34,7 +34,7 @@ else {
     
     
 }
-$conn->close();
+
 
 
 ?>

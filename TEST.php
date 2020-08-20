@@ -209,11 +209,16 @@ echo "<br>"  ;
     $mpdf->AddPage('A4-L'); // ตั้งค่ากระดาษ
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
-    $mpdf->Output("MyReport.pdf"); // ส่งไปที่ไฟล์Myreport   
+    $mpdf->Output("pdf/MyReport.pdf"); // ส่งไปที่ไฟล์Myreport   
     ob_end_flush();
-    header("Location:MyReport.pdf");
+    
 ?>
-<center><a  href="MyReport.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
+<center><a  href="pdf/MyReport.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
 
 </body>
 </html>
+<?php 
+
+header("Location:pdf/MyReport.pdf"); 
+
+?>

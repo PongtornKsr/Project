@@ -1,4 +1,6 @@
-<!DOCTYPE html><?php SESSION_START(); header("Location:Login.php"); ?>
+<!DOCTYPE html><?php SESSION_START(); 
+if(!isset($_SESSION['Account'])){header("Location:Login.php");}
+else{} ?>
 <html lang="en">
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
