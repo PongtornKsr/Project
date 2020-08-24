@@ -63,8 +63,13 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         $note = $_POST['note'][$count];//หมายเหตุ
         $dstat_ID = $_POST['dstat_ID'][$count];//ดรอปดาวลักษณะการติดตั้ง
         $dtype = $_POST['dtype'][$count];//ลักษณะการติดตั้งที่เพิ่มใหม่
-       
-    
+        $setof = $_POST['setof'][$count];
+        $runnumber = $_POST['runnumber'][$count];
+        echo($runnumber);
+        var_dump($_POST['runnumber']);
+        echo '<br> setof: '.$setof;
+        echo '<br> runnumber :'.$runnumber;
+        
 
         $get = "" ; 
     
@@ -182,15 +187,63 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
             //echo "'".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$qty." ".$assetid."','".$asset_Set."','".$asset_Set.".".$qty."','".$asset_name."','".$model."','".$asset_order."','".$property."','".$assetloca."','".$rmid."'.'".$resid."','".$asven."','".$assettype."','1','".$price."','1','".$get."','".$note."','".$dstat_ID."'";
             
           
-                
-                $c = 1;
-                while($c <= $qty){
-                    $datestring = date("d/m/Y", strtotime($adate));
-                    array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
-                    ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
-                    array_push($a,"$asset_Set".".$c");
-                    $c++;
+                if($setof == "more"){
+                    if($runnumber == "defaultex"){
+                        $c = 1;
+                         while($c <= $qty){
+                            $datestring = date("d/m/Y", strtotime($adate));
+                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
+                            ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
+                            array_push($a,"$asset_Set".".$c");
+                            $c++;
+                        }
+
+                    }
+                    else if($runnumber == "notdefaultex"){
+                        $c = 1;
+                         while($c <= $qty){
+                             $asidas = 'asset_ID'.''.($count+1).'';
+                             $asas = 'asset_Set'.''.($count+1).'';
+                             $asn = 'asset_n'.''.($count+1).'';
+                             $asidid = 'assetid'.''.($count+1).'';
+                             echo $asidas.'<br>';
+                             $p1 = $_POST[$asidas][$c-1];
+                             $p2 = $_POST[$asas][$c-1];
+                             $p3 = $_POST[$asn][$c-1];
+                             $p4 = $_POST[$asidid][$c-1];
+                             echo $p1;
+                            $datestring = date("d/m/Y", strtotime($adate));
+                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
+                            ('".$NO."','".$order_number."','".$p1."/".$p2.".".$p3." ".$p4."','".$p2."','".$p2.".".$p3."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
+                            array_push($a,"$p2".".$p3");
+                            $c++;
+                        }
+
+                    }
+
                 }
+                else if($setof == "one"){
+                        $c = 1;
+                         while($c <= $qty){
+                            $asidas = 'asset_ID'.''.($count+1).'';
+                            $asas = 'asset_Set'.''.($count+1).'';
+                            $asidid = 'assetid'.''.($count+1).'';
+                            echo '<br> asset_ID :'.$asidas;
+                            $p1 = $_POST[$asidas][$c-1];
+                            $p2 = $_POST[$asas][$c-1];
+                            $p4 = $_POST[$asidid][$c-1];
+                            echo '<br> r : '.$p1;
+                            $datestring = date("d/m/Y", strtotime($adate));
+                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
+                            ('".$NO."','".$order_number."','".$p1."/".$p2." ".$p4."','".$p2."','".$p2."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
+                            array_push($a,"$p2");
+                            $c++;
+                         }
+
+
+                }
+                
+               
                    
                 
                         
@@ -220,8 +273,8 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
             }
         }
        // echo count($sqlm);
-        print_r($a);
-        echo "count : a :".count($a);
+        //print_r($a);
+        //echo "count : a :".count($a);
         for($x = 0; $x< count($a); $x++){
             $q = $a[$x];
             $sqlst = "SELECT * FROM asset WHERE asset_number = $q";
@@ -279,7 +332,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
         for($z = 0 ; $z <count($idB) ; $z++){
             $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$idA[$i]."','".$idB[$z]."')";
             if ($conn->query($sqll) == TRUE) {
-            echo $sqll;
+            //echo $sqll;
             }
 
         }
@@ -287,8 +340,8 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
     }
     //echo "number".count($_POST['num']);
     //echo "a".count($a);
-    echo " ".$idA;
-    echo " ".$idB;
+    //echo " ".$idA;
+    //echo " ".$idB;
     //echo count($sqlm);
 
 
@@ -303,7 +356,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
       //print_r($a);
       //echo $sqlst;
       //echo $sqlsta;
-      header('Location: assetmanage.php');
+      //header('Location: assetmanage.php');
       /*
       echo $_POST['asset_name'];
       echo $_POST['num'];

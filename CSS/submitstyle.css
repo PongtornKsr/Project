@@ -17,3 +17,22 @@ input[type=submit]:hover
     color: white;
 }
 
+.Pt{
+    background: rgb(59, 155, 59);
+    color: #ccc;
+    width: auto;
+    height: 30px;
+    border: 1px solid #030803;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: .6s;
+    overflow: hidden;
+    text-align: center;
+
+}
+.Pt:hover{
+    background: rgba(9, 255, 30, 0.678);
+    border: 2px solid #ffffff;
+    color: white;
+}
+

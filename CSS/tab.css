@@ -1,0 +1,60 @@
+/* Style the links inside the sidenav */
+#mySidenav a {
+  /* Position them relative to the browser window */
+  left: -80px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+  position: fixed;
+}
+
+#mySidenav a:hover {
+  left: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+/* The about link: 20px from the top with a green background */
+#a {
+  top: 220px;
+  background-color: #4CAF50;
+}
+
+#b {
+  top: 280px;
+  background-color: #2196F3; /* Blue */
+}
+
+#c {
+  top: 340px;
+  background-color: #f44336; /* Red */
+}
+
+#d {
+  top: 400px;
+  background-color: #555 /* Light Black */
+}
+#e {
+  top: 460px;
+  background-color: #4CAF50;
+}
+
+#f {
+  top: 520px;
+  background-color: #2196F3; /* Blue */
+}
+
+#g {
+  top: 580px;
+  background-color: #f44336; /* Red */
+}
+
+#h {
+  top: 640px;
+  background-color: #555 /* Light Black */
+}
+html {
+  scroll-behavior: smooth;
+}

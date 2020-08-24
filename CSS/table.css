@@ -1,0 +1,34 @@
+table tbody, table thead
+{
+    display: block;
+}
+table tbody 
+{
+
+   overflow: auto;
+   height: 400;
+
+}
+th
+{
+    width: 100%;
+}
+td
+{
+    width: 100%;
+}
+.widea{
+    width: 200px;
+
+}
+.wideb{
+    width: 300px;
+}
+.widec{
+    width: 100px;
+}
+.wided{
+    width: 50px;
+
+}
+
