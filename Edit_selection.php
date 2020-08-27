@@ -33,12 +33,12 @@
 <form class = "whitebox" action= "" name="add_detail" id="add_detail" method = "POST" >  
 
   
-  <div align= "center" class="table-responsive">
+  <div align= "center" >
     <br><br>
     <div align= "center"style ="width:800px;hight:300">
     <div>
     <h2 id = "stat_da">สถานะครุภัณฑ์</h2>
-<input type="text" placeholder= "ค้นหาสถานะ"style = "float:right" id = "stat_search"> <button style = "float:left" type="button" name="add" id="addstat" class="btn btn-info">เพิ่มสถานะครุภัณฑ์</button>
+<input type="text" placeholder= "ค้นหาสถานะ"style = "float:right" id = "stat_search" value= ""> <button style = "float:left" type="button" name="add" id="addstat" class="btn btn-info">เพิ่มสถานะครุภัณฑ์</button>
 <br>
     <br>
     <div id="alert_message_stat"></div>
@@ -55,7 +55,7 @@
     </div>
 </div>
 
-  <div align= "center" class="table-responsive">
+  <div align= "center" >
     <br><br>
     <div align= "center"style ="width:800px;hight:300">
         <div>
@@ -78,7 +78,7 @@
     </table>
     </div>
 
-    <div align= "center" class="table-responsive">
+    <div align= "center" >
     <br><br>
     <div align= "center"style ="width:400px;hight:300">
         <div>
@@ -100,7 +100,7 @@
     </table>
     </div>
 
-    <div align= "center" class="table-responsive">
+    <div align= "center" >
     <br><br>
     <div align= "center"style ="width:400px;hight:300">
         <div>
@@ -123,7 +123,7 @@
     </div>
 
 
-    <div align= "center" class="table-responsive">
+    <div align= "center" >
     <br><br>
     <div align= "center"style ="width:400px;hight:300">
         <div>
@@ -145,7 +145,7 @@
     </table>
     </div>
 
-    <div align= "center" class="table-responsive">
+    <div align= "center">
     <br><br>
     <div align= "center"style ="width:700px;hight:300">
         <div>
@@ -168,9 +168,9 @@
     </table>
     </div>
 
-    <div align= "center" class="table-responsive">
+    <div align= "center" >
     <br><br>
-    <div align= "center"style ="width:400px;hight:300">
+    <div align= "center"style ="width:400px;height:300;overflow:auto;">
         <div>
         <h2 id = "rm_da">ห้องที่จัดเก็บครุภัณฑ์</h2>
      <input type="text" placeholder= "ค้นหาห้องที่จัดเก็บ"style = "float:right" id = "rm_search"> <button style = "float:left" type="button" name="add" id="addrm" class="btn btn-info">เพิ่มห้องที่จัดเก็บ</button>
@@ -178,7 +178,7 @@
     </div>
     <br>
     <div id="alert_message_rm"></div>
-    <table style = "width: 400px;text-align:center;vertical-align:middle" id="rm_data" class="tr2 table table-bordered table-striped">
+    <table style = "width: 400px;height:300;text-align:center;vertical-align:middle" id="rm_data" class="tr2 table table-bordered table-striped table-responsive">
      <thead>
       <tr>
        <th>รหัสห้องจัดเก็บ</th>
@@ -191,7 +191,7 @@
     </div>
 
 
-    <div align= "center" class="table-responsive">
+    <div align= "center">
     <br><br>
     <div align= "center"style ="width:900px;hight:300">
         <div>

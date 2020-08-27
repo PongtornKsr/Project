@@ -1,21 +1,18 @@
-table tbody, table thead
-{
-    display: block;
-}
-table tbody 
-{
-
-   overflow: auto;
-   height: 400;
-
-}
+thead, tbody { display: block; }
+table tbody {
+    height: 200px;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+  }
 th
 {
-    width: 100%;
+    text-align:center;
+    vertical-align:middle;
 }
 td
 {
-    width: 100%;
+    text-align:center;
+    vertical-align:middle;
 }
 .widea{
     width: 200px;
