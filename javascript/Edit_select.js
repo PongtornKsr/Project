@@ -103,6 +103,14 @@ $(document).ready(function(){
                });
 
         }
+        function injectin_check(ijtext){
+            if(ijtext == "" || ijtext.trim() === "" || ijtext.length === 0 || ijtext.includes("'") || ijtext.includes("*") || ijtext.includes(";") ){
+                return false;
+            }
+            else { return true; }
+
+        }
+
 
         $(document).on('keyup','#stat_search',function(){
             var s = $('#stat_search').val();
@@ -145,10 +153,13 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#stat_data').html(data);
+                 var s = $('#stat_name').val().trim();
+                var q = injectin_check(s);
+                if(q == true){ $('#stat_name').css('border','solid black'); $('#s_insert').attr('disabled',false);}
+                else if( q == false ){ $('#stat_name').css('border','solid red'); $('#s_insert').attr('disabled',true); }
                 }
-
             });
-
+            
         });
         $(document).on('click','#addtype',function(){
             $.ajax({
@@ -158,6 +169,23 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#type_data').html(data);
+                 var s = $('#type_name').val().trim();
+                 var d = $('#noun_name').val().trim();
+                 var q = injectin_check(s);
+                 var w = injectin_check(d);
+                 if(q == true ){ $('#type_name').css('border','solid black'); }
+                 else if( q == false ){ $('#type_name').css('border','solid red');  }
+                if(w == true){
+                    $('#noun_name').css('border','solid black');
+                }
+                else if(w == false){ 
+                    $('#noun_name').css('border','solid red'); 
+                }
+                if(q == true && w == true){
+                    $('#t_insert').attr('disabled',false); $('#t_update').attr('disabled',false);
+                }else{
+                    $('#t_insert').attr('disabled',true); $('#t_update').attr('disabled',true);
+                }
                 }
 
             });
@@ -241,8 +269,35 @@ $(document).ready(function(){
             });
 
         });
+
+        $(document).on('keyup','.statin',function(){
+            var s = $('#stat_name').val().trim();
+            var q = injectin_check(s);
+            if(q == true){ $('#stat_name').css('border','solid black'); $('#s_insert').attr('disabled',false); $('#s_update').attr('disabled',false);}
+            else if( q == false ){ $('#stat_name').css('border','solid red'); $('#s_insert').attr('disabled',true); $('#s_update').attr('disabled',true); }
+        });
+        $(document).on('keyup','.typein',function(){
+            var s = $('#type_name').val().trim();
+            var d = $('#noun_name').val().trim();
+            var q = injectin_check(s);
+            var w = injectin_check(d);
+            if(q == true ){ $('#type_name').css('border','solid black'); }
+            else if( q == false ){ $('#type_name').css('border','solid red');  }
+           if(w == true){
+               $('#noun_name').css('border','solid black');
+           }
+           else if(w == false){ 
+               $('#noun_name').css('border','solid red'); 
+           }
+
+           if(q == true && w == true){
+               $('#t_insert').attr('disabled',false); $('#t_update').attr('disabled',false);
+           }else{
+               $('#t_insert').attr('disabled',true); $('#t_update').attr('disabled',true);
+           }
+        });
         $(document).on('click','#s_insert',function(){
-            var s = $('#stat_name').val();
+            var s = $('#stat_name').val().trim();
             $.ajax({
                 url:"Edit_select_back.php",
                 method:"POST",
@@ -645,5 +700,278 @@ $(document).ready(function(){
             vd_init();
             $('#vd_search').val('');
         });
+
+
+        $(document).on('click','#s_update',function(){
+            var s = $(this).val();
+            var r = $('#stat_name').val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method:"POST",
+                data: {
+                    'update' : 1,
+                    'id' : s,
+                    'stat_name' : r
+                },
+                success:function(){
+                    stat_init();
+                }
+            });
+            
+        });
+
+        $(document).on('click','#t_update',function(){
+            var s = $(this).val();
+            var r = $('#type_name').val();
+            var e = $('#noun_name').val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method: "POST",
+                data:{
+                    'update': 2,
+                    'id' : s,
+                    'type_name': r,
+                    'noun_name': e
+                },
+                success:function(){
+                    type_init();
+                }
+            });
+        });
+
+        $(document).on('click','#d_update',function(){
+            var s = $(this).val();
+            var r = $('#dtype_name').val();;
+            $.ajax({
+                url: "Edit_select_back.php",
+                method: "POST",
+                data:{
+                    'update': 3,
+                    'id' : s,
+                    'dtype_name' : r
+                },
+                success:function(){
+                    dtype_init();
+                }
+            });
+        });
+
+        $(document).on('click','#gm_update',function(){
+            var s = $(this).val();
+            var r = $('#gm_name').val();
+            $.ajax({
+                url:"Edit_select_back.php",
+                method: "POST",
+                data:{
+                    'update' : 4,
+                    'id': s,
+                    'gm_name': r
+                },
+                success:function(){
+                    gm_init();
+                }
+            });
+        });
+
+        $(document).on('click','#mt_update',function(){
+            var s = $(this).val();
+            var r = $('#mt_name').val();
+            $.ajax({
+                url : "Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'update': 5,
+                    'id' : s,
+                    'mt_name': r
+                },
+                success:function(){
+                    mt_init();
+                }
+            });
+        });
+
+        $(document).on('click','#rp_update',function(){
+            var s = $(this).val();
+            var r = $('#rp_name').val();
+            var e = $('#rp_lname').val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'update' : 6,
+                    'id': s,
+                    'rp_name':r,
+                    'rp_lname' : e
+                },
+                success:function(){
+                    rp_init();
+                }
+            });
+        });
+
+        $(document).on('click','#rm_update',function(){
+            var s = $(this).val();
+            var r = $('#rm_name').val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'update' : 7,
+                    'id': s ,
+                    'rm_name': r
+                },
+                success:function(){
+                    rm_init();
+                }
+            });
+        });
+
+        $(document).on('click','#vd_update',function(){
+            var s = $(this).val();
+            var r = $('#vd_name').val();
+            var e = $('#vd_lo').val();
+            var t = $('#vd_tel').val();
+            var y = $('#vd_fax').val();
+            $.ajax({
+                url:"Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'update' : 8,
+                    'id' : s,
+                    'vd_name': r,
+                    'vd_lo': e,
+                    'vd_tel': t,
+                    'vd_fax': y
+                },
+                success:function(){
+                    vd_init();
+                }
+            });
+        });
+
+        $(document).on('click','#s_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'del': 1,
+                    'id' : s
+                },
+                success:function(){
+                    stat_init();
+                }
+            });
+        });
+
+        $(document).on('click','#t_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method: "POST",
+                data:{
+                    'del': 2,
+                    'id': s
+                },
+                success:function(){
+                    type_init();
+                }
+            });
+        });
+
+        $(document).on('click','#d_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'del' : 3,
+                    'id' :s
+                },
+                success:function(){
+                    dtype_init();
+                }
+            });
+        });
+
+        $(document).on('click','#gm_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method:"POST",
+                data:{
+                    'del' : 4,
+                    'id' : s
+                },
+                success:function(){
+                    gm_init();
+                }
+            });
+        });
+
+        $(document).on('click','#mt_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method: "POST",
+                data:{
+                    'del' : 5,
+                    'id' : s
+                },
+                success:function(){
+                    mt_init();
+                }
+            });
+        });
+
+        $(document).on('click','#rp_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method : "POST",
+                data: {
+                    'del' :6,
+                    'id' : s
+                },
+                success:function(){
+                    rp_init();
+                }
+            });
+        });
+
+        $(document).on('click','#rm_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method: "POST",
+                data: {
+                    'del' : 7,
+                    'id' : s
+                },
+                success:function(){
+                    rm_init();
+                }
+            });
+        });
+
+        $(document).on('click','#vd_del',function(){
+            var s = $(this).val();
+            $.ajax({
+                url: "Edit_select_back.php",
+                method: "POST",
+                data: {
+                    'del' : 8,
+                    'id' : s
+                },
+                success:function(){
+                    vd_init();
+                }
+            });
+        });
+
+
+
+
+
 
    });
