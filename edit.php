@@ -13,6 +13,7 @@
      <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="Css/BG.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
     <title>CS_Asset</title>
 </head>
 <?php require 'nav.php'; ?>

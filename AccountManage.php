@@ -10,13 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css/management.css"> 
     <link rel="stylesheet" href="Css/BG.css"> 
+    <link rel="stylesheet" href="CSS/navbar.css">
     <title>CS_Asset</title>
     <!--ทำให้หัวตารางไม่เลื่อน-->
     <style>
-    body{
-    align-items: center;
-    
-}
+  
 table tbody, table thead
 {
     display: block;
@@ -24,26 +22,29 @@ table tbody, table thead
 table tbody 
 {
     align-items: center;
-   overflow: auto;
+    overflow-y: auto;
+   overflow-x: hidden;
    height: 450px;
-   width: 100%;
+   width: 1400px;
 }
 th
 {
-    width: 72px;
-    
+    text-align:center;
+    vertical-align:middle;
+   
 }
 td
 {
-    width: 72px;
+    text-align:center;
+    vertical-align:middle;
 }
-table th:nth-child(1), td:nth-child(1) { min-width: 150px;  max-width: 150px; text-align: center;}
-table th:nth-child(2), td:nth-child(2) { min-width: 300px;  max-width: 300px; text-align: center;}
-table th:nth-child(3), td:nth-child(3) { min-width: 500px;  max-width: 500px; text-align: center;}
-table th:nth-child(4), td:nth-child(4) { min-width: 200px;  max-width: 200px; text-align: center;}
-table th:nth-child(5), td:nth-child(5) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(1), td:nth-child(1) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(2), td:nth-child(2) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(3), td:nth-child(3) { min-width: 300px;  max-width: 300px; text-align: center;}
+table th:nth-child(4), td:nth-child(4) { min-width: 100px;  max-width: 100px; text-align: center;}
+table th:nth-child(5), td:nth-child(5) { min-width: 100px;  max-width: 100px; text-align: center;}
 table th:nth-child(6), td:nth-child(6) { min-width: 200px;  max-width: 200px; text-align: center;}
-table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; text-align: center;}
+table th:nth-child(7), td:nth-child(7) { min-width: 300px;  max-width: 300px; text-align: center;}
     </style>
 </head>
 
@@ -54,8 +55,8 @@ table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; te
 <form>
 <center>
 <div class="brand_logo_container">
-         
-      <img src="img/LOGOxx.png" class="brand_logo" alt="Logo"></center>
+
+      <img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
    </div>
 
                                 <div class="d-flex justify-content-center form_container">
@@ -76,11 +77,11 @@ table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; te
                               </div>
                         </div>
                       </div>
-                    
+                     
                     <br><br>
 
-    <div id="sort_table" style="height: 450px">
-    <table class="table bg-light text-dark table-bordered table-striped" width="100%">
+    <div  id="sort_table" style="height: 450px;width: 1400px; ">
+    <table class="table bg-light text-dark table-bordered table-striped" width="900px">
   <thead>
     <tr>
       <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>
@@ -100,6 +101,8 @@ table th:nth-child(7), td:nth-child(7) { min-width: 350px;  max-width: 350px; te
     </tbody>
 </table>
 </div>
+</center>
+
 <br><br>
 </form>
 <?php require 'footer.php'; ?>

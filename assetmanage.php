@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="CSS/fixedthead.css">
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="Css/BG.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
     <style>
     
     </style>

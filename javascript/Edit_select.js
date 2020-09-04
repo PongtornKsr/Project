@@ -110,6 +110,160 @@ $(document).ready(function(){
             else { return true; }
 
         }
+        function stat_injection_check(){
+            var s = $('#stat_name').val().trim();
+                var q = injectin_check(s);
+                if(q == true){ $('#stat_name').css('border','solid black'); $('#s_insert').attr('disabled',false);}
+                else if( q == false ){ $('#stat_name').css('border','solid red'); $('#s_insert').attr('disabled',true); }
+        }
+        function type_injection_check(){
+            var s = $('#type_name').val().trim();
+                 var d = $('#noun_name').val().trim();
+                 var q = injectin_check(s);
+                 var w = injectin_check(d);
+                 if(q == true ){ $('#type_name').css('border','solid black'); }
+                 else if( q == false ){ $('#type_name').css('border','solid red');  }
+                if(w == true){
+                    $('#noun_name').css('border','solid black');
+                }
+                else if(w == false){ 
+                    $('#noun_name').css('border','solid red'); 
+                }
+                if(q == true && w == true){
+                    $('#t_insert').attr('disabled',false); $('#t_update').attr('disabled',false);
+                }else{
+                    $('#t_insert').attr('disabled',true); $('#t_update').attr('disabled',true);
+                }
+        }
+        function dtype_injection_check(){
+            var s = $('#dtype_name').val().trim();
+            var q = injectin_check(s);
+            if(q == true){
+                $('#dtype_name').css('border','solid black');
+                $('#d_insert').attr('disabled',false);
+                $('#d_update').attr('disabled',false);
+            }
+            else if( q == false){
+                $('#dtype_name').css('border','solid red');
+                $('#d_insert').attr('disabled',true);
+                $('#d_update').attr('disabled',true);
+            }
+        }
+        function gm_injection_check(){
+            var s = $('#gm_name').val().trim();
+            var q = injectin_check(s);
+            if(q == true){
+                $('#gm_name').css('border','solid black');
+                $('#gm_insert').attr('disabled',false);
+                $('#gm_update').attr('disabled',false);
+            }
+            else if(q == false){
+                $('#gm_name').css('border','solid red');
+                $('#gm_insert').attr('disabled',true);
+                $('#gm_update').attr('disabled',true);
+            }
+        }
+        function mt_injection_check(){
+            var s = $('#mt_name').val().trim();
+            var q = injectin_check(s);
+            if( q == true ){
+                $('#mt_name').css('border','solid black');
+                $('#mt_insert').attr('disabled',false);
+                $('#mt_update').attr('disabled',false);
+            }
+            else if( q == false)
+            {
+                $('#mt_name').css('border','solid red');
+                $('#mt_insert').attr('disabled',true);
+                $('#mt_update').attr('disabled',true);
+            }
+        }
+        function rp_injection_check(){
+            var s = $('#rp_name').val().trim();
+            var d = $('#rp_lname').val().trim();
+            var q = injectin_check(s);
+            var w = injectin_check(d);
+            if( q == true){
+                $('#rp_name').css('border','solid black');
+            }else if( q == false){
+                $('#rp_name').css('border','solid red');
+            }
+            if( w == true ){
+                $('#rp_lname').css('border','solid black');
+            }
+            else if( w == false){
+                $('#rp_lname').css('border','solid red');
+            }
+
+            if( q == true && w == true){
+                $('#rp_insert').attr('disabled',false);
+                $('#rp_update').attr('disabled',false);
+            }
+            else{
+                $('#rp_insert').attr('disabled',true);
+                $('#rp_update').attr('disabled',true);
+            }
+        }
+        function rm_injection_check(){
+            var s = $('#rm_name').val().trim();
+            var q = injectin_check(s);
+            if( q == true ){
+                $('#rm_name').css('border','solid black');
+                $('#rm_insert').attr('disabled',false);
+                $('#rm_update').attr('disabled',false);
+            }
+            else if( q == false ){
+                $('#rm_name').css('border','solid red');
+                $('#rm_insert').attr('disabled',true);
+                $('#rm_update').attr('disabled',true);
+            }
+        }
+        function vd_injection_check(){
+            var s = $('#vd_name').val().trim();
+            var d = $('#vd_lo').val().trim();
+            var f = $('#vd_tel').val().trim();
+            var g = $('#vd_fax').val().trim();
+            var q = injectin_check(s);
+            var w = injectin_check(d);
+            var e = injectin_check(f);
+            var r = injectin_check(g);
+
+            if(q == true){
+                $('#vd_name').css('border','solid black');
+            }
+            else if(q == false){
+                $('#vd_name').css('border','solid red');
+            }
+            if( w == true){
+                $('#vd_lo').css('border','solid black');
+            }
+            else if(w == false){
+                $('#vd_lo').css('border','solid red');
+            }
+            if(e == true){
+                $('#vd_tel').css('border','solid black');
+            }
+            else if(e == false){
+                $('#vd_tel').css('border','solid red');
+            }
+            if(r == true){
+                $('#vd_fax').css('border','solid black');
+            }
+            else if( r == false) {
+                $('#vd_fax').css('border', 'solid red');
+            }
+
+            if( q == true && w == true && e == true && r == true){
+                $('#vd_insert').attr('disabled',false);
+                $('#vd_update').attr('disabled',false);
+            }
+            else 
+            {
+                $('#vd_insert').attr('disabled',true);
+                $('#vd_update').attr('disabled',true);
+            }
+        }
+
 
 
         $(document).on('keyup','#stat_search',function(){
@@ -153,10 +307,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#stat_data').html(data);
-                 var s = $('#stat_name').val().trim();
-                var q = injectin_check(s);
-                if(q == true){ $('#stat_name').css('border','solid black'); $('#s_insert').attr('disabled',false);}
-                else if( q == false ){ $('#stat_name').css('border','solid red'); $('#s_insert').attr('disabled',true); }
+                 stat_injection_check();
                 }
             });
             
@@ -169,23 +320,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#type_data').html(data);
-                 var s = $('#type_name').val().trim();
-                 var d = $('#noun_name').val().trim();
-                 var q = injectin_check(s);
-                 var w = injectin_check(d);
-                 if(q == true ){ $('#type_name').css('border','solid black'); }
-                 else if( q == false ){ $('#type_name').css('border','solid red');  }
-                if(w == true){
-                    $('#noun_name').css('border','solid black');
-                }
-                else if(w == false){ 
-                    $('#noun_name').css('border','solid red'); 
-                }
-                if(q == true && w == true){
-                    $('#t_insert').attr('disabled',false); $('#t_update').attr('disabled',false);
-                }else{
-                    $('#t_insert').attr('disabled',true); $('#t_update').attr('disabled',true);
-                }
+                 type_injection_check();
                 }
 
             });
@@ -199,6 +334,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#dtype_data').html(data);
+                 dtype_injection_check();
                 }
 
             });
@@ -212,6 +348,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#gm_data').html(data);
+                 gm_injection_check();
                 }
 
             });
@@ -225,6 +362,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#mt_data').html(data);
+                 mt_injection_check();
                 }
 
             });
@@ -238,6 +376,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#rp_data').html(data);
+                 rp_injection_check();
                 }
 
             });
@@ -251,6 +390,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#rm_data').html(data);
+                 rm_injection_check();
                 }
 
             });
@@ -264,6 +404,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                  $('#vd_data').html(data);
+                 vd_injection_check();
                 }
 
             });
@@ -271,31 +412,30 @@ $(document).ready(function(){
         });
 
         $(document).on('keyup','.statin',function(){
-            var s = $('#stat_name').val().trim();
-            var q = injectin_check(s);
-            if(q == true){ $('#stat_name').css('border','solid black'); $('#s_insert').attr('disabled',false); $('#s_update').attr('disabled',false);}
-            else if( q == false ){ $('#stat_name').css('border','solid red'); $('#s_insert').attr('disabled',true); $('#s_update').attr('disabled',true); }
+            stat_injection_check();
         });
         $(document).on('keyup','.typein',function(){
-            var s = $('#type_name').val().trim();
-            var d = $('#noun_name').val().trim();
-            var q = injectin_check(s);
-            var w = injectin_check(d);
-            if(q == true ){ $('#type_name').css('border','solid black'); }
-            else if( q == false ){ $('#type_name').css('border','solid red');  }
-           if(w == true){
-               $('#noun_name').css('border','solid black');
-           }
-           else if(w == false){ 
-               $('#noun_name').css('border','solid red'); 
-           }
-
-           if(q == true && w == true){
-               $('#t_insert').attr('disabled',false); $('#t_update').attr('disabled',false);
-           }else{
-               $('#t_insert').attr('disabled',true); $('#t_update').attr('disabled',true);
-           }
+          type_injection_check();
         });
+        $(document).on('keyup','.dtypein',function(){
+           dtype_injection_check();
+        });
+        $(document).on('keyup','.gmin',function(){
+            gm_injection_check();
+        });
+        $(document).on('keyup','.mtin',function(){
+            mt_injection_check();
+        });
+        $(document).on('keyup','.rpin',function(){
+            rp_injection_check();
+        });
+        $(document).on('keyup','.rmin',function(){
+            rm_injection_check();
+        });
+        $(document).on('keyup','.vdin',function(){
+            vd_injection_check();
+        });
+
         $(document).on('click','#s_insert',function(){
             var s = $('#stat_name').val().trim();
             $.ajax({

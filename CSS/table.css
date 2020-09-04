@@ -1,18 +1,22 @@
 thead, tbody { display: block; }
 table tbody {
-    height: 200px;       /* Just for the demo          */
-    overflow-y: auto;    /* Trigger vertical scroll    */
-    overflow-x: hidden;  /* Hide the horizontal scroll */
+    height: 250px;       
+    overflow-y: auto;    
+    overflow-x: hidden;  
+    width: calc(100% + 16px);
+    
   }
 th
 {
     text-align:center;
     vertical-align:middle;
+    width: calc(100% - 16px);
 }
 td
 {
     text-align:center;
     vertical-align:middle;
+    width: calc(100% - 16px);
 }
 .widea{
     width: 200px;

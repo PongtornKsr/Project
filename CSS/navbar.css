@@ -1,0 +1,79 @@
+.navnav {
+    overflow: hidden;
+    background-color: #484848;
+  }
+  
+  .navnav a {
+    float: right;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navnav .band {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navnav .band :hover{
+    text-decoration: none;
+}
+  
+  .dropdownnav {
+    float: right;
+    overflow: hidden;
+  }
+  
+  .dropdownnav .dropbtnnav {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navnav .a:hover, .dropdownnav:hover .dropbtnnav {
+    background-color: #2eb82e;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .dropdown-contentnav {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-contentnav a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-contentnav a:hover {
+    background-color: #ddd;
+    text-decoration: none;
+  }
+  
+  .dropdownnav:hover .dropdown-contentnav {
+    display: block;
+    text-decoration: none;
+  }
+
+  .navnav a :visited{
+    color: white;
+    text-decoration: none;
+  }

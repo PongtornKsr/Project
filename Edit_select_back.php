@@ -215,7 +215,7 @@ else if($initop == 3){
     if(isset($addop)){
         $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="dtype_name" id="dtype_name"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="dtype_name" id="dtype_name" class = "dtypein"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "d_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_cancel"  >X</button>
             </td>
@@ -231,7 +231,7 @@ else if($initop == 3){
         while($row = $result->fetch_assoc()) {
             $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle">'.$row['dstat_ID'].'</td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="dtype_name" id="dtype_name" value = '.$row['dstat'].'></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" class = "dtypein" name="dtype_name" id="dtype_name" value = '.$row['dstat'].'></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> ';
             if(isset($updateop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "d_update" value = "'.$ids.'">แก้ไข</button>';
@@ -294,7 +294,7 @@ else if($initop == 4){
     if(isset($addop)){
         $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="gm_name" id="gm_name"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "gmin" type="text" name="gm_name" id="gm_name"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "gm_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_cancel"  >X</button>
             </td>
@@ -310,7 +310,7 @@ else if($initop == 4){
         while($row = $result->fetch_assoc()) {
             $output .= '<tr>
             <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$ids.'</td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="gm_name" id="gm_name" value = '.$row['method'].'></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "gmin" type="text" name="gm_name" id="gm_name" value = '.$row['method'].'></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> ';
             if(isset($updateop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "gm_update" value = "'.$ids.'">แก้ไข</button>';
@@ -374,7 +374,7 @@ else if($initop == 5){
     if(isset($addop)){
         $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="mt_name" id="mt_name"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "mtin" type="text" name="mt_name" id="mt_name"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "mt_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "mt_cancel"  >X</button>
             </td>
@@ -390,7 +390,7 @@ else if($initop == 5){
         while($row = $result->fetch_assoc()) {
             $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle">'.$ids.'</td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="mt_name" id="mt_name" value = "'.$row['money_type'].'"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "mtin" type="text" name="mt_name" id="mt_name" value = "'.$row['money_type'].'"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> ';
             if(isset($updateop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "mt_update" value = "'.$ids.'">แก้ไข</button>';
@@ -454,8 +454,8 @@ else if($initop == 6){
     if(isset($addop)){
         $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle"></td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="rp_name" id="rp_name"></td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="rp_lname" id="rp_lname"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" class = "rpin" type="text" name="rp_name" id="rp_name"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" class = "rpin" type="text" name="rp_lname" id="rp_lname"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "rp_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_cancel"  >X</button>
             </td>
@@ -471,8 +471,8 @@ else if($initop == 6){
         while($row = $result->fetch_assoc()) {
             $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle">'.$ids.'</td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="rp_name" id="rp_name" value = "'.$row['resper_firstname'].'"></td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="rp_lname" id="rp_lname" value = "'.$lname = $row['resper_lastname'].'"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" class = "rpin" name="rp_name" id="rp_name" value = "'.$row['resper_firstname'].'"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" class = "rpin" name="rp_lname" id="rp_lname" value = "'.$lname = $row['resper_lastname'].'"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> ';
             if(isset($updateop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "rp_update" value = "'.$ids.'" >แก้ไข</button>';
@@ -527,7 +527,7 @@ else if($initop == 6){
 }
 
 else if($initop == 7){
-    $output='<table style = "width: 400px;height: 300px;overflow:auto;text-align:center;vertical-align:middle" id="rm_data" class="tr2 table table-bordered table-striped table-responsive">
+    $output='<table style = "width: 400px;text-align:center;vertical-align:middle" id="rm_data" class="tr2 table table-bordered table-striped">
     <thead>
      <tr>
       <th class = "widec"style= "text-align:center;vertical-align:middle">รหัสห้องที่จัดเก็บ</th>
@@ -538,7 +538,7 @@ else if($initop == 7){
     if(isset($addop)){
         $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="rm_name" id="rm_name"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" class = "rmin" name="rm_name" id="rm_name"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "rm_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_cancel"  >X</button>
             </td>
@@ -554,7 +554,7 @@ else if($initop == 7){
         while($row = $result->fetch_assoc()) {
             $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle">'.$ids.'</td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="rm_name" id="rm_name" value = "'.$row['room'].'"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px"class = "rmin" type="text" name="rm_name" id="rm_name" value = "'.$row['room'].'"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> ';
             if(isset($updateop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "rm_update" value = "'.$ids.'">แก้ไข</button>';
@@ -621,10 +621,10 @@ else if($initop == 8){
     if(isset($addop)){
         $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle"></td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="vd_name" id="vd_name"></td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="vd_lo" id="vd_lo"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="vd_tel" id="vd_tel"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="vd_fax" id="vd_fax"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" class = "vdin" type="text" name="vd_name" id="vd_name"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" class = "vdin" type="text" name="vd_lo" id="vd_lo"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "vdin" type="text" name="vd_tel" id="vd_tel"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "vdin" type="text" name="vd_fax" id="vd_fax"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "vd_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_cancel"  >X</button>
             </td>
@@ -640,10 +640,10 @@ else if($initop == 8){
         while($row = $result->fetch_assoc()) {
             $output .= '<tr>
             <td  class = "widec" style= "text-align:center;vertical-align:middle">'.$ids.'</td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="vd_name" id="vd_name" value = "'.$row['vendor_company'].'"></td>
-            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" name="vd_lo" id="vd_lo" value = "'.$row['vendor_location'].'"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="vd_tel" id="vd_tel" value = "'.$row['vendor_tel'].'"></td>
-            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="vd_fax" id="vd_fax" value = "'.$row['fax'].'"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" class = "vdin" name="vd_name" id="vd_name" value = "'.$row['vendor_company'].'"></td>
+            <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" type="text" class = "vdin" name="vd_lo" id="vd_lo" value = "'.$row['vendor_location'].'"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" class = "vdin" name="vd_tel" id="vd_tel" value = "'.$row['vendor_tel'].'"></td>
+            <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" class = "vdin" name="vd_fax" id="vd_fax" value = "'.$row['fax'].'"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle">';
             if(isset($updateop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "vd_update" value = "'.$ids.'">แก้ไข</button>';

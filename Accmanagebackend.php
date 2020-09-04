@@ -5,7 +5,7 @@ $ffname = $_SESSION['Uname'];
 $db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
 $output= "";
 if(isset($_POST['nmsearch'])){
-    $output .='<table class="table bg-light text-dark table-bordered table-striped" width="100%"> <thead>
+    $output .='<table class="table bg-light text-dark table-bordered table-striped" width="1400px"> <thead>
     <tr>
       <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>
       <th scope="col"><a class= "column_sort" id="familyName" data-order="desc"  href="#" >Last Name</a></th>
@@ -67,7 +67,7 @@ if(isset($_POST['sort'])){
     $query = $_SESSION['query'];
     $query .= "ORDER BY ".$_POST["column_name"]." ".$_POST['order']."";
     $result = mysqli_query($db,$query);
-    $output .='<table class="table bg-light text-dark table-bordered table-striped" width="100%"> <thead> 
+    $output .='<table class="table bg-light text-dark table-bordered table-striped" width="1400px"> <thead> 
     <tr>
       <th scope="col"><a class= "column_sort" id="givenName" data-order="'.$order.'" href="#" >First Name</a></th>
       <th scope="col"><a class= "column_sort" id="familyName" data-order="'.$order.'"  href="#" >Last Name</a></th>
