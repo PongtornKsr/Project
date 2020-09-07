@@ -210,7 +210,7 @@ echo "<br>"  ;
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
     $mpdf->Output("pdf/MyReport.pdf"); // ส่งไปที่ไฟล์Myreport   
-    ob_end_flush();
+    
     
 ?>
 <center><a  href="pdf/MyReport.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
@@ -221,4 +221,5 @@ echo "<br>"  ;
 
 header("Location:pdf/MyReport.pdf"); 
 
+ob_end_flush();
 ?>

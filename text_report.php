@@ -83,6 +83,8 @@
                                </thead>
                                <tbody id = "tbody">
                                <?php 
+
+                                    $c = 1;
                                     $as = $_GET['asset_number'];
                                     $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_number = '".$as."' ";
                                     $result = $conn->query($sql);
@@ -101,9 +103,12 @@
                                         <td id = "treport_td" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text" value = "'.$row['sum_Depreciation'].'"></td>
                                         <td id = "treport_td" ><input name = "net_value[]" style ="width:100%;" type = "text" value ="'.$row['net_value'].'"></td>
                                         <td id = "treport_td" ><input name = "Change_order[]" style ="width:100%;" type = "text" value = "'.$row['Change_order'].'"></td>
-                                        <td id = "treport_td" ><input name = "report_number[]"style ="width:100%;" type = "text" value ="'.$row['report_number'].'"></td>
-                                       </tr>
-                                       ';
+                                        <td id = "treport_td" ><input name = "report_number[]"style ="width:100%;" type = "text" value ="'.$row['report_number'].'"></td>';
+                                        if($c > 1){
+                                            echo '<td id = "trport_td"><button class="btn btn-danger" id = "remover"style = "width: 50px"type = "button" value = "'.$row['aid'].'">X</button></td>';
+                                        }
+                                        echo '</tr>';
+                                       $c += 1;
                                     }     
                                 }
                                ?>

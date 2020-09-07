@@ -75,7 +75,9 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
     
         if($assettype == 0)
             {
-                $sql= "INSERT INTO assettype ( asset_type_ID , asset_type_name ) VALUES ( '(MAX(asset_type_ID)+1)','".$type."')";           
+                $tpe = str_replace(' ', '', $type);
+                if($tpe!=""){
+                     $sql= "INSERT INTO assettype (  asset_type_name ) VALUES ( '".$type."')";           
                 if ($conn->query($sql) == TRUE) {
                     $sql = "SELECT asset_type_ID FROM assettype WHERE asset_type_name = '".$type."'";
                     $result = $conn->query($sql);
@@ -89,6 +91,30 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
+                }else{
+                    $sql= "INSERT INTO assettype ( asset_type_name ) VALUES ('ค่าว่าง')";           
+                    if ($conn->query($sql) == TRUE) {
+                        $sql = "SELECT asset_type_ID FROM assettype WHERE asset_type_name = 'ค่าว่าง'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $assettype = $row['asset_type_ID'];
+                        }
+                        }
+        
+        
+                    } else {
+                        $sql = "SELECT asset_type_ID FROM assettype WHERE asset_type_name = 'ค่าว่าง'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $assettype = $row['asset_type_ID'];
+                        }
+                        }
+                    }
+                }
+                
+               
             }
             else {
                 $assettype = $_POST['assettype'][$count];
@@ -96,7 +122,9 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
             
             if($dstat_ID == 0)
                 {
-                    $sql = "INSERT INTO deploy_stat ( dstat_ID , dstat ) VALUES ( '(MAX(dstat_ID)+1)','".$dtype."')"; 
+                    $dtp = str_replace(' ', '', $dtype);
+                    if($dtp!=""){
+                        $sql = "INSERT INTO deploy_stat (  dstat ) VALUES ('".$dtype."')"; 
                     if ($conn->query($sql) == TRUE) {
                         $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = '".$dtype."'";
                         $result = $conn->query($sql);
@@ -108,6 +136,27 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error;
                     }
+                    }else{
+                        $sql = "INSERT INTO deploy_stat (  dstat ) VALUES ('ค่าว่าง')"; 
+                    if ($conn->query($sql) == TRUE) {
+                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = 'ค่าว่าง'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $dstat_ID = $row['dstat_ID'];
+                        }
+                        }
+                    } else {
+                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = 'ค่าว่าง'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $dstat_ID = $row['dstat_ID'];
+                        }
+                        }
+                    }
+                    }
+                    
                 }
             else {
                 $dstat_ID = $_POST['dstat_ID'][$count];
@@ -116,7 +165,10 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
 
             if($asven == 0)
             {
-                $sql= "INSERT INTO vendor ( vendor_company , vendor_location , vendor_tel , fax ) VALUES ('".$vendor_company."','".$vendor_location."','".$vendor_tel."','".$fax."')";           
+                $vdc = str_replace(' ', '', $vendor_company);
+                $vdl = str_replace(' ', '', $vendor_location);
+                if($vdc != "" &&  $vdl != "" ){
+                    $sql= "INSERT INTO vendor ( vendor_company , vendor_location , vendor_tel , fax ) VALUES ('".$vendor_company."','".$vendor_location."','".$vendor_tel."','".$fax."')";           
                 if ($conn->query($sql) == TRUE) {
                     $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = '".$vendor_company."'";
                     $result = $conn->query($sql);
@@ -130,11 +182,39 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
+                }
+                else{
+                    $sql= "INSERT INTO vendor ( vendor_company , vendor_location , vendor_tel , fax ) VALUES ('ค่าว่าง','ค่าว่าง','ค่าว่าง','ค่าว่าง')";           
+                if ($conn->query($sql) == TRUE) {
+                    $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = 'ค่าว่าง'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $asven = $row['vendor_ID'];
+                    }
+                    }
+    
+    
+                } else {
+                    $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = 'ค่าว่าง'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $asven = $row['vendor_ID'];
+                    }
+                    }
+                }
+                }
+                
+            }else{
+                $asven = $_POST['asven'][$count];
             }
 
             if($rmid == 0)
             {
-                $sql = "INSERT INTO room ( room ) VALUE ( '".$rmname."' )";
+                $rmn = str_replace(' ', '', $rmname);
+                if($rmn != ""){
+                     $sql = "INSERT INTO room ( room ) VALUE ( '".$rmname."' )";
                 if ($conn->query($sql) == TRUE) {
                     $sql = "SELECT room_ID FROM room WHERE room = '".$rmname."'";
                     $result = $conn->query($sql);
@@ -144,11 +224,39 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                     }
                 }
             }
+                }
+                else{
+                    $sql = "INSERT INTO room ( room ) VALUE ( 'ค่าว่าง' )";
+                    if ($conn->query($sql) == TRUE) {
+                        $sql = "SELECT room_ID FROM room WHERE room = 'ค่าว่าง'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $rmid = $row['room_ID'];
+                        }
+                    }
+                }
+                else{
+                    $sql = "SELECT room_ID FROM room WHERE room = 'ค่าว่าง'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $rmid = $row['room_ID'];
+                        }
+                    }
+                }
+                }
+               
+            }else{
+                $rmid = $_POST['rmid'][$count];
             }
 
             if($resid == 0)
             {
-                $sql = "INSERT INTO respon_per ( resper_firstname , resper_lastname ) VALUE ( '".$resfname."','".$reslname."' )";
+                $rf = str_replace(' ', '', $resfname);
+                $rl = str_replace(' ', '', $reslname);
+                if($rf != "" && $rl != ""){
+                    $sql = "INSERT INTO respon_per ( resper_firstname , resper_lastname ) VALUE ( '".$resfname."','".$reslname."' )";
                 if ($conn->query($sql) == TRUE) {
                     $sql = "SELECT 	resper_ID FROM  respon_per WHERE resper_firstname = '".$resfname."' and resper_lastname = '".$reslname."' " ;
                     $result = $conn->query($sql);
@@ -158,6 +266,31 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                     }
                 }
             }
+                }
+                else{
+                    $sql = "INSERT INTO respon_per ( resper_firstname , resper_lastname ) VALUE ( 'ค่าว่าง','ค่าว่าง' )";
+                    if ($conn->query($sql) == TRUE) {
+                        $sql = "SELECT 	resper_ID FROM  respon_per WHERE resper_firstname = 'ค่าว่าง' and resper_lastname = 'ค่าว่าง' " ;
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $resid = $row['resper_ID'];
+                        }
+                    }
+                }else{
+                    $sql = "SELECT 	resper_ID FROM  respon_per WHERE resper_firstname = 'ค่าว่าง' and resper_lastname = 'ค่าว่าง' " ;
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $resid = $row['resper_ID'];
+                        }
+                    }
+                }
+
+                }
+                
+            }else {
+                $resid = $_POST['resid'][$count];
             }
 
             if($gett == 2 || $gett == 4){
@@ -263,6 +396,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                 mysqli_query($connect, $sql);  */
            }
           //print_r($sqlm);
+          
            for ($i = 0; $i < count($sqlm); $i++) {
             
                // mysqli_query($connect, $sqlm[$i]);
@@ -356,7 +490,7 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
       //print_r($a);
       //echo $sqlst;
       //echo $sqlsta;
-      //header('Location: assetmanage.php');
+      header('Location: assetmanage.php');
       /*
       echo $_POST['asset_name'];
       echo $_POST['num'];

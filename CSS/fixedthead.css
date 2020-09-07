@@ -1,26 +1,21 @@
-body{
-    align-items: center;
+table ,tr td{
+    border:1px solid red
 }
-table tbody, table thead
-{
-    display: block;
+tbody {
+    display:block;
+    height:350px;
+    overflow:auto;
 }
-table tbody 
-{
-   overflow: auto;
-   height: 350px;
+thead, tbody tr {
+    display:table;
+    width:100%;
+    /*table-layout:fixed;even columns width , fix width of table too*/
+    overflow-y: auto;    
+    overflow-x: hidden;  
 }
-th
-{
-    width: 72px;
+thead {
+    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
 }
-td
-{
-    width: 72px;
+table {
+    position: relative;
 }
-table th:nth-child(1), td:nth-child(1) { min-width: 150px;  max-width: 150px; text-align: center;}
-table th:nth-child(2), td:nth-child(2) { min-width: 300px;  max-width: 300px; text-align: center;}
-table th:nth-child(3), td:nth-child(3) { min-width: 500px;  max-width: 500px; text-align: center;}
-table th:nth-child(4), td:nth-child(4) { min-width: 420px;  max-width: 420px; text-align: center;}
-table th:nth-child(5), td:nth-child(5) { min-width: 250px;  max-width: 250px; text-align: center;}
-table th:nth-child(6), td:nth-child(6) { min-width: 200px;  max-width: 200px; text-align: center;}

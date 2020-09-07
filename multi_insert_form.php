@@ -69,7 +69,7 @@
                echo  "</select>";
 
                 ?>
-                  เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "2" name = "type[]" width="50">
+                  เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "2" name = "type[]" width="50" class="atypein">
                 </td>
             </tr>
            
@@ -205,10 +205,8 @@
                     echo "<option value=".$row['resper_ID'].">".$row['resper_firstname'].$row['resper_lastname']."</option>";
                     }     }
                echo  "</select>";
-                ?>
-                    
-                    ชื่อ: <input type="text" name = "resfname[]" id ="6" width="50">
-                    นามสกุล: <input type="text" name = "reslname[]" id = "6" width="50">
+                ?> ชื่อ:<input type="text" name = "resfname[]" id ="6" width="50">
+                นามสกุล:<input type="text" name = "reslname[]" id = "6" width="50">
                 </td>
                 </tr>
                
@@ -655,13 +653,14 @@ $(document).ready(function(){
             else if(run == "notdefaultex"){ 
                 var idq = parseInt($(this).val());
                 var htmlq = "";
+                $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                 if(idq > 0){
                     $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                 for(var ci = 0;ci<=idq-1;ci++){
                     
                     htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
                 }
-                
+                $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                   $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
                   else{ htmlq+= '<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
                   $(this).parents().parents().siblings().children('td[id=keyy]').html('');
@@ -799,6 +798,7 @@ $(document).on('change' , '#so',function(){
         var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
         if(run == "notdefaultex"){
             var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         htmlq ="";
         htmlq+= '<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
@@ -817,7 +817,7 @@ $(document).on('change' , '#so',function(){
         $(this).parents().parents().siblings().children().children('select[id=rn]').prop('disabled', true);
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         htmlq="";
-        htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+        
           $(this).parents().parents().siblings().children('td[id=keyy]').html('');
           $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
           var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
@@ -826,8 +826,11 @@ $(document).on('change' , '#so',function(){
             for(var ci = 0;ci<=idq-1;ci++){
             htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
         }
-        
-          $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
+    }else{
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+    }
+          $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
         
         
         
@@ -852,19 +855,22 @@ $(document).on('change','#rn',function(){
     }    
     else if(value == "notdefaultex"){
         var o = $(this).parents().parents().siblings().children().children('input[id=iforc]').val();
-    
-        var htmlq = "";
-        htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
-        $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+        var htmlq = "";
+        
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        
         if(idq > 0){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         for(var ci = 0;ci<=idq-1;ci++){
             
-            htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+        htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
           
-        }  $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
-    }
+        }  
+    }else{
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        htmlq+='<input type="text" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style="width:50px" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style="width:50px" type ="text" name= "asset_n'+o+'[]" ><input style="width:50px" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+    }$(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
 
     }
 

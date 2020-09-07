@@ -104,7 +104,7 @@ $(document).ready(function(){
 
         }
         function injectin_check(ijtext){
-            if(ijtext == "" || ijtext.trim() === "" || ijtext.length === 0 || ijtext.includes("'") || ijtext.includes("*") || ijtext.includes(";") ){
+            if(ijtext == "" || ijtext.trim() === "" || ijtext.length === 0 || ijtext.includes("'") || ijtext.includes("*") || ijtext.includes(";") || ijtext.includes("<") || ijtext.includes(">") || ijtext.includes(",")){
                 return false;
             }
             else { return true; }

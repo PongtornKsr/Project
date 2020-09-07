@@ -4,7 +4,8 @@ table tbody {
     overflow-y: auto;    
     overflow-x: hidden;  
     width: calc(100% + 16px);
-    
+    vertical-align: middle;
+    position: relative;
   }
 th
 {

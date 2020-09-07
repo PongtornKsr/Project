@@ -94,7 +94,7 @@ function useractive(){
 function userinsert(){
     require 'connect.php';
     $name = $_POST['fname']." ".$_POST['lname']; 
-    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')),'".$_POST['Type']."','1')";
+    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`,`username`,`password`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."','".$_POST['username']."','".$_POST['pass']."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')),'".$_POST['Type']."','1')";
     if ($conn->query($sqla) === TRUE) {
         $log = new Log();
         $log->Write('log/test.txt','#### '.date("l jS \of F Y h:i:s A").' ####');

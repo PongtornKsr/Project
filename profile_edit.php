@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="Css/BG.css">
     <link rel="stylesheet" href="CSS/Editpro.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>CS_Asset</title>
@@ -49,6 +51,7 @@
             }
         }
 ?>
+
 <form class = "form">
   <h2>Profile Edit</h2>
   <h4 id = "error_msg" style="text-align:center; color:red">df</h4>
@@ -83,10 +86,11 @@
         </p>
         <center>
 		<p>
-            <button type="button" name="update_button" id="update_button">&nbsp;Update Profile&nbsp;</button>
+            <button type="button" class= "btn btn-outline-success"name="update_button" id="update_button">&nbsp;Update Profile&nbsp;</button>
             <input type="hidden" name="uid" id ="uid" value = "<?php echo $uid; ?>">
 		</p></center>
 	</form>
+    </div>
 <?php require 'footer.php'; ?>
 </body>
 </html>
@@ -100,6 +104,17 @@ $('document').ready(function(){
         $('#email').siblings("span").hide();
         $('#username').siblings("span").hide();
         $('#error_msg').hide();
+    }
+    function check_stat(){
+        if (username_state == false || email_state == false || passwordin_state == false || passwordinc_state == false) {
+            e.preventDefault();
+            $('#error_msg').show();
+            $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
+            $('#update_button').attr('disabled',true);
+        } else {
+            $('#error_msg').hide();
+            $('#update_button').attr('disabled',false);
+        }
     }
     function check(){
         var value = $('#password').val();
@@ -141,9 +156,11 @@ $('document').ready(function(){
 
     $('#password').on('keyup',function(){
        check();
+       check_stat();
     });
     $('#password2').on('keyup',function(){
         check();
+        check_stat();
     });
 
     $('#username').on('blur', function() {
@@ -166,22 +183,27 @@ $('document').ready(function(){
                     $('#username').parent().addClass('form_error');
                     $('#username').siblings("span").text("ชื่อผู้ใช้มีการลงทะเบียนในระบบแล้ว");
                     $('#username').siblings("span").show();
+                    check_stat();
                 } else if (response == "not_taken") {
                     username_state = true;
                     $('#username').parent().removeClass();
                     $('#username').parent().addClass('form_success');
                     $('#username').siblings("span").text("ชื่อผู้ใช้สามารถใช้ได้");
                     $('#username').siblings("span").hide();
-                    
+                    check_stat();
                 }
             }
         })
     });
 
     $('#email').on('blur', function() {
-        var email = $('#email').val();
+        var email = $('#email').val().trim();
         if (email == '') {
             email_state = false;
+            $('#email').parent().removeClass();
+                    $('#email').parent().addClass('form_error');
+                    $('#email').siblings("span").text("กรุณาใส่อีเมล");
+                    $('#email').siblings("span").show();
             return;
         }
         $.ajax({
@@ -198,12 +220,14 @@ $('document').ready(function(){
                     $('#email').parent().addClass('form_error');
                     $('#email').siblings("span").text("อีเมลนี้มีการใช้งานในระบบแล้ว");
                     $('#email').siblings("span").show();
+                    check_stat();
                 } else if (response == "not_taken") {
                     email_state = true;
                     $('#email').parent().removeClass();
                     $('#email').parent().addClass('form_success');
                     $('#email').siblings("span").text("อีเมลสามารถใช้ได้");
                     $('#email').siblings("span").hide();
+                    check_stat();
        
                 }
             }
@@ -221,6 +245,7 @@ $('document').ready(function(){
             e.preventDefault();
             $('#error_msg').show();
             $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
+            
         } else {
             $.ajax({
                 url: 'update_profile.php',

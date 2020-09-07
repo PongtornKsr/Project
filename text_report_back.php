@@ -107,5 +107,5 @@ for($i = 0 ; $i <count($idA); $i++){
 }
 
 print_r($idA);
-//header('Location: assetmanage.php');
+header('Location: assetmanage.php');
 ?>

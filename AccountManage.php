@@ -8,44 +8,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="Css/management.css"> 
     <link rel="stylesheet" href="Css/BG.css"> 
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/fixedheader.css">
     <title>CS_Asset</title>
     <!--ทำให้หัวตารางไม่เลื่อน-->
-    <style>
-  
-table tbody, table thead
-{
-    display: block;
-}
-table tbody 
-{
-    align-items: center;
-    overflow-y: auto;
-   overflow-x: hidden;
-   height: 450px;
-   width: 1400px;
-}
-th
-{
-    text-align:center;
-    vertical-align:middle;
    
-}
-td
-{
-    text-align:center;
-    vertical-align:middle;
-}
-table th:nth-child(1), td:nth-child(1) { min-width: 200px;  max-width: 200px; text-align: center;}
-table th:nth-child(2), td:nth-child(2) { min-width: 200px;  max-width: 200px; text-align: center;}
-table th:nth-child(3), td:nth-child(3) { min-width: 300px;  max-width: 300px; text-align: center;}
-table th:nth-child(4), td:nth-child(4) { min-width: 100px;  max-width: 100px; text-align: center;}
-table th:nth-child(5), td:nth-child(5) { min-width: 100px;  max-width: 100px; text-align: center;}
-table th:nth-child(6), td:nth-child(6) { min-width: 200px;  max-width: 200px; text-align: center;}
-table th:nth-child(7), td:nth-child(7) { min-width: 300px;  max-width: 300px; text-align: center;}
-    </style>
 </head>
 
 <body>
@@ -80,8 +50,8 @@ table th:nth-child(7), td:nth-child(7) { min-width: 300px;  max-width: 300px; te
                      
                     <br><br>
 
-    <div  id="sort_table" style="height: 450px;width: 1400px; ">
-    <table class="table bg-light text-dark table-bordered table-striped" width="900px">
+    <div  id="sort_table" style="height:450px;width:90%;overflow-y:auto ">
+    <table class="table bg-light text-dark table-bordered table-striped" width="100%" height="100%">
   <thead>
     <tr>
       <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>

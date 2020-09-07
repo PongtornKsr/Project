@@ -41,11 +41,11 @@ if(isset($_POST['nmsearch'])){
             <td>".$row['profile_name']."</td>
             <td>".$row['last_update']."</td>
             <td>";
-            if($row['ID_stat']==1){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' style='background-color:red; border-color:White; color:white'>DELETE</button></a>";}                       
-            else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' style='background-color:green; border-color:White; color:white'>Active</button></a>";}
+            if($row['ID_stat']==1){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' class='btn btn-outline-danger'>DELETE</button></a> ";}                       
+            else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a> ";}
             
-            if($row['profile_ID']==2){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' style='background-color:blue; border-color:White; color:white'>SET TO ADMIN</button></a>";}                       
-            else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' style='background-color:black; border-color:White; color:white'>SET TO GUEST</button></a>";};
+            if($row['profile_ID']==2){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' class='btn btn-outline-info'>SET TO ADMIN</button></a>";}                       
+            else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' class='btn btn-outline-warning'>SET TO GUEST</button></a>";};
             $output .="</td></tr>";
         }
     }

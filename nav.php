@@ -97,8 +97,8 @@
                           ?>
     <img src="img/logomini.png" width="60" height="20" alt=""></a>
 
-  <a class = "a" href="#home">Logout</a>
-  <a class = "a"href="#news">ภาพรวมครุภัณฑ์</a>
+  <a class = "a" href="logout.php">Logout</a>
+  <a class = "a"href="asset_report.php">ภาพรวมครุภัณฑ์</a>
   <div class="dropdownnav">
     <button class="dropbtnnav">จัดการบัญชีผู้ใช้ 
       <i class="fa fa-caret-down"></i>

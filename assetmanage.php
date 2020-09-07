@@ -1,18 +1,23 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
 <!DOCTYPE html><?php SESSION_START(); ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Css/management.css"> 
-    <link rel="stylesheet" href="CSS/fixedthead.css">
-    <link rel="stylesheet" href="CSS/submitstyle.css">
-    <link rel="stylesheet" href="Css/BG.css">
+    <link rel="stylesheet" href="CSS/formstyle.css">
+    <link rel="stylesheet" href="CSS/fixedheader.css">
+    <link rel="stylesheet" href="CSS/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
     <style>
-    
+       /* table th:nth-child(1), td:nth-child(1) { min-width: 50px;  max-width: 50px; text-align: center;}
+table th:nth-child(2), td:nth-child(2) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(3), td:nth-child(3) { min-width: 200px;  max-width: 200px; text-align: center;}
+table th:nth-child(4), td:nth-child(4) { min-width: 150px;  max-width: 150px; text-align: center;}
+table th:nth-child(5), td:nth-child(5) { min-width: 150px;  max-width: 150px; text-align: center;}
+table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*/
     </style>
     <title>CS_Asset</title>
 </head>
@@ -144,24 +149,30 @@
                
               
 ?>
+<center>
 <div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
 						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
 					</div>
 				</div>
-  <form action="search.php" method="post" style ="text-align:center"><div><?php echo $search_word; ?></div><button type= "submit" >ค้นหาใหม่</button></form>
-  <form action="asset_update.php" method="post">
-    <div style="text-align:center">
-    <table class="table bg-light text-dark table-bordered table-striped">
+                <br>
+                <br>
+<div class="containter" style="width:90%;" align = "center">
+ <div class = "whitebox" style = "width:90%" align = "center">
+  <form action="search.php"  method="post" style ="text-align:center;"><div style ="float:left"><?php echo $search_word; ?></div><button style ="float:right"type= "submit" >ค้นหาใหม่</button></form>
+  <br>
+  <form  align = "center" action="asset_update.php" method="post">
+    <div  align = "center" style="height:400px;overflow-y:auto" >
+    <table style ="width:100%height:100%;overflow:auto"align = "center" class="c table bg-light text-dark table-bordered table-striped ">
   <thead>
-    <tr>
-        <th><input type='checkbox' class='checkall' onClick='toggle(this)' /></th>
-        <th>รหัสครุภัณฑ์</th>
-        <th>ชื่อครุภัณฑ์</th>
-        <th>ชื่อเรียก</th>
-        <th>ประเภทครุภัณฑ์</th>
-	    <th>edit</th>
-    </tr>
+  <tr>
+        <th scope="col"><input type='checkbox' class='checkall' onClick='toggle(this)' /></th>
+        <th scope="col">รหัสครุภัณฑ์</th>
+        <th scope="col">ชื่อครุภัณฑ์</th>
+        <th scope="col">ชื่อเรียก</th>
+        <th scope="col">ประเภทครุภัณฑ์</th>
+        <th scope="col">edit</th>
+  </tr>
   </thead>
   <tbody>
        <?php
@@ -177,43 +188,41 @@
                         <td>".$row['asset_name']."</td>
                         <td>".$row['asset_nickname']."</td>
                         <td>".$row['asset_type_name']."</td>
-                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' style='background-color:red; border-color:White; color:white'>Detail</button></a><br>";
-                        echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' style='background-color:blue; border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a><br>"; 
+                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-outline-danger' border-color:White; color:white'>รายละเอียด</button></a> ";
+                        echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-outline-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
                         if($_SESSION['editop'] == 1){
-                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button' style='background-color:green; border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a><br>";
-                        echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' style='background-color:black; border-color:White; color:white'>EDIT</button></a><br>"; }
+                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button'  class='btn btn-outline-success' border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a> ";
+                        echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' class='btn btn-outline-warning' border-color:White; color:white'>แก้ไข</button></a> "; }
                          //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
                 echo "</td></tr>";
         
-                echo "<script language ='javascript'> 
-                    function deletethis(did){
-                        if(confirm('Do you Want to delete?')){
-                            window.location.href='assetdelete.php?del_id='+did+''
-                            return true;
-                        }
-
-                    }
-                </script>";
+               
 
             }
         }
        
         ?>
     </tbody>
-</table>
-<div><?php echo $sortway; ?></div>
+    </table>
+</div>
+<br>
+<div><?php // echo $sortway; ?></div>
 <?php if($_SESSION['editop'] == 2){ }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>
 <div style = "text-align: center">
-<input style= "text-align: center" type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
-<input style= "text-align: center" type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
+<input style= "text-align: center" class='btn btn-outline-success' type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
+<input style= "text-align: center"  class='btn btn-outline-success' type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
 </div>
 <?php } ?>
-</div>
+
 </form>
+
+</div>
+</center>
 <?php require 'footer.php'; ?>
+</body>
 </html>
 
 <script type="text/javascript"> 

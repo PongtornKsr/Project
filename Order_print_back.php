@@ -50,7 +50,7 @@ ob_start();
 </head>
 <body>
 <h2 align="center">รายการครุภัณฑ์</h2>
-
+<br>
 
 <?php 
 
@@ -186,6 +186,8 @@ ob_start();
       if(isset($respers)){ $head .= "<th align='center'>ผู้รับผิดชอบ</th>"; array_push($se,"resper_firstname|resper_lastname");}
      
 ?>
+<div style ="float:left"><?php echo $search_word; ?></div>
+<br>
 <table class="table table-bordered" width = "100%" style = "text-align:center">
 <thead align='center'>
 <tr>
@@ -221,10 +223,15 @@ ob_start();
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
     $mpdf->Output("pdf/Asset_Order_List.pdf"); // ส่งไปที่ไฟล์Myreport   
-    ob_end_flush();
+    
    
     ?>
-    <center><a  href="Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
+    <center><a  href="pdf/Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
 </body>
 </html>
-<?php header("Location:pdf/Asset_Order_List.pdf"); ?>
+<?php 
+
+header("Location: pdf/Asset_Order_List.pdf"); 
+
+ob_end_flush();
+?>
