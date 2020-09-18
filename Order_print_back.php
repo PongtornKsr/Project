@@ -25,6 +25,8 @@ $mpdf = new \Mpdf\Mpdf([
     'default_font' => 'sarabun'
   
 ]);
+
+
 ob_start();
 ?>
 <!DOCTYPE html>
@@ -75,94 +77,166 @@ ob_start();
         
          if($_POST['rm'] !=  '')
          {
-             $sqlss = "SELECT * FROM room WHERE room_ID = '".$_POST['rm']."'";
+            $numItems = count($_POST['rm']);
+            $i = 0;
+            $search_word .= " [ห้องจัดเก็บครุภัณฑ์: ";
+            foreach($_POST['rm'] as $w){
+                 $sqlss = "SELECT * FROM room WHERE room_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
                  while($row = $result->fetch_assoc()) {
-                     $search_word .= " [ห้องจัดเก็บครุภัณฑ์: ".$row['room']."] ";
+                    if(++$i === $numItems) {
+                     $search_word .= $row['room']." ";
+                    }
+                    else{
+                        $search_word .= $row['room'].",";
+                    }
                  }
              }
              
-             $r = $_POST['rm'];
+             $r = $w;
              $c = "room_ID";
              $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
-             $clause = " and ";
+             $clause = " or ";
              $sortway.= $c." = ".$r;
+            }
+            $search_word .=" ] ";
+            $clause = " and ";
+            
          }
         if($_POST['tp'] != '')
          {
-             $sqlss = "SELECT * FROM assettype WHERE asset_type_ID = '".$_POST['tp']."'";
+            $numItems = count($_POST['tp']);
+            $i = 0;
+            $search_word .= " [ประเภทครุภัณฑ์: ";
+            foreach($_POST['tp'] as $w){
+             $sqlss = "SELECT * FROM assettype WHERE asset_type_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
                  while($row = $result->fetch_assoc()) {
-                     $search_word .= " [ประเภทครุภัณฑ์: ".$row['asset_type_name']."] ";
+                    if(++$i === $numItems) {
+                        $search_word .= $row['asset_type_name']." ";
+                      }
+                      else{
+                          $search_word .= $row['asset_type_name'].",";
+                      }
+                     
                  }
              }
-             $r = $_POST['tp'];
+             $r = $w;
              $c = "asset_type_ID";
              $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
-             $clause = " and ";
+             $clause = " or ";
              $sortway.= $c." = ".$r;
+           
+            }
+            $search_word .= "] ";
+            $clause = " and ";
+
          }
          if($_POST['stt'] != '')
          {
-             $sqlss = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$_POST['stt']."'";
+            $numItems = count($_POST['stt']);
+            $i = 0;
+            $search_word .= " [สถานะครุภัณฑ์: ";
+            foreach($_POST['stt'] as $w){
+             $sqlss = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
                  while($row = $result->fetch_assoc()) {
-                     $search_word .= " [สถานะครุภัณฑ์: ".$row['asset_stat_name']."] ";
+                    if(++$i === $numItems) {
+                     $search_word .= $row['asset_stat_name']." ";
+                    }else{
+                        $search_word .= $row['asset_stat_name'].",";
+                    }
                  }
              }
-             $r = $_POST['stt'];
+             $r = $w;
              $c = "asset_stat_ID";
              $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
-             $clause = " and ";
+             $clause = " or ";
              $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] "; 
+            $clause = " and ";
          }
          if($_POST['dstt'] != '')
          {
-             $sqlss = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$_POST['dstt']."'";
+            $numItems = count($_POST['dstt']);
+            $i = 0;
+            $search_word .= " [ลักษณะการติดตั้ง: ";
+            foreach($_POST['dstt'] as $w){
+             $sqlss = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
                  while($row = $result->fetch_assoc()) {
-                     $search_word .= " [ลักษณะการติดตั้ง: ".$row['dstat']."] ";
+                    if(++$i === $numItems) {
+                     $search_word .= $row['dstat']." ";
+                    }else{
+                        $search_word .= $row['dstat'].",";
+                    }
                  }
              }
-             $r = $_POST['dstt'];
+             $r = $w;
              $c = "dstat_ID";
              $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
-             $clause = " and ";
+             $clause = " or ";
              $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] ";
+            $clause = " and ";
          }
          if($_POST['rp'] != '')
          {
-             $sqlss = "SELECT * FROM respon_per WHERE resper_ID = '".$_POST['rp']."'";
+            $numItems = count($_POST['rp']);
+            $i = 0;
+            $search_word .= " [ผู้รับผิดชอบ: ";
+            foreach($_POST['rp'] as $w){
+             $sqlss = "SELECT * FROM respon_per WHERE resper_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
                  while($row = $result->fetch_assoc()) {
-                     $search_word .= " [ผู้รับผิดชอบ: ".$row['resper_firstname']." ".$row['resper_lastname']."] ";
+                    if(++$i === $numItems) {
+                     $search_word .= $row['resper_firstname']." ".$row['resper_lastname']." ";
+                    }else{
+                        $search_word .= $row['resper_firstname']." ".$row['resper_lastname'].",";
+                    }
                  }
              }
-             $r = $_POST['rp'];
+             $r = $w;
              $c = "resper_ID";
              $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
-             $clause = " and ";
+             $clause = " or ";
              $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] ";
+            $clause = " and ";
          }
          if($_POST['gm'] != '')
          {
-             $sqlss = "SELECT * FROM getmethod WHERE getMethod_ID = '".$_POST['gm']."'";
+            $numItems = count($_POST['gm']);
+            $i = 0;
+            $search_word .= " [วิธีได้รับ: ";
+            foreach($_POST['gm'] as $w){
+             $sqlss = "SELECT * FROM getmethod WHERE getMethod_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
                  while($row = $result->fetch_assoc()) {
-                     $search_word .= " [วิธีได้รับ: ".$row['method']."] ";
+                    if(++$i === $numItems) {
+                     $search_word .= $row['method']." ";
+                    }else{
+                        $search_word .= $row['method'].",";
+                    }
                  }
              }
-             $r = $_POST['gm'];
+             $r = $w;
              $c = "getMethod_ID";
              $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
-             $clause = " and ";
+             $clause = " or ";
              $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] ";
+            $clause = " and ";
          }
         
         
@@ -211,15 +285,21 @@ ob_start();
             echo "</tr>";
         }
     }
-
+    echo $sql;
 ?>
 </tbody>
 </table>
 
 
 <?php  
+    $paperaxis = $_POST['axis'];
     $mpdf->SetDisplayMode('fullwidth'); 
-    $mpdf->AddPage('P'); // ตั้งค่ากระดาษ
+    if($paperaxis == 'P'){
+        $mpdf->AddPage('P');
+    }else{
+        $mpdf->AddPage('A4-L');
+    }
+    // ตั้งค่ากระดาษ
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์
     $mpdf->WriteHTML($html); // นำตัวแปรHTMLมาแสดงผล
     $mpdf->Output("pdf/Asset_Order_List.pdf"); // ส่งไปที่ไฟล์Myreport   

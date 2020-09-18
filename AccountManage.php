@@ -1,13 +1,15 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!DOCTYPE html>
 <?php SESSION_START(); ?>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="Css/management.css"> 
     <link rel="stylesheet" href="Css/BG.css"> 
@@ -24,6 +26,7 @@
 <!-- action กับ method ห้ามเปลี่ยน-->
 <form>
 <center>
+
 <div class="brand_logo_container">
 
       <img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
@@ -54,12 +57,12 @@
     <table class="table bg-light text-dark table-bordered table-striped" width="100%" height="100%">
   <thead>
     <tr>
-      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>
-      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc" href="#" >Last Name</a></th>
-      <th scope="col"><a class= "column_sort" id="email" data-order="desc" href="#" >Email</a></th>
-	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc" href="#" >Status</a></th>
-      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc" href="#" >Profile</a></th>
-      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc" href="#" >Lastupdate</a></th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >ชื่อ</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc" href="#" >นามสกุล</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="desc" href="#" >อีเมล</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc" href="#" >สถานะ</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc" href="#" >ประเภทบัญชี</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc" href="#" >แก้ไขล่าสุด</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>
@@ -79,3 +82,4 @@
 </html>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="javascript/accmanage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

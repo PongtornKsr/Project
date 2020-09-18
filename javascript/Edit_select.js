@@ -8,6 +8,8 @@ $(document).ready(function(){
     rp_init();
     rm_init();
     vd_init();
+    $('#stat').css('display','block');
+  $('#tabstat').attr('class','tablinks active');
         function stat_init(query){
             $.ajax({
                 url:"Edit_select_back.php",
@@ -264,7 +266,59 @@ $(document).ready(function(){
             }
         }
 
-
+        function tabset(){
+            $('.tabcontent').css('display','none');
+            $('.tablinks').attr('class', 'tablinks');
+            
+          }
+          $(document).on('click','#tabstat',function(){
+            tabset();
+            $('#stat').css('display','block');
+            $('#tabstat').attr('class','tablinks active');
+            stat_init();
+          });
+          $(document).on('click','#tabtype',function(){
+            tabset();
+            $('#type').css('display','block');
+            $('#tabtype').attr('class','tablinks active');
+            type_init();
+          });
+          $(document).on('click','#tabdtype',function(){
+            tabset();
+            $('#dtype').css('display','block');
+            $('#tabdtype').attr('class','tablinks active');
+            dtype_init();
+          });
+          $(document).on('click','#tabgm',function(){
+            tabset();
+            $('#gm').css('display','block');
+            $('#tabgm').attr('class','tablinks active');
+            gm_init();
+          });
+          $(document).on('click','#tabmt',function(){
+            tabset();
+            $('#mt').css('display','block');
+            $('#tabmt').attr('class','tablinks active');
+            mt_init();
+          });
+          $(document).on('click','#tabrp',function(){
+            tabset();
+            $('#rp').css('display','block');
+            $('#tabrp').attr('class','tablinks active');
+            rp_init();
+          });
+          $(document).on('click','#tabrm',function(){
+            tabset();
+            $('#rm').css('display','block');
+            $('#tabrm').attr('class','tablinks active');
+            rm_init();
+          });
+          $(document).on('click','#tabvd',function(){
+            tabset();
+            $('#vd').css('display','block');
+            $('#tabvd').attr('class','tablinks active');
+            vd_init();
+          });
 
         $(document).on('keyup','#stat_search',function(){
             var s = $('#stat_search').val();
@@ -521,11 +575,11 @@ $(document).ready(function(){
         });
         $(document).on('click','#rm_insert',function(){
             var s = $('#rm_name').val();
-            
+            var r = $('#resid').val();
             $.ajax({
                 url:"Edit_select_back.php",
                 method:"POST",
-                data:{ 'insertop' : 7 , 'rm_name' : s},
+                data:{ 'insertop' : 7 , 'rm_name' : s , 'resid' : r},
                 success:function(){
                     rm_init();
                 }
@@ -648,7 +702,7 @@ $(document).ready(function(){
         });
         $(document).on('click', '#rm_edit',function(){
             var s = $(this).val();
-
+            
             $.ajax({
                 url:"Edit_select_back.php",
                 method :"POST",
@@ -680,131 +734,274 @@ $(document).ready(function(){
         });
 
         $(document).on('click', '#s_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 1 ,'delop' : 1, 'id' : s
+                    'del': 1,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#stat_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    stat_init();
                 }
-
-            })
+            });
+                  
+                }
+              })
+            
 
         });
         $(document).on('click', '#t_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 2 ,'delop' : 1, 'id' : s
+                    'del': 2,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#type_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    type_init();
                 }
-
-            })
-
+            });
+                  
+                }
+              })
         });
         $(document).on('click', '#d_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 3 ,'delop' : 1, 'id' : s
+                    'del': 3,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#dtype_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    dtype_init();
                 }
-
-            })
+            });
+                  
+                }
+              })
+            
 
         });
         $(document).on('click', '#gm_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 4 ,'delop' : 1, 'id' : s
+                    'del': 4,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#gm_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    gm_init();
                 }
-
-            })
-
+            });
+                  
+                }
+              })
+            
         });
         $(document).on('click', '#mt_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 5 ,'delop' : 1, 'id' : s
+                    'del': 5,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#mt_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    mt_init();
                 }
-
-            })
-
+            });
+                  
+                }
+              })
         });
         $(document).on('click', '#rp_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 6 ,'delop' : 1, 'id' : s
+                    'del': 6,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#rp_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    rp_init();
                 }
-
-            })
-
+            });
+                  
+                }
+              })
         });
         $(document).on('click', '#rm_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 7 ,'delop' : 1, 'id' : s
+                    'del': 7,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#rm_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    rm_init();
                 }
-
-            })
+            });
+                  
+                }
+              })
 
         });
         $(document).on('click', '#vd_delete',function(){
-            var s = $(this).val();
-
+            Swal.fire({
+                title: 'ลบข้อมูลนี้หรือไม่?',
+                text: "ยืนยันการลบข้อมูลนี้",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    var s = $(this).val();
             $.ajax({
-                url:"Edit_select_back.php",
-                method :"POST",
+                url: "Edit_select_back.php",
+                method:"POST",
                 data:{
-                    'initop' : 8 ,'delop' : 1, 'id' : s
+                    'del': 8,
+                    'id' : s
                 },
-                success:function(data){
-                    $('#vd_data').html(data);
+                success:function(){
+                    Swal.fire(
+                    'Deleted!',
+                    'ทำการลบข้อมูลเรียบร้อย.',
+                    'success'
+                  )
+                    vd_init();
                 }
-
-            })
+            });
+                  
+                }
+              })
 
         });
 
@@ -952,13 +1149,15 @@ $(document).ready(function(){
         $(document).on('click','#rm_update',function(){
             var s = $(this).val();
             var r = $('#rm_name').val();
+            var f = $('#resid').val();
             $.ajax({
                 url: "Edit_select_back.php",
                 method:"POST",
                 data:{
                     'update' : 7,
                     'id': s ,
-                    'rm_name': r
+                    'rm_name': r,
+                    'resid' : f
                 },
                 success:function(){
                     rm_init();
@@ -989,20 +1188,7 @@ $(document).ready(function(){
             });
         });
 
-        $(document).on('click','#s_del',function(){
-            var s = $(this).val();
-            $.ajax({
-                url: "Edit_select_back.php",
-                method:"POST",
-                data:{
-                    'del': 1,
-                    'id' : s
-                },
-                success:function(){
-                    stat_init();
-                }
-            });
-        });
+        
 
         $(document).on('click','#t_del',function(){
             var s = $(this).val();

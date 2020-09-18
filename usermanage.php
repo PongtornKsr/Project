@@ -109,24 +109,21 @@ function userinsert(){
 }
 function userdel(){
     require 'connect.php';
-    $sql = "SELECT * FROM userdata WHERE ID= ".$_GET['ID']."";
+    $sql = "SELECT * FROM userdata WHERE ID= ".$_POST['ID']."";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if($row['profile_ID'] == 2){
-                $sql = "DELETE FROM userdata WHERE ID = ".$_GET['ID']." ";
+                $sql = "DELETE FROM userdata WHERE ID = ".$_POST['ID']." ";
                 if ($conn->query($sql) === TRUE) {
         
-                    header("location: AccountManage.php");
+                    echo "PASS";
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
             }else{
-                echo "<script>
-                alert('ADMIN is Unable to delete please Change Role Before Delete');
-                window.location.href='Accountmanage.php';
-                </script>";
+                echo "no";
             }
         }   
     }
@@ -152,17 +149,14 @@ function usblock(){
                                 $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');
                                 $log->Write('log/test.txt','#### Action : Set User_stat to Deleted : '.$name.' ####');
                                 $log->Write('log/test.txt','-----------------------------------------------------------------------------');
-                                header("location: AccountManage.php");
+                                echo "PASS";
                         }
                     }
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error;
                     }
             } else{
-                echo "<script>
-                alert('ADMIN is Unblockable please Change Role Before Blocking');
-                window.location.href='Accountmanage.php';
-                </script>";
+                echo "no";
             }
         }
     }

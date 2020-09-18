@@ -30,40 +30,42 @@
 <br>
     <br>
 	<div class = "whitebox" style = "width: 500px;height:auto">
+	<div><h3>เพิ่มผู้ใช้งานใหม่</h3></div>
+
     <form action="usermanage.php?function=2" method = "POST" Align = "center">
     <input type="hidden" value = "2" name = "function">
       
 		<div class="form-group">
-	<label>First Name</label>
+	<label style= "float:left">ชื่อ</label>
     <input type="text" class="form-control" name = "fname" id="fname"  placeholder="first name">
 	<div id = "name_alert" tyle = "color:red" ></div>
 		</div>
 	
 	<div class="form-group">
-    <label>Familyname</label>
+    <label  style= "float:left">นามสกุล</label>
     <input type="text" class="form-control" name = "lname" id="lname"  placeholder="Familyname">
 	<div id = "lname_alert" tyle = "color:red"></div>
 		</div>
 			
 		<div class="form-group">
-	<label>Email</label>
+	<label  style= "float:left">อีเมล</label>
     <input type="email" class="form-control"  name = "email" id="email"  placeholder="Enter email">
 	<div id = "email_alert" style = "color:red"></div>
 	</div>
 	
 	<div class="form-group">
-	<label>Username</label>
+	<label  style= "float:left">ชื่อผู้ใช้งาน</label>
     <input type="text" class="form-control"  name = "username" id="username"  placeholder="Enter email">
 	<div id = "username_alert" style = "color:red"></div>
 	</div>
 	
 	<div class="form-group">
-	<label>Password</label>
+	<label style= "float:left">รหัสผ่าน</label>
     <input type="password" class="form-control"  name = "pass" id="pass"  placeholder="Enter email">
 	<div id = "pass_alert" style = "color:red"></div>
 	</div>
 	
-  <label>Status</label>
+  <label  style= "float:left">ประเภทบัญชี</label>
   <select class="form-control form-control-sm" name = "Type">
   <option value="2">GUEST</option>
 <option value="1">ADMIN</option>   

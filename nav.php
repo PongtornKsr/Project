@@ -112,11 +112,12 @@
                           while($row = $result->fetch_assoc()) {
                           if($row['profile_ID'] == 1 ){ echo "<a href='AccountManage.php' class='dropdown-item'>ค้นหาและจัดการผู้ใช้</a>
                             <a href='userinsert.php' class='dropdown-item'>เพิ่มผู้ใช้ใหม่</a>
-                            <a href='profile_edit.php' class='dropdown-item'>แก้ไขข้อมูลส่วนตัว</a>";} 
+                            <a href='profile_edit.php?ID=".$row['ID']."' class='dropdown-item'>แก้ไขข้อมูลส่วนตัว</a>";} 
                             elseif($row['profile_ID'] == 2){ echo "<a href='profile_edit.php' class='dropdown-item'>แก้ไขข้อมูลส่วนตัว</a>"; }
                           }
                         }
                           ?>
+                          
     </div>
   </div> 
   <div class="dropdownnav">

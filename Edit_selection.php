@@ -6,25 +6,25 @@
     <link rel="stylesheet" href="CSS/navbar.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
   <script src="javascript/Edit_select.js"></script>
     <link rel="stylesheet" href="CSS/BG.css">
     <link rel="stylesheet" href="CSS/fixedheader.css">
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/tab.css">
-    <title>Document</title>
+    <title>CS_Asset</title>
 </head>
 <body>
     <?php require 'nav.php'; ?>
    
     <br><br><br><br><br>
 <div class = "container">
-<div class="tab">
+<div class="tab"style="text-align: center;">
   <button class="tablinks" id = "tabstat">สถานะครุภัณฑ์</button>
   <button class="tablinks" id = "tabtype">ประเภทครุภัณฑ์</button>
   <button class="tablinks" id = "tabdtype">ประเภทการติดตั้ง</button>
-  <button class="tablinks" id = "tabgm">วิธีการได้รับ</button>
-  <button class="tablinks" id = "tabmt">ประเภทเงินงบประมาณ</button>
+  <!--<button class="tablinks" id = "tabgm">วิธีการได้รับ</button>-->
+  <!--<button class="tablinks" id = "tabmt">ประเภทเงินงบประมาณ</button>-->
   <button class="tablinks" id = "tabrp">ผู้รับผิดชอบ</button>
   <button class="tablinks" id = "tabrm">ห้องที่จัดเก็บ</button>
   <button class="tablinks" id = "tabvd">บริษัทผู้ค้า</button>
@@ -45,7 +45,6 @@
     <table style = "width:100%;height:100%;text-align:center;vertical-align:middle" id="stat_data" class="table table-bordered table-striped">
      <thead>
       <tr>
-       <th>รหัสสถานะครุภัณฑ์</th>
        <th>สถานะครุภัณฑ์</th>
        <th>ตัวเลือก</th>
       </tr>
@@ -116,7 +115,7 @@
 </form>
 </div>
 
-<div id="gm" class="tabcontent">
+<!--<div id="gm" class="tabcontent">
   <form class = "whitebox" action= "" name="add_detail" id="add_detail" method = "POST" >  
   <div align= "center" >
   <br><br>
@@ -172,7 +171,7 @@
   </div>
   </div>
 </form>
-</div>
+</div> -->
 
 <div id="rp" class="tabcontent">
 <form class = "whitebox" action= "" name="add_detail" id="add_detail" method = "POST" >  
@@ -267,5 +266,6 @@
 <?php require 'footer.php'; ?>
 </body>
 </html>
-<script src="javascript/tab.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

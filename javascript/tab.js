@@ -41,6 +41,7 @@ $(document).ready(function(){
     tabset();
     $('#rm').css('display','block');
     $('#tabrm').attr('class','tablinks active');
+    rm_init();
   });
   $(document).on('click','#tabvd',function(){
     tabset();

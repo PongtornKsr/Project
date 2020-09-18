@@ -27,7 +27,13 @@
         $uname = "";
         $pass = "";
         $uid = "";
-       $sqla = "SELECT * FROM userdata WHERE name = '".$_SESSION['Account']."'";
+        if(!isset($_GET['ID'])){
+            $sqla = "SELECT * FROM userdata WHERE name = '".$_SESSION['Account']."'";
+        }
+        else if(isset($_GET['ID'])){
+            $sqla = "SELECT * FROM userdata WHERE ID = '".$_GET['ID']."'";
+        }
+       
        $result = $conn->query($sqla);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -53,34 +59,35 @@
 ?>
 
 <form class = "form">
-  <h2>Profile Edit</h2>
+<a href='AccountManage.php'> <button type='button' class='btn btn-outline-secondary' >ย้อนกลับ</button></a>
+  <h2>แก้ไขข้อมูลผู้ใช้</h2>
   <h4 id = "error_msg" style="text-align:center; color:red">df</h4>
   <br>
 		<p>
-			<label class="floatLabel">Email</label>
+			<label class="floatLabel">อีเมล</label>
 			<input class="w3-input" id="email" name="email" value ="<?php echo $email; ?>"type="text" required>
             <span id = "hint2"></span>
         </p>
         <p>
-			<label  class="floatLabel">Firstname</label>
+			<label  class="floatLabel">ชื่อ</label>
 			<input class="w3-input"  id = "fname" name="fname" value ="<?php echo $fname; ?>" type="text" required>
         </p>
         <p>
-			<label  class="floatLabel">Lastname</label>
+			<label  class="floatLabel">นามสกุล</label>
 			<input  class="w3-input" id = "lname" name="lname" value ="<?php echo $lname; ?>" type="text" required>
         </p>
         <p>
-			<label  class="floatLabel">Username</label>
+			<label  class="floatLabel">ชื่อผู้ใช้</label>
 			<input  class="w3-input" id = "username" name="uname" value ="<?php  echo $uname; ?>" type="text" required>
             <span id = "hint2"></span>
 		</p>
 		<p>
-			<label for="password" class="floatLabel">Password</label>
+			<label for="password" class="floatLabel">รหัสผ่าน</label>
 			<input class="w3-input" id="password" onkeyup = "passcount()" value ="<?php echo $pass; ?>" name="password" type="password">
 			<span id = "hint1">Enter a password longer than 8 characters</span>
 		</p>
 		<p>
-			<label for="confirm_password" class="floatLabel">Confirm Password</label>
+			<label for="confirm_password" class="floatLabel">ยืนยันรหัสผ่าน</label>
 			<input class="w3-input" id="password2" onkeyup= "passcheck()" value ="<?php echo $pass; ?>" name="confirm_password" type="password">
 			<span id = "hint2">Your passwords do not match</span>
         </p>

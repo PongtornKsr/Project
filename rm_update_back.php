@@ -5,7 +5,7 @@ require 'connect.php';
 if(isset($_POST['RoomUpdate'])){
     $rm = $_POST['rmid'];
 foreach ($aid as $x){
-    $sql = "UPDATE asset SET room_ID = '".$rm."' WHERE id = '".$x."'";
+    $sql = "UPDATE asset SET room_ID = '".$rm."',resper_ID = (SELECT resper_ID FROM `room` join respon_per where room_ID = '".$rm."' and (room.resper_IDs = respon_per.resper_ID)) WHERE id = '".$x."'";
     if ($conn->query($sql) === TRUE) {
         
     } else {

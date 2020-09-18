@@ -11,6 +11,7 @@
     padding: 14px 16px;
     text-decoration: none;
   }
+  
   .navnav .band {
     float: left;
     font-size: 16px;
@@ -63,8 +64,12 @@
     text-align: left;
   }
   
+  
+  
+  
   .dropdown-contentnav a:hover {
-    background-color: #ddd;
+    background-color:#484848;
+    color: white;
     text-decoration: none;
   }
   

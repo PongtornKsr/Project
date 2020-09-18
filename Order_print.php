@@ -9,10 +9,19 @@
     <link rel="stylesheet" href="CSS/search.css">
     <link rel="stylesheet" href="CSS/Checckbox.css">
     <link rel="stylesheet" href="CSS/navbar.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>CS_Asset</title>
+    
 
-    <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+ 
+    
+
+    
+    <title>CS_Asset</title>
+   <style>
        
     </style>
 </head>
@@ -27,6 +36,8 @@
     <center>
     <div id= "bodytext">
     <form class="searchbox" id="sbox" action ="Order_print_back.php" method= "post" target= "_bank">
+    <div><h1>พิมพ์รายการครุภัณฑ์</h1></div>
+    <br>
     <div class="form__group">
     <input type="text" class="form__input" name ="searchtxt"id="searchtxt" placeholder="รหัสครุภัณฑ์/ชื่อครุภัณฑ์" />
     <label style="text-align:center" for="name" class="form__label">รหัสครุภัณฑ์/ชื่อครุภัณฑ์</label>
@@ -36,23 +47,24 @@
     <table  class="select_layout">
     <tr>
         <td class="tdsp">
-            <div class="select">
-                <select name="gm" id = "gm">
+            <div >
+            
+                <select name="gm[]" id = "gm" multiple="true">
                 <option placeholder="" value="">วิธีที่ได้รับมา</option>
                     <?php 
                         $sql = "SELECT * FROM getmethod ";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                        echo "<option value=".$row['method'].">".$row['method']."</option>";
+                        echo "<option value=".$row['getMethod_ID'].">".$row['method']."</option>";
                         }     }
                     ?>
                 </select>
             </div>
         </td>
         <td class="tdsp">
-            <div class="select">
-                <select name="rm" id = "rm">
+            <div >
+                <select name="rm[]" id = "rm" multiple="true">
                 <option placeholder="" value="">ห้องที่จัดเก็บครุภัณฑ์</option>
                     <?php $sql = "SELECT * FROM room ";
                     $result = $conn->query($sql);
@@ -65,9 +77,9 @@
             </div>
         </td>
         <td class="tdsp">
-            <div class="select">
-                <select name="tp" id ="tp">
-                <option placeholder="" value="">ประเภทของครุภัณฑ์</option>
+            <div >
+                <select name="tp[]" id ="tp" multiple="true">
+                <option placeholder="" value="" >ประเภทของครุภัณฑ์</option>
                     <?php $sql = "SELECT * FROM assettype ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -80,8 +92,8 @@
     </tr>
     <tr>
         <td class="tdsp">
-            <div class="select">
-                <select name="stt" id ="stt">
+            <div >
+                <select name="stt[]" id ="stt" multiple="true">
                 <option placeholder="" value="">สถานะการใช้งาน</option>
                     <?php $sql = "SELECT * FROM assetstat ";
                     $result = $conn->query($sql);
@@ -93,8 +105,8 @@
             </div>
         </td>
         <td class="tdsp">
-            <div class="select">
-                <select name="dstt" id = "dstt">
+            <div >
+                <select name="dstt[]" id = "dstt" multiple="true">
                 <option placeholder="" value="">ลักษณะการติดตั้ง</option>
                         <?php 
                             $sql = "SELECT * FROM deploy_stat ";
@@ -108,8 +120,8 @@
             </div>
         </td>
         <td class="tdsp">
-            <div class="select">
-                <select name="rp" id ="rp">
+            <div >
+                <select name="rp[]" id ="rp"multiple="true">
                 <option placeholder="" value="">ผู้รับผิดชอบ</option>
                     <?php 
                         $sql = "SELECT * FROM respon_per ";
@@ -124,54 +136,65 @@
         </td>
     </tr>
     </table>
+    <br>
+    <br>
     <table>
     <tr>
     <td><input type="checkbox" class="hidden-box" id="a" name="asid" value = "qqq" />
     <label for="a" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">รหัสครุภัณฑ์</span>
+      <span >รหัสครุภัณฑ์</span>
     </label></td>
     <td><input type="checkbox" class="hidden-box" id="b" name ="nkn"/>
     <label for="b" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">ชื่อเรียก</span>
+      <span >ชื่อเรียก</span>
     </label></td>
     <td><input type="checkbox" class="hidden-box" id="s" name = "ustat" />
     <label for="s" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">สถานะการใช้งาน</span>
+      <span >สถานะการใช้งาน</span>
     </label></td>
     </tr>
     <tr>
     <td><input type="checkbox" class="hidden-box" id="q" name = "astyp" />
     <label for="q" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">ประเภทของครุภัณฑ์</span>
+      <span>ประเภทของครุภัณฑ์</span>
     </label></td>
     <td><input type="checkbox" class="hidden-box" id="w" name = "asroom"/>
     <label for="w" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">ห้องที่จัดเก็บครุภัณฑ์</span>
+      <span>ห้องที่จัดเก็บครุภัณฑ์</span>
     </label></td>
     <td><input type="checkbox" class="hidden-box" id="e" name = "respers"/>
     <label for="e" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">ชื่อผู้รับผิดชอบ</span>
+      <span >ชื่อผู้รับผิดชอบ</span>
     </label></td>
     </tr>
     <tr>
     <td><input type="checkbox" class="hidden-box" id="f" name = "asname"/>
     <label for="f" class="check--label">
       <span class="check--label-box"></span>
-      <span class="check--label-text">ชื่อครุภัณฑ์</span>
+      <span >ชื่อครุภัณฑ์</span>
     </label></td>
     </tr>
     </table>
-    <table style="text-align:center">
+    <br>
+    
+    <table width="50%" >
+    
         <tr>
-            <th><button type="submit" class="btns first" id = "search_button">ค้นหา</button></th>
+        <td><div ><select class="form-control form-control-lg" name="axis" id="axis">
+        <option value='P'>แนวตั้ง</option>
+        <option value='A4-L'>แนวนอน</option>
+    </select></div></td>
+            <td><button type="submit" class="btns first" id = "search_button">พิมพ์รายการครุภัณฑ์</button></td>
         </tr>
     </table>
+    <br>
+    
     </center>
     </form>
     
@@ -180,11 +203,51 @@
     
     
     </center>
- 
+    
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+   
+    <script>
+$(document).ready(function(){
+ $('#gm').multiselect({
+  nonSelectedText: 'เลือกวิธีการได้รับ',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true
+ 
+ });
+ $('#rm').multiselect({
+  nonSelectedText: 'เลือกห้องที่จัดเก็บ',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true
+ 
+ });
+ $('#tp').multiselect({
+  nonSelectedText: 'เลือกประเภทครุภัณฑ์',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true
+ 
+ });
+ $('#stt').multiselect({
+  nonSelectedText: 'เลือกสถานะการใช้งาน',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true
+ 
+ });
+ $('#dstt').multiselect({
+  nonSelectedText: 'เลือกสถานะการติดตั้ง',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true
+ 
+ });
+ $('#rp').multiselect({
+  nonSelectedText: 'เลือกผู้รับผิดชอบ',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true
+ 
+ });
+
+
+ 
+});
+</script>

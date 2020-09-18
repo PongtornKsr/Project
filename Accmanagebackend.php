@@ -7,12 +7,12 @@ $output= "";
 if(isset($_POST['nmsearch'])){
     $output .='<table class="table bg-light text-dark table-bordered table-striped" width="1400px"> <thead>
     <tr>
-      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >First Name</a></th>
-      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc"  href="#" >Last Name</a></th>
-      <th scope="col"><a class= "column_sort" id="email" data-order="desc"  href="#" >Email</a></th>
-	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc"  href="#" >Status</a></th>
-      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc"  href="#">Profile</a></th>
-      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc"  href="#" >Lastupdate</a></th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="desc" href="#" >ชื่อ</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="desc"  href="#" >นามสกุล</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="desc"  href="#" >อีเมล</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc"  href="#" >สถานะ</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc"  href="#">ประเภทบัญชี</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="desc"  href="#" >แก้ไขครั้งล่าสุด</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>
@@ -34,18 +34,20 @@ if(isset($_POST['nmsearch'])){
         while($row = mysqli_fetch_array($result))
         {
             $output .="<tr>
-            <td>".$row['givenName']."</td>
-            <td>".$row['familyName']."</td>
-            <td>".$row['email']."</td>
-            <td>".$row['stat_name']."</td>
-            <td>".$row['profile_name']."</td>
-            <td>".$row['last_update']."</td>
+            <td align='left'>".$row['givenName']."</td>
+            <td align='left'>".$row['familyName']."</td>
+            <td align='left'>".$row['email']."</td>
+            <td align='left'>".$row['stat_name']."</td>
+            <td align='left'>".$row['profile_name']."</td>
+            <td align='left'>".$row['last_update']."</td>
             <td>";
-            if($row['ID_stat']==1){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' class='btn btn-outline-danger'>DELETE</button></a> ";}                       
-            else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a> ";}
-            
-            if($row['profile_ID']==2){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' class='btn btn-outline-info'>SET TO ADMIN</button></a>";}                       
-            else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' class='btn btn-outline-warning'>SET TO GUEST</button></a>";};
+            if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
+      else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}
+      
+      if($row['profile_ID']==2){ $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' class='btn btn-outline-info'>ตั้งเป็นแอดมิน</button></a>";}                       
+      else { $output.= "  <a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' class='btn btn-outline-warning''>ตั้งเป็นผู้ใช้ทั่วไป</button></a>";};
+      $output .= "  <a href='profile_edit.php?ID=".$row['ID']."'> <button type='button' class='btn btn-outline-secondary' value = '".$row['ID']."'>แก้ไขข้อมูล</button></a>";
+      
             $output .="</td></tr>";
         }
     }
@@ -69,31 +71,35 @@ if(isset($_POST['sort'])){
     $result = mysqli_query($db,$query);
     $output .='<table class="table bg-light text-dark table-bordered table-striped" width="1400px"> <thead> 
     <tr>
-      <th scope="col"><a class= "column_sort" id="givenName" data-order="'.$order.'" href="#" >First Name</a></th>
-      <th scope="col"><a class= "column_sort" id="familyName" data-order="'.$order.'"  href="#" >Last Name</a></th>
-      <th scope="col"><a class= "column_sort" id="email" data-order="'.$order.'"  href="#" >Email</a></th>
-	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="'.$order.'"  href="#" >Status</a></th>
-      <th scope="col"><a class= "column_sort" id="profile_name" data-order="'.$order.'"  href="#" >Profile</a></th>
-      <th scope="col"><a class= "column_sort" id="last_update" data-order="'.$order.'"  href="#" >Lastupdate</a></th>
+      <th scope="col"><a class= "column_sort" id="givenName" data-order="'.$order.'" href="#" >ชื่อ</a></th>
+      <th scope="col"><a class= "column_sort" id="familyName" data-order="'.$order.'"  href="#" >นามสกุล</a></th>
+      <th scope="col"><a class= "column_sort" id="email" data-order="'.$order.'"  href="#" >อีเมล</a></th>
+	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="'.$order.'"  href="#" >สถานะ</a></th>
+      <th scope="col"><a class= "column_sort" id="profile_name" data-order="'.$order.'"  href="#" >ประเภทบัญชี</a></th>
+      <th scope="col"><a class= "column_sort" id="last_update" data-order="'.$order.'"  href="#" >แก้ไขครั้งล่าสุด</a></th>
 	  <th scope="col">Edit</th> 
 	  
     </tr>
   </thead> <tbody>';
   while($row = mysqli_fetch_array($result)){
       $output .="<tr>
-      <td>".$row['givenName']."</td>
-      <td>".$row['familyName']."</td>
-      <td>".$row['email']."</td>
-      <td>".$row['stat_name']."</td>
-      <td>".$row['profile_name']."</td>
-      <td>".$row['last_update']."</td>
-      <td>";
-      if($row['ID_stat']==1){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=4'><button type='button' style='background-color:red; border-color:White; color:white'>DELETE</button></a>";}                       
-      else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' style='background-color:green; border-color:White; color:white'>Active</button></a>";}
+      <td align='left'>".$row['givenName']."</td>
+      <td align='left'>".$row['familyName']."</td>
+      <td align='left'>".$row['email']."</td>
+      <td align='left'>".$row['stat_name']."</td>
+      <td align='left'>".$row['profile_name']."</td>
+      <td align='left'>".$row['last_update']."</td>
+      <td align='left'>";
+
+      if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
+      else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}
       
-      if($row['profile_ID']==2){ $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' style='background-color:blue; border-color:White; color:white'>SET TO ADMIN</button></a>";}                       
-      else { $output.= "<a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' style='background-color:black; border-color:White; color:white'>SET TO GUEST</button></a>";};
+      if($row['profile_ID']==2){ $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=5'><button type='button' class='btn btn-outline-info'>ตั้งเป็นแอดมิน</button></a>";}                       
+      else { $output.= "  <a href='usermanage.php?ID=".$row['ID']."&function=6'><button type='button' class='btn btn-outline-warning''>ตั้งเป็นผู้ใช้ทั่วไป</button></a>";};
+      $output .= "  <a href='profile_edit.php?ID=".$row['ID']."'><button type='button' class='btn btn-outline-secondary' value = '".$row['ID']."'>แก้ไขข้อมูล</button></a>";
+      
       $output .="</td></tr>";
+
   }
   $output .='</tbody> </table>';
   echo $output;

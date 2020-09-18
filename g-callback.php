@@ -26,7 +26,7 @@
 
     $_SESSION['userData'] = $user;
 
-    header("location: login2.php");
+    header("location: index.php");
     print_r($userData);
     
 

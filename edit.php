@@ -1,5 +1,9 @@
 
-<?php require 'connect.php'; ?>
+<?php require 'connect.php'; 
+SESSION_START();
+$_SESSION['sql_edi'] = $_SESSION['sqlx'];
+$_SESSION['word_edi'] = $_SESSION['searchword'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +18,24 @@
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="Css/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+
+    <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
+
+<style type="text/css">
+
+			.demoHeaders { margin-top: 2em; }
+			#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+			#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+			ul#icons {margin: 0; padding: 0;}
+			ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
+			ul#icons span.ui-icon {float: left; margin: 0 4px;}
+			ul.test {list-style:none; line-height:30px;}
+		</style>
     <title>CS_Asset</title>
 </head>
 <?php require 'nav.php'; ?>
+<br>
+<br>
 <div>
 <br><br>
 <?php 
@@ -53,14 +72,17 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 }
 }
 ?>
-<br>
-<form class="box" style="height: 800px;" action="edit2.php" method="POST">
+<br >
+<div class="box" align = "center" style="height: 830px;">
+<a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+<form  style="height: 800px;" action="edit2.php" method="POST">
+
 <div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
 <br>
 <div align = "center">
 <table>
 <tr><td>รายการที่ : </td><td><input id= "tx "type="text" value = "<?php echo $O_N; ?>" disabled></td></tr>
-<tr><td>วันที่</td><td><input type="date" name="dte" id="" value = "<?php echo $date; ?>"></td></tr>
+<tr><td>วันที่</td><td><input type="text" name="dte" id="datepick" class = "datepicker"value = "<?php echo $date; ?>"></td></tr>
 <tr><td>รหัสครุภัณฑ์ :</td><td><input id= "tx "type="text" value = "<?php echo $asid; ?>" disabled> </td></tr>
 <tr><td>ชื่อชุดครุภัณฑ์ :</td><td><input type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id="" ></td></tr>
 <tr><td>ชื่อเรียกครุภัณฑ์ :</td><td><input type="text" name="a_nnf" value="<?php echo $a_nn; ?>"  ></td></tr>
@@ -141,10 +163,39 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     <button type="submit" name = "action" value = "Multi" class="btn btn-danger">แก้ไขหลายรายการ</button>
 </form>
 </div>
+</div>
 
 
 </body>
+
 </html>
 <?php require 'footer.php'; ?>
 
+<script type="text/javascript" src="javascript/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="javascript/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
+<script type="text/javascript">
+		  $(function () {
+		    var d = new Date();
+		    var toDay = d.getDate() + '/' + (d.getMonth() + 1) + '/' + (d.getFullYear() + 543);
+
+
+		    // กรณีต้องการใส่ปฏิทินลงไปมากกว่า 1 อันต่อหน้า ก็ให้มาเพิ่ม Code ที่บรรทัดด้านล่างด้วยครับ (1 ชุด = 1 ปฏิทิน)
+
+		    $("#datepick").datepicker({ dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: '19/09/2563', dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+              dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
+              monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+              monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']});
+
+		    $("#datepicker-th-2").datepicker({ changeMonth: true, changeYear: true,dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: toDay,dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
+              dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
+              monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+              monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']});
+
+     		    $("#datepicker-en").datepicker({ dateFormat: 'dd/mm/yy'});
+
+		    $("#inline").datepicker({ dateFormat: 'dd/mm/yy', inline: true });
+
+
+			});
+		</script>
 

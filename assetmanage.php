@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!DOCTYPE html><?php SESSION_START(); ?>
 <html lang="en">
 <head>
@@ -37,115 +37,207 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
 <?php
        // var_dump($_SESSION['Account']);
        require 'connect.php';
-        $search_word ="ค้นหารายการจาก: ";
-            $sortway = "";
-            $s = $_POST['searchtxt'];
-            $clause = " WHERE ";
-            $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat";//Query stub
-            if($_POST['searchtxt'] != ''){
-                $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
-                   $c = "asset_ID";
-                   $_SESSION['sqlx'] = $sql .= $clause."`".$c."` LIKE '%{$s}%' OR asset_name LIKE '%{$s}%'";
-                $clause = " and ";//Change  to OR after 1st WHERE
-                $sortway.= $c." = ".$s;
-               }
-               if($_POST['searchtxt'] == '')
-               {
-                $search_word .= " รายการทั้งหมด ";
-               }
-               
-                if($_POST['rm'] !=  '')
-                {
-                    $sqlss = "SELECT * FROM room WHERE room_ID = '".$_POST['rm']."'";
-                    $result = $conn->query($sqlss);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $search_word .= " [ห้องจัดเก็บครุภัณฑ์: ".$row['room']."] ";
-                        }
+ $search_word ="ค้นหารายการจาก: ";
+     $sortway = "";
+     $s = $_POST['searchtxt'];
+     $clause = " WHERE ";
+     $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat";//Query stub
+     if($_POST['searchtxt'] != ''){
+         $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
+            $c = "asset_ID";
+            $_SESSION['sqlx'] = $sql .= $clause."`".$c."` LIKE '%{$s}%' OR asset_name LIKE '%{$s}%'";
+         $clause = " and ";//Change  to OR after 1st WHERE
+         $sortway.= $c." = ".$s;
+        }
+        if($_POST['searchtxt'] == '')
+        {
+         $search_word .= " รายการทั้งหมด ";
+        }
+        
+         if($_POST['rm'] !=  '')
+         {
+            $numItems = count($_POST['rm']);
+            $i = 0;
+            $search_word .= " [ห้องจัดเก็บครุภัณฑ์: ";
+            foreach($_POST['rm'] as $w){
+                 $sqlss = "SELECT * FROM room WHERE room_ID = '".$w."'";
+             $result = $conn->query($sqlss);
+             if ($result->num_rows > 0) {
+                 while($row = $result->fetch_assoc()) {
+                    if(++$i === $numItems) {
+                     $search_word .= $row['room']." ";
                     }
+                    else{
+                        $search_word .= $row['room'].",";
+                    }
+                 }
+             }
+             
+             $r = $w;
+             $c = "room_ID";
+             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+             $clause = " or ";
+             $sortway.= $c." = ".$r;
+            }
+            $search_word .=" ] ";
+            $clause = " and ";
+            
+         }
+        if($_POST['tp'] != '')
+         {
+            $numItems = count($_POST['tp']);
+            $i = 0;
+            $search_word .= " [ประเภทครุภัณฑ์: ";
+            foreach($_POST['tp'] as $w){
+             $sqlss = "SELECT * FROM assettype WHERE asset_type_ID = '".$w."'";
+             $result = $conn->query($sqlss);
+             if ($result->num_rows > 0) {
+                 while($row = $result->fetch_assoc()) {
+                    if(++$i === $numItems) {
+                        $search_word .= $row['asset_type_name']." ";
+                      }
+                      else{
+                          $search_word .= $row['asset_type_name'].",";
+                      }
+                     
+                 }
+             }
+             $r = $w;
+             $c = "asset_type_ID";
+             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+             $clause = " or ";
+             $sortway.= $c." = ".$r;
+           
+            }
+            $search_word .= "] ";
+            $clause = " and ";
+
+         }
+         if($_POST['stt'] != '')
+         {
+            $numItems = count($_POST['stt']);
+            $i = 0;
+            $search_word .= " [สถานะครุภัณฑ์: ";
+            foreach($_POST['stt'] as $w){
+             $sqlss = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$w."'";
+             $result = $conn->query($sqlss);
+             if ($result->num_rows > 0) {
+                 while($row = $result->fetch_assoc()) {
+                    if(++$i === $numItems) {
+                     $search_word .= $row['asset_stat_name']." ";
+                    }else{
+                        $search_word .= $row['asset_stat_name'].",";
+                    }
+                 }
+             }
+             $r = $w;
+             $c = "asset_stat_ID";
+             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+             $clause = " or ";
+             $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] "; 
+            $clause = " and ";
+         }
+         if($_POST['dstt'] != '')
+         {
+            $numItems = count($_POST['dstt']);
+            $i = 0;
+            $search_word .= " [ลักษณะการติดตั้ง: ";
+            foreach($_POST['dstt'] as $w){
+             $sqlss = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$w."'";
+             $result = $conn->query($sqlss);
+             if ($result->num_rows > 0) {
+                 while($row = $result->fetch_assoc()) {
+                    if(++$i === $numItems) {
+                     $search_word .= $row['dstat']." ";
+                    }else{
+                        $search_word .= $row['dstat'].",";
+                    }
+                 }
+             }
+             $r = $w;
+             $c = "dstat_ID";
+             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+             $clause = " or ";
+             $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] ";
+            $clause = " and ";
+         }
+         if($_POST['rp'] != '')
+         {
+            $numItems = count($_POST['rp']);
+            $i = 0;
+            $search_word .= " [ผู้รับผิดชอบ: ";
+            foreach($_POST['rp'] as $w){
+             $sqlss = "SELECT * FROM respon_per WHERE resper_ID = '".$w."'";
+             $result = $conn->query($sqlss);
+             if ($result->num_rows > 0) {
+                 while($row = $result->fetch_assoc()) {
+                    if(++$i === $numItems) {
+                     $search_word .= $row['resper_firstname']." ".$row['resper_lastname']." ";
+                    }else{
+                        $search_word .= $row['resper_firstname']." ".$row['resper_lastname'].",";
+                    }
+                 }
+             }
+             $r = $w;
+             $c = "resper_ID";
+             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+             $clause = " or ";
+             $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] ";
+            $clause = " and ";
+         }
+         if($_POST['gm'] != '')
+         {
+            $numItems = count($_POST['gm']);
+            $i = 0;
+            $search_word .= " [วิธีได้รับ: ";
+            foreach($_POST['gm'] as $w){
+             $sqlss = "SELECT * FROM getmethod WHERE getMethod_ID = '".$w."'";
+             $result = $conn->query($sqlss);
+             if ($result->num_rows > 0) {
+                 while($row = $result->fetch_assoc()) {
+                    if(++$i === $numItems) {
+                     $search_word .= $row['method']." ";
+                    }else{
+                        $search_word .= $row['method'].",";
+                    }
+                 }
+             }
+             $r = $w;
+             $c = "getMethod_ID";
+             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+             $clause = " or ";
+             $sortway.= $c." = ".$r;
+            }
+            $search_word .= " ] ";
+            $clause = " and ";
+         }
+                $_SESSION['searchword'] = $search_word;
+                $search_word = $_SESSION['searchword'];
+                if(isset($_SESSION['sql_detail']) || $_SESSION['sql_detail'] != ""){
+                    $_SESSION['sqlx'] = $sql = $_SESSION['sql_detail'];
+                    $_SESSION['searchword'] = $search_word = $_SESSION['word_detail'];
+                    unset($_SESSION['sql_detail']);
+                    unset($_SESSION['word_detail']);
                     
-                    $r = $_POST['rm'];
-                    $c = "room_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
-                    $clause = " and ";
-                    $sortway.= $c." = ".$r;
                 }
-               if($_POST['tp'] != '')
-                {
-                    $sqlss = "SELECT * FROM assettype WHERE asset_type_ID = '".$_POST['tp']."'";
-                    $result = $conn->query($sqlss);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $search_word .= " [ประเภทครุภัณฑ์: ".$row['asset_type_name']."] ";
-                        }
-                    }
-                    $r = $_POST['tp'];
-                    $c = "asset_type_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
-                    $clause = " and ";
-                    $sortway.= $c." = ".$r;
+                if(isset($_SESSION['sql_edi']) || $_SESSION['sql_edi'] != ""){
+                    $_SESSION['sqlx'] = $sql = $_SESSION['sql_edi'];
+                    $_SESSION['searchword'] = $search_word = $_SESSION['word_edi'];
+                    unset($_SESSION['sql_edi']);
+                    unset($_SESSION['word_edi']);
                 }
-                if($_POST['stt'] != '')
-                {
-                    $sqlss = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$_POST['stt']."'";
-                    $result = $conn->query($sqlss);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $search_word .= " [สถานะครุภัณฑ์: ".$row['asset_stat_name']."] ";
-                        }
-                    }
-                    $r = $_POST['stt'];
-                    $c = "asset_stat_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
-                    $clause = " and ";
-                    $sortway.= $c." = ".$r;
+                if(isset($_SESSION['sql_text']) || $_SESSION['sql_text'] != ""){
+                    $_SESSION['sqlx'] = $sql = $_SESSION['sql_text'];
+                    $_SESSION['searchword'] = $search_word = $_SESSION['word_text'];
+                    unset($_SESSION['sql_text']);
+                    unset($_SESSION['word_text']);
                 }
-                if($_POST['dstt'] != '')
-                {
-                    $sqlss = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$_POST['dstt']."'";
-                    $result = $conn->query($sqlss);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $search_word .= " [ลักษณะการติดตั้ง: ".$row['dstat']."] ";
-                        }
-                    }
-                    $r = $_POST['dstt'];
-                    $c = "dstat_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
-                    $clause = " and ";
-                    $sortway.= $c." = ".$r;
-                }
-                if($_POST['rp'] != '')
-                {
-                    $sqlss = "SELECT * FROM respon_per WHERE resper_ID = '".$_POST['rp']."'";
-                    $result = $conn->query($sqlss);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $search_word .= " [ผู้รับผิดชอบ: ".$row['resper_firstname']." ".$row['resper_lastname']."] ";
-                        }
-                    }
-                    $r = $_POST['rp'];
-                    $c = "resper_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
-                    $clause = " and ";
-                    $sortway.= $c." = ".$r;
-                }
-                if($_POST['gm'] != '')
-                {
-                    $sqlss = "SELECT * FROM getmethod WHERE getMethod_ID = '".$_POST['gm']."'";
-                    $result = $conn->query($sqlss);
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $search_word .= " [วิธีได้รับ: ".$row['method']."] ";
-                        }
-                    }
-                    $r = $_POST['gm'];
-                    $c = "getMethod_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
-                    $clause = " and ";
-                    $sortway.= $c." = ".$r;
-                }
-               
                
               
 ?>
@@ -176,7 +268,8 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
   </thead>
   <tbody>
        <?php
-        
+       
+
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -184,10 +277,10 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                 echo
                     "<tr>
                         <td><input type='checkbox' name='id[]' id= 'cbx' onClick='checkboxes()' value = '".$row['id']."'></td>
-                        <td>".$row['asset_ID']."</td>
-                        <td>".$row['asset_name']."</td>
-                        <td>".$row['asset_nickname']."</td>
-                        <td>".$row['asset_type_name']."</td>
+                        <td align='left'>".$row['asset_ID']."</td>
+                        <td align='left'>".$row['asset_name']."</td>
+                        <td align='left'>".$row['asset_nickname']."</td>
+                        <td align='left'>".$row['asset_type_name']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-outline-danger' border-color:White; color:white'>รายละเอียด</button></a> ";
                         echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-outline-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
                         if($_SESSION['editop'] == 1){
@@ -207,7 +300,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
     </table>
 </div>
 <br>
-<div><?php // echo $sortway; ?></div>
+<div><?php  //echo $sql; ?></div>
 <?php if($_SESSION['editop'] == 2){ }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>

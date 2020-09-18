@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php SESSION_START(); ?>
+<?php SESSION_START();
+$_SESSION['sql_detail'] = $_SESSION['sqlx'];
+$_SESSION['word_detail'] = $_SESSION['searchword'];
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +26,9 @@
 
 <form class="box" action='assetmanage.php'>
 <div class="head">รายละเอียดครุภัณฑ์</div>
+<a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
 <br><br>
+<div>
 <?php 
 $number = $_GET['asset_number'];
 $st= "";
@@ -61,6 +66,7 @@ $sql = "SELECT * FROM asset  natural join assettype natural join asset_location 
 }
 }
 ?>
+</div>
 </form>
 <?php require 'footer.php'; ?>
 </body>

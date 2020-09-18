@@ -1,7 +1,7 @@
 <?php 
 require 'connect.php';
 if($_POST['action']=="Single"){
-    $datestring = date("d/m/Y", strtotime($_POST['dte']));
+    $datestring = $_POST['dte'];
 $sql = "UPDATE asset SET room_ID ='".$_POST['rm']."' ,addin_date = '".$datestring."',  resper_ID = '".$_POST['rsid']."' , asset_setname = '".$_POST['a_snf']."', asset_nickname = '".$_POST['a_nnf']."', asset_name = '".$_POST['a_nf']."' , model = '".$_POST['mod']."' , asset_order = '".$_POST['a_orf']."' , property = '".$_POST['a_ppf']."'  WHERE asset_number = '".$_POST['asnum']."'";
 
 if ($conn->query($sql) === TRUE) {
@@ -12,7 +12,7 @@ if ($conn->query($sql) === TRUE) {
 }
 else if ($_POST['action']=="Multi")
 {
-    $datestring = date("d/m/Y", strtotime($_POST['dte']));
+    $datestring = $_POST['dte'];
     $sql = "UPDATE asset SET  room_ID ='".$_POST['rm']."' ,addin_date = '".$datestring."',  resper_ID = '".$_POST['rsid']."' , asset_setname = '".$_POST['a_snf']."', asset_nickname = '".$_POST['a_nnf']."', asset_name = '".$_POST['a_nf']."' , model = '".$_POST['mod']."' , asset_order = '".$_POST['a_orf']."' , property = '".$_POST['a_ppf']."'  WHERE asset_number = '".$_POST['num1']."' OR asset_number = '".$_POST['num2']."' OR (asset_number >  '".$_POST['num1']."' AND  asset_number <  '".$_POST['num2']."') ";
 
 if ($conn->query($sql) === TRUE) {
