@@ -1,4 +1,4 @@
-<!DOCTYPE html><?php SESSION_START(); require 'connect.php'; ?>
+<!DOCTYPE html><?php SESSION_START(); require 'connect.php'; error_reporting(~E_NOTICE );  ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

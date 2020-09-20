@@ -137,7 +137,7 @@
     </table>
     <table style="text-align:center">
         <tr>
-            <th><button type="submit" class="btns first" id = "search_button">ค้นหา</button></th>
+            <th><button type="submit" class="btns first"  style = "font-size:12px" id = "search_button">ค้นหา</button></th>
         </tr>
     </table>
     </center>

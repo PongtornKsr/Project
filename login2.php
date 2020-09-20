@@ -18,20 +18,14 @@ if ($result->num_rows > 0) {
         header("location: index.php");
     } 
     else if ($row['profile_ID'] == 2 && $row['ID_stat'] == 2){
-        header("location: Blockwarning.php");
+        header("location: Blockwarning.php?warn=block");
     }
     }
 } else if(isset($_POST['uname']) || isset($_POST['password'])){
     header('location: login.php?error=y');
 }
 else {
-    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`, `last_update` , `profile_ID`,`ID_stat`) VALUES ('".$_SESSION['userData']['givenName']."','".$_SESSION['userData']['familyName']."','".$_SESSION['userData']['name']."','".$_SESSION['userData']['email']."',(NOW()),'2','1')";
-    if ($conn->query($sqla) === TRUE) {
-        header("location: login2.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    
+    header("location: Blockwarning.php?warn=noID");
     
 }
 

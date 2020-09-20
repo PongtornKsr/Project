@@ -198,7 +198,7 @@
         <option value='P'>แนวตั้ง</option>
         <option value='A4-L'>แนวนอน</option>
     </select></div></td>
-            <td><button type="submit" class="btns first" id = "search_button">พิมพ์รายการครุภัณฑ์</button></td>
+            <td><button type="submit" class="btns first" style = "font-size:12px" id = "search_button">พิมพ์รายการครุภัณฑ์</button></td>
         </tr>
     </table>
     <br>

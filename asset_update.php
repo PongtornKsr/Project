@@ -1,4 +1,7 @@
-<!DOCTYPE html><?php SESSION_START(); ?>
+<!DOCTYPE html><?php SESSION_START(); 
+$_SESSION['sql_st'] = $_SESSION['sqlx'];
+$_SESSION['word_st'] = $_SESSION['searchword'];
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,10 +23,12 @@
         require 'connect.php';
         $_SESSION['id'] = $_POST['id'];
         ?>
-        
-    <form class="box" action="rm_update_back.php" method="post">
+        <div class = "box">
+        <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+    <form action="rm_update_back.php" method="post">
     <div class="head">แก้ไขสถานะครุภัณฑ์</div>
-    <br><br><br>
+    <br>
+    <br><br>
         <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
         <div class="thsarabunnew"style="font-size:24px">เปลี่ยนสถานะเป็น <?php  
         echo "<select id = 'select' onchange='checkselecttion()' name = 'stid'>
@@ -40,7 +45,7 @@
      <input id= "a"style = "width:100px;height: 50px;"type="submit" name = "StatUpdate" onclick="chackselecttion()"value="Update">
      
      <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกสถานะใหม่ของครุภัณฑ์ที่ต้องการเปลี่ยน</p>
-    </form>
+    </form></div>
     <?php } ?>
 
 
@@ -50,10 +55,13 @@
     <?php if(isset($_POST['room_update'])){ 
         require 'connect.php';
         $_SESSION['id'] = $_POST['id'];
-       
+        $_SESSION['sql_rm'] = $_SESSION['sqlx'];
+        $_SESSION['word_rm'] = $_SESSION['searchword'];
 
         ?>
-    <form class="box" action="rm_update_back.php" method="post">
+    <div class="box">
+    <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+    <form  action="rm_update_back.php" method="post">
     <div class="head">แก้ไขที่จัดเก็บครุภัณฑ์</div>
     <br><br><br>
         <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
@@ -74,7 +82,7 @@
      <br><br><br>
      <input id= "a"style = "width:100px;height: 50px;"type="submit" name = "RoomUpdate" onclick="chackselecttion()"value="Update">
      <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกห้องที่ต้องการเปลี่ยนเพื่อจัดเก็บครุภัณฑ์</p>
-    </form>
+    </form></div>
     <?php } ?>
     <?php require 'footer.php'; ?>
 </body>

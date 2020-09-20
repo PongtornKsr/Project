@@ -1,8 +1,15 @@
 <?php 
 SESSION_START();
 require_once ('Log.class.php');
-$Fuction = $_GET['function'];
-$Option = $_POST['function'];
+$Fuction = "";
+if(isset($_GET['function'])){
+    $Fuction = $_GET['function'];
+}
+$Option = "";
+if(isset($_POST['function'])){
+    $Option = $_POST['function'];
+}
+
 if($Fuction == 1||$Option ==1){
     useractive();
 }

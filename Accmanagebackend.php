@@ -1,7 +1,11 @@
 <?php 
 SESSION_START();
 $fname = $_SESSION['userData']['givenName'];
-$ffname = $_SESSION['Uname'];
+$ffname ="";
+if(isset($_SESSION['Uname'])){
+    $ffname = $_SESSION['Uname'];
+}
+
 $db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
 $output= "";
 if(isset($_POST['nmsearch'])){

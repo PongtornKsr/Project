@@ -39,22 +39,25 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
        require 'connect.php';
  $search_word ="ค้นหารายการจาก: ";
      $sortway = "";
-     $s = $_POST['searchtxt'];
+     if(!empty($_POST['searchtxt'])){
+         $s = $_POST['searchtxt'];
+     }
+     
      $clause = " WHERE ";
      $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat";//Query stub
-     if($_POST['searchtxt'] != ''){
+     if(!empty($_POST['searchtxt'])){
          $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
             $c = "asset_ID";
             $_SESSION['sqlx'] = $sql .= $clause."`".$c."` LIKE '%{$s}%' OR asset_name LIKE '%{$s}%'";
          $clause = " and ";//Change  to OR after 1st WHERE
          $sortway.= $c." = ".$s;
         }
-        if($_POST['searchtxt'] == '')
+        if(empty($_POST['searchtxt']))
         {
          $search_word .= " รายการทั้งหมด ";
         }
         
-         if($_POST['rm'] !=  '')
+         if(isset($_POST['rm']))
          {
             $numItems = count($_POST['rm']);
             $i = 0;
@@ -83,7 +86,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $clause = " and ";
             
          }
-        if($_POST['tp'] != '')
+        if(isset($_POST['tp']))
          {
             $numItems = count($_POST['tp']);
             $i = 0;
@@ -113,7 +116,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $clause = " and ";
 
          }
-         if($_POST['stt'] != '')
+         if(isset($_POST['stt']))
          {
             $numItems = count($_POST['stt']);
             $i = 0;
@@ -139,7 +142,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " ] "; 
             $clause = " and ";
          }
-         if($_POST['dstt'] != '')
+         if(isset($_POST['dstt']))
          {
             $numItems = count($_POST['dstt']);
             $i = 0;
@@ -165,7 +168,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " ] ";
             $clause = " and ";
          }
-         if($_POST['rp'] != '')
+         if(isset($_POST['rp']))
          {
             $numItems = count($_POST['rp']);
             $i = 0;
@@ -191,7 +194,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " ] ";
             $clause = " and ";
          }
-         if($_POST['gm'] != '')
+         if(isset($_POST['gm']))
          {
             $numItems = count($_POST['gm']);
             $i = 0;
@@ -219,24 +222,36 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
          }
                 $_SESSION['searchword'] = $search_word;
                 $search_word = $_SESSION['searchword'];
-                if(isset($_SESSION['sql_detail']) || $_SESSION['sql_detail'] != ""){
+                if(isset($_SESSION['sql_detail'])){
                     $_SESSION['sqlx'] = $sql = $_SESSION['sql_detail'];
                     $_SESSION['searchword'] = $search_word = $_SESSION['word_detail'];
                     unset($_SESSION['sql_detail']);
                     unset($_SESSION['word_detail']);
                     
                 }
-                if(isset($_SESSION['sql_edi']) || $_SESSION['sql_edi'] != ""){
+                if(isset($_SESSION['sql_edi'])){
                     $_SESSION['sqlx'] = $sql = $_SESSION['sql_edi'];
                     $_SESSION['searchword'] = $search_word = $_SESSION['word_edi'];
                     unset($_SESSION['sql_edi']);
                     unset($_SESSION['word_edi']);
                 }
-                if(isset($_SESSION['sql_text']) || $_SESSION['sql_text'] != ""){
+                if(isset($_SESSION['sql_text'])){
                     $_SESSION['sqlx'] = $sql = $_SESSION['sql_text'];
                     $_SESSION['searchword'] = $search_word = $_SESSION['word_text'];
                     unset($_SESSION['sql_text']);
                     unset($_SESSION['word_text']);
+                }
+                if(isset($_SESSION['sql_st'])){
+                    $_SESSION['sqlx'] = $sql = $_SESSION['sql_st'];
+                    $_SESSION['searchword'] = $search_word = $_SESSION['word_st'];
+                    unset($_SESSION['sql_st']);
+                    unset($_SESSION['word_st']);
+                }
+                if(isset($_SESSION['sql_rm'])){
+                    $_SESSION['sqlx'] = $sql = $_SESSION['sql_rm'];
+                    $_SESSION['searchword'] = $search_word = $_SESSION['word_rm'];
+                    unset($_SESSION['sql_rm']);
+                    unset($_SESSION['word_rm']);
                 }
                
               
@@ -300,7 +315,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
     </table>
 </div>
 <br>
-<div><?php  //echo $sql; ?></div>
+<div><?php  echo $sql; ?></div>
 <?php if($_SESSION['editop'] == 2){ }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>

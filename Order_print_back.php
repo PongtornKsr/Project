@@ -70,12 +70,12 @@ ob_start();
          $clause = " and ";//Change  to OR after 1st WHERE
          $sortway.= $c." = ".$s;
         }
-        if($_POST['searchtxt'] == '')
+        if(empty($_POST['searchtxt']))
         {
          $search_word .= " รายการทั้งหมด ";
         }
         
-         if($_POST['rm'] !=  '')
+         if(!empty($_POST['rm']))
          {
             $numItems = count($_POST['rm']);
             $i = 0;
@@ -104,7 +104,7 @@ ob_start();
             $clause = " and ";
             
          }
-        if($_POST['tp'] != '')
+        if(!empty($_POST['tp']))
          {
             $numItems = count($_POST['tp']);
             $i = 0;
@@ -134,7 +134,7 @@ ob_start();
             $clause = " and ";
 
          }
-         if($_POST['stt'] != '')
+         if(!empty($_POST['stt']))
          {
             $numItems = count($_POST['stt']);
             $i = 0;
@@ -160,7 +160,7 @@ ob_start();
             $search_word .= " ] "; 
             $clause = " and ";
          }
-         if($_POST['dstt'] != '')
+         if(!empty($_POST['dstt']))
          {
             $numItems = count($_POST['dstt']);
             $i = 0;
@@ -186,7 +186,7 @@ ob_start();
             $search_word .= " ] ";
             $clause = " and ";
          }
-         if($_POST['rp'] != '')
+         if(!empty($_POST['rp']))
          {
             $numItems = count($_POST['rp']);
             $i = 0;
@@ -212,7 +212,7 @@ ob_start();
             $search_word .= " ] ";
             $clause = " and ";
          }
-         if($_POST['gm'] != '')
+         if(!empty($_POST['gm']))
          {
             $numItems = count($_POST['gm']);
             $i = 0;

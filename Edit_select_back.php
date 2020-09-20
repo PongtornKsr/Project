@@ -1,13 +1,28 @@
 <?php 
 require 'connect.php';
-$initop = $_POST['initop'];
-$addop = $_POST['addop'];
-$insertop = $_POST['insertop'];
-$updateop = $_POST['updateop'];
-$delop = $_POST['delop'];
+if(isset($_POST['initop'])){
+    $initop = $_POST['initop'];
+}
+if(isset($_POST['addop'])){
+    $addop = $_POST['addop'];
+}
+if(isset($_POST['insertop'])){
+    $insertop = $_POST['insertop'];
+}
+if(isset($_POST['updateop'])){
+    $updateop = $_POST['updateop'];
+}
+if(isset($_POST['delop'])){
+    $delop = $_POST['delop'];
+}
+if(isset($_POST['update'])){
+    $update = $_POST['update'];
+}
+if(isset($_POST['del'])){
+    $del = $_POST['del'];
+}
 $output = "";
-$update = $_POST['update'];
-$del = $_POST['del'];
+
 if($initop == 1){
 
     $output .= ' <table style = "width: 500px;text-align:center;vertical-align:middle" id="stat_data" class="tr1 table table-bordered table-striped">
@@ -175,11 +190,7 @@ else if($initop == 2){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM assettype WHERE asset_type_ID Like '%".$s."%' OR asset_type_name Like '%".$s."%' OR noun Like '%".$s."%'";
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $sql = "SELECT * FROM assettype ";
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['asset_type_ID'];
@@ -197,6 +208,29 @@ else if($initop == 2){
 
         }
     }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+        $sql = "SELECT * FROM assettype ";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['asset_type_ID'];
+            $name = $row['asset_type_name'];
+            $n = $row['noun'];
+            $output .= '<tr>
+           
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$n.'</td>
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "t_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "t_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
+    }
+    
     $output .="</tbody></table>";
     echo $output;
     exit();
@@ -253,14 +287,7 @@ else if($initop == 3){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM deploy_stat WHERE dstat_ID Like '%".$s."%' OR dstat Like '%".$s."%'";
-
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM deploy_stat";
-
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['dstat_ID'];
@@ -276,6 +303,28 @@ else if($initop == 3){
 
         }
     }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+        
+        $sql = "SELECT * FROM deploy_stat";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['dstat_ID'];
+            $name = $row['dstat'];
+            $output .= '<tr>
+           
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "d_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
+    }
+    
     $output .="</tbody></table>";
     echo $output;
     exit();
@@ -333,14 +382,7 @@ else if($initop == 4){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM getmethod WHERE getMethod_ID Like '%".$s."%' OR method Like '%".$s."%'";
-
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM getmethod";
-
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['getMethod_ID'];
@@ -356,6 +398,28 @@ else if($initop == 4){
 
         }
     }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+        $s = mysqli_real_escape_string($conn, $_POST['query']);
+        $sql = "SELECT * FROM getmethod";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['getMethod_ID'];
+            $name = $row['method'];
+            $output .= '<tr>
+            
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "gm_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
+    }
+    
     $output .="</tbody></table>";
     echo $output;
     exit();
@@ -412,14 +476,7 @@ else if($initop == 5){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM money_type WHERE mid Like '%".$s."%' OR money_type Like '%".$s."%'";
-
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM money_type";
-
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['mid'];
@@ -435,6 +492,28 @@ else if($initop == 5){
 
         }
     }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+        $s = mysqli_real_escape_string($conn, $_POST['query']);
+        $sql = "SELECT * FROM money_type";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['mid'];
+            $name = $row['money_type'];
+            $output .= '<tr>
+            
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "mt_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "mt_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
+    }
+    
     $output .="</tbody></table>";
     echo $output;
     exit();
@@ -495,14 +574,7 @@ else if($initop == 6){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM respon_per WHERE resper_ID Like '%".$s."%' OR resper_firstname Like '%".$s."%' OR resper_lastname LIKE '%".$s."%'";
-
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM respon_per";
-
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['resper_ID'];
@@ -520,6 +592,30 @@ else if($initop == 6){
 
         }
     }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+       
+        $sql = "SELECT * FROM respon_per";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['resper_ID'];
+            $name = $row['resper_firstname'];
+            $lname = $row['resper_lastname'];
+            $output .= '<tr>
+           
+            <td  class = "widea"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle">'.$lname.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "rp_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
+    }
+    
     $output .="</tbody></table>";
     echo $output;
     exit();
@@ -617,14 +713,7 @@ else if($initop == 7){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM room  WHERE room_ID Like '%".$s."%' OR room Like '%".$s."%'";
-
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM room ";
-
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['room_ID'];
@@ -654,6 +743,42 @@ else if($initop == 7){
             </tr>';
 
         }
+    }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+     
+        $sql = "SELECT * FROM room ";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['room_ID'];
+            $name = $row['room'];
+            $rsname ="";
+            $sqlrr = "SELECT * FROM respon_per WHERE resper_ID = '".$row['resper_IDs']."'";
+                $resultr = $conn->query($sqlrr);
+                if ($resultr->num_rows > 0) {
+                while($rowr = $resultr->fetch_assoc()) {
+                    if($rowr['resper_ID'] == 0){
+                        $rsname = "ยังไม่มีผู้รับผิดชอบ";
+                    }
+                    else{
+                        $rsname = $rowr['resper_firstname']." ".$rowr['resper_lastname'];
+                    }
+                    
+                }    
+             }else{ $rsname = "ยังไม่มีผู้รับผิดชอบ"; }
+            
+            $output .= '<tr>
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$rsname.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "rm_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
     }
     $output .="</tbody></table>";
     echo $output;
@@ -720,14 +845,7 @@ else if($initop == 8){
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
         $sql = "SELECT * FROM vendor WHERE vendor_ID Like '%".$s."%' OR vendor_company Like '%".$s."%' OR vendor_location Like '%".$s."%' OR vendor_tel Like '%".$s."%' OR fax Like '%".$s."%'";
-
-    }
-    else if(!isset($_POST['query'])&&!isset($addop)){
-        $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM vendor";
-
-    }
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $id = $row['vendor_ID'];
@@ -749,6 +867,34 @@ else if($initop == 8){
 
         }
     }
+    }
+    else if(!isset($_POST['query'])&&!isset($addop)){
+     
+        $sql = "SELECT * FROM vendor";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['vendor_ID'];
+            $name = $row['vendor_company'];
+            $lo = $row['vendor_location'];
+            $tel = $row['vendor_tel'];
+            $fax = $row['fax'];
+            $output .= '<tr>
+           
+            <td  class = "widea"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle">'.$lo.'</td>
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$tel.'</td>
+            <td  class = "widec"style= "text-align:center;vertical-align:middle">'.$fax.'</td>
+            <td  class = "widea"style= "text-align:center;vertical-align:middle"> 
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "vd_edit" value ="'.$id.'">แก้ไข</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_delete" value ="'.$id.'">ลบ</button>
+            </td>
+            </tr>';
+
+        }
+    }
+    }
+    
     $output .="</tbody></table>";
     echo $output;
     exit();
@@ -831,7 +977,7 @@ if(isset($insertop)){
     if($insertop == 7){
         $rmname = mysqli_real_escape_string($conn, $_POST['rm_name']);
         $resid = $_POST['resid'];
-        $sql = "INSERT INTO room (room,resper_ID) VALUE ('".$rmname."',".$resid.")";
+        $sql = "INSERT INTO room (room,resper_IDs) VALUE ('".$rmname."',".$resid.")";
         if($conn->query($sql) == TRUE){
             
             exit();
@@ -886,7 +1032,7 @@ if(isset($update)){
         $sql = "UPDATE respon_per SET resper_firstname = '".$_POST['rp_name']."' , resper_lastname  = '".$_POST['rp_lname']."' WHERE resper_ID = '".$_POST['id']."'";
     }
     else if($update == 7){
-        $sql = "UPDATE room SET room = '".$_POST['rm_name']."' , resper_ID = ".$_POST['resid']." WHERE room_ID = '".$_POST['id']."'";
+        $sql = "UPDATE room SET room = '".$_POST['rm_name']."' , resper_IDs = ".$_POST['resid']." WHERE room_ID = '".$_POST['id']."'";
         
     }
     else if($update == 8){
