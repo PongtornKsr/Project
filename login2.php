@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
     header('location: login.php?error=y');
 }
 else {
-    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`, last_update , `profile_ID`,'ID_stat') VALUES ('".$_SESSION['userData']['givenName']."','".$_SESSION['userData']['familyName']."','".$_SESSION['userData']['name']."','".$_SESSION['userData']['email']."',(NOW()),'2','1')";
+    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`, `last_update` , `profile_ID`,`ID_stat`) VALUES ('".$_SESSION['userData']['givenName']."','".$_SESSION['userData']['familyName']."','".$_SESSION['userData']['name']."','".$_SESSION['userData']['email']."',(NOW()),'2','1')";
     if ($conn->query($sqla) === TRUE) {
         header("location: login2.php");
     } else {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php SESSION_START(); ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,8 +16,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
- 
-    
+
 
     
     <title>CS_Asset</title>
@@ -140,6 +139,15 @@
     <br>
     <table>
     <tr>
+        <td>
+        <input type="checkbox" class="hidden-box" id="all"  name="all" value = "qd" />
+    <label for="all" class="check--label">
+      <span class="check--label-box"></span>
+      <span >เลือกทั้งหมด</span>
+    </label>
+        </td>
+    </tr>
+    <tr>
     <td><input type="checkbox" class="hidden-box" id="a" name="asid" value = "qqq" />
     <label for="a" class="check--label">
       <span class="check--label-box"></span>
@@ -210,6 +218,27 @@
    
     <script>
 $(document).ready(function(){
+
+    $(document).on('change','#all',function(){
+        if(this.checked) {
+            $('#a').prop( "checked", true );
+            $('#b').prop( "checked", true );
+            $('#s').prop( "checked", true );
+            $('#q').prop( "checked", true );
+            $('#w').prop( "checked", true );
+            $('#e').prop( "checked", true );
+            $('#f').prop( "checked", true );
+        }
+        else{
+            $('#a').prop( "checked", false );
+            $('#b').prop( "checked", false );
+            $('#s').prop( "checked", false );
+            $('#q').prop( "checked", false );
+            $('#w').prop( "checked", false );
+            $('#e').prop( "checked", false );
+            $('#f').prop( "checked", false );
+        }
+    })
  $('#gm').multiselect({
   nonSelectedText: 'เลือกวิธีการได้รับ',
   enableFiltering: true,
@@ -246,6 +275,7 @@ $(document).ready(function(){
   enableCaseInsensitiveFiltering: true
  
  });
+
 
 
  

@@ -10,6 +10,7 @@
            <link rel="stylesheet" href="CSS/formstyle.css">
            <link rel="stylesheet" href="CSS/BG.css">
            <link rel="stylesheet" href="CSS/navbar.css">
+           <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
     <style>
     
     #treport_td{ border: 1px solid black; }
@@ -56,7 +57,7 @@
                     วันที่:
                 </td>
                 <td>
-                    <input type="date" name = "addin_date[]" width="50">
+                    <input type="date" style ="width: 100%" id= "datepick" class = "datepick" name = "addin_date[]" width="50">
                 </td>
             </tr>
             <tr>
@@ -477,7 +478,7 @@ $(document).ready(function(){
   html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
   html += '<table Align = "center">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="date" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
+  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="text" id = "datepick" class ="datepick" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
   html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "detype[]" width="50">'; 
   html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การรันเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: </td><td>    <input type="text" name="quantity[]" id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]" style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" width="50"></td></tr>';
   html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
@@ -885,10 +886,32 @@ $(document).on('change','#rn',function(){
  $(document).on('click','#submit',function(){
     $('#rn').prop('disabled',false);
  });
+ /*$(document).on('click','#datepick[type=text]',function(){
+     var t = $(this).prop('type');
+     var d = $(this).val().split('/');
+     var dy = (parseInt(d[2])-543)+'-'+d[1]+'-'+d[0];
+         $(this).prop('type','date');
+         $(this).val(dy);
+    
+ });
+ $(document).on('blur','#datepick[type=date]',function(){
+    
+     var t = $(this).prop('type');
+     var d = $(this).val().split('-');
+     var dy = d[2]+'/'+d[1]+'/'+(parseInt(d[0])+543);
+     $(this).prop('type','text');
+     $(this).val(dy);
+        
+     
+    
+ });*/
 });
 
 
 </script>
+
+
+
 
 </html>
 

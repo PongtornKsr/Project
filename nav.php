@@ -3,7 +3,7 @@
   background-attachment: fixed; ">
          <!--
           <nav class="navbar navbar-light" style="background-color: #B3EE3A;" width = "100%">
-          <?php SESSION_START();
+          <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -18,7 +18,7 @@
                     <?php echo $_SESSION['Account']; ?>
             <ul class="nav justify-content-end">
                     <li class="nav-item">
-                    <?php SESSION_START();
+                    <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -36,7 +36,7 @@
                       <div class="nav-item dropdown">
                         <a href="insert.html" class="nav-link dropdown-toggle" data-toggle="dropdown">จัดการบัญชีผู้ใช้</a>
                         <div class="dropdown-menu">
-                          <?php SESSION_START();
+                          <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -57,7 +57,7 @@
                       <div class="nav-item dropdown">
                         <a href="insert.html" class="nav-link dropdown-toggle" data-toggle="dropdown">จัดการครุภัณฑ์</a>
                         <div class="dropdown-menu">
-                        <?php SESSION_START();
+                        <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -84,7 +84,7 @@
           </nav> -->
 <div class="navnav">
 	
-  <?php SESSION_START();
+  <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -104,7 +104,7 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-contentnav">
-                        <?php SESSION_START();
+                        <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);
@@ -125,7 +125,7 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-contentnav">
-    <?php SESSION_START();
+    <?php 
                           require 'connect.php';
                           $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
                           $result = $conn->query($sql);

@@ -258,7 +258,12 @@ ob_start();
       if(isset($astyp)){ $head .= "<th align='center'>ประเภทครุภัณฑ์</th>"; array_push($se, "asset_type_name");}
       if(isset($asroom)){ $head .= "<th align='center'>ห้องที่จัดเก็บ</th>"; array_push($se, "room");}
       if(isset($respers)){ $head .= "<th align='center'>ผู้รับผิดชอบ</th>"; array_push($se,"resper_firstname|resper_lastname");}
-     
+     else{
+        $head .= "<th align='center'>รหัสครุภัณฑ์</th>"; array_push($se,"asset_ID");
+        $head .= "<th align='center'>ชื่อเรียกครุภัณฑ์</th>"; array_push($se,"asset_nickname");
+        $head .= "<th align='center'>ห้องที่จัดเก็บ</th>"; array_push($se, "room");
+     }
+      
 ?>
 <div style ="float:left"><?php echo $search_word; ?></div>
 <br>

@@ -367,6 +367,8 @@ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");
                             $p4 = $_POST[$asidid][$c-1];
                             echo '<br> r : '.$p1;
                             $datestring = date("d/m/Y", strtotime($adate));
+                            $de = explode("/",$datestring);
+                            $datestring = $de[0]."/".$de[1]."/".($de[2]+543);
                             array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
                             ('".$NO."','".$order_number."','".$p1."/".$p2." ".$p4."','".$p2."','".$p2."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
                             array_push($a,"$p2");

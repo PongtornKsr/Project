@@ -19,7 +19,7 @@ $_SESSION['word_edi'] = $_SESSION['searchword'];
     <link rel="stylesheet" href="Css/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
 
-    <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
+
 
 <style type="text/css">
 
@@ -64,11 +64,13 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     $statid = $row['asset_stat_ID'];
     $stat = $row['asset_stat_name'];
     $astype = $row['asset_type_name'];
-    $get_met = $row['get_method'];
+    $get_metid = $row['getMethod_ID'];
+    $vid = $row['vendor_ID'];
     $vcom =  $row['vendor_company'];
     $vlo =  $row['vendor_location'];
     $vtel =  $row['vendor_tel'];
     $vfax = $row['fax'];
+    $mid = $row['mid'];
 }
 }
 ?>
@@ -80,18 +82,18 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 <div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
 <br>
 <div align = "center">
-<table>
-<tr><td>รายการที่ : </td><td><input id= "tx "type="text" value = "<?php echo $O_N; ?>" disabled></td></tr>
-<tr><td>วันที่</td><td><input type="text" name="dte" id="datepick" class = "datepicker"value = "<?php echo $date; ?>"></td></tr>
-<tr><td>รหัสครุภัณฑ์ :</td><td><input id= "tx "type="text" value = "<?php echo $asid; ?>" disabled> </td></tr>
-<tr><td>ชื่อชุดครุภัณฑ์ :</td><td><input type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id="" ></td></tr>
-<tr><td>ชื่อเรียกครุภัณฑ์ :</td><td><input type="text" name="a_nnf" value="<?php echo $a_nn; ?>"  ></td></tr>
-<tr><td>ชื่อครุภัณฑ์ :</td><td><input id= "tx "type="text" name = "a_nf" value = "<?php echo $asname; ?>" ></td></tr>
-<tr><td>รุ่น/แบบ : </td><td><input name = "mod" type="text" value = "<?php echo $mod; ?>" ></td></tr>
-<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "a_orf" value ="<?php echo $a_or; ?>" ></td></tr>
-<tr><td>คุณลักษณะ :</td><td><input type="text" name ="a_ppf" value = "<?php echo $a_pp?>" > </td></tr>
-<tr><td>สถานที่ :</td><td><input id= "tx" type="text" value = "<?php echo $aslo; ?>" ></td></tr>
-<tr><td>ห้องที่จัดเก็บ :</td><td><select name="rm" id="">
+<table style ="width:80%">
+<tr><td>รายการที่ : </td><td><input style ="width:100%;text-align:left" id= "tx "type="text" name = "onum" value = "<?php echo $O_N; ?>" ></td></tr>
+<tr><td>วันที่</td><td><input style ="width:100%;text-align:left"type="text" name="dte" id="datepick" class = "datepicker"value = "<?php echo $date; ?>"></td></tr>
+<tr><td>รหัสครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"id= "tx "type="text" name = "asid" value = "<?php echo $asid; ?>" > </td></tr>
+<tr><td>ชื่อชุดครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id="" ></td></tr>
+<tr><td>ชื่อเรียกครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"type="text" name="a_nnf" value="<?php echo $a_nn; ?>"  ></td></tr>
+<tr><td>ชื่อครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"id= "tx "type="text" name = "a_nf" value = "<?php echo $asname; ?>" ></td></tr>
+<tr><td>รุ่น/แบบ : </td><td><input style ="width:100%;text-align:left"name = "mod" type="text" value = "<?php echo $mod; ?>" ></td></tr>
+<tr><td>หมายเลขทะเบียน :</td><td><input style ="width:100%;text-align:left"type="text" name = "a_orf" value ="<?php echo $a_or; ?>" ></td></tr>
+<tr><td>คุณลักษณะ :</td><td><input style ="width:100%;text-align:left"type="text" name ="a_ppf" value = "<?php echo $a_pp?>" > </td></tr>
+<tr><td>สถานที่ :</td><td><input style ="width:100%;text-align:left"id= "tx" type="text" value = "<?php echo $aslo; ?>" disabled></td></tr>
+<tr><td>ห้องที่จัดเก็บ :</td><td><select style ="width:100%;text-align:left"name="rm" id="">
     <?php $sql = "SELECT * FROM room WHERE room_ID = '".$rmid."'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -105,7 +107,7 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     echo "<option value=".$row['room_ID']." >".$row['room']."</option>";
                     }     }  ?>
     </select></td></tr>
-<tr><td>ผู้รับผิดชอบ :</td><td><select name="rsid" id="">
+<tr><td>ผู้รับผิดชอบ :</td><td><select style ="width:100%"name="rsid" id="">
     <?php $sql = "SELECT * FROM respon_per WHERE resper_ID = '".$respid."'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -119,12 +121,76 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     echo "<option value=".$row['resper_ID']." >".$row['resper_firstname']." ".$row['resper_lastname']."</option>";
                     }     }  ?>
     </select></td></tr>
-<tr><td>สถานะการติดตั้ง :</td><td><input id= "tx" type="text" value = "<?php echo $dstat; ?>"disabled></td></tr>
-<tr><td>ประเภทครุภัณฑ์ :</td><td><input id = "tx"type="text" value = "<?php echo $astype; ?>" disabled > </td></tr>
-<tr><td>วิธีการได้รับ :</td><td><input id = "tx" type="text" value = "<?php echo $get_met; ?>"disabled></td></tr>
-<tr><td>บริษัทผู้ขาย :</td><td><input  type="text" value = "<?php echo $vcom; ?>" disabled></td></tr>
-<tr><td>เบอร์โทรศัพท์ติดต่อ :</td><td><input id = "tx" type="text" value = "<?php echo $vtel; ?>"disabled></td></tr>
-<tr><td>โทรสาร :</td><td><input type="text " id ="tx" value = "<?php echo $vfax; ?>"disabled></td></tr>
+<tr><td>สถานะการติดตั้ง :</td><td><select style= "width:100%"name="dtypeid" id="tx">
+<?php $sql = "SELECT * FROM deploy_stat WHERE dstat = '".$dstat."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['dstat_ID']." >".$row['dstat']."</option>";
+                    }     }
+                    $sql = "SELECT * FROM deploy_stat WHERE dstat NOT IN ('".$dstat."')";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['dstat_ID']." >".$row['dstat']."</option>";
+                    }     }  ?>
+</select></td></tr>
+<tr><td>ประเภทครุภัณฑ์ :</td><td><select style="width:100%"name="typeid" id="tx">
+<?php $sql = "SELECT * FROM assettype WHERE asset_type_name = '".$astype."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['asset_type_ID']." >".$row['asset_type_name']."</option>";
+                    }     }
+                    $sql = "SELECT * FROM assettype WHERE asset_type_name NOT IN ('".$astype."')";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['asset_type_ID']." >".$row['asset_type_name']."</option>";
+                    }     }  ?>
+</select></td></tr>
+<tr><td>วิธีการได้รับ :</td><td><select style ="width:100%"name="gmtype" id="">
+<?php $sql = "SELECT * FROM getmethod WHERE getMethod_ID = '".$get_metid."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['getMethod_ID']." >".$row['method']."</option>";
+                    }     }
+                    $sql = "SELECT * FROM getmethod WHERE getMethod_ID NOT IN ('".$get_metid."')";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['getMethod_ID']." >".$row['method']."</option>";
+                    }     }  ?>
+</select></td></tr>
+<tr><td>ประเภทเงินงบประมาณ :</td><td><select style="width:100%" name="mttype" id="tx">
+<?php $sql = "SELECT * FROM money_type WHERE mid = '".$mid."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['mid']." >".$row['money_type']."</option>";
+                    }     }
+                    $sql = "SELECT * FROM money_type WHERE mid NOT IN ('".$mid."')";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['mid']." >".$row['money_type']."</option>";
+                    }     }  ?>
+</select></td></tr>
+<tr><td>บริษัทผู้ขาย :</td><td><select style="width:100%"name="vdid" id="tx">
+<?php $sql = "SELECT * FROM vendor WHERE vendor_ID = '".$vid."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['vendor_ID']." >".$row['vendor_company']."</option>";
+                    }     }
+                    $sql = "SELECT * FROM vendor WHERE vendor_ID NOT IN ('".$vid."')";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['vendor_ID']." >".$row['vendor_company']."</option>";
+                    }     }  ?>
+</select></td></tr>
 </table>
 </div><br>
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
@@ -170,32 +236,4 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 
 </html>
 <?php require 'footer.php'; ?>
-
-<script type="text/javascript" src="javascript/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="javascript/jquery-ui-1.8.10.offset.datepicker.min.js"></script>
-<script type="text/javascript">
-		  $(function () {
-		    var d = new Date();
-		    var toDay = d.getDate() + '/' + (d.getMonth() + 1) + '/' + (d.getFullYear() + 543);
-
-
-		    // กรณีต้องการใส่ปฏิทินลงไปมากกว่า 1 อันต่อหน้า ก็ให้มาเพิ่ม Code ที่บรรทัดด้านล่างด้วยครับ (1 ชุด = 1 ปฏิทิน)
-
-		    $("#datepick").datepicker({ dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: '19/09/2563', dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
-              dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
-              monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-              monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']});
-
-		    $("#datepicker-th-2").datepicker({ changeMonth: true, changeYear: true,dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: toDay,dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
-              dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
-              monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-              monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']});
-
-     		    $("#datepicker-en").datepicker({ dateFormat: 'dd/mm/yy'});
-
-		    $("#inline").datepicker({ dateFormat: 'dd/mm/yy', inline: true });
-
-
-			});
-		</script>
 
