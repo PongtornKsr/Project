@@ -1,6 +1,9 @@
 <body background="img/BG.png" style ="
   background-repeat: no-repeat;
   background-attachment: fixed; ">
+  <?php if(!isset($_SESSION['Account'])){
+      header('location: login.php');
+    } ?>
          <!--
           <nav class="navbar navbar-light" style="background-color: #B3EE3A;" width = "100%">
           <?php 
@@ -98,7 +101,7 @@
     <img src="img/logomini.png" width="60" height="20" alt=""></a>
 
   <a class = "a" href="logout.php">Logout</a>
-  <a class = "a"href="asset_report.php">ภาพรวมครุภัณฑ์</a>
+  <a class = "a"href="Asset_prereport.php">ภาพรวมครุภัณฑ์</a>
   <div class="dropdownnav">
     <button class="dropbtnnav">จัดการบัญชีผู้ใช้ 
       <i class="fa fa-caret-down"></i>

@@ -44,7 +44,7 @@ function RoleUp(){
                 $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');
                 $log->Write('log/test.txt','#### Action : RoleUp to Admin : '.$name.' ####');
                 $log->Write('log/test.txt','-----------------------------------------------------------------------------');
-                header("location: AccountManage.php");
+                echo "PASS";
         }
     }
     } else {
@@ -67,7 +67,7 @@ function RoleDown(){
                 $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');
                 $log->Write('log/test.txt','#### Action : RoleDown to NormalUser : '.$name.' ####');
                 $log->Write('log/test.txt','-----------------------------------------------------------------------------');
-                header("location: AccountManage.php");
+                echo "PASS";
         }
     }
     } else {

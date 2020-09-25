@@ -5,7 +5,7 @@ require 'connect.php';
 $name = $_SESSION['userData']['name'];
 $eml = $_SESSION['userData']['email'];
 $pass = base64_encode($_POST['password']);
-$sql = "SELECT * FROM userdata WHERE (name = '$name' and email ='".$eml."') or ( username = '".$_POST['uname']."'and password = '".$pass."')";
+$sql = "SELECT * FROM userdata WHERE (name = '$name' and email ='".$eml."') or ( username = '".$_POST['uname']."'and password = '".$pass."') or (email = '".$eml."')";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

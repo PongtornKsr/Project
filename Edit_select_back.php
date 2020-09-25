@@ -79,7 +79,7 @@ if($initop == 1){
     
     if(isset($_POST['query'])){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM assetstat WHERE asset_stat_ID Like '%".$s."%' OR asset_stat_name Like '%".$s."%'";
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_ID Like '%".$s."%' OR asset_stat_name Like '%".$s."%' AND asset_stat_ID NOT IN ('15') ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -97,7 +97,7 @@ if($initop == 1){
     }
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
-        $sql = "SELECT * FROM assetstat ";
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_ID NOT IN ('15') ";
         
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -189,7 +189,7 @@ else if($initop == 2){
     
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM assettype WHERE asset_type_ID Like '%".$s."%' OR asset_type_name Like '%".$s."%' OR noun Like '%".$s."%'";
+        $sql = "SELECT * FROM assettype WHERE asset_type_ID Like '%".$s."%' OR asset_type_name Like '%".$s."%' OR noun Like '%".$s."%' AND asset_type_ID NOT IN ('23')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -210,7 +210,7 @@ else if($initop == 2){
     }
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
-        $sql = "SELECT * FROM assettype ";
+        $sql = "SELECT * FROM assettype WHERE asset_type_ID NOT IN ('23')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -286,7 +286,7 @@ else if($initop == 3){
     }
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM deploy_stat WHERE dstat_ID Like '%".$s."%' OR dstat Like '%".$s."%'";
+        $sql = "SELECT * FROM deploy_stat WHERE dstat_ID Like '%".$s."%' OR dstat Like '%".$s."%' AND dstat_ID NOT IN ('12')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -306,7 +306,7 @@ else if($initop == 3){
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
         
-        $sql = "SELECT * FROM deploy_stat";
+        $sql = "SELECT * FROM deploy_stat WHERE dstat_ID NOT IN ('12')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -573,7 +573,7 @@ else if($initop == 6){
     }
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM respon_per WHERE resper_ID Like '%".$s."%' OR resper_firstname Like '%".$s."%' OR resper_lastname LIKE '%".$s."%'";
+        $sql = "SELECT * FROM respon_per WHERE resper_ID Like '%".$s."%' OR resper_firstname Like '%".$s."%' OR resper_lastname LIKE '%".$s."%' AND resper_ID NOT IN ('48')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -595,7 +595,7 @@ else if($initop == 6){
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
        
-        $sql = "SELECT * FROM respon_per";
+        $sql = "SELECT * FROM respon_per WHERE resper_ID NOT IN ('48')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -712,7 +712,7 @@ else if($initop == 7){
     }
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM room  WHERE room_ID Like '%".$s."%' OR room Like '%".$s."%'";
+        $sql = "SELECT * FROM room  WHERE room_ID Like '%".$s."%' OR room Like '%".$s."%' AND room_ID NOT IN ('64') ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -747,7 +747,7 @@ else if($initop == 7){
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
      
-        $sql = "SELECT * FROM room ";
+        $sql = "SELECT * FROM room WHERE room_ID NOT IN ('64') ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -844,7 +844,7 @@ else if($initop == 8){
     }
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM vendor WHERE vendor_ID Like '%".$s."%' OR vendor_company Like '%".$s."%' OR vendor_location Like '%".$s."%' OR vendor_tel Like '%".$s."%' OR fax Like '%".$s."%'";
+        $sql = "SELECT * FROM vendor WHERE vendor_ID Like '%".$s."%' OR vendor_company Like '%".$s."%' OR vendor_location Like '%".$s."%' OR vendor_tel Like '%".$s."%' OR fax Like '%".$s."%' AND vendor_ID NOT IN ('49')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -870,7 +870,7 @@ else if($initop == 8){
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
      
-        $sql = "SELECT * FROM vendor";
+        $sql = "SELECT * FROM vendor WHERE vendor_ID NOT IN ('49')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -1051,32 +1051,50 @@ if(isset($update)){
 
 if(isset($del)){
     $sql = "";
+    $sqlq = "";
     if($del == 1){
         $sql = "DELETE FROM assetstat WHERE asset_stat_ID = '".$_POST['id']."'";
+        $sqlq = "UPDATE asset_stat_overview SET asset_stat_ID = '15' WHERE asset_stat_ID = '".$_POST['id']."'";
     }
     else if($del == 2){
+        $sqlq = "UPDATE asset SET asset_type_ID = '23' WHERE asset_type_ID = '".$_POST['id']."'";
         $sql = "DELETE FROM assettype WHERE asset_type_ID = '".$_POST['id']."'";
     }
     else if($del == 3){
+        $sqlq = "UPDATE asset SET dstat_ID = '12' WHERE dstat_ID = '".$_POST['id']."' ";
         $sql = "DELETE FROM deploy_stat WHERE dstat_ID = '".$_POST['id']."'";
     }
     else if($del == 4){
+        
         $sql = "DELETE FROM getmethod WHERE getMethod_ID = '".$_POST['id']."'";
     }
     else if($del == 5){
+
         $sql = "DELETE FROM money_type WHERE mid = '".$_POST['id']."'";
     }
     else if($del == 6){
+        $sqlq = "UPDATE asset SET resper_ID = '48' WHERE resper_ID = '".$_POST['id']."' ";
         $sql = "DELETE FROM respon_per WHERE resper_ID = '".$_POST['id']."'";
     }
     else if($del == 7){
+        $sqlq = "UPDATE asset SET room_ID = '64' WHERE room_ID = '".$_POST['id']."' ";
         $sql = "DELETE FROM room WHERE room_ID = '".$_POST['id']."'";
     }
     else if($del == 8){
+        $sqlq = "UPDATE asset SET vendor_ID = '49' WHERE vendor_ID = '".$_POST['id']."'";
         $sql = "DELETE FROM vendor WHERE vendor_ID = '".$_POST['id']."'";
+    }
+    if(!empty($sqlq)){
+            if($conn->query($sqlq) == TRUE){
+           
+        }
+        else{
+            echo "Error: " . $sqlq . "<br>" . $conn->error;
+        }
     }
     if($conn->query($sql) == TRUE){
         exit();
+        
     }
     else{
         echo "Error: " . $sql . "<br>" . $conn->error;

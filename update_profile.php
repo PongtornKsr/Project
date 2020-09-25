@@ -36,7 +36,7 @@ if(isset($_POST['save'])){
     $uid = $_POST['uid'];
     $pass = base64_encode($_POST['password']);
     $name = $fname." ".$lname;
-    $sql ="UPDATE `userdata` SET `givenName`='".$fname."',`familyName`='".$lname."',`name`='".$name."',`email`='".$email."',`username`='".$uname."',`password`='".$pass."',`last_update`=(NOW()) WHERE ID = '".$uid."'";
+    $sql ="UPDATE `userdata` SET `givenName`='".$fname."',`familyName`='".$lname."',`name`='".$name."',`email`='".$email."',`username`='".$uname."',`password`='".$pass."',`last_update`=(SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID = '".$uid."'";
     $results = mysqli_query($db, $sql);
     echo 'Saved';
     $sqls = "SELECT * FROM userdata WHERE ID = '$uid' ";

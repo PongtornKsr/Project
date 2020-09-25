@@ -84,7 +84,75 @@ function load_acc_search(query)
  
  });
 
+ $(document).on('click','#role_up',function(){
+  var IDx = $(this).val();
+  var func = $(this).data("func");
+  $.ajax({
+    url : "usermanage.php?ID="+IDx+"&function="+func,
+    method : "GET",
+    success:function(dataxx){
+      if(dataxx=="PASS"){
+       
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'ดำเนินการสำเร็จ',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(function() {
+          window.location.href = "AccountManage.php";
+        }, 2000);
+       
+      }
+      else{
+       
+        Swal.fire({
+          icon: 'error',
+          title: 'มีบางอย่างผิดพลาด',
+          text: 'ไม่สามารถเปลี่ยนแปลงได้'
+         
+        })
+      }
+    }
+   
+  })
+ });
 
+ $(document).on('click','#role_down',function(){
+  var IDx = $(this).val();
+  var func = $(this).data("func");
+  $.ajax({
+    url : "usermanage.php?ID="+IDx+"&function="+func,
+    method : "GET",
+    success:function(dataxx){
+      if(dataxx=="PASS"){
+       
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'ดำเนินการสำเร็จ',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setTimeout(function() {
+          window.location.href = "AccountManage.php";
+        }, 2000);
+       
+      }
+      else{
+       
+        Swal.fire({
+          icon: 'error',
+          title: 'มีบางอย่างผิดพลาด',
+          text: 'ไม่สามารถเปลี่ยนแปลงได้'
+         
+        })
+      }
+    }
+   
+  })
+ });
 
 });
 

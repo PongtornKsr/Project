@@ -2,7 +2,8 @@
 //insert.php;
 SESSION_START();
 require 'connect.php';
-$connect = mysqli_connect("localhost", "admin", "1234", "prodata");  
+ $connect = mysqli_connect("localhost", "admin", "1234", "prodata");  
+//$connect = mysqli_connect("localhost", "u263202561_fams", "Famsproject1234", "u263202561_fams");  
  $numberss = count($_POST['num']); 
  $sqlm = array();
  $qtyr = array();

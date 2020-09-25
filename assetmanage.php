@@ -315,7 +315,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
     </table>
 </div>
 <br>
-<div><?php  echo $sql; ?></div>
+<div><?php // echo $sql; ?></div>
 <?php if($_SESSION['editop'] == 2){ }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>

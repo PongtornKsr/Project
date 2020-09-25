@@ -10,7 +10,7 @@
            <link rel="stylesheet" href="CSS/formstyle.css">
            <link rel="stylesheet" href="CSS/BG.css">
            <link rel="stylesheet" href="CSS/navbar.css">
-           <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
+           
     <style>
     
     #treport_td{ border: 1px solid black; }
@@ -26,6 +26,7 @@
         width:50%;
         text-align-last: center;
     }
+    
     </style>
 
  </head>
@@ -49,7 +50,7 @@
                     รายการที่ :
                 </td>
                 <td>
-                    <input type="text" name = "on[]" width="50">
+                    <input type="text" name = "on[]" width="50" required>
                 </td>
             </tr>
             <tr>
@@ -57,7 +58,7 @@
                     วันที่:
                 </td>
                 <td>
-                    <input type="date" style ="width: 100%" id= "datepick" class = "datepick" name = "addin_date[]" width="50">
+                    <input type="date" style ="width: 100%" id= "datepick" class = "datepick" name = "addin_date[]" width="50" required>
                 </td>
             </tr>
             <tr>
@@ -77,7 +78,7 @@
                echo  "</select>";
 
                 ?><br>
-                  เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "2" name = "type[]" width="50" class="atypein">
+                  เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "2"width="50" name = "type[]" required>
                 </td>
             </tr>
            
@@ -97,7 +98,7 @@
                     }     }
                echo  "</select>";
                 ?><br>
-                เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="4" name = "dtype[]" width="50">
+                เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="4" name = "dtype[]"required width="50">
                 </td>
             </tr>
             <tr>
@@ -127,7 +128,7 @@
                     จำนวน:
                 </td>
                 <td>    
-                    <input type="text" name="quantity[]" id= "idq" ><span style="float:right;"  class = "idx"></span>
+                    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span>
                 </td>
             </tr>
             <tr>
@@ -135,7 +136,7 @@
                     รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "1">
                 </td>
                 <td id ="keyy">    
-                    <input type="text" style ="width:40%"name="asset_ID[]" id = "ida" class = "">/<input style="width:10%" type="text" name="asset_Set[]" id = "idb" class = ""><input style="width:10%" type="text" name="assetid[]" id= "idc" class = "">
+                    <input type="text" style ="width:40%"name="asset_ID[]"required id = "ida" class = "">/<input style="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style="width:10%" type="text" name="assetid[]" id= "idc" class = "">
                     
                 </td>
             </tr>
@@ -145,7 +146,7 @@
                     ชื่อชุดครุภัณฑ์:
                 </td>
                 <td>
-                    <input type="text" name = "asset_setname[]" width="50">
+                    <input type="text" name = "asset_setname[]"required width="50">
                 </td>
             </tr>
             <tr>
@@ -153,7 +154,7 @@
                     ชื่อครุภัณฑ์:
                 </td>
                 <td>
-                    <input type="text" name = "asset_name[]" width="50">
+                    <input type="text" name = "asset_name[]"required width="50">
                 </td>
             </tr>
             <tr>
@@ -213,8 +214,8 @@
                     echo "<option value=".$row['resper_ID'].">".$row['resper_firstname'].$row['resper_lastname']."</option>";
                     }     }
                echo  "</select>";
-                ?> <br> ชื่อ:<input type="text" name = "resfname[]" id ="6" width="50">
-                นามสกุล:<input type="text" name = "reslname[]" id = "6" width="50">
+                ?> <br> ชื่อ:<input type="text" name = "resfname[]"required id ="6" width="50">
+                นามสกุล:<input type="text" name = "reslname[]"required id = "6" width="50">
                 </td>
                 </tr>
                
@@ -234,7 +235,7 @@
                     }     }
                echo  "</select>";
                 ?><br>
-                ห้อง: <input type="text" name = "rmname[]" id="8" width="50">
+                ห้อง: <input type="text" name = "rmname[]"required id="8" width="50">
                 </td>
                 </tr>
                 <tr>
@@ -330,7 +331,7 @@
                     ราคาต่อหน่วย: 
                 </td>
                 <td>    
-                    <input type="text" name="price[]">
+                    <input type="text" name="price[]"required >
                 </td>
             </tr>
             <tr>
@@ -478,17 +479,17 @@ $(document).ready(function(){
   html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
   html += '<table Align = "center">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50"> </td></tr> <tr><td>วันที่:</td><td><input type="text" id = "datepick" class ="datepick" name = "addin_date[]" width="50"></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]" width="50">'; 
-  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "detype[]" width="50">'; 
-  html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การรันเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: </td><td>    <input type="text" name="quantity[]" id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]" style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" width="50"></td></tr>';
-  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]" width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
+  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่:</td><td><input type="text" id = "datepick" class ="datepick" name = "addin_date[]" width="50" required></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
+  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
+  html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การรันเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]"required width="50"></td></tr>';
+  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]"required width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
   html += '<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "asset_order[]" width="50"></td></tr><tr><td>สถานที่ตั้ง / หน่วยงานที่รับผิดชอบ:</td><td><input type="text" value="คณะวิทยาศาสตร์และเทคโนโลยี" name = "assetloca[]" disabled>';
-  html += '</td></tr><tr><td>ผู้รับผิดชอบ :</td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> <br>ชื่อ: <input type="text" name = "resfname[]" id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]" id ="'+array[array.length - 5]+'" width="50">';
-  html += '</td></tr><tr><td>ห้องที่จัดเก็บ :</td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> <br>ห้อง: <input type="text" name = "rmname[]" id ="'+array[array.length -3]+'" width="50">';
+  html += '</td></tr><tr><td>ผู้รับผิดชอบ :</td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> <br>ชื่อ: <input type="text" name = "resfname[]"required id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]"required id ="'+array[array.length - 5]+'" width="50">';
+  html += '</td></tr><tr><td>ห้องที่จัดเก็บ :</td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> <br>ห้อง: <input type="text" name = "rmname[]"required id ="'+array[array.length -3]+'" width="50">';
   html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
   html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
   html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"></td></tr>';
+  html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"required ></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
            $('#dynamic_field').append('<tr id="'+i+'t"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr>');  
@@ -620,11 +621,11 @@ $(document).ready(function(){
             var idq = parseInt($(this).val());
             var htmlq = "";
             if(idq > 0){for(var ci = 0;ci<=idq-1;ci++){
-                htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
             }
             
               $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
-              else{ htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
+              else{ htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
               $(this).parents().parents().siblings().children('td[id=keyy]').html('');
               $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
             }
@@ -666,11 +667,11 @@ $(document).ready(function(){
                     $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                 for(var ci = 0;ci<=idq-1;ci++){
                     
-                    htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]" ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
                 }
                 $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                   $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
-                  else{ htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]" ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
+                  else{ htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
                   $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                   $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
                 }
@@ -735,9 +736,14 @@ $(document).ready(function(){
    if(value !="0"){
        $(this).siblings('input').attr('disabled',true);
        $('[id='+op+']').slice().prop("disabled", true);
+       $('[id='+op+']').slice().prop("required", false);
+       $(this).siblings('input').attr('required',false);
    }
    else{ $(this).siblings('input').attr('disabled',false);
-    $('[id='+op+']').slice().prop("disabled", false);}
+    $(this).siblings('input').attr('required',true);
+    $('[id='+op+']').slice().prop("disabled", false);
+    $('[id='+op+']').slice().prop("required", true);
+}
 
 });
 $(document).on('keyup' , '#kk input' ,function(){
@@ -808,7 +814,7 @@ $(document).on('change' , '#so',function(){
             var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         htmlq ="";
-        htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]" ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
+        htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
         var htmlq = "";
@@ -816,7 +822,7 @@ $(document).on('change' , '#so',function(){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         for(var ci = 0;ci<=idq-1;ci++){
             
-            htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]" ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+            htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
         }$(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
     }
         }
@@ -832,11 +838,11 @@ $(document).on('change' , '#so',function(){
           if(idq > 0){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
             for(var ci = 0;ci<=idq-1;ci++){
-            htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+            htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
         }
     }else{
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
-        htmlq+='<input type="text"  style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+        htmlq+='<input type="text"  style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
     }
           $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
         
@@ -855,7 +861,7 @@ $(document).on('change','#rn',function(){
      var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
     if(value =="defaultex"){
         htmlq = "";
-        htmlq+= '<input type="text" style ="width:40%" name="asset_ID[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]" id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = "">';
+        htmlq+= '<input type="text" style ="width:40%" name="asset_ID[]"required id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = "">';
           $(this).parents().parents().siblings().children('td[id=keyy]').html('');
           $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
 
@@ -872,12 +878,12 @@ $(document).on('change','#rn',function(){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         for(var ci = 0;ci<=idq-1;ci++){
             
-        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]" ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
           
         }  
     }else{
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
-        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb" class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]" ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
     }$(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
 
     }
@@ -909,7 +915,7 @@ $(document).on('change','#rn',function(){
 
 
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 

@@ -267,8 +267,20 @@ $('document').ready(function(){
                     'uid' : uid
                 },
                 success: function(response) {
-                    alert('User Profile saved');
-                    window.location.href = 'index.php';
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'ดำเนินการสำเร็จ',
+                        showConfirmButton: false,
+                        timer: 1500
+                        })
+                        setTimeout(function() {
+                        window.location.href = "AccountManage.php";
+                        }, 2000);
+                    
+                    
+                    
+                   
                 }
             })
         }
@@ -277,3 +289,4 @@ $('document').ready(function(){
 });
 </script>     
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
