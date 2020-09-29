@@ -93,7 +93,7 @@
         </p>
         <center>
 		<p>
-            <button type="button" class= "btn btn-outline-success"name="update_button" id="update_button">&nbsp;Update Profile&nbsp;</button>
+            <button type="button" class= "btn btn-outline-success"name="update_button" id="update_button">&nbsp;แก้ไขข้อมูล&nbsp;</button>
             <input type="hidden" name="uid" id ="uid" value = "<?php echo $uid; ?>">
 		</p></center>
 	</form>

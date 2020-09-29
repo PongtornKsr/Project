@@ -32,7 +32,7 @@ else if($Fuction == 6||$Option ==6){
 function RoleUp(){
     require 'connect.php';
     $ID = $_GET['ID'];
-    $sql = "UPDATE `userdata` SET `profile_ID`= 1 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$ID." ";
+    $sql = "UPDATE `userdata` SET `profile_ID`= 1 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE ID= ".$ID." ";
     if ($conn->query($sql) === TRUE) {  
         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
         $result = $conn->query($sql); 
@@ -54,7 +54,7 @@ function RoleUp(){
 
 function RoleDown(){
     require 'connect.php';
-    $sql = "UPDATE `userdata` SET `profile_ID`= 2 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$_GET['ID']." ";
+    $sql = "UPDATE `userdata` SET `profile_ID`= 2 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE ID= ".$_GET['ID']." ";
     if ($conn->query($sql) === TRUE) {  
         $ID = $_GET['ID'];
         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
@@ -77,7 +77,7 @@ function RoleDown(){
 
 function useractive(){
     require 'connect.php';
-    $sql = "UPDATE `userdata` SET `ID_stat`= 1 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$_GET['ID']." ";
+    $sql = "UPDATE `userdata` SET `ID_stat`= 1 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE ID= ".$_GET['ID']." ";
     if ($conn->query($sql) === TRUE) {  
         $ID = $_GET['ID'];
         $sql = "SELECT * From userdata WHERE ID = ".$ID."";
@@ -143,7 +143,7 @@ function usblock(){
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if($row['profile_ID'] == 2){
-                $sql = "UPDATE `userdata` SET `ID_stat`= 2 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID= ".$_GET['ID']." ";
+                $sql = "UPDATE `userdata` SET `ID_stat`= 2 , last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE ID= ".$_GET['ID']." ";
                     if ($conn->query($sql) === TRUE) {
                         $ID = $_GET['ID'];
                         $sql = "SELECT * From userdata WHERE ID = ".$ID."";

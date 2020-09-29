@@ -220,6 +220,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " ] ";
             $clause = " and ";
          }
+         $_SESSION['sqlx'] = $sql .= " order by id ";
                 $_SESSION['searchword'] = $search_word;
                 $search_word = $_SESSION['searchword'];
                 if(isset($_SESSION['sql_detail'])){
@@ -277,8 +278,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
         <th scope="col">รหัสครุภัณฑ์</th>
         <th scope="col">ชื่อครุภัณฑ์</th>
         <th scope="col">ชื่อเรียก</th>
+        <th scope="col">สถานะครุภัณฑ์</th>
         <th scope="col">ประเภทครุภัณฑ์</th>
-        <th scope="col">edit</th>
+        <th scope="col">ตัวเลือก</th>
   </tr>
   </thead>
   <tbody>
@@ -295,6 +297,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                         <td align='left'>".$row['asset_ID']."</td>
                         <td align='left'>".$row['asset_name']."</td>
                         <td align='left'>".$row['asset_nickname']."</td>
+                        <td align='left'>".$row['asset_stat_name']."</td>
                         <td align='left'>".$row['asset_type_name']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-outline-danger' border-color:White; color:white'>รายละเอียด</button></a> ";
                         echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-outline-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
@@ -322,6 +325,7 @@ else if($_SESSION['editop'] == 1){ ?>
 <div style = "text-align: center">
 <input style= "text-align: center" class='btn btn-outline-success' type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
 <input style= "text-align: center"  class='btn btn-outline-success' type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
+<a  href="allasset.php" target="_blank"><button type="button" class='btn btn-outline-success'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
 </div>
 <?php } ?>
 
@@ -375,4 +379,9 @@ function checkboxes()
     }
     checkboxes();
 }
+</script>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 </script>

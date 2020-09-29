@@ -12,8 +12,8 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/navbar.css">
     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
-    <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="Css/BG.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>CS_Assert</title>
 </head>
 
@@ -25,13 +25,13 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
         ?>
         <div class = "box">
         <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
-    <form action="rm_update_back.php" method="post">
+    <form id = "myform"action="rm_update_back.php" method="post">
     <div class="head">แก้ไขสถานะครุภัณฑ์</div>
     <br>
     <br><br>
         <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
         <div class="thsarabunnew"style="font-size:24px">เปลี่ยนสถานะเป็น <?php  
-        echo "<select id = 'select' onchange='checkselecttion()' name = 'stid'>
+        echo "<select id = 'selectst' onchange='checkselecttion()' name = 'stid'>
         <option value='0'>---สถานะครุภัณฑ์---</option>";
             $sql = "SELECT * FROM assetstat ";
             $result = $conn->query($sql);
@@ -42,7 +42,7 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
        echo  "</select>";
         ?></div>
      <br><br><br>
-     <input id= "a"style = "width:100px;height: 50px;"type="submit" name = "StatUpdate" onclick="chackselecttion()"value="Update">
+     <input id= "a"style = "width:100px;height: 50px;"type="button" name = "StatUpdate" class="btn btn-outline-success" onclick="chackselecttion()"value="แก้ไข">
      
      <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกสถานะใหม่ของครุภัณฑ์ที่ต้องการเปลี่ยน</p>
     </form></div>
@@ -61,13 +61,13 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
         ?>
     <div class="box">
     <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
-    <form  action="rm_update_back.php" method="post">
+    <form  id ="myform"action="rm_update_back.php" method="post">
     <div class="head">แก้ไขที่จัดเก็บครุภัณฑ์</div>
     <br><br><br>
         <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
         <div class="thsarabunnew"style="font-size:24px">เปลี่ยนสถานที่จัดเก็บใหม่เป็น 
         <?php  
-        echo "<select id = 'select' onchange='checkselecttion()' name = 'rmid'>
+        echo "<select id = 'selectrm' onchange='checkselecttion()' name = 'rmid'>
         <option value='0'>---ห้องที่จัดเก็บ---</option>";
             $sql = "SELECT * FROM room ";
             $result = $conn->query($sql);
@@ -80,7 +80,7 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
         
      <!-- <input type="button" value="Cancel" onclick="window.location.href = '<?php //echo $_SERVER['HTTP_REFERER'] ?>';"> -->
      <br><br><br>
-     <input id= "a"style = "width:100px;height: 50px;"type="submit" name = "RoomUpdate" onclick="chackselecttion()"value="Update">
+     <input id= "a"style = "width:100px;height: 50px;"type="button" name = "RoomUpdate" class="btn btn-outline-success" onclick="chackselecttion()"value="แก้ไข">
      <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกห้องที่ต้องการเปลี่ยนเพื่อจัดเก็บครุภัณฑ์</p>
     </form></div>
     <?php } ?>
@@ -96,15 +96,73 @@ function checkselecttion(){
     var x = document.getElementById('select').value;
     if (x == 0){
         document.getElementById('a').disabled = true;
-        document.getElementById('a1').disabled = true;
+       
         document.getElementById('hint1').style.display='block';
     }
     else if(x>0){
         document.getElementById('a').disabled = false;
-        document.getElementById('a1').disabled = false;
+      
         document.getElementById('hint1').style.display='none';
         
     }
 }
 
 </script>
+<script>
+$(document).ready(function(){
+
+    $('#a').click(function(){
+        var ru = $('#a').attr('name');
+        if(ru == "RoomUpdate"){
+            var rmid = $('#selectrm option:selected').val();
+            $.ajax({
+        url: "rm_update_back.php",
+        method: "POST",
+        data: { 'RoomUpdate' : ru,
+        'rmid' : rmid },
+        success:function(){
+            Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'ดำเนินการสำเร็จ',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        
+        setTimeout(function() {
+          window.location.href="assetmanage.php";
+        }, 2000);
+        }
+    })
+}else if(ru == "StatUpdate"){
+    var stid = $('#selectst option:selected').val();
+    $.ajax({
+        url: "rm_update_back.php",
+        method: "POST",
+        data: { 'StatUpdate' : ru ,
+        'stid' : stid },
+        success:function(){
+            Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'ดำเนินการสำเร็จ',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      
+        setTimeout(function() {
+          window.location.href="assetmanage.php";
+        }, 2000);
+        }
+    })
+
+    }
+        
+    })
+        
+    })
+    
+
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

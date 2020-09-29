@@ -8,7 +8,7 @@
     $gClient->setApplicationName("Project_web");
     $gClient->setRedirectUri("http://localhost/Project/g-callback.php");
     $gClient->addScope([Google_Service_Oauth2::PLUS_LOGIN,Google_Service_Oauth2::USERINFO_EMAIL]);
-    
+
     
 
 ?>

@@ -54,8 +54,6 @@ ob_start();
 
 <?php 
 
-$as = $_GET['asset_number'];
-$rowc= array();
 $mt = "";
 $getm = "";
 $C = "";
@@ -65,14 +63,17 @@ $max = "";
 $mas = "";
 $cun = array();
 $cmin = array();
-$sql = "SELECT asset_Set FROM asset WHERE asset_number = '".$as."'";
+$rowc= array();
+$setas = array();
+$sql = "SELECT asset_Set FROM `asset` GROUP by asset_Set ORDER BY `asset`.`asset_setname` DESC ";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
-$set = $row['asset_Set'];
+    array_push($setas,$row['asset_Set']);
 }
 }
-
+for ($x = 0; $x < count($setas) ; $x++) {
+$set = $setas[$x];
 $sql = "SELECT MIN(asset_ID) From asset WHERE asset_Set like '".$set."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -103,8 +104,6 @@ while($row = $result->fetch_assoc()) {
 }
 }
 $e = explode(".",$mas);
-//echo count($cun);
-//echo $e[1];
 if(count($cun) == $e[1]){
   if($min == $max){
   $C .= $min;
@@ -128,7 +127,8 @@ if(count($cun) == $e[1]){
   }
   
 }
-$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_number = '".$as."'";
+
+$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_Set = '".$set."' GROUP BY asset_Set";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -150,7 +150,7 @@ $J = $row['fax'];
 }
 }
 
- $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_number = '".$as."' ";
+ $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_Set = '".$set."' and asset_number = ( SELECT MIN(asset_number) FROM asset WHERE asset_Set = '".$set."' ) ";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {
@@ -182,7 +182,7 @@ array_push($rowc , '
 
 <div class="a">
 
-<p>ส่วนราชการ มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ <Br>
+<p>ส่วนราชการ มหาวิทยาลัยเทคโนโลยีราชมงคล <Br>
 หน่วยงานวิทยาเขตเทคนิคกรุงเทพฯ </p>
 </div>
 
@@ -207,7 +207,7 @@ echo "<br>"  ;
 
 
 ?>
-  <table class='table borderless'>
+  <table style ="width:100%" class='table borderless'>
 
    <col width="250"> 
    <col width="250"> 
@@ -233,7 +233,7 @@ echo "<br>"  ;
   <br>
   <br>
   
-  <table class="table table-bordered"> 
+  <table style ="width:100%" class="table table-bordered"> 
   <tr>
   <th align="center" width = "50px" rowspan=2>วัน/เดือน/ปี</th>
     <th align="center" width = "50px" rowspan=2>เลขที่เอกสาร</th> 
@@ -271,7 +271,7 @@ if( $forin > 0){
 
 <div class="a">
 
-<p>ส่วนราชการ มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ <Br>
+<p>ส่วนราชการ มหาวิทยาลัยเทคโนโลยีราชมงคล <Br>
 หน่วยงานวิทยาเขตเทคนิคกรุงเทพฯ </p>
 </div>
 
@@ -296,7 +296,7 @@ echo "<br>"  ;
 
 
 ?>
-  <table class='table borderless'>
+  <table style ="width:100%"  class='table borderless'>
 
    <col width="250"> 
    <col width="250"> 
@@ -322,9 +322,9 @@ echo "<br>"  ;
   <br>
   <br>
   
-  <table class="table table-bordered"> 
-  <tr align="center">
-    <th align="center" width = "50px" rowspan=2>วัน/เดือน/ปี</th>
+  <table style ="width:100%" class="table table-bordered"> 
+  <tr>
+  <th align="center" width = "50px" rowspan=2>วัน/เดือน/ปี</th>
     <th align="center" width = "50px" rowspan=2>เลขที่เอกสาร</th> 
     <th align="center" width = "300px" rowspan=2>รายการ</th>
     <th align="center" width = "50px" rowspan=2>จำนวน/หน่วย</th>
@@ -349,7 +349,7 @@ echo "<br>"  ;
       echo $rowc[$u];
   }
   echo '</table>';
-
+  echo '<pagebreak/>';
 }
   
 
@@ -358,8 +358,17 @@ echo "<br>"  ;
  
 
 <?php
-
-
+$cun = [];
+$cmin = [];
+$rowc= [];
+$mt = "";
+$getm = "";
+$C = "";
+$set ="";
+$min = "";
+$max = "";
+$mas = "";
+}
     $mpdf->SetDisplayMode('fullwidth'); 
     $mpdf->AddPage('A4-L'); // ตั้งค่ากระดาษ
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์

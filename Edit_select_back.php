@@ -39,7 +39,7 @@ if($initop == 1){
            
             <td class = "wideb"style= "text-align:center;vertical-align:middle"><input type="text" name="stat_name" class = "statin" id="stat_name"></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "s_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -63,7 +63,7 @@ if($initop == 1){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_del" value = "'.$ids.'">ลบ</button>';
             }
             
-            $output .= ' <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >X</button>
+            $output .= ' <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -111,7 +111,7 @@ if($initop == 1){
                 
                 <td class = "wideb"style= "text-align:center;vertical-align:middle"><input type="text" name="stat_name" id="stat_name" value = '.$row['asset_stat_name'].'></td>
                 <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_update" >แก้ไข</button>
-                <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >X</button>
+                <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >ยกเลิก</button>
                 </td>
                 </tr>';
                 }
@@ -153,7 +153,7 @@ else if($initop == 2){
         <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input style= "width:200px" type="text" class = "typein" name="type_name" id="type_name"></td>
         <td  class = "widec"style= "text-align:center;vertical-align:middle"><input style= "width:80px"  type="text" class = "typein" name="noun_name" id="noun_name"></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "t_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "t_cancel" >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "t_cancel" >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -175,7 +175,7 @@ else if($initop == 2){
             else if(isset($delop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "t_del" value = "'.$ids.'" >ลบ</button>';
             }
-            $output .= ' <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "t_cancel" >X</button>
+            $output .= ' <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "t_cancel" >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -251,7 +251,7 @@ else if($initop == 3){
            
             <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" type="text" name="dtype_name" id="dtype_name" class = "dtypein"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "d_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_cancel"  >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -273,7 +273,7 @@ else if($initop == 3){
             else if(isset($delop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_del" value = "'.$ids.'">ลบ</button>';
             }
-             $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_cancel"  >X</button>
+             $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "d_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -345,7 +345,7 @@ else if($initop == 4){
            
             <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "gmin" type="text" name="gm_name" id="gm_name"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "gm_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_cancel"  >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -368,7 +368,7 @@ else if($initop == 4){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_del" value = "'.$ids.'" >ลบ</button>';
             }
         
-            $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_cancel"  >X</button>
+            $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "gm_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -440,7 +440,7 @@ else if($initop == 5){
            
             <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "mtin" type="text" name="mt_name" id="mt_name"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "mt_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "mt_cancel"  >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "mt_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -462,7 +462,7 @@ else if($initop == 5){
             else if(isset($delop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-denger" id = "mt_del"  value = "'.$ids.'">ลบ</button>';
             }
-            $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "mt_cancel"  >X</button>
+            $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "mt_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -536,7 +536,7 @@ else if($initop == 6){
             <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" class = "rpin" type="text" name="rp_name" id="rp_name"></td>
             <td class = "widea"style= "text-align:center;vertical-align:middle"><input style = "width:150px" class = "rpin" type="text" name="rp_lname" id="rp_lname"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "rp_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_cancel"  >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -560,7 +560,7 @@ else if($initop == 6){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_del" value = "'.$ids.'">ลบ</button>';
             }
             $output .='
-             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_cancel"  >X</button>
+             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rp_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -647,7 +647,7 @@ else if($initop == 7){
                 }     }
                 $output .=  "</select></td>";
                 $output .= '<td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "rm_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_cancel"  >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -663,7 +663,7 @@ else if($initop == 7){
             
             <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px"class = "rmin" type="text" name="rm_name" id="rm_name" value = "'.$row['room'].'"></td>
             <td style= "text-align:center;vertical-align:middle"> <select name = "resid" id ="resid">';
-            if($row['resper_ID'] != NULL || $row['resper_ID'] != 0){
+            if($row['resper_IDs'] != NULL || $row['resper_IDs'] != 0){
                 $sqlrr = "SELECT * FROM respon_per WHERE resper_ID = '".$row['resper_IDs']."'";
                 $resultr = $conn->query($sqlrr);
                 if ($resultr->num_rows > 0) {
@@ -699,7 +699,7 @@ else if($initop == 7){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_del" value = "'.$ids.'">ลบ</button>';
             }
             $output .= '
-             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_cancel"  >X</button>
+             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "rm_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
             }
@@ -806,7 +806,7 @@ else if($initop == 8){
             <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "vdin" type="text" name="vd_tel" id="vd_tel"></td>
             <td class = "widec"style= "text-align:center;vertical-align:middle"><input style = "width:80px" class = "vdin" type="text" name="vd_fax" id="vd_fax"></td>
             <td  class = "widea"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "vd_insert" >เพิ่ม</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_cancel"  >X</button>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
 
@@ -831,7 +831,7 @@ else if($initop == 8){
             else if(isset($delop)){
                 $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_del" value = "'.$ids.'">ลบ</button>';
             }
-             $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_cancel"  >X</button>
+             $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "vd_cancel"  >ยกเลิก</button>
             </td>
         </tr>';
             }

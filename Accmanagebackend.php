@@ -10,7 +10,7 @@ if(isset($_SESSION['Uname'])){
     $ffname = $_SESSION['Uname'];
 }
 
-$db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
+include 'connect_b.php'; 
 $output= "";
 if(isset($_POST['nmsearch'])){
     $output .='<table class="table bg-light text-dark table-bordered table-striped" width="1400px"> <thead>
@@ -41,13 +41,15 @@ if(isset($_POST['nmsearch'])){
     {
         while($row = mysqli_fetch_array($result))
         {
+            $datethai = explode("/",$row['last_update']);
+            //".$datethai[0]."/".$datethai[1]."/".($datethai[2]+543).":".$datethai[3]."
             $output .="<tr>
             <td align='left'>".$row['givenName']."</td>
             <td align='left'>".$row['familyName']."</td>
             <td align='left'>".$row['email']."</td>
             <td align='left'>".$row['stat_name']."</td>
             <td align='left'>".$row['profile_name']."</td>
-            <td align='left'>".$row['last_update']."</td>
+            <td align='left'>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+43)."  ".$datethai[3]."</td>
             <td>";
             if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
       else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}

@@ -240,13 +240,13 @@ ob_start();
          }
         
         
-       $asids = $_POST['asid'];
-       $nkn = $_POST['nkn'];
-       $ustat = $_POST['ustat'];
-       $astyp = $_POST['astyp'];
-       $asroom = $_POST['asroom'];
-       $respers = $_POST['respers'];
-       $asname = $_POST['asname'];
+        if(isset($_POST['asid'])){ $asids = $_POST['asid']; }
+       if(isset($_POST['nkn'])){ $nkn = $_POST['nkn'];}
+       if(isset($_POST['ustat'])){ $ustat = $_POST['ustat'];}
+       if(isset($_POST['astyp'])){ $astyp = $_POST['astyp'];}
+       if(isset($_POST['asroom'])){ $asroom = $_POST['asroom'];}
+       if(isset($_POST['respers'])){ $respers = $_POST['respers'];}
+       if(isset($_POST['asname'])){ $asname = $_POST['asname'];}
          $se = array();
        $head = "";
        //echo "show ".$asids;
@@ -267,10 +267,11 @@ ob_start();
 ?>
 <div style ="float:left"><?php echo $search_word; ?></div>
 <br>
+<div id = "order_table">
 <table class="table table-bordered" width = "100%" style = "text-align:center">
 <thead align='center'>
 <tr>
-<?php echo $head; ?>
+<?php echo $head; $_SESSION['excel_head'] = $head; $_SESSION['se'] = $se ; ?>
 </tr>
 </thead>
 <tbody>
@@ -290,11 +291,12 @@ ob_start();
             echo "</tr>";
         }
     }
-    echo $sql;
+    $_SESSION['sqlexcel'] = $sql;
+   // echo $sql;
 ?>
 </tbody>
 </table>
-
+</div>
 
 <?php  
     $paperaxis = $_POST['axis'];
@@ -311,12 +313,23 @@ ob_start();
     
    
     ?>
-    <center><a  href="pdf/Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสาร</botton></a><center>
+    <center><a  href="pdf/Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสารPDF</botton></a><button id ="create_excel"type="button" class="btn btn-success">ดาวโหลดไฟล์Excel</botton><center>
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>  
+
+
+ $(document).ready(function(){  
+      $('#create_excel').click(function(){  
+        window.location.href = "order_excel.php";
+           
+      });  
+ });  
+ </script>  
 </html>
 <?php 
 
-header("Location: pdf/Asset_Order_List.pdf"); 
+//header("Location: pdf/Asset_Order_List.pdf"); 
 
 ob_end_flush();
 ?>

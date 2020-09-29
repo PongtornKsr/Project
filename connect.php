@@ -8,7 +8,7 @@ $dbname = "prodata";
 $servername = "localhost";
 $username = "u263202561_fams";
 $password = "Famsproject1234";
-$dbname = "u263202561_fams";*/*
+$dbname = "u263202561_fams";*/
     // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection

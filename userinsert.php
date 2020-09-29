@@ -37,38 +37,38 @@
       
 		<div class="form-group">
 	<label style= "float:left">ชื่อ</label>
-    <input type="text" class="form-control" name = "fname" id="fname"  placeholder="first name">
+    <input type="text" class="form-control" name = "fname" id="fname"  placeholder="ชื่อ">
 	<div id = "name_alert" tyle = "color:red" ></div>
 		</div>
 	
 	<div class="form-group">
     <label  style= "float:left">นามสกุล</label>
-    <input type="text" class="form-control" name = "lname" id="lname"  placeholder="Familyname">
+    <input type="text" class="form-control" name = "lname" id="lname"  placeholder="นามสกุล">
 	<div id = "lname_alert" tyle = "color:red"></div>
 		</div>
 			
 		<div class="form-group">
 	<label  style= "float:left">อีเมล</label>
-    <input type="email" class="form-control"  name = "email" id="email"  placeholder="Enter email">
+    <input type="email" class="form-control"  name = "email" id="email"  placeholder="อีเมล">
 	<div id = "email_alert" style = "color:red"></div>
 	</div>
 	
 	<div class="form-group">
 	<label  style= "float:left">ชื่อผู้ใช้งาน</label>
-    <input type="text" class="form-control"  name = "username" id="username"  placeholder="Enter email">
+    <input type="text" class="form-control"  name = "username" id="username"  placeholder="ชื่อผู้ใช้">
 	<div id = "username_alert" style = "color:red"></div>
 	</div>
 	
 	<div class="form-group">
 	<label style= "float:left">รหัสผ่าน</label>
-    <input type="password" class="form-control"  name = "pass" id="pass"  placeholder="Enter email">
+    <input type="password" class="form-control"  name = "pass" id="pass"  placeholder="รหัสผ่าน">
 	<div id = "pass_alert" style = "color:red"></div>
 	</div>
 	
   <label  style= "float:left">ประเภทบัญชี</label>
   <select class="form-control form-control-sm" name = "Type">
-  <option value="2">GUEST</option>
-<option value="1">ADMIN</option>   
+  <option value="2">ผู้ใช้งานทั่วไป</option>
+<option value="1">เจ้าหน้าที่ระบบ</option>   
  
   </select>
   <br><br>

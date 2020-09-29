@@ -233,7 +233,11 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 
 
 </body>
-
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 </html>
 <?php require 'footer.php'; ?>
 

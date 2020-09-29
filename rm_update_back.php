@@ -7,14 +7,14 @@ if(isset($_POST['RoomUpdate'])){
 foreach ($aid as $x){
     $sql = "UPDATE asset SET room_ID = '".$rm."',resper_ID = (SELECT resper_ID FROM `room` join respon_per where room_ID = '".$rm."' and (room.resper_IDs = respon_per.resper_ID)) WHERE id = '".$x."'";
     if ($conn->query($sql) === TRUE) {
-        
+       
     } else {
         echo "Error updating record: " . $conn->error;
     }
     
 }
 unset($_SESSION['id']);
-header('Location: assetmanage.php');
+exit();
 }else if(isset($_POST['StatUpdate'])){
     $st = $_POST['stid'];
     foreach ($aid as $x){
@@ -25,7 +25,7 @@ header('Location: assetmanage.php');
             echo "Error updating record: " . $conn->error;
         }
 }unset($_SESSION['id']);
-header('Location: assetmanage.php');
+exit();
 }else if(isset($_POST['newStat'])){
     $st = $_POST['stid'];
     foreach ($aid as $x){
@@ -43,3 +43,5 @@ header('Location: assetmanage.php');
 
 
 ?>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
