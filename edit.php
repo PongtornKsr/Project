@@ -71,8 +71,11 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     $vtel =  $row['vendor_tel'];
     $vfax = $row['fax'];
     $mid = $row['mid'];
+    $dateex = explode("/",$date);
+    $dateaf = $dateex[2]."-".$dateex[1]."-".$dateex[0];
 }
 }
+
 ?>
 <br >
 <div class="box" align = "center" style="height: 830px;">
@@ -84,7 +87,7 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 <div align = "center">
 <table style ="width:80%">
 <tr><td>รายการที่ : </td><td><input style ="width:100%;text-align:left" id= "tx "type="text" name = "onum" value = "<?php echo $O_N; ?>" ></td></tr>
-<tr><td>วันที่</td><td><input style ="width:100%;text-align:left"type="text" name="dte" id="datepick" class = "datepicker"value = "<?php echo $date; ?>"></td></tr>
+<tr><td>วันที่</td><td><input style ="width:100%;text-align:left"type="date" name="dte" id="datepick" class = "datepicker"value="<?php echo $dateaf; ?>"></td></tr>
 <tr><td>รหัสครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"id= "tx "type="text" name = "asid" value = "<?php echo $asid; ?>" > </td></tr>
 <tr><td>ชื่อชุดครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"type="text" name="a_snf" value ="<?php echo $a_sn; ?>" id="" ></td></tr>
 <tr><td>ชื่อเรียกครุภัณฑ์ :</td><td><input style ="width:100%;text-align:left"type="text" name="a_nnf" value="<?php echo $a_nn; ?>"  ></td></tr>

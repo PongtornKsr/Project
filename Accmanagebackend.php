@@ -9,7 +9,7 @@ $ffname ="";
 if(isset($_SESSION['Uname'])){
     $ffname = $_SESSION['Uname'];
 }
-
+$datethai = array();
 include 'connect_b.php'; 
 $output= "";
 if(isset($_POST['nmsearch'])){
@@ -34,13 +34,14 @@ if(isset($_POST['nmsearch'])){
         
             $query ="SELECT * FROM userdata natural join userstat natural join userprofile  WHERE givenName NOT IN ('$fname') and givenName NOT IN ('$ffname') AND ID NOT IN ('47')";
             $_SESSION['query'] = $query;
-    
+            $datethai = [];
     }
     $result = mysqli_query($db, $query);
     if(mysqli_num_rows($result) > 0)
     {
         while($row = mysqli_fetch_array($result))
         {
+            $datethai = [];
             $datethai = explode("/",$row['last_update']);
             //".$datethai[0]."/".$datethai[1]."/".($datethai[2]+543).":".$datethai[3]."
             $output .="<tr>
@@ -92,13 +93,15 @@ if(isset($_POST['sort'])){
     </tr>
   </thead> <tbody>';
   while($row = mysqli_fetch_array($result)){
+      $datethai = [];
+    $datethai = explode("/",$row['last_update']);
       $output .="<tr>
       <td align='left'>".$row['givenName']."</td>
       <td align='left'>".$row['familyName']."</td>
       <td align='left'>".$row['email']."</td>
       <td align='left'>".$row['stat_name']."</td>
       <td align='left'>".$row['profile_name']."</td>
-      <td align='left'>".$row['last_update']."</td>
+      <td align='left'>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+43)."  ".$datethai[3]."</td>
       <td align='left'>";
 
       if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       

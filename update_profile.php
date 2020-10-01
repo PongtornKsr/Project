@@ -1,5 +1,7 @@
 <?php 
 SESSION_START();
+require 'connect.php';
+include 'action_insert.php';
 $db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
 
 
@@ -36,16 +38,34 @@ if(isset($_POST['save'])){
     $uid = $_POST['uid'];
     $pass = base64_encode($_POST['password']);
     $name = $fname." ".$lname;
-    $sql ="UPDATE `userdata` SET `givenName`='".$fname."',`familyName`='".$lname."',`name`='".$name."',`email`='".$email."',`username`='".$uname."',`password`='".$pass."',`last_update`=(SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')) WHERE ID = '".$uid."'";
+    $sql ="UPDATE `userdata` SET `givenName`='".$fname."',`familyName`='".$lname."',`name`='".$name."',`email`='".$email."',`username`='".$uname."',`password`='".$pass."',`last_update`=(SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE ID = '".$uid."'";
     $results = mysqli_query($db, $sql);
     echo 'Saved';
+    $idid ="";
+    $sqlr = "SELECT ID FROM userdata WHERE name = '".$_SESSION['Account']."'";
+    $result = mysqli_query($db, $sqlr);
+    if(mysqli_num_rows($result) > 0)
+    {
+        while($row = mysqli_fetch_array($result))
+        {
+            $idid = $row['ID'];
+
+        }
+    }
     $sqls = "SELECT * FROM userdata WHERE ID = '$uid' ";
     $result = mysqli_query($db, $sqls);
     if(mysqli_num_rows($result) > 0)
     {
         while($row = mysqli_fetch_array($result))
         {
-            $_SESSION['Account'] = $row['givenName']." ".$row['familyName'];
+            if($idid == $uid){
+                $_SESSION['Account'] = $row['givenName']." ".$row['familyName'];
+                insert_action("แก้ไขข้อมูลบัญชีผู้ใช้งาน ".$_SESSION['Account']);
+            }else{
+                insert_action("แก้ไขข้อมูลบัญชีผู้ใช้งาน ".$row['givenName']." ".$row['familyName']);
+            }
+            
+            
         }
 
     }

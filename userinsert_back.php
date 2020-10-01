@@ -1,7 +1,13 @@
 <?php 
 require 'connect.php';
-$email = $_POST['email'];
-$username = $_POST['username'];
+if(isset($_POST['email'])){
+    $email = $_POST['email'];
+}
+if(isset($_POST['username'])){
+    $username = $_POST['username'] ;
+}
+
+
 if(isset($_POST['email'])){
 $sql = "SELECT email From userdata WHERE email = '".$email."'";
 $result = $conn->query($sql);

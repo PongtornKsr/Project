@@ -1,5 +1,6 @@
-<?php 
+<?php SESSION_START();
 require 'connect.php';
+include 'action_insert.php';
 if(isset($_POST['initop'])){
     $initop = $_POST['initop'];
 }
@@ -906,6 +907,7 @@ if(isset($insertop)){
         $statname = mysqli_real_escape_string($conn, $_POST['stat_name']);
         $sql = "INSERT INTO assetstat ( asset_stat_name ) VALUE ( '".$statname."' )";
         if ($conn->query($sql) == TRUE) {
+            insert_action("เพิ่มตัวเลือก สถานะครุภัณฑืใหม่ ".$statname);
             exit();
         }
         else {
@@ -918,6 +920,7 @@ if(isset($insertop)){
         $nname = mysqli_real_escape_string($conn, $_POST['noun_name']);
         $sql = "INSERT INTO assettype ( asset_type_name , noun ) VALUE ( '".$tname."' , '".$nname."')";
         if ($conn->query($sql) == TRUE) {
+            insert_action("เพิ่มตัวเลือก ประเภทครุภัณฑ์ใหม่ ".$tname);
             exit();
         }
         else {
@@ -929,6 +932,7 @@ if(isset($insertop)){
         $dtname = mysqli_real_escape_string($conn, $_POST['dtype_name']);
         $sql = "INSERT INTO deploy_stat (  dstat ) VALUE ( '".$dtname."' )";
         if ($conn->query($sql) == TRUE) {
+            insert_action("เพิ่มตัวเลือก ลักษณะการติดตั้งใหม่ ".$dtname);
             exit();
         }
         else {
@@ -940,6 +944,7 @@ if(isset($insertop)){
         $gmname = mysqli_real_escape_string($conn, $_POST['gm_name']);
         $sql = "INSERT INTO getmethod (  method ) VALUE ( '".$gmname."' )";
         if ($conn->query($sql) == TRUE) {
+            insert_action("เพิ่มตัวเลือก วิธีการได้รับครุภัณฑ์ใหม่ ".$gmname);
             exit();
         }
         else {
@@ -951,6 +956,7 @@ if(isset($insertop)){
         $mtname = mysqli_real_escape_string($conn, $_POST['mt_name']);
         $sql = "INSERT INTO money_type ( money_type ) VALUE ('".$mtname."')";
         if($conn->query($sql) == TRUE){
+            insert_action("เพิ่มตัวเลือก ประเภทเงินงบประมาณใหม่ ".$mtname);
             exit();
 
         }
@@ -965,7 +971,7 @@ if(isset($insertop)){
         $rplname = mysqli_real_escape_string($conn, $_POST['rp_lname']);
         $sql = "INSERT INTO respon_per ( resper_firstname , resper_lastname ) VALUE ('".$rpname."' , '".$rplname."')";
         if($conn->query($sql) == TRUE){
-
+            insert_action("เพิ่มตัวเลือก ผู้รับผิดชอบครุภัณฑ์ใหม่ ".$rpname." ".$rplname);
             exit();
         }
         else{
@@ -979,7 +985,7 @@ if(isset($insertop)){
         $resid = $_POST['resid'];
         $sql = "INSERT INTO room (room,resper_IDs) VALUE ('".$rmname."',".$resid.")";
         if($conn->query($sql) == TRUE){
-            
+            insert_action("เพิ่มตัวเลือก ห้องที่จัดเก็บครุภัณฑ์ใหม่ ".$rmname);
             exit();
 
 
@@ -996,6 +1002,7 @@ if(isset($insertop)){
         $vdfax = mysqli_real_escape_string($conn, $_POST['vd_fax']);
         $sql = "INSERT INTO vendor (vendor_company , vendor_location , vendor_tel , fax) value ('".$vdname."' , '".$vdlo."' , '".$vdtel."' , '".$vdfax."')";
         if($conn->query($sql) == TRUE){
+            insert_action("เพิ่มตัวเลือก บริษัทคู่ค้าใหม่ ".$vdname);
             exit();
 
         }
@@ -1015,28 +1022,72 @@ if(isset($update)){
     $sql = "";
     if($update == 1){
         $sql = "UPDATE assetstat SET asset_stat_name = '".$_POST['stat_name']."' WHERE asset_stat_ID = '".$_POST['id']."' ";
+        $sqls = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("แก้ไขตัวเลือก สถานะครุภัณฑ์ ".$row['asset_stat_name']." เป็น ".$_POST['stat_name']);
+        }
+        }
+        
     }
     else if($update == 2){
         $sql = "UPDATE assettype SET asset_type_name = '".$_POST['type_name']."' , noun = '".$_POST['noun_name']."' WHERE asset_type_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM assettype WHERE asset_type_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("แก้ไขตัวเลือก ประเภทครุภัณฑ์ ".$row['asset_type_name']." เป็น ".$_POST['type_name']);
+        }
+        }
     }
     else if($update == 3){
         $sql = "UPDATE deploy_stat SET  dstat  = '".$_POST['dtype_name']."' WHERE dstat_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("แก้ไขตัวเลือก ลักษณะการติดตั้งครุภัณฑ์ ".$row['dstat']." เป็น ".$_POST['dtype_name']);
+        }
+        }
     }
     else if($update == 4){
         $sql = "UPDATE getmethod SET  method  = '".$_POST['gm_name']."' WHERE getMethod_ID = '".$_POST['id']."'";
+        
     }
     else if($update == 5){
         $sql = "UPDATE money_type SET money_type = '".$_POST['mt_name']."' WHERE mid = '".$_POST['id']."' ";
     }
     else if($update == 6){
         $sql = "UPDATE respon_per SET resper_firstname = '".$_POST['rp_name']."' , resper_lastname  = '".$_POST['rp_lname']."' WHERE resper_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM respon_per WHERE resper_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("แก้ไขตัวเลือก ผู้รับผิดชอบ ".$row['resper_firstname']." ".$row['resper_lastname']." เป็น ".$_POST['rp_name']." ".$_POST['rp_lname']);
+        }
+        }
     }
     else if($update == 7){
-        $sql = "UPDATE room SET room = '".$_POST['rm_name']."' , resper_IDs = ".$_POST['resid']." WHERE room_ID = '".$_POST['id']."'";
+        $sql = "UPDATE room SET room = '".$_POST['rm_name']."' , resper_IDs = '".$_POST['resid']."' WHERE room_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM room WHERE room_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("แก้ไขตัวเลือก ห้องที่จัดเก็บ ".$row['room']." เป็น ".$_POST['rm_name']);
+        }
+        }
         
     }
     else if($update == 8){
         $sql = "UPDATE vendor SET vendor_company  = '".$_POST['vd_name']."', vendor_location = '".$_POST['vd_lo']."' , vendor_tel  = '".$_POST['vd_tel']."', fax = '".$_POST['vd_fax']."'  WHERE vendor_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM vendor WHERE vendor_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("แก้ไขตัวเลือก คู่ค้า ".$row['vd_name']);
+        }
+        }
     }
 
     if($conn->query($sql) == TRUE){
@@ -1054,14 +1105,35 @@ if(isset($del)){
     $sqlq = "";
     if($del == 1){
         $sql = "DELETE FROM assetstat WHERE asset_stat_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("ลบตัวเลือก สถานะครุภัณฑ์ ".$row['asset_stat_name']);
+        }
+        }
         $sqlq = "UPDATE asset_stat_overview SET asset_stat_ID = '15' WHERE asset_stat_ID = '".$_POST['id']."'";
     }
     else if($del == 2){
         $sqlq = "UPDATE asset SET asset_type_ID = '23' WHERE asset_type_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM assettype WHERE asset_type_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("ลบตัวเลือก ประเภทครุภัณฑ์ ".$row['asset_type_name']);
+        }
+        }
         $sql = "DELETE FROM assettype WHERE asset_type_ID = '".$_POST['id']."'";
     }
     else if($del == 3){
         $sqlq = "UPDATE asset SET dstat_ID = '12' WHERE dstat_ID = '".$_POST['id']."' ";
+        $sqls = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("ลบตัวเลือก ลักษณะการติดตั้งครุภัณฑ์ ".$row['dstat']);
+        }
+        }
         $sql = "DELETE FROM deploy_stat WHERE dstat_ID = '".$_POST['id']."'";
     }
     else if($del == 4){
@@ -1074,14 +1146,35 @@ if(isset($del)){
     }
     else if($del == 6){
         $sqlq = "UPDATE asset SET resper_ID = '48' WHERE resper_ID = '".$_POST['id']."' ";
+        $sqls = "SELECT * FROM respon_per WHERE resper_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("ลบตัวเลือก ผู้รับผิดชอบ ".$row['resper_firstname']." ".$row['resper_lastname']);
+        }
+        }
         $sql = "DELETE FROM respon_per WHERE resper_ID = '".$_POST['id']."'";
     }
     else if($del == 7){
         $sqlq = "UPDATE asset SET room_ID = '64' WHERE room_ID = '".$_POST['id']."' ";
+        $sqls = "SELECT * FROM room WHERE room_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("ลบตัวเลือก ห้องที่จัดเก็บ ".$row['room']);
+        }
+        }
         $sql = "DELETE FROM room WHERE room_ID = '".$_POST['id']."'";
     }
     else if($del == 8){
         $sqlq = "UPDATE asset SET vendor_ID = '49' WHERE vendor_ID = '".$_POST['id']."'";
+        $sqls = "SELECT * FROM vendor WHERE vendor_ID = '".$_POST['id']."'";
+        $result = $conn->query($sqls);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            insert_action("ลบตัวเลือก คู่ค้า ".$row['vd_name']);
+        }
+        }
         $sql = "DELETE FROM vendor WHERE vendor_ID = '".$_POST['id']."'";
     }
     if(!empty($sqlq)){

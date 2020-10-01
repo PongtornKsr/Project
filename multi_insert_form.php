@@ -666,8 +666,12 @@ $(document).ready(function(){
                 if(idq > 0){
                     $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                 for(var ci = 0;ci<=idq-1;ci++){
-                    
-                    htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    if(ci == 0){
+                         htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    }else{
+                        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" disabled class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"disabled class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    }
+                   
                 }
                 $(this).parents().parents().siblings().children('td[id=keyy]').html('');
                   $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);}
@@ -822,7 +826,11 @@ $(document).on('change' , '#so',function(){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         for(var ci = 0;ci<=idq-1;ci++){
             
-            htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+            if(ci == 0){
+                         htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    }else{
+                        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" disabled class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"disabled class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    }
         }$(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
     }
         }
@@ -837,9 +845,9 @@ $(document).on('change' , '#so',function(){
           var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
           if(idq > 0){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
-            for(var ci = 0;ci<=idq-1;ci++){
+            $('#idq').val("1");
             htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
-        }
+        
     }else{
         $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         htmlq+='<input type="text"  style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
@@ -878,7 +886,11 @@ $(document).on('change','#rn',function(){
             $(this).parents().parents().siblings().children('td[id=keyy]').html('');
         for(var ci = 0;ci<=idq-1;ci++){
             
-        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+            if(ci == 0){
+                         htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    }else{
+                        htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" disabled class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"disabled class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
+                    }
           
         }  
     }else{

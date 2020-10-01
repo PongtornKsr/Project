@@ -1,6 +1,7 @@
 <?php 
 SESSION_START();
 require_once ('Log.class.php');
+include "action_insert.php";
 $Fuction = "";
 if(isset($_GET['function'])){
     $Fuction = $_GET['function'];
@@ -39,6 +40,7 @@ function RoleUp(){
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $name = $row['givenName']." ".$row['familyName'];
+                insert_action("ตั้ง ".$name." เป็นเจ้าหน้าที่");
                 $log = new Log();
                 $log->Write('log/test.txt','#### '.date("l jS \of F Y h:i:s A").' ####');
                 $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');
@@ -62,6 +64,7 @@ function RoleDown(){
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $name = $row['givenName']." ".$row['familyName'];
+                insert_action("ตั้ง ".$name." เป็นผู้ใช้ทั่วไป");
                 $log = new Log();
                 $log->Write('log/test.txt','#### '.date("l jS \of F Y h:i:s A").' ####');
                 $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');
@@ -101,9 +104,10 @@ function useractive(){
 function userinsert(){
     require 'connect.php';
     $name = $_POST['fname']." ".$_POST['lname']; 
-    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`,`username`,`password`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."','".$_POST['username']."','".$_POST['pass']."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y : %H:%i')),'".$_POST['Type']."','1')";
+    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`,`username`,`password`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."','".$_POST['username']."','".$_POST['pass']."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')),'".$_POST['Type']."','1')";
     if ($conn->query($sqla) === TRUE) {
         $log = new Log();
+        insert_action("เพิ่ม ".$name." เป็นผู้ใช้ใหม่");
         $log->Write('log/test.txt','#### '.date("l jS \of F Y h:i:s A").' ####');
         $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');
         $log->Write('log/test.txt','#### Action : insert new user : '.$name.' ####');
@@ -151,6 +155,7 @@ function usblock(){
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
                                 $name = $row['givenName']." ".$row['familyName'];
+                                insert_action("ปิดการใช้งานบัญชีของ ".$name." ");
                                 $log = new Log();
                                 $log->Write('log/test.txt','#### '.date("l jS \of F Y h:i:s A").' ####');
                                 $log->Write('log/test.txt','#### Account : '.$_SESSION['Account'].' ####');

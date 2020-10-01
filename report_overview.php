@@ -65,8 +65,12 @@ if(!empty($_POST['img5'])){
 <?php  
     $paperaxis = $_SESSION['axis'];
     $mpdf->SetDisplayMode('fullwidth'); 
-    
+    if($paperaxis == 'P'){
         $mpdf->AddPage('P');
+    }else{
+        $mpdf->AddPage('A4-L');
+    }
+        
     
     // ตั้งค่ากระดาษ
     $html = ob_get_contents(); // ดึงข้อมูลที่เก็บไว้ในบัฟเฟอร์

@@ -1,5 +1,7 @@
 <?php 
+SESSION_START();
 require 'connect.php';
+include 'action_insert.php'; 
 echo "AADS";
 $num = "255546.65";
 echo "<br>";
@@ -107,5 +109,12 @@ for($i = 0 ; $i <count($idA); $i++){
 }
 
 print_r($idA);
-header('Location: assetmanage.php');
+$sqlxe = "SELECT * FROM asset where id = '".$idA[0]."'";
+$result = $conn->query($sqlxe);
+           if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                insert_action("แก้ไขทะเบียนคุมทรัพย์สิน ".$row['asset_setname']." ".$row['asset_name']);
+            }
+        }
+//header('Location: assetmanage.php');
 ?>

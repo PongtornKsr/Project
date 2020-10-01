@@ -204,7 +204,7 @@ $('document').ready(function(){
     });
 
     $('#email').on('blur', function() {
-        var email = $('#email').val().trim();
+        var email = $('#email').val();
         if (email == '') {
             email_state = false;
             $('#email').parent().removeClass();

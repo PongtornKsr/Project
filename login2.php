@@ -11,6 +11,19 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $_SESSION['Account'] = $row['givenName']." ".$row['familyName'];
+        if(isset($eml)){
+            $sqle = "UPDATE `userdata` SET last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE email = '".$eml."' ";
+            if ($conn->query($sqle) === TRUE) {  
+    
+            }
+        }else if(isset($_POST['uname'])){
+            $sqle = "UPDATE `userdata` SET last_update = (SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE username = '".$_POST['uname']."' ";
+            if ($conn->query($sqle) === TRUE) {  
+    
+            }
+        }
+    
+        
     if($row['profile_ID'] == 1){
         header("location: indexAdmin.php");
     }

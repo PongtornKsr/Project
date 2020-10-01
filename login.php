@@ -48,7 +48,7 @@
 							<input type="password" name = "password" class="form-control input_user" placeholder="PASSWORD">
 						</div>
 						
-						<a style = "float: right"href="Setnewpass.php">ลืมรหัสผ่าน</a>
+						<!-- <a style = "float: right"href="Setnewpass.php">ลืมรหัสผ่าน</a> -->
 						</div>
 						
 							<div class="d-flex justify-content-center mt-3 login_container">

@@ -1,5 +1,6 @@
 <?php SESSION_START();
     require 'connect.php';
+    include 'action_insert.php';
     require_once __DIR__ . '/vendor/autoload.php';
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
@@ -51,6 +52,7 @@ ob_start();
 </style>
 </head>
 <body>
+
 <h2 align="center">รายการครุภัณฑ์</h2>
 <br>
 
@@ -265,6 +267,7 @@ ob_start();
      }
       
 ?>
+
 <div style ="float:left"><?php echo $search_word; ?></div>
 <br>
 <div id = "order_table">
@@ -313,7 +316,7 @@ ob_start();
     
    
     ?>
-    <center><a  href="pdf/Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสารPDF</botton></a><button id ="create_excel"type="button" class="btn btn-success">ดาวโหลดไฟล์Excel</botton><center>
+    <center><a  href="pdf/Asset_Order_List.pdf" target="_blank"><button type="button" class="btn btn-success">ดาวโหลดเอกสารPDF</botton></a><button id ="create_excel"type="button" class="btn btn-success">ดาวโหลดไฟล์Excel</button><center>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>  
@@ -329,7 +332,14 @@ ob_start();
 </html>
 <?php 
 
-//header("Location: pdf/Asset_Order_List.pdf"); 
+if($_POST['checkway'] == "order"){
+    insert_action("พิมพ์ รายการครุภัณฑ์");
+    header("Location: pdf/Asset_Order_List.pdf"); 
+}else{
+    insert_action("ดาวน์โหลดไฟล์ Excel รายการครุภัณฑ์");
+    header("Location: order_excel.php");
+}
+
 
 ob_end_flush();
 ?>

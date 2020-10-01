@@ -1,5 +1,8 @@
 <?php
+SESSION_START();
 require 'connect.php';
+include 'action_insert.php';
+insert_action("พิมพ์ทะเบียนคุมทรัพย์สินครุภัณฑ์ทุกรายการ");
 require_once __DIR__ . '/vendor/autoload.php';
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
