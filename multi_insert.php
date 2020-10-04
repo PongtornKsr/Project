@@ -9,6 +9,7 @@ require 'connect.php';
  $idA = array();
  $idB = array();
  $a = array();
+ $arraycontain =array();
  $break = false;
  if($numberss >= 0)  
  {  
@@ -92,26 +93,13 @@ require 'connect.php';
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
                 }else{
-                    $sql= "INSERT INTO assettype ( asset_type_name ) VALUES ('ค่าว่าง')";           
-                    if ($conn->query($sql) == TRUE) {
-                        $sql = "SELECT asset_type_ID FROM assettype WHERE asset_type_name = 'ค่าว่าง'";
+                    $sql = "SELECT * FROM `assettype` WHERE asset_type_name like '%ยังไม่กำหนด%'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             $assettype = $row['asset_type_ID'];
-                        }
-                        }
-        
-        
-                    } else {
-                        $sql = "SELECT asset_type_ID FROM assettype WHERE asset_type_name = 'ค่าว่าง'";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $assettype = $row['asset_type_ID'];
-                        }
-                        }
-                    }
+             }
+            }
                 }
                 
                
@@ -226,25 +214,15 @@ require 'connect.php';
             }
                 }
                 else{
-                    $sql = "INSERT INTO room ( room ) VALUE ( 'ค่าว่าง' )";
-                    if ($conn->query($sql) == TRUE) {
-                        $sql = "SELECT room_ID FROM room WHERE room = 'ค่าว่าง'";
+                    
+                        $sql = "SELECT room_ID FROM room WHERE like '%ยังไม่กำหนด%'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             $rmid = $row['room_ID'];
                         }
                     }
-                }
-                else{
-                    $sql = "SELECT room_ID FROM room WHERE room = 'ค่าว่าง'";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $rmid = $row['room_ID'];
-                        }
-                    }
-                }
+               
                 }
                
             }else{
@@ -378,10 +356,102 @@ require 'connect.php';
                 
                
                    
-                
-                        
+                for ($i = 0; $i < count($sqlm); $i++) {
             
+               // mysqli_query($connect, $sqlm[$i]);
+                $sqlq = $sqlm[$i];          
+                if ($conn->query($sqlq) == TRUE) {                     
+            
+            //echo $sqlm[$i];
+                    }
+                 }
+
+
+                 $sqlm = [];
+                 for($x = 0; $x< count($a); $x++){
+            $q = $a[$x];
+            $sqlst = "SELECT * FROM asset WHERE asset_number = $q";
+            $result = $conn->query($sqlst);
+            if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $assetnum = $row['id'];
+                array_push($idA,$assetnum);
+                $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."',1)";
+                if ($conn->query($sqlsta) == TRUE) {
+                //echo $sqlsta;
+                }
             }
+        }
+        }
+
+        $a = [];
+      $cr = 'count_re'.''.($count+1).'';
+    $count_re = $_POST[$cr];
+    echo $_POST[$cr]."<br>";
+    echo $count_re;
+    for($h = 0 ; $h <= $count_re; $h++)
+    {
+        $da = 'report_date'.''.($count+1).'';
+        $rep = 'report_NO'.''.($count+1).'';
+        $repod = 'report_order'.''.($count+1).'';
+        $un = 'unit'.''.($count+1).'';
+        $pr = 'price_per_unit'.''.($count+1).'';
+        $su = 'summary'.''.($count+1).'';
+        $li = 'life_time'.''.($count+1).'';
+        $de = 'Depreciation_rate'.''.($count+1).'';
+        $ye = 'year_Depreciation'.''.($count+1).'';
+        $sumde = 'sum_Depreciation'.''.($count+1).'';
+        $netv = 'net_value'.''.($count+1).'';
+        $ch = 'Change_order'.''.($count+1).'';
+        $repn ='report_number'.''.($count+1).'';
+    $date = isset($_POST[$da][$h]) ? $_POST[$da][$h] : null;
+    $report_NO = isset($_POST[$rep][$h]) ? $_POST[$rep][$h] : null;
+    $report_order = isset($_POST[$repod][$h]) ? $_POST[$repod][$h] : null;
+    $unit = isset($_POST[$un][$h]) ? $_POST[$un][$h] : null;
+    $price_per_unit =  isset($_POST[$pr][$h]) ? $_POST[$pr][$h] : null;
+    $summary = isset($_POST[$su][$h]) ? $_POST[$su][$h] : null;
+    $life_time =  isset($_POST[$li][$h]) ? $_POST[$li][$h] : null;
+    $Depreciation_rate = isset($_POST[$de][$h]) ? $_POST[$de][$h] : null;
+    $year_Depreciation = isset($_POST[$ye][$h]) ? $_POST[$ye][$h] : null;
+    $sum_Depreciation =  isset($_POST[$sumde][$h]) ? $_POST[$sumde][$h] : null;
+    $net_value =  isset($_POST[$netv][$h]) ? $_POST[$netv][$h] : null;
+    $Change_order = isset($_POST[$ch][$h]) ? $_POST[$ch][$h] : null;
+    $report_number = isset($_POST[$repn][$h]) ? $_POST[$repn][$h] : null;
+    $t = time();
+    $r = rand();
+    $sql = "INSERT INTO `asset_report`( `date`,`time_now`, `report_NO`, `report_order`, `unit`, `price_per_unit`, `summary`, `life_time`, `Depreciation_rate`, `year_Depreciation`, `sum_Depreciation`, `net_value`, `Change_order`, `report_number`) VALUES ('".$date."','".$t.$h.$r."','".$report_NO."','".$report_order."','".$unit."','".$price_per_unit."','".$summary."','".$life_time."','".$Depreciation_rate."','".$year_Depreciation."','".$sum_Depreciation."','".$net_value."','".$Change_order."','".$report_number."')";
+    if ($conn->query($sql) == TRUE) {
+           $sql = "SELECT aid FROM asset_report WHERE time_now = '".$t.$h.$r."'" ;
+           $result = $conn->query($sql);
+           if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+            $repid = $row['aid'];
+            array_push($idB,$repid);
+            }
+           }
+        
+        }
+    }  
+            
+        for($i = 0 ; $i <count($idA); $i++){
+        for($z = 0 ; $z <count($idB) ; $z++){
+            $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$idA[$i]."','".$idB[$z]."')";
+            if ($conn->query($sqll) == TRUE) {
+            //echo $sqll;
+            }
+
+        }
+
+    }
+    print_r($idA);
+    echo "<br>";
+    print_r($idB);
+    echo "<br>";
+    $idA = [];
+    $idB = [];
+
+
+}
 
             
             //header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -397,81 +467,19 @@ require 'connect.php';
            }
           //print_r($sqlm);
           
-           for ($i = 0; $i < count($sqlm); $i++) {
-            
-               // mysqli_query($connect, $sqlm[$i]);
-                $sqlq = $sqlm[$i];          
-                if ($conn->query($sqlq) == TRUE) {                     
-            
-            //echo $sqlm[$i];
-            }
-        }
+           
        // echo count($sqlm);
         //print_r($a);
         //echo "count : a :".count($a);
-        for($x = 0; $x< count($a); $x++){
-            $q = $a[$x];
-            $sqlst = "SELECT * FROM asset WHERE asset_number = $q";
-            $result = $conn->query($sqlst);
-            if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $assetnum = $row['id'];
-                array_push($idA,$assetnum);
-                $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."',1)";
-                if ($conn->query($sqlsta) == TRUE) {
-                //echo $sqlsta;
-                }
-            }
-        }
-
-        }
-    
-    $count_re = $_POST['count_re'];
-    for($h = 0 ; $h <= $count_re; $h++)
-    {
-    $date = $_POST['report_date'][$h];
-    $report_NO = $_POST['report_NO'][$h];
-    $report_order = $_POST['report_order'][$h];
-    $unit = $_POST['unit'][$h];
-    $price_per_unit = $_POST['price_per_unit'][$h];
-    $summary = $_POST['summary'][$h];
-    $life_time = $_POST['life_time'][$h];
-    $Depreciation_rate = $_POST['Depreciation_rate'][$h];
-    $year_Depreciation = $_POST['year_Depreciation'][$h];
-    $sum_Depreciation = $_POST['sum_Depreciation'][$h];
-    $net_value = $_POST['net_value'][$h];
-    $Change_order = $_POST['Change_order'][$h];
-    $report_number = $_POST['report_number'][$h];
-    $t = time();
-    $sql = "INSERT INTO `asset_report`( `date`,`time_now`, `report_NO`, `report_order`, `unit`, `price_per_unit`, `summary`, `life_time`, `Depreciation_rate`, `year_Depreciation`, `sum_Depreciation`, `net_value`, `Change_order`, `report_number`) VALUES ('".$date."','".$t.$h."','".$report_NO."','".$report_order."','".$unit."','".$price_per_unit."','".$summary."','".$life_time."','".$Depreciation_rate."','".$year_Depreciation."','".$sum_Depreciation."','".$net_value."','".$Change_order."','".$report_number."')";
-    if ($conn->query($sql) == TRUE) {
-           $sql = "SELECT aid FROM asset_report WHERE time_now = '".$t.$h."'" ;
-           $result = $conn->query($sql);
-           if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-            $repid = $row['aid'];
-            array_push($idB,$repid);
-            }
-           }
         
-        }
-  
-    }
+    
+    
     //print_r($idA);
     //print_r($idB);
     //print_r($sqlm);
 
 
-    for($i = 0 ; $i <count($idA); $i++){
-        for($z = 0 ; $z <count($idB) ; $z++){
-            $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$idA[$i]."','".$idB[$z]."')";
-            if ($conn->query($sqll) == TRUE) {
-            //echo $sqll;
-            }
-
-        }
-
-    }
+    
     //echo "number".count($_POST['num']);
     //echo "a".count($a);
     //echo " ".$idA;
@@ -490,7 +498,7 @@ require 'connect.php';
       //print_r($a);
       //echo $sqlst;
       //echo $sqlsta;
-      header('Location: assetmanage.php');
+      //header('Location: assetmanage.php');
       /*
       echo $_POST['asset_name'];
       echo $_POST['num'];

@@ -154,22 +154,22 @@ $J = $row['fax'];
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {
-array_push($rowc , '
+array_push($rowc, '
 <tr>
 <td align="right" width = "50px">'.$row['date'].'</td> <!--วันที่-->
 <td align="center" width = "50px">'.$row['report_NO'].'</td> <!--เลขเอกสาร-->
 <td align="left" width = "300px">'.$row['report_order'].'</td> <!--รายการ-->
 <td align="center" width = "50px">'.$row['unit'].'</td>  <!--จำนวนชุด-->
-<td align="right"width = "50px">'.$row['price_per_unit'].'</td>  <!--ราคาต่อหน่วย-->
+<td align="right" width = "50px">'.$row['price_per_unit'].'</td>  <!--ราคาต่อหน่วย-->
 <td align="right" width = "100px">'.$row['summary'].'</td>  <!--ราคารวม-->
 <td align="right" width = "50px">'.$row['life_time'].'</td>  <!--ค่าเสื่อมประจำปี-->
-<td align="right"width = "50px">'.$row['Depreciation_rate'].'</td>  <!--ค่าเสื่อมประจำปี-->
-<td align="right"width = "50px">'.$row['year_Depreciation'].'</td> <!--ค่าเสื่อมสะสม-->
-<td align="right"width = "50px">'.$row['sum_Depreciation'].'</td> <!--มูลค่าสุทธื-->
-<td align="right"width = "100px">'.$row['net_value'].'</td> <!--มูลค่าสุทธื-->
-<td align="center"width = "50px">'.$row['Change_order'].'</td>  <!--รายการเปลี่ยนแปลง-->
-<td align="center"width = "50px">'.$row['report_number'].'</td>  <!--เลขที่เอกสาร-->   
-  </tr>') ;}      }
+<td align="right" width = "50px">'.$row['Depreciation_rate'].'</td>  <!--ค่าเสื่อมประจำปี-->
+<td align="right" width = "50px">'.$row['year_Depreciation'].'</td> <!--ค่าเสื่อมสะสม-->
+<td align="right" width = "50px">'.$row['sum_Depreciation'].'</td> <!--มูลค่าสุทธื-->
+<td align="right" width = "100px">'.$row['net_value'].'</td> <!--มูลค่าสุทธื-->
+<td align="center" width = "50px">'.$row['Change_order'].'</td>  <!--รายการเปลี่ยนแปลง-->
+<td align="center" width = "50px">'.$row['report_number'].'</td>  <!--เลขที่เอกสาร-->   
+</tr>') ;}      }
 
   $countrowc = count($rowc); //23
   $forcount = floor($countrowc / 7);  // 3
@@ -345,9 +345,11 @@ echo "<br>"  ;
 
 
     <?php
-    for( $u = (7*$forcount) ; $u < ((7*$forcount)+$forin)+1 ;  $u ++){
-      echo $rowc[$u];
-  }
+    for( $u = (7*$forcount) ; $u < ((7*$forcount)+$forin) ;  $u ++){
+      
+        echo $rowc[$u];
+      
+    }
   echo '</table>';
 
 }

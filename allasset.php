@@ -348,7 +348,7 @@ echo "<br>"  ;
 
 
     <?php
-    for( $u = (7*$forcount) ; $u < ((7*$forcount)+$forin)+1 ;  $u ++){
+    for( $u = (7*$forcount) ; $u < ((7*$forcount)+$forin) ;  $u ++){
       echo $rowc[$u];
   }
   echo '</table>';

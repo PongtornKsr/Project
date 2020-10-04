@@ -13,12 +13,13 @@
            
     <style>
     
-    #treport_td{ border: 1px solid black; }
+    #treport_td{ border: 1px solid black;}
     #treport_tds{ 
         border: 1px solid black;
        
                     border-top: none;
     }
+    
     input[type=text]{
         width: 100%
     }
@@ -33,18 +34,21 @@
  <body> 
  <?php require 'nav.php'; ?>
   <br />
-  <div class="container" style="width:90%">
+  <div class="container-fluid" style="width:65%">
    <h3 align="center">เพิ่มครุภัณฑ์ชุด</h3>
    <br />
    <h4 align="center">Enter Item Details</h4>
    <br />
-   <form class = "whitebox" action= "multi_insert.php" name="add_detail" id="add_detail" method = "POST" style="width:100%" >  
-                          <div class="table-responsive" style="width:100%">  
-                               <table class="table table-borderless"  id="dynamic_field" style="width:100%">  
+   <form class = "whitebox" action= "multi_insert.php" name="add_detail" id="add_detail" method = "POST" style="width:100%" >
+   <br>
+   <br>  
+                          <div class="table-responsive"style="width:100%">  
+                               <table class="table table-borderless"  id="dynamic_field" style="width:100%;">  
                                     <tr id = "0t">  
-                                         <td>
+                                         <td style="width:90%">
+                                         
                                          <input type="hidden" name="num[]">
-                                         <table Align = "center">
+<table Align = "center" style="width:80%">
             <tr>
                 <td>
                     รายการที่ :
@@ -342,14 +346,18 @@
                     <input type="text" name="note[]">
                 </td>
             </tr>
+            
         </table>
-                                         </td>  
-                                         <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>  
-                                    </tr>  
-                               </table>  
-                               <table id = "treport">
-                               <thead>
-                               <tr id ="treport_tr">
+        
+                    </td>  
+                    <td Align="center"><button type="button" name="add" id="add" class="btn btn-success">+</button></td>
+                    </tr>
+                    <tr id = "0t" > 
+                        <td class = "container-fluid" colspan="2">
+                        <div height = "200px">
+                                    <table height = "200px" >
+                               <thead height = "200px">
+                               <tr  id ="treport_tr" style ="height:50px">
                                     <td id = "treport_td" rowspan="2">
                                         <div>วัน/เดือน/ปี</div>
                                     </td>
@@ -387,39 +395,46 @@
                                         <div>รายการเปลี่ยนแปลงการเคลื่อนย้ายสถานภาพ</div>
                                     </td>
                                </tr>
-                               <tr>
-                                 <td id = "treport_td"><div>รายการเปลี่ยน</div> </td>
-                                 <td id = "treport_td"><div>รายการเลขที่เอกสาร</div> </td>
+                               <tr style ="height:50px">
+                                 <td id = "treport_td" style ="height:50px"><div>รายการเปลี่ยน</div> </td>
+                                 <td id = "treport_td" style ="height:50px"><div>รายการเลขที่เอกสาร</div> </td>
                                </tr>
                                </thead>
-                               <tbody id = "tbody">
+                               <tbody id = "tbody1">
                                 <tr id = "report_ta">
-                                  <td id = "treport_td" ><input name = "report_date[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "report_NO[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "report_order[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "unit[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "price_per_unit[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "summary[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>
-                                  <td id = "treport_td" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_date1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_NO1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_order1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "unit1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "price_per_unit1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "summary1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "life_time1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "Depreciation_rate1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "year_Depreciation1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "sum_Depreciation1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "net_value1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "Change_order1[]" style ="width:100%;" type = "text"></td>
+                                  <td id = "treport_td" ><input name = "report_number1[]"style ="width:100%;" type = "text"></td>
                                  </tr>
-                                 
-                                 
-                                 
-                                 
-
-                                 
                                </tbody>
                                </table>
+                               <div id ="bam1"style = "float:right;"><input type = "hidden" value = "1" id = "asita" name ="asita"><button style = "width:50%"  type="button" id = "minus" class="btn btn-danger">-</button><button style = "width:50%" type="button" id = "plus" class="btn btn-success">+</button>
+                               <input type = "hidden" id = "count_re1" name ="count_re1"></div>
+                                </div>
+                                </td>
+                                
+                                </tr>
+                            
+                        </table> 
+                                    
                                
-                               <div style = "float:right;"><button style = "width:50%" type="button" id = "minus" class="btn btn-danger">-</button><button style = "width:50%" type="button" id = "plus" class="btn btn-success">+</button></div>
+                                    
+                                
+                               
+                               
+                               
                                <br>
-                               <input type = "hidden" id = "count_re" name ="count_re">
+                               
                                <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit"/> </center> 
                           </div>  
                      </form>  
@@ -433,9 +448,10 @@
 $(document).ready(function(){  
     
     var array = [1,2,3,4,5,6,7,8,9,10];
+    var keystone = [0];
     var num = 0;
       var i=1;  
-      
+      var asi = 1;
       function checknum() {
         return num;
         }
@@ -448,7 +464,7 @@ $(document).ready(function(){
         
         }
       $('#add').click(function(){  
-             
+             asi +=1;
            for(var di = 1 ; di <= 10 ; di ++){
      	var q = false;
         var w = false;
@@ -475,11 +491,12 @@ $(document).ready(function(){
         array.push(numa);
         array.push(numb);
             }
+           keystone.push(0);
            var html = '';
   html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
-  html += '<table Align = "center">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่:</td><td><input type="text" id = "datepick" class ="datepick" name = "addin_date[]" width="50" required></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
+  html += '<table Align = "center" style="width:80%">';
+  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่:</td><td><input type="date" id = "datepick" class ="datepick" name = "addin_date[]" width="50" required></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
   html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
   html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การรันเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]"required width="50"></td></tr>';
   html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]"required width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
@@ -491,14 +508,40 @@ $(document).ready(function(){
   html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
   html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"required ></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
+  
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
-           $('#dynamic_field').append('<tr id="'+i+'t"><td>'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr>');  
+          
+           var html2 = "";
+           html2 += '<table id = "'+asi+'"><thead><tr id ="treport_tr"><td id = "treport_td" rowspan="2"><div>วัน/เดือน/ปี</div></td><td id ="treport_td" rowspan="2"><div>ที่เอกสาร</div></td><td id = "treport_td" rowspan="2"><div>รายการ</div></td>';
+  html2 += '<td id = "treport_td" rowspan="2"> <div>จำนวนหน่วย</div></td><td id = "treport_td" rowspan="2"><div>ราคาต่อ หน่วย/ชุด/กลุ่ม</div></td><td id = "treport_td" rowspan="2"><div>มูลค่ารวม</div></td><td id = "treport_td" rowspan="2"><div>อายุการใช้งาน</div></td><td id = "treport_td" rowspan="2">';
+  html2 += '<div>อัตรค่าเสื่อมราคา(%)</div></td><td id = "treport_td" rowspan="2"><div>ค่าเสื่อมราคาประจำปี</div></td><td id = "treport_td" rowspan="2"><div>ค่าเสื่อมราคาสะสม</div></td><td id = "treport_td" rowspan="2"><div>มูลค่าสุทธิ</div></td><td id = "treport_td" colspan="2"><div>รายการเปลี่ยนแปลงการเคลื่อนย้ายสถานภาพ</div>';
+  html2 += '</td></tr><tr><td id = "treport_td"><div>รายการเปลี่ยน</div> </td><td id = "treport_td"><div>รายการเลขที่เอกสาร</div> </td></tr></thead>';
+  html2 += '<tbody id = "tbody'+asi+'"><tr id = "report_ta"><td id = "treport_td" ><input name = "report_date'+asi+'[]" style ="width:100%;" type = "text"></td><td id = "treport_td" ><input name = "report_NO'+asi+'[]" style ="width:100%;" type = "text"></td><td id = "treport_td" ><input name = "report_order'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "unit'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "price_per_unit'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "summary'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "life_time'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "Depreciation_rate'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "year_Depreciation'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "sum_Depreciation'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "net_value'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "Change_order'+asi+'[]" style ="width:100%;" type = "text"></td>';
+  html2 += '<td id = "treport_td" ><input name = "report_number'+asi+'[]"style ="width:100%;" type = "text"></td>';
+  html2 += '</tr>';                             
+  html2 += '</tbody>';
+  html2 += '</table>';
+  html2 += '<div id ="bam1" style = "float:right;"><input type = "hidden" value = "'+asi+'" id = "asita" name ="asita"><button style = "width:50%"  type="button" id = "minus" class="btn btn-danger">-</button><button style = "width:50%" type="button" id = "plus" class="btn btn-success">+</button><input type = "hidden" id = "count_re'+asi+'" name ="count_re'+asi+'"></div>';
+  //$('#asi_report').append(html2);
+  $('#dynamic_field').append('<tr id="'+i+'t"><td style="width:90%">'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr><tr id="'+i+'tt" ><td class = "container-fluid" colspan="2"><div height = "200px">'+html2+'</div></td></tr>');  
            i++;
       });  
       $(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
+           var button_id = $(this).attr("id");
+           keystone.splice(button_id-1, 1);   
            $('#'+button_id+'').remove();
+           $('#'+button_id+'t').remove();
            i--;
+           asi--;
            
       });
       $(document).on('keyup','input[id=ida]' , function(){
@@ -685,43 +728,48 @@ $(document).ready(function(){
         
     });
     var tra = [0];
-    $("#count_re").val(tra[0]);
     $(document).on('click','#plus',function(){
-        var a = tra[tra.length-1]+1;
-
-        tra.push(a);
-        $("#count_re").val(tra[tra.length-1]);
+       var asita = $(this).siblings('input[id=asita]').val();
+        keystone[asita-1]+=1;
+        
+        
+        $("#count_re"+asita).val(keystone[asita-1]);
+        
         //var ss = $(this).parent().parent().siblings().children().attr('rowspan');
         //var q = parseInt(ss);
         //var s = q+1;
         //$(this).parent().parent().siblings().children().attr('rowspan',s);
         var html = '';
-        html +='<tr id = "'+tra[tra.length-1]+'s">';
-        html += '<td id = "treport_tds" ><input name = "report_date[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "report_NO[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "report_order[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "unit[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "price_per_unit[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "summary[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "life_time[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "Depreciation_rate[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "year_Depreciation[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "sum_Depreciation[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "net_value[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "Change_order[]" style ="width:100%;" type = "text"></td>';
-        html +='<td id = "treport_tds" ><input name = "report_number[]"style ="width:100%;" type = "text"></td>';
+        html +='<tr id = "'+asita+keystone[asita-1]+'s">';
+        html += '<td id = "treport_tds" ><input name = "report_date'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_NO'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_order'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "unit'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "price_per_unit'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "summary'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "life_time'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "Depreciation_rate'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "year_Depreciation'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "sum_Depreciation'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "net_value'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "Change_order'+asita+'[]" style ="width:100%;" type = "text"></td>';
+        html +='<td id = "treport_tds" ><input name = "report_number'+asita+'[]"style ="width:100%;" type = "text"></td>';
         html +='</tr>';
-        $('#tbody').append(html);
+        $('#tbody'+asita).append(html);
 
     });
     $(document).on('click','#minus',function(){
+        var asita = $(this).siblings('input[id=asita]').val();
         
-        var a = tra[tra.length-1] ;
+        if(keystone[asita-1] == 0){ }
+        else if(keystone[asita-1] > 0){
+            
+        $('#'+asita+keystone[asita-1]+'s').remove();
         
-        if(a == 0){ }
-        else if(a > 0){tra.pop();
-        $('#'+a+'s').remove();}
-        $("#count_re").val(tra[tra.length-1]);
+        keystone[asita-1] -= 1;
+        $("#count_re"+asita).val(keystone[asita-1]);
+        }
+       
         /*var ss = $(this).parent().parent().siblings().children().attr('rowspan');
         var q = parseInt(ss);
         if(q <=1 ){ }
@@ -832,6 +880,18 @@ $(document).on('change' , '#so',function(){
                         htmlq+='<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida" disabled class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"disabled class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = ""><br>';
                     }
         }$(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+    }
+        }else if( run == "defaultex"){
+            var idq= $(this).parents().parents().siblings().children().children('input[id=idq]').val();
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        htmlq ="";
+        htmlq+= '<input type="text" style ="width:40%" name="asset_ID[]"required id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = "">';
+        $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+        var htmlq = "";
+        if(idq > 0){
+            $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+        $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
     }
         }
     }

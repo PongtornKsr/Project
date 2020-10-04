@@ -116,5 +116,5 @@ $result = $conn->query($sqlxe);
                 insert_action("แก้ไขทะเบียนคุมทรัพย์สิน ".$row['asset_setname']." ".$row['asset_name']);
             }
         }
-//header('Location: assetmanage.php');
+header('Location: assetmanage.php');
 ?>
