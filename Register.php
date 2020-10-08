@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="CSS/RegistCSS.css">
 	<link rel="stylesheet" href="Css/BG.css">
 	<link rel="stylesheet" href="CSS/navbar.css">
+	<link rel="shortcut icon" href="img/computer.png">
 </head>
 <body>
 <center>

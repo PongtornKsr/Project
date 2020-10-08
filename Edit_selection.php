@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="CSS/fixedheader.css">
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/tab.css">
+    <link rel="shortcut icon" href="img/computer.png">
     <title>CS_Asset</title>
 </head>
 <body>
@@ -46,6 +47,7 @@
      <thead>
       <tr>
        <th>สถานะครุภัณฑ์</th>
+       <th>สีสถานะครุภัณฑ์</th>
        <th>ตัวเลือก</th>
       </tr>
      </thead>

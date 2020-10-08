@@ -57,14 +57,19 @@ ob_start();
 $as = $_GET['asset_number'];
 $rowc= array();
 $mt = "";
+$mo = "";
 $getm = "";
 $C = "";
 $set ="";
 $min = "";
 $max = "";
 $mas = "";
+$aid = "";
 $cun = array();
 $cmin = array();
+$allid = array();
+$b = array();
+$f = array();
 $sql = "SELECT asset_Set FROM asset WHERE asset_number = '".$as."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -73,22 +78,22 @@ $set = $row['asset_Set'];
 }
 }
 
-$sql = "SELECT MIN(asset_ID) From asset WHERE asset_Set like '".$set."'";
+$sql = "SELECT * From asset WHERE asset_Set like '".$set."' ORDER BY CAST(asset_number AS SIGNED) asc LIMIT 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
-$min .= $row['MIN(asset_ID)'];
+$min .= $row['asset_ID'];
 }
 }
 $cmin = explode(" ",$min);
-$sql = "SELECT MAX(asset_ID) From asset WHERE asset_Set like '".$set."'";
+$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY CAST(asset_number AS SIGNED) DESC LIMIT 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
-$max .= $row['MAX(asset_ID)'];
+$max .= $row['asset_ID'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."' order by id DESC LIMIT 1";
+$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."' order by CAST(asset_number AS SIGNED) DESC LIMIT 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -102,10 +107,16 @@ while($row = $result->fetch_assoc()) {
   array_push($cun,$row['asset_number']);
 }
 }
+$e = [];
 $e = explode(".",$mas);
 //echo count($cun);
 //echo $e[1];
+
+if(count($e) > 1){
+  $cu = count($cun);
+  $mod = fmod($cu,2);
 if(count($cun) == $e[1]){
+  echo "A";
   if($min == $max){
   $C .= $min;
   }else {
@@ -119,14 +130,156 @@ if(count($cun) == $e[1]){
   
   }
 }else {
-  $C .= $cmin[0];
+  if($mod == 1){
+$C .= $cmin[0];
+  $t = false;
+  $rr = false;
+  $l = false;
+  $b = [];
+  $f = [];
   for($i = 1; $i < count($cun);$i++){
-       $C .= ','.$cun[$i];  
+    if($i == (count($cun)-1)){
+      $rr = true;
+    }
+      $b = explode('.',$cun[$i-1]);
+      $f = explode('.',$cun[$i]);
+      if(($b[1]+1) == $f[1]){
+          if($i != (count($cun)-1) && $t == false && $rr == false){
+              $t = true;
+              $C .= '-';
+              $l = true;
+          }
+          else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] && $rr == true && $l ==false){
+            
+            $C .= "-".$cun[$i];
+          }
+          else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] && $rr == true && $l ==true){
+            $C .= $cun[$i];
+          }
+          
+      }
+      else if(($b[1]+1) != $f[1]){
+          if($t == true){
+              $t = false;
+              $C .= $cun[$i-1].','.$cun[$i];
+              $l = false;
+          }
+          else if($t == false){
+            $l = false;
+              $C .= ','.$cun[$i]; 
+          }
+         
+      }
+
   }
   if(!empty($cmin[1])){
     $C .= ' '.$cmin[1];
   }
+
+  }elseif($mod == 0){
+
+    $C .= $cmin[0];
+    $t = false;
+    $rr = false;
+    $b = [];
+    $f = [];
+    for($i = 1; $i < count($cun);$i++){
+      if($i == (count($cun)-1)){
+        $rr = true;
+      }
+        $b = explode('.',$cun[$i-1]);
+        $f = explode('.',$cun[$i]);
+        if(($b[1]+1) == $f[1]){
+            if($i != (count($cun)-1) && $t == false && $rr == false){
+                $t = true;
+                $C .= '-';
+            }
+            else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] || $rr == true ){
+              
+              $C .= $cun[$i];
+            }
+            
+        }
+        else if(($b[1]+1) != $f[1]){
+            if($t == true){
+                $t = false;
+                $C .= $cun[$i-1].','.$cun[$i];
+            }
+            else if($t == false){
+                
+                $C .= ','.$cun[$i]; 
+            }
+           
+        }
   
+    }
+    if(!empty($cmin[1])){
+      $C .= ' '.$cmin[1];
+    }
+  }
+  
+  
+}
+}else{
+  echo "B";
+  $aid = "";
+  $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    $aid = $row['aid'];
+    //echo " d ".$row['aid']; 
+    }
+  }
+ $allid = [];
+  $sql = "SELECT asset_number FROM asset_report_text NATURAL join asset WHERE aid = '".$aid."'";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+      array_push($allid,$row['asset_number']);
+      //echo " d ".$row['asset_number']; 
+    }
+  }
+  if(count($allid) ==1){
+    $C .= $min;
+    
+  }
+  else{
+    $r = explode('/', $min);
+    $C .= $r[0].'/'.$allid[0];
+    $tt = false;
+    
+    for($i = 1; $i < count($allid);$i++){
+
+        
+        if(($allid[$i-1]+1) == $allid[$i]){
+          
+            if($tt == false){
+                $tt = true;
+                $C .= '-';
+            }else if($i < count($allid) && $tt == true ){
+              $C .= $allid[$i];
+            }
+        }
+        else if(($allid[$i-1]+1) != $allid[$i]){
+            if($tt == true){
+                $tt = false;
+                $C .= $allid[$i-1].','.$allid[$i];
+            }
+            else if($tt == false){
+                $C .= ','.$allid[$i]; 
+            }
+        }
+         
+
+  }
+  if(!empty($cmin[1])){
+    $C .= ' '.$cmin[1];
+  }
+  }
+
+
+
 }
 $sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_number = '".$as."'";
 $result = $conn->query($sql);

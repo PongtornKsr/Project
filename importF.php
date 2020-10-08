@@ -1,26 +1,39 @@
-<!DOCTYPE html>
+<!DOCTYPE html><?php SESSION_START(); require 'connect.php';?>
 <html>
    <head>
-     <title>Import Data From Excel or CSV File </title>
+     <title>CS_Asset </title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />  
+     <link rel="stylesheet" href="CSS/navbar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+    <link rel="stylesheet" href="CSS/BG.css">
+    <link rel="stylesheet" href="CSS/fixedheader.css">
+    <link rel="stylesheet" href="CSS/formstyle.css">
+    <link rel="shortcut icon" href="img/computer.png">
+    
    </head>
    <body>
+   <?php include 'nav.php'; ?>
+   <br>
+   <br>
+   <br>
      <div class="container">
+     
       <br />
-      <h3 align="center">Import Data From Excel or CSV File</h3>
+      <div class= "whitebox">
+      <h2 align="center">นำเข้าข้อมูลครุภัณฑ์</h3>
       <br />
         <div class="panel panel-default">
-          <div class="panel-heading">Import Data From Excel or CSV File </div>
+          <div class="panel-heading">นำเข้าข้อมูลครุภัณฑ์ จากไฟล์ Excel หรือ CSV</div>
           <div class="panel-body">
           <div class="table-responsive">
            <span id="message"></span>
               <form method="post" id="import_excel_form" enctype="multipart/form-data">
                 <table class="table">
                   <tr>
-                    <td width="25%" align="right">Select Excel File</td>
+                    <td width="25%" align="right">เลือกไฟล์ที่ต้องการนำเข้าข้อมูล</td>
                     <td width="50%"><input type="file" name="import_excel" /></td>
-                    <td width="25%"><input type="submit" name="import" id="import" class="btn btn-primary" value="import" /></td>
+                    <td width="25%"><input type="submit" name="import" id="import" class="btn btn-primary" value="นำเข้า" /></td>
                   </tr>
                 </table>
               </form>
@@ -28,6 +41,8 @@
               
           </div>
           </div>
+        </div>
+        <a  href="Excel_v/upload_ex/ตัวอย่างอัพโหลด.xlsx" target="_blank"><button type="button" class='btn btn-outline-success'>ดาวน์โหลดตัวอย่างไฟล์นำเข้าข้อมูล</button></a>
         </div>
      </div>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="Css/BG.css">
 	<link rel="stylesheet" href="CSS/navbar.css">
 	<link rel="stylesheet" href="CSS/formstyle.css">
+	<link rel="shortcut icon" href="img/computer.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -22,7 +23,7 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">

@@ -21,7 +21,7 @@ if(isset($_POST['nmsearch'])){
 	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="desc"  href="#" >สถานะ</a></th>
       <th scope="col"><a class= "column_sort" id="profile_name" data-order="desc"  href="#">ประเภทบัญชี</a></th>
       <th scope="col"><a class= "column_sort" id="last_update" data-order="desc"  href="#" >แก้ไขครั้งล่าสุด</a></th>
-	  <th scope="col">Edit</th> 
+	  <th scope="col">ตัวเลือก</th> 
 	  
     </tr>
   </thead> <tbody>';
@@ -51,7 +51,7 @@ if(isset($_POST['nmsearch'])){
             <td align='left'>".$row['stat_name']."</td>
             <td align='left'>".$row['profile_name']."</td>
             <td align='left'>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+43)."  ".$datethai[3]."</td>
-            <td>";
+            <td align= 'center'>";
             if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
       else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}
       
@@ -88,7 +88,7 @@ if(isset($_POST['sort'])){
 	  <th scope="col"><a class= "column_sort" id="stat_name" data-order="'.$order.'"  href="#" >สถานะ</a></th>
       <th scope="col"><a class= "column_sort" id="profile_name" data-order="'.$order.'"  href="#" >ประเภทบัญชี</a></th>
       <th scope="col"><a class= "column_sort" id="last_update" data-order="'.$order.'"  href="#" >แก้ไขครั้งล่าสุด</a></th>
-	  <th scope="col">Edit</th> 
+	  <th scope="col">ตัวเลือก</th> 
 	  
     </tr>
   </thead> <tbody>';
@@ -102,7 +102,7 @@ if(isset($_POST['sort'])){
       <td align='left'>".$row['stat_name']."</td>
       <td align='left'>".$row['profile_name']."</td>
       <td align='left'>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+43)."  ".$datethai[3]."</td>
-      <td align='left'>";
+      <td align= 'center'>";
 
       if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
       else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}

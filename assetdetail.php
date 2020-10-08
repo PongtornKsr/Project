@@ -15,6 +15,7 @@ $_SESSION['word_detail'] = $_SESSION['searchword'];
     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="CSS/BG.css">
+    <link rel="shortcut icon" href="img/computer.png">
     <link rel="stylesheet" href="CSS/navbar.css">
     <title>CS_Asset</title>
 </head>
@@ -24,11 +25,14 @@ $_SESSION['word_detail'] = $_SESSION['searchword'];
 <body>
 <?php require 'nav.php'; ?>
 
-<form class="box" action='assetmanage.php'>
+<form align ="center" class="box" action='assetmanage.php'>
 <div class="head">รายละเอียดครุภัณฑ์</div>
 <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
 <br><br>
-<div>
+<div align ="center">
+<center>
+<div align ="center">
+<table align ="center">
 <?php 
 $number = $_GET['asset_number'];
 $st= "";
@@ -37,37 +41,47 @@ $st= "";
     $result = $conn->query($sqlq);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $st.=$row['asset_stat_name']." ";
+        if($row['asset_stat_ID'] == 15){
+            $st.= "<div style='color:orange'>".$row['asset_stat_name']."</div>";
+        }
+        else{
+            $st.= "<div style='color:".$row['asset_stat_color']."'>".$row['asset_stat_name']."</div>";
+        }
+        
     }
     }
-$sql = "SELECT * FROM asset  natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor natural join money_type natural join getmethod WHERE id = '".$number."'";
+
+$sql = "SELECT * FROM asset  natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor natural join money_type natural join getmethod WHERE id = '".$number."</td></tr>'";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {
     $datethai = explode("/",$row['addin_date']);
-    echo "เลขรายการ :".$row['order_number']."<br>";
-    echo "รหัสครุภัณฑ์ :".$row['asset_ID']."<br>";
-    echo "ประเภทครุภัณฑ์ :".$row['asset_type_name']."<br>";
-    echo "วิธีการได้รับ :".$row['money_type'].": ".$row['method']."<br>";
-    echo "ชื่อบริษัทผู้ขาย :".$row['vendor_company']."<br>";
-    echo "ที่อยู่บริษัท :".$row['vendor_location']."<br>";
-    echo "เบอร์โทรบริษัท :".$row['vendor_tel']."<br>";
-    echo "โทรสาร :".$row['fax']."<br>";
-    echo "ชื่อชุดครุภัณฑ์ :".$row['asset_setname']."<br>";
-    echo "ชื่อเรียกครุภัณฑ์ :".$row['asset_nickname']."<br>";
-    echo "ชื่อครุภัณฑ์ :".$row['asset_name']."<br>";
-    echo "รุ่น/แบบ :".$row['model']."<br>";
-    echo "คุณสมบัติ :".$row['property']."<br>";
-    echo "วันที่ :".$datethai[0]."/".$datethai[1]."/".($datethai[2]+543)."<br>";
-    echo "สถานที่ :".$row['asset_location']."<br>";
-    echo "ห้องที่จัดเก็บ :".$row['room']."<br>";
-    echo "ชื่อผู้รับผิดชอบ :".$row['resper_firstname']." ".$row['resper_lastname']."<br>";
-    echo "สถานะการติดตั้ง :".$row['dstat']."<br>";
-    echo "สถานะการใช้งาน :".$st."<br>";
+    echo "<tr><td>เลขรายการ :</td><td>".$row['order_number']."</td></tr>";
+    echo "<tr><td>รหัสครุภัณฑ์ :</td><td>".$row['asset_ID']."</td></tr>";
+    echo "<tr><td>ประเภทครุภัณฑ์ :</td><td>".$row['asset_type_name']."</td></tr>";
+    echo "<tr><td>วิธีการได้รับ :</td><td>".$row['money_type']." : ".$row['method']." ".$row['getm']."</td></tr>";
+    echo "<tr><td>ชื่อบริษัทผู้ขาย :</td><td>".$row['vendor_company']."</td></tr>";
+    echo "<tr><td>ที่อยู่บริษัท :</td><td>".$row['vendor_location']."</td></tr>";
+    echo "<tr><td>เบอร์โทรบริษัท :</td><td>".$row['vendor_tel']."</td></tr>";
+    echo "<tr><td>โทรสาร :</td><td>".$row['fax']."</td></tr>";
+    echo "<tr><td>ชื่อชุดครุภัณฑ์ :</td><td>".$row['asset_setname']."</td></tr>";
+    echo "<tr><td>ชื่อเรียกครุภัณฑ์ :</td><td>".$row['asset_nickname']."</td></tr>";
+    echo "<tr><td>ชื่อครุภัณฑ์ :</td><td>".$row['asset_name']."</td></tr>";
+    echo "<tr><td>รุ่น/แบบ :</td><td>".$row['model']."</td></tr>";
+    echo "<tr><td>คุณสมบัติ :</td><td>".$row['property']."</td></tr>";
+    echo "<tr><td>วันที่ :</td><td>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+543)."</td></tr>";
+    echo "<tr><td>สถานที่ :</td><td>".$row['asset_location']."</td></tr>";
+    echo "<tr><td>ห้องที่จัดเก็บ :</td><td>".$row['room']."</td></tr>";
+    echo "<tr><td>ชื่อผู้รับผิดชอบ :</td><td>".$row['resper_firstname']." ".$row['resper_lastname']."</td></tr>";
+    echo "<tr><td>สถานะการติดตั้ง :</td><td>".$row['dstat']."</td></tr>";
+    echo "<tr><td>สถานะการใช้งาน :</td><td>".$st."</td></tr>";
     
 }
 }
 ?>
+</table>
+</div>
+</center>
 </div>
 </form>
 <?php require 'footer.php'; ?>

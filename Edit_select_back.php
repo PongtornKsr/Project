@@ -31,6 +31,7 @@ if($initop == 1){
      <tr>
 
       <th class = "wideb"style= "text-align:center;vertical-align:middle">สถาะครุภัณฑ์</th>
+      <th class = "wideb"style= "text-align:center;vertical-align:middle">สีสถานะครุภัณฑ์</th>
       <th class = "wideb"style= "text-align:center;vertical-align:middle">ตัวเลือก</th>
      </tr>
     </thead>
@@ -39,6 +40,7 @@ if($initop == 1){
         $output .= '<tr>
            
             <td class = "wideb"style= "text-align:center;vertical-align:middle"><input type="text" name="stat_name" class = "statin" id="stat_name"></td>
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="#000000"></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-success" id = "s_insert" >เพิ่ม</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >ยกเลิก</button>
             </td>
@@ -55,6 +57,7 @@ if($initop == 1){
             $output .= '<tr>
             
             <td class = "wideb"style= "text-align:center;vertical-align:middle"><input type="text" name="stat_name" class = "statin" id="stat_name" value = '.$row['asset_stat_name'].'></td>
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="'.$row['asset_stat_color'].'" ></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle">';
 
             if(isset($updateop)){
@@ -89,6 +92,7 @@ if($initop == 1){
             $output .= '<tr>
             
             <td class = "wideb"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="'.$row['asset_stat_color'].'" disabled></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_edit" value ="'.$id.'">แก้ไข</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_delete" value ="'.$id.'">ลบ</button>
             </td>
@@ -111,6 +115,7 @@ if($initop == 1){
                 $output .= '<tr>
                 
                 <td class = "wideb"style= "text-align:center;vertical-align:middle"><input type="text" name="stat_name" id="stat_name" value = '.$row['asset_stat_name'].'></td>
+                <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="'.$row['asset_stat_color'].'" disabled></td>
                 <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_update" >แก้ไข</button>
                 <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_cancel" >ยกเลิก</button>
                 </td>
@@ -120,6 +125,7 @@ if($initop == 1){
             $output .= '<tr>
             
             <td  class = "wideb"style= "text-align:center;vertical-align:middle">'.$name.'</td>
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="'.$row['asset_stat_color'].'" disabled></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"> 
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_edit" value ="'.$id.'">แก้ไข</button>
             <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_delete" value ="'.$id.'">ลบ</button>
@@ -748,7 +754,7 @@ else if($initop == 7){
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
      
-        $sql = "SELECT * FROM room WHERE room_ID NOT IN ('64') ";
+        $sql = "SELECT * FROM room WHERE room_ID NOT IN ('64') ORDER BY room";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -871,7 +877,7 @@ else if($initop == 8){
     }
     else if(!isset($_POST['query'])&&!isset($addop)){
      
-        $sql = "SELECT * FROM vendor WHERE vendor_ID NOT IN ('49')";
+        $sql = "SELECT * FROM vendor WHERE vendor_ID NOT IN ('49') ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -905,7 +911,7 @@ else if($initop == 8){
 if(isset($insertop)){
     if($insertop == 1){
         $statname = mysqli_real_escape_string($conn, $_POST['stat_name']);
-        $sql = "INSERT INTO assetstat ( asset_stat_name ) VALUE ( '".$statname."' )";
+        $sql = "INSERT INTO assetstat ( asset_stat_color , asset_stat_name ) VALUE ( '".$_POST['favcolor']."''".$statname."' )";
         if ($conn->query($sql) == TRUE) {
             insert_action("เพิ่มตัวเลือก สถานะครุภัณฑืใหม่ ".$statname);
             exit();
@@ -983,6 +989,9 @@ if(isset($insertop)){
     if($insertop == 7){
         $rmname = mysqli_real_escape_string($conn, $_POST['rm_name']);
         $resid = $_POST['resid'];
+        if($resid == 0){
+            $resid = 48;
+        }
         $sql = "INSERT INTO room (room,resper_IDs) VALUE ('".$rmname."',".$resid.")";
         if($conn->query($sql) == TRUE){
             insert_action("เพิ่มตัวเลือก ห้องที่จัดเก็บครุภัณฑ์ใหม่ ".$rmname);
@@ -1021,7 +1030,7 @@ if(isset($insertop)){
 if(isset($update)){
     $sql = "";
     if($update == 1){
-        $sql = "UPDATE assetstat SET asset_stat_name = '".$_POST['stat_name']."' WHERE asset_stat_ID = '".$_POST['id']."' ";
+        $sql = "UPDATE assetstat SET asset_stat_color = '".$_POST['favcolor']."' , asset_stat_name = '".$_POST['stat_name']."' WHERE asset_stat_ID = '".$_POST['id']."' ";
         $sqls = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$_POST['id']."'";
         $result = $conn->query($sqls);
         if ($result->num_rows > 0) {

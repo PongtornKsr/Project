@@ -10,6 +10,7 @@
            <link rel="stylesheet" href="CSS/formstyle.css">
            <link rel="stylesheet" href="CSS/BG.css">
            <link rel="stylesheet" href="CSS/navbar.css">
+           <link rel="shortcut icon" href="img/computer.png">
            
     <style>
     
@@ -35,31 +36,30 @@
  <?php require 'nav.php'; ?>
   <br />
   <div class="container-fluid" style="width:65%">
-   <h3 align="center">เพิ่มครุภัณฑ์ชุด</h3>
-   <br />
-   <h4 align="center">Enter Item Details</h4>
+ 
    <br />
    <form class = "whitebox" action= "multi_insert.php" name="add_detail" id="add_detail" method = "POST" style="width:100%" >
+   <h3 align="center">เพิ่มครุภัณฑ์</h3>
    <br>
    <br>  
                           <div class="table-responsive"style="width:100%">  
                                <table class="table table-borderless"  id="dynamic_field" style="width:100%;">  
-                                    <tr id = "0t">  
+                                    <tr id = "0t" style="width:90%">  
                                          <td style="width:90%">
                                          
                                          <input type="hidden" name="num[]">
 <table Align = "center" style="width:80%">
             <tr>
                 <td>
-                    รายการที่ :
+                    รายการที่ : <label style="color:red">*</label>
                 </td>
                 <td>
-                    <input type="text" name = "on[]" width="50" required>
+                     <input type="text" name = "on[]" width="50" required>
                 </td>
             </tr>
             <tr>
                 <td>
-                    วันที่:
+                    วันที่: <label style="color:red">*</label>
                 </td>
                 <td>
                     <input type="date" style ="width: 100%" id= "datepick" class = "datepick" name = "addin_date[]" width="50" required>
@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <td>
-                    ประเภทของครุภัณฑ์: 
+                    ประเภทของครุภัณฑ์: <label style="color:red">*</label> 
                 </td>
                 <td id = "kk">    
                 <?php 
@@ -88,7 +88,7 @@
            
                 <tr>
                 <td>
-                    ลักษณะการติดตั้ง: 
+                    ลักษณะการติดตั้ง: <label style="color:red">*</label> 
                 </td>
                 <td id = "kk">    
                 <?php 
@@ -118,7 +118,7 @@
             </tr>
             <tr>
                 <td>
-                    การรันเลขรหัสครุภัณฑ์
+                    การไล่ลำดับเลขรหัสครุภัณฑ์
                 </td>
                 <td>
                     <select readonly name="runnumber[]" id="rn">
@@ -129,7 +129,7 @@
             </tr>
              <tr>
                 <td>
-                    จำนวน:
+                    จำนวน: <label style="color:red">*</label>
                 </td>
                 <td>    
                     <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span>
@@ -137,7 +137,7 @@
             </tr>
             <tr>
                 <td>
-                    รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "1">
+                    รหัสครุภัณฑ์เริ่มต้น: <label style="color:red">*</label> <input type="hidden" name="iforc" id = "iforc" value = "1">
                 </td>
                 <td id ="keyy">    
                     <input type="text" style ="width:40%"name="asset_ID[]"required id = "ida" class = "">/<input style="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style="width:10%" type="text" name="assetid[]" id= "idc" class = "">
@@ -150,12 +150,12 @@
                     ชื่อชุดครุภัณฑ์:
                 </td>
                 <td>
-                    <input type="text" name = "asset_setname[]"required width="50">
+                    <input type="text" name = "asset_setname[]" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "width="50">
                 </td>
             </tr>
             <tr>
                 <td>
-                    ชื่อครุภัณฑ์:
+                    ชื่อครุภัณฑ์: <label style="color:red">*</label>
                 </td>
                 <td>
                     <input type="text" name = "asset_name[]"required width="50">
@@ -205,7 +205,7 @@
                
                 <tr>
                 <td>
-                   ผู้รับผิดชอบ :
+                   ผู้รับผิดชอบ : <label style="color:red">*</label>
                 </td>
                 <td id = "kk">
                 <?php 
@@ -225,7 +225,7 @@
                
                 <tr>
                 <td>
-                   ห้องที่จัดเก็บ :
+                   ห้องที่จัดเก็บ : <label style="color:red">*</label>
                 </td>
                 <td id = "kk">
                 <?php 
@@ -244,7 +244,7 @@
                 </tr>
                 <tr>
                 <td>
-                   ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:
+                   ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ: <label style="color:red">*</label>
                 </td>
                 <td id = "kk">
                 <?php 
@@ -264,26 +264,26 @@
             <td></td>
                 <td  id = "kk">
                 ชื่อบริษัท :
-                    <input type="text" name = "vendor_company[]" id ="10" width="50">
+                    <input type="text" name = "vendor_company[]" id ="10" width="50" required>
                 </td>
                 </tr>
                 <tr>
                 <td></td><td  id = "kk">ที่อยู่บริษัท :
-                    <input type="text" name = "vendor_location[]" id ="10" width="50">
+                    <input type="text" name = "vendor_location[]" id ="10" width="50" required>
                 </td></tr>
                 <tr>
                 <td></td><td  id = "kk">โทรศัพท์ :
-                    <input type="text" name = "vendor_tel[]" id ="10" width="50">
+                    <input type="text" name = "vendor_tel[]" id ="10" width="50" required>
                 </td></tr>
                 <tr>
                 <td></td><td  id = "kk">โทรสาร :
-                    <input type="text" name = "fax[]" id ="10" width="50">
+                    <input type="text" name = "fax[]" id ="10" width="50" required>
                 </td></tr>
                 <tr>
-                <td>วิธีการได้มา : </td>
+                <td>วิธีการได้มา : <label style="color:red">*</label> </td>
                 <td> 
                 <select name="get[]" id = "gmt">
-                <option value="0">---ประเภทเงิน---</option> 
+                <option value="0">---ประเภทเงินงบประมาณ---</option> 
                 <?php 
                 $sql = "SELECT * FROM money_type";
                 $result = $conn->query($sql);
@@ -326,7 +326,7 @@
 
                     ?>
                 </select>
-                <br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>
+                <br>รายได้ปีงบประมาณ: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled>  <!--อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>--> 
                 </td><td>
                 
                 </td></tr>
@@ -335,7 +335,15 @@
                     ราคาต่อหน่วย: 
                 </td>
                 <td>    
-                    <input type="text" name="price[]"required >
+                    <input type="text" name="price[]" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์เดี่ยว หากเป็นราคารวมชุดให้ใส่ 0 หรือ -" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ราคารวมต่อชุด: 
+                </td>
+                <td>    
+                    <input type="text" name="gprice[]"placeholder="ใส่ราคากรณีเป็นครุภัณฑ์ชุด หากเป็นครุภัณฑ์เดี่ยวให้ใส่ 0 หรือ -" >
                 </td>
             </tr>
             <tr>
@@ -435,7 +443,7 @@
                                
                                <br>
                                
-                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit"/> </center> 
+                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" /> </center> 
                           </div>  
                      </form>  
   </div>
@@ -496,17 +504,17 @@ $(document).ready(function(){
   html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
   html += '<table Align = "center" style="width:80%">';
-  html += '<tr><td> รายการที่ :</td><td><input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่:</td><td><input type="date" id = "datepick" class ="datepick" name = "addin_date[]" width="50" required></td></tr> <tr> <td>ประเภทของครุภัณ์: </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
-  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
-  html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การรันเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]"required width="50"></td></tr>';
-  html += '<tr><td>ชื่อครุภัณฑ์:</td><td><input type="text" name = "asset_name[]"required width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
+  html += '<tr><td> รายการที่ : <label style="color:red">*</label></td><td> <input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่: <label style="color:red">*</label></td><td><input type="date" id = "datepick" class ="datepick" name = "addin_date[]" style ="width: 100%" required></td></tr> <tr> <td>ประเภทของครุภัณฑ์: <label style="color:red">*</label> </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
+  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: <label style="color:red">*</label> </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
+  html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การไล่ลำดับเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: <label style="color:red">*</label> </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <label style="color:red">*</label> <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "required width="50"></td></tr>';
+  html += '<tr><td>ชื่อครุภัณฑ์: <label style="color:red">*</label></td><td><input type="text" name = "asset_name[]"required width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
   html += '<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "asset_order[]" width="50"></td></tr><tr><td>สถานที่ตั้ง / หน่วยงานที่รับผิดชอบ:</td><td><input type="text" value="คณะวิทยาศาสตร์และเทคโนโลยี" name = "assetloca[]" disabled>';
-  html += '</td></tr><tr><td>ผู้รับผิดชอบ :</td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> <br>ชื่อ: <input type="text" name = "resfname[]"required id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]"required id ="'+array[array.length - 5]+'" width="50">';
-  html += '</td></tr><tr><td>ห้องที่จัดเก็บ :</td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> <br>ห้อง: <input type="text" name = "rmname[]"required id ="'+array[array.length -3]+'" width="50">';
-  html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ:</td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
-  html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"></td></tr>';
-  html += '<tr><td>วิธีการได้มา : </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงิน---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปี: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]"required ></td></tr>';
+  html += '</td></tr><tr><td>ผู้รับผิดชอบ : <label style="color:red">*</label></td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> <br>ชื่อ: <input type="text" name = "resfname[]"required id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]"required id ="'+array[array.length - 5]+'" width="50">';
+  html += '</td></tr><tr><td>ห้องที่จัดเก็บ : <label style="color:red">*</label></td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> <br>ห้อง: <input type="text" name = "rmname[]"required id ="'+array[array.length -3]+'" width="50">';
+  html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ: <label style="color:red">*</label></td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
+  html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50" required></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50" required></td></tr>';
+  html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50" required></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"required></td></tr>';
+  html += '<tr><td>วิธีการได้มา : <label style="color:red">*</label> </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงินงบประมาณ---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปีงบประมาณ: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> <!--อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>--></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์เดี่ยว หากเป็นราคารวมชุดให้ใส่ 0 หรือ -" ></td></tr><tr><td>ราคารวมต่อชุด: </td><td><input type="text" name="gprice[]"placeholder="ใส่ราคากรณีเป็นครุภัณฑ์ชุด หากเป็นครุภัณฑ์เดี่ยวให้ใส่ 0 หรือ -" ></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
   
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
@@ -584,6 +592,14 @@ $(document).ready(function(){
         
     });
     $(document).on('keyup','input[id=idb]' , function(){
+        var idb_value = $(this).val();
+        if (isNaN(idb_value / 1) == true || idb_value <= 0 || idb_value.includes(".")) {
+            alert("กรุณาเติมค่าเป็นตัวเลข และ มีค่ามากกว่า 0");
+            var ele = document.getElementsByClassName("idx");
+            var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+            ele[q].innerHTML= "";
+            $(this).val('');
+        }else{
         var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
         if(asd == "one"){
 
@@ -618,7 +634,7 @@ $(document).ready(function(){
             else if(run == "notdefault"){ }
         }
     	
-        
+    }
     });
     $(document).on('keyup','input[id=idc]' , function(){
         var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
@@ -657,6 +673,14 @@ $(document).ready(function(){
         
     });
     $(document).on('keyup','input[id=idq]' , function(){
+        var quantity_value = $(this).val();
+        if (isNaN(quantity_value / 1) == true || quantity_value <= 0 || quantity_value.includes(".")) {
+            alert("กรุณาเติมค่าเป็นตัวเลข และ มีค่ามากกว่า 0");
+            var ele = document.getElementsByClassName("idx");
+            var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+            ele[q].innerHTML= "";
+            $(this).val('');
+        }else{
         var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
         var o = $(this).parents().parents().siblings().children().children('input[id=iforc]').val();
         if(asd == "one"){
@@ -725,7 +749,7 @@ $(document).ready(function(){
             }
         }
     	
-        
+    }
     });
     var tra = [0];
     $(document).on('click','#plus',function(){

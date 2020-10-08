@@ -42,6 +42,8 @@ if($_FILES["import_excel"]["name"] != '')
   $idA = array();
   $idB = array();
   $a = array();
+  $e = array();
+  $checkpoint= array();
   foreach($data as $row)
   {/*เก็บเป็นอาเรย์ ตามตำแหน่ง วนลูปตามจำนวนแถว */
 
@@ -50,6 +52,7 @@ if($_FILES["import_excel"]["name"] != '')
     }
     else{
 
+      $group_price = $row[14];
       if($asset_set == ""){
         $sql = "SELECT MAX(No) FROM asset";
         $result = $conn->query($sql);
@@ -156,7 +159,7 @@ if($_FILES["import_excel"]["name"] != '')
                   }
       }
 
-      $mid = $row[14];
+      $mid = $row[15];
       if($mid == "" || empty($mid)){
         $midn = str_replace(' ', '', $mid);
         if($midn == ""){
@@ -191,7 +194,7 @@ if($_FILES["import_excel"]["name"] != '')
                   }
       }
 
-      $getMethod_ID = $row[15];
+      $getMethod_ID = $row[16];
 
       if($getMethod_ID == "" || empty($getMethod_ID)){
         $getMethod_IDn = str_replace(' ', '', $getMethod_ID);
@@ -225,7 +228,7 @@ if($_FILES["import_excel"]["name"] != '')
            }
       }
       
-      $dstat_ID = $row[18];
+      $dstat_ID = $row[19];
       if($dstat_ID == "" || empty($dstat_ID)){
         $dstat_IDn = str_replace(' ', '', $dstat_ID);
         if($dstat_IDn == ""){
@@ -280,13 +283,124 @@ while($rows = $result->fetch_assoc()) {
   $vendor = $rows['vendor_ID'];
 }
 }
-array_push($a,$row[3]);
+$e = [];
+$e = explode('-',$row[3]);
+if(count($e) > 1)
+{
+  $minn = "";
+  $maxx = "";
+$checkpoint = [];
+    $checkpoint = explode('.',$e[0]);
+    $minn = $checkpoint[1];
+    $checkpoint = explode('.',$e[1]);
+    $maxx = $checkpoint[1];
+  
+  if($minn != $maxx && $minn < $maxx){
+      for($i = $minn ;$i<=$maxx;$i++){
+        array_push($a,$asset_set.".".$i);
+        $insert_data = array(
+          ':No'=> $NO,
+          ':order_number'=> $row[0],
+          ':asset_ID'=> $row[1]."/".$asset_set.".".$i,
+          ':asset_Set'=> $asset_set,
+          ':asset_number'=> $asset_set.".".$i,
+          ':asset_setname'=> $row[4],
+          ':asset_nickname'=> $row[5],    
+          ':asset_name'=> $row[6],    
+          ':model'=> $row[7],
+          ':asset_order'=> $row[8],
+          ':property'=> $row[9],
+          ':addin_date'=> $row[10],
+          ':asset_location_ID'=> 1,
+          ':room_ID'=> $rm,
+          ':resper_ID'=> $resper,
+          ':vendor_ID'=> $vendor,
+          ':asset_type_ID'=> $astype,
+          ':quantity'=> 1,
+          ':price_per_qty' => $row[13],
+          ':group_price' => $group_price,
+          ':mid' => $mid,
+          ':getMethod_ID' => $getMethod_ID,
+          ':getm' => $row[17],
+          ':note' => $row[18],
+          ':dstat_ID' => $dstat_ID,
+         );
+      
+         $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
+                                     asset_setname,asset_nickname,asset_name,model,asset_order,
+                                     property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                                     ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
+      
+                    VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
+                                    :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
+                                    :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                                    :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
+      
+      
+         $statement = $connn->prepare($query);
+         $statement->execute($insert_data);
 
 
-   $insert_data = array(
+
+
+      }
+  }else if($minn == $maxx){
+    array_push($a,$asset_set.".".$minn);
+    $insert_data = array(
+      ':No'=> $NO,
+      ':order_number'=> $row[0],
+      ':asset_ID'=> $row[1]."/".$asset_set.".".$minn,
+      ':asset_Set'=> $asset_set,
+      ':asset_number'=> $asset_set.".".$minn,
+      ':asset_setname'=> $row[4],
+      ':asset_nickname'=> $row[5],    
+      ':asset_name'=> $row[6],    
+      ':model'=> $row[7],
+      ':asset_order'=> $row[8],
+      ':property'=> $row[9],
+      ':addin_date'=> $row[10],
+      ':asset_location_ID'=> 1,
+      ':room_ID'=> $rm,
+      ':resper_ID'=> $resper,
+      ':vendor_ID'=> $vendor,
+      ':asset_type_ID'=> $astype,
+      ':quantity'=> 1,
+      ':price_per_qty' => $row[13],
+      ':group_price' => $group_price,
+      ':mid' => $mid,
+      ':getMethod_ID' => $getMethod_ID,
+      ':getm' => $row[17],
+      ':note' => $row[18],
+      ':dstat_ID' => $dstat_ID,
+     );
+  
+     $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
+                                 asset_setname,asset_nickname,asset_name,model,asset_order,
+                                 property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                                 ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
+  
+                VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
+                                :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
+                                :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                                :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
+  
+  
+     $statement = $connn->prepare($query);
+     $statement->execute($insert_data);
+
+
+
+
+  }
+
+
+}else{
+
+  array_push($a,$row[3]);
+  $insert_data = array(
     ':No'=> $NO,
     ':order_number'=> $row[0],
-    ':asset_ID'=> $row[1],
+    ':asset_ID'=> $row[1]."/".$row[3],
     ':asset_Set'=> $asset_set,
     ':asset_number'=> $row[3],
     ':asset_setname'=> $row[4],
@@ -303,26 +417,36 @@ array_push($a,$row[3]);
     ':asset_type_ID'=> $astype,
     ':quantity'=> 1,
     ':price_per_qty' => $row[13],
+    ':group_price' => $group_price,
     ':mid' => $mid,
     ':getMethod_ID' => $getMethod_ID,
-    ':getm' => $row[16],
-    ':note' => $row[17],
+    ':getm' => $row[17],
+    ':note' => $row[18],
     ':dstat_ID' => $dstat_ID,
    );
 
    $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
                                asset_setname,asset_nickname,asset_name,model,asset_order,
                                property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
-                               ,price_per_qty,mid,getMethod_ID,getm,note,dstat_ID)
+                               ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
 
               VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
                               :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
                               :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
-                              :price_per_qty,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
+                              :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
 
 
    $statement = $connn->prepare($query);
    $statement->execute($insert_data);
+
+
+
+}
+
+  
+
+
+
   }
   }
 

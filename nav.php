@@ -1,4 +1,4 @@
-<body background="img/BG.png" style ="
+<body background="img/Bg.png" style ="
   background-repeat: no-repeat;
   background-attachment: fixed; ">
   <?php if(!isset($_SESSION['Account'])){
@@ -70,6 +70,7 @@
                            echo "<a href='multi_insert_form.php' class='dropdown-item'>เพิ่มครุภัณฑ์</a>
                             <a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>";
                             echo "<a href='Order_print.php' class='dropdown-item'>พิมพ์รายการครุภัณฑ์</a>";
+                            echo "<a href='ImportF.php' class='dropdown-item'>นำเข้าข้อมูลครุภัณฑ์</a>";
                             echo "<a href='Edit_selection.php' class='dropdown-item'>แก้ไขตัวเลือก</a>";
                           } 
                             elseif($row['profile_ID'] == 2){ echo "<a href='Search.php' class='dropdown-item'>ค้นหาและตรวจสอบข้อมูลครุภัณฑ์</a>";
@@ -98,12 +99,12 @@
                           }
                         }
                           ?>
-    <img src="img/logomini.png" width="60" height="20" alt=""></a>
+    <img src="img/logomini.png" width="70" height="30" alt=""></a>
 
-  <a class = "a" href="logout.php">Logout</a>
-  <a class = "a"href="Asset_prereport.php">ภาพรวมครุภัณฑ์</a>
+  <a class = "a" href="logout.php"><img src="img/loout.png" width="30" height="30" alt=""> ออกจากระบบ</a>
+  <a class = "a"href="Asset_prereport.php"><img src="img/pie.png" width="30" height="30" alt=""> ภาพรวมครุภัณฑ์</a>
   <div class="dropdownnav">
-    <button class="dropbtnnav">จัดการบัญชีผู้ใช้ 
+    <button class="dropbtnnav"><img src="img/userex.png" width="30" height="30" alt=""> จัดการบัญชีผู้ใช้ 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-contentnav">
@@ -124,7 +125,7 @@
     </div>
   </div> 
   <div class="dropdownnav">
-    <button class="dropbtnnav">จัดการครุภัณฑ์ 
+    <button class="dropbtnnav"><img src="img/computer.png" width="30" height="30" alt=""> จัดการครุภัณฑ์ 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-contentnav">
@@ -138,6 +139,7 @@
                            echo "<a href='multi_insert_form.php' class='dropdown-item'>เพิ่มครุภัณฑ์</a>
                             <a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>";
                             echo "<a href='Order_print.php' class='dropdown-item'>พิมพ์รายการครุภัณฑ์</a>";
+                            echo "<a href='ImportF.php' class='dropdown-item'>นำเข้าข้อมูลครุภัณฑ์</a>";
                             echo "<a href='Edit_selection.php' class='dropdown-item'>แก้ไขตัวเลือก</a>";
                           } 
                             elseif($row['profile_ID'] == 2){ echo "<a href='Search.php' class='dropdown-item'>ค้นหาและตรวจสอบข้อมูลครุภัณฑ์</a>";

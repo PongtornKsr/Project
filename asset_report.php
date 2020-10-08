@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="shortcut icon" href="img/computer.png">
    
 </head>
 <body>
@@ -42,10 +43,10 @@
       }
 
     ?>
-  <div class = "container" align = "center" style = "background-color:white">
-  <form id = "myform" action="report_overview.php" method="post" target="_blank">
+  <div class = "container" align = "center" >
+  <form class = "whitebox"id = "myform" action="report_overview.php" method="post" target="_blank">
   
-  <button style = "float:left"type = "submit" id = "pdf">ดาวน์โหลดเป็นPDF</button>
+  <button style = "float:left"type = "submit" class="btn btn-outline-success" id = "pdf">ดาวน์โหลดเป็นPDF</button>
   
   <br>
   <br><br>

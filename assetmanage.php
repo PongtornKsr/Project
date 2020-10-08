@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="CSS/fixedheader.css">
     <link rel="stylesheet" href="CSS/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="shortcut icon" href="img/computer.png">
     <style>
        /* table th:nth-child(1), td:nth-child(1) { min-width: 50px;  max-width: 50px; text-align: center;}
 table th:nth-child(2), td:nth-child(2) { min-width: 200px;  max-width: 200px; text-align: center;}
@@ -260,7 +261,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
 <center>
 <div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
 					</div>
 				</div>
                 <br>
@@ -290,6 +291,14 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
+                $st = "";          
+                if($row['asset_stat_ID'] == 15){
+                    $st.= "<div style='color:orange'>".$row['asset_stat_name']."</div>";
+                }
+                else{
+                    $st.= "<div style='color:".$row['asset_stat_color']."'>".$row['asset_stat_name']."</div>";
+                }
+                
                 $an = $row['asset_number'];
                 echo
                     "<tr>
@@ -297,7 +306,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                         <td align='left'>".$row['asset_ID']."</td>
                         <td align='left'>".$row['asset_name']."</td>
                         <td align='left'>".$row['asset_nickname']."</td>
-                        <td align='left'>".$row['asset_stat_name']."</td>
+                        <td align='left'>".$st."</td>
                         <td align='left'>".$row['asset_type_name']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-outline-danger' border-color:White; color:white'>รายละเอียด</button></a> ";
                         echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-outline-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
@@ -326,6 +335,7 @@ else if($_SESSION['editop'] == 1){ ?>
 <input style= "text-align: center" class='btn btn-outline-success' type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
 <input style= "text-align: center"  class='btn btn-outline-success' type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
 <a  href="allasset.php" target="_blank"><button type="button" class='btn btn-outline-success'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
+<a  href="Export.php" target="_blank"><button type="button" class='btn btn-outline-success'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>
 </div>
 <?php } ?>
 

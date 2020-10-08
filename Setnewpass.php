@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="CSS/RegistCSS.css"> <!--ใช้ CSS เดียวกับ หน้า register -->
 	<link rel="stylesheet" href="Css/BG.css">
 	<link rel="stylesheet" href="CSS/navbar.css">
+	<link rel="shortcut icon" href="img/computer.png">
     <title>CS_Asset</title>
 </head>
 <body background="image/BG.png">

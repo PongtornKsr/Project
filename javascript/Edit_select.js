@@ -1042,11 +1042,14 @@ $(document).ready(function(){
         $(document).on('click','#s_update',function(){
             var s = $(this).val();
             var r = $('#stat_name').val();
+            var color = $('#favcolor').val();
+            
             $.ajax({
                 url: "Edit_select_back.php",
                 method:"POST",
                 data: {
                     'update' : 1,
+                    'favcolor' : color,
                     'id' : s,
                     'stat_name' : r
                 },

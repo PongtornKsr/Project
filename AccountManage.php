@@ -15,8 +15,17 @@
     <link rel="stylesheet" href="Css/BG.css"> 
     <link rel="stylesheet" href="CSS/navbar.css">
     <link rel="stylesheet" href="CSS/fixedheader.css">
+    <link rel="stylesheet" href="CSS/formstyle.css">
+    <link rel="shortcut icon" href="img/computer.png">
     <title>CS_Asset</title>
-    <!--ทำให้หัวตารางไม่เลื่อน-->
+    <style>
+    table a:visited {
+      color: #403f3f;
+    }
+    table a {
+      color: #403f3f;
+    }
+    </style>
    
 </head>
 
@@ -29,22 +38,25 @@
 
 <div class="brand_logo_container">
 
-      <img src="img/LOGOxx.png" class="brand_logo" alt="Logo">
+      <img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
    </div>
-
+<br>
+<br>
+                             <div class = "whitebox" style="width:80%">  
                                 <div class="d-flex justify-content-center form_container">
                                 
                    
                       <div class="container">
                         <div class="row">
                           <div class="col-md-12">
+
                                   <div class="input-group" id="adv-search">
-                                  <!-- name ห้ามเปลี่ยน , textbox กับ ปุ่มกดต้องอยู่ form เดียวกัน และปุ่มทุกปุ่มต้องเป็น type submit-->
+                                
                                   
                                   <span class="input-group-text">Search</span>
                                  <input type="text" name="search_text" id="search_text" placeholder="Search Keyword" class="form-control" />
                                  
-                                </div>
+                          
                                   </div>
                                 </div>
                               </div>
@@ -53,7 +65,7 @@
                      
                     <br><br>
 
-    <div  id="sort_table" style="height:450px;width:90%;overflow-y:auto ">
+    <div  id="sort_table" style="height:450px;width:100%;overflow-y:auto ">
     <table class="table bg-light text-dark table-bordered table-striped" width="100%" height="100%">
   <thead>
     <tr>
@@ -73,6 +85,7 @@
         
     </tbody>
 </table>
+</div>
 </div>
 </center>
 

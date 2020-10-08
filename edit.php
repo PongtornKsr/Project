@@ -18,6 +18,7 @@ $_SESSION['word_edi'] = $_SESSION['searchword'];
     <link rel="stylesheet" href="CSS/submitstyle.css">
     <link rel="stylesheet" href="Css/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="shortcut icon" href="img/computer.png">
 
 
 
@@ -71,6 +72,8 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     $vtel =  $row['vendor_tel'];
     $vfax = $row['fax'];
     $mid = $row['mid'];
+    $price = $row['price_per_qty'];
+    $gprice = $row['group_price'];
     $dateex = explode("/",$date);
     $dateaf = $dateex[2]."-".$dateex[1]."-".$dateex[0];
 }
@@ -194,6 +197,8 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
                     echo "<option value=".$row['vendor_ID']." >".$row['vendor_company']."</option>";
                     }     }  ?>
 </select></td></tr>
+<tr><td>ราคาต่อหน่วย :</td><td><input style ="width:100%;text-align:left"name = "price" type="text" value = "<?php echo $price; ?>" ></td></tr>
+<tr><td>ราคารวมชุด :</td><td><input style ="width:100%;text-align:left"name = "gprice" type="text" value = "<?php echo $gprice; ?>" ></td></tr>
 </table>
 </div><br>
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
