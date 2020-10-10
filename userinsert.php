@@ -54,7 +54,7 @@
 	<div id = "email_alert" style = "color:red"></div>
 	</div>
 	
-	<div class="form-group">
+	<!--<div class="form-group">
 	<label  style= "float:left">ชื่อผู้ใช้งาน</label>
     <input type="text" class="form-control"  name = "username" id="username"  placeholder="ชื่อผู้ใช้">
 	<div id = "username_alert" style = "color:red"></div>
@@ -65,7 +65,7 @@
     <input type="password" class="form-control"  name = "pass" id="pass"  placeholder="รหัสผ่าน">
 	<div id = "pass_alert" style = "color:red"></div>
 	</div>
-	
+	-->
   <label  style= "float:left">ประเภทบัญชี</label>
   <select class="form-control form-control-sm" name = "Type">
   <option value="2">ผู้ใช้งานทั่วไป</option>
@@ -75,7 +75,7 @@
   <br><br>
 					<div class="d-flex justify-content-center mt-3 login_container">
 					
-				 	<button type="submit" id = "accsubmit" class="btn btn-outline-success">Accept</button>&nbsp&nbsp
+				 	<button type="submit" id = "accsubmit" class="btn btn-success">Accept</button>&nbsp&nbsp
 				    <!-- <a href="indexadmin.php"><button type="submit" class="btn btn-outline-danger">Back</button></a> -->
 				   </div>
 				   

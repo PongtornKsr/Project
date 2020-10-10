@@ -27,12 +27,12 @@ if(isset($_POST['nmsearch'])){
   </thead> <tbody>';
     if(isset($_POST['query'])){
             $sch = mysqli_real_escape_string($db, $_POST['query']);
-            $query = "SELECT * FROM userdata natural join userstat natural join userprofile WHERE (givenName NOT IN ('$fname')) AND  (givenName LIKE '%$sch%' or familyName  LIKE '%$sch%' or email  LIKE '%$sch%') AND ID NOT IN ('47')";
+            $query = "SELECT * FROM userdata natural join userstat natural join userprofile WHERE (givenName NOT IN ('$fname')) AND  (givenName LIKE '%$sch%' or familyName  LIKE '%$sch%' or email  LIKE '%$sch%') AND ID NOT IN ('47') AND ID_stat NOT IN ('2')";
             $_SESSION['query'] = $query;
     }
     else{
         
-            $query ="SELECT * FROM userdata natural join userstat natural join userprofile  WHERE givenName NOT IN ('$fname') and givenName NOT IN ('$ffname') AND ID NOT IN ('47')";
+            $query ="SELECT * FROM userdata natural join userstat natural join userprofile  WHERE givenName NOT IN ('$fname') and givenName NOT IN ('$ffname') AND ID NOT IN ('47') AND ID_stat NOT IN ('2')";
             $_SESSION['query'] = $query;
             $datethai = [];
     }
@@ -52,12 +52,12 @@ if(isset($_POST['nmsearch'])){
             <td align='left'>".$row['profile_name']."</td>
             <td align='left'>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+43)."  ".$datethai[3]."</td>
             <td align= 'center'>";
-            if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
-      else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}
+            if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
+      else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-success'>Active</button></a>";}
       
-      if($row['profile_ID']==2){ $output.= " <button type='button' data-func='5' value = '".$row['ID']."' id = 'role_up' class='btn btn-outline-info'>ตั้งเป็นแอดมิน</button>";}                       
-      else { $output.= " <button type='button' data-func='6' value = '".$row['ID']."' id = 'role_down' class='btn btn-outline-warning''>ตั้งเป็นผู้ใช้ทั่วไป</button>";};
-      $output .= "  <a href='profile_edit.php?ID=".$row['ID']."'> <button type='button' class='btn btn-outline-secondary' value = '".$row['ID']."'>แก้ไขข้อมูล</button></a>";
+      if($row['profile_ID']==2){ $output.= " <button type='button' data-func='5' value = '".$row['ID']."' id = 'role_up' class='btn btn-info'>ตั้งเป็นแอดมิน</button>";}                       
+      else { $output.= " <button type='button' data-func='6' value = '".$row['ID']."' id = 'role_down' class='btn btn-warning''>ตั้งเป็นผู้ใช้ทั่วไป</button>";};
+      $output .= "  <a href='profile_edit.php?ID=".$row['ID']."'> <button type='button' class='btn btn-success' value = '".$row['ID']."'>แก้ไขข้อมูล</button></a>";
       
             $output .="</td></tr>";
         }

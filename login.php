@@ -20,53 +20,44 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
-<body background="image/BG.png">
-
-  
- 
-
+<body background="img/BG.png">
   <div class="p-3 mb-2 bg-success text-black"></div>
-	<div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
+	
 				<div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="image/LOGOxx.png" class="brand_logo" alt="Logo">
+						<img src="img/newlogoex.png" class="brand_logo" alt="Logo" style = "margin-top:10%;height:450px">
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-
 					<form action = "login2.php" method="POST">
-					<div class="input-group mb-2">
+					<!-- <div class="input-group mb-2">
 						
 						<div class="input-group-append">
 						<span class="input-group-text"><i class="fas fa-user"></i></span>
-					</div>
-					<input type="Text" name = "uname" class="form-control input_pass"  placeholder="USERNAME">
+					</div> -->
+					<!--<input type="Text" name = "uname" class="form-control input_pass"  placeholder="USERNAME"> 
 					</div>
 						<div class="input-group mb-3">
+						-->
+						<!--	<input type="password" name = "password" class="form-control input_user" placeholder="PASSWORD">
+						</div> -->
 						
-							<input type="password" name = "password" class="form-control input_user" placeholder="PASSWORD">
-						</div>
-						
-						<!-- <a style = "float: right"href="Setnewpass.php">ลืมรหัสผ่าน</a> -->
-						</div>
+						<!-- <a style = "float: right"href="Setnewpass.php">ลืมรหัสผ่าน</a> 
+						</div>-->
 						
 							<div class="d-flex justify-content-center mt-3 login_container">
-							<button class="btn btn-success" type="submit"><img src="img/in.png" width="20" height="20" alt=""> LOGIN</button>
-					&nbsp&nbsp
+							<!-- <button class="btn btn-success" type="submit"><img src="img/in.png" width="20" height="20" alt=""> LOGIN</button> -->
+					
 				<!--	<button type="button" onclick = "window.location ='Register.php'">Register</button>
 					&nbsp&nbsp -->
-					 <button type="button" onclick = "window.location = '<?php  echo $loginURL ; ?>'" class="btn btn-danger"><img src="img/google.png" width="20" height="20" alt=""> Google-Login</button>
+					 <button type="button" onclick = "window.location = '<?php  echo $loginURL ; ?>'" class="btn btn-danger"><img src="img/google.png" width="20" height="20" alt=""> เข้าใช้งานระบบด้วยบัญชี GOOGLE </button>
 				   </div>
-				   <br><br>
+				   
 				   <center><b style="color: red;font-size: 30px;"><?php if(!isset($_GET['error'])){ }elseif(isset($_GET['error'])){ echo "ชื่อผู้ใช้หรือรหัสผ่านไม่ตรงกับข้อมูลที่มีอยู่ในระบบ";} ?></b></center>
 					</form>
 				
 				</div>
-				</div>
-			</div>
-		</div>
+				
 	</div>
 
 

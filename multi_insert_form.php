@@ -3,7 +3,7 @@
 <html><?php SESSION_START(); require 'connect.php';  ?>
  <head>
  <title>CS_Asset</title> 
-            
+        
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -48,7 +48,7 @@
                                          <td style="width:90%">
                                          
                                          <input type="hidden" name="num[]">
-<table Align = "center" style="width:80%">
+<table Align = "center" style="width:90%">
             <tr>
                 <td>
                     รายการที่ : <label style="color:red">*</label>
@@ -443,7 +443,7 @@
                                
                                <br>
                                
-                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" /> </center> 
+                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="เพิ่มครุภัณฑ์ใหม่" /> </center> 
                           </div>  
                      </form>  
   </div>
@@ -503,7 +503,7 @@ $(document).ready(function(){
            var html = '';
   html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
-  html += '<table Align = "center" style="width:80%">';
+  html += '<table Align = "center" style="width:90%">';
   html += '<tr><td> รายการที่ : <label style="color:red">*</label></td><td> <input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่: <label style="color:red">*</label></td><td><input type="date" id = "datepick" class ="datepick" name = "addin_date[]" style ="width: 100%" required></td></tr> <tr> <td>ประเภทของครุภัณฑ์: <label style="color:red">*</label> </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
   html += '</td></tr><tr><td>ลักษณะการติดตั้ง: <label style="color:red">*</label> </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
   html += '<tr><td>ครุภัณฑ์</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การไล่ลำดับเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: <label style="color:red">*</label> </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <label style="color:red">*</label> <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "required width="50"></td></tr>';

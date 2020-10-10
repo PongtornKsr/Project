@@ -23,7 +23,7 @@
     $user['email'] = $userData->email;
     $user['name'] = $userData->name;
     $user['picture'] = $userData->picture;
-
+    
     $_SESSION['userData'] = $user;
 
     header("location: login2.php");

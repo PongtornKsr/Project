@@ -8,6 +8,7 @@ else{} ?>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Css/BG.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/BG.css">
     <link rel="shortcut icon" href="img/computer.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,9 @@ else{} ?>
 </head>
 <body>
     <?php require 'nav.php'; ?>
-    
+    <form Align ="center">
+<img src="img/newlogoex.png" class="brand_logo" alt="Logo" style="margin-top:10%" height= "500px">
+</form>
     <?php require 'footer.php'; ?>
 </body>
 </html>

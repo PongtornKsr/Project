@@ -4,14 +4,14 @@ $(document).ready(function(){
     init_require();
     var fname=false,lname=false,email=false,username=false,pass=false;
     function injectin_check(ijtext){
-        if(ijtext == "" || ijtext.trim() === "" || ijtext.length === 0 || ijtext.includes("'") || ijtext.includes("*") || ijtext.includes(";") || ijtext.includes("<") || ijtext.includes(">") || ijtext.includes(",")){
+        if(ijtext == "" || ijtext.trim() == "" || ijtext.includes("'") || ijtext.includes("*") || ijtext.includes(";") || ijtext.includes("<") || ijtext.includes(">") || ijtext.includes(",")){
             return false;
         }
         else { return true; }
     }
 
     function condition_check(){
-        if(fname == true && lname == true && email == true && username == true && pass == true){
+        if(fname == true && lname == true && email == true){
             $('#accsubmit').attr('disabled',false);
         }
         else{
@@ -27,7 +27,8 @@ $(document).ready(function(){
         $('#pass').css('border','solid 2px red');
     }
     $(document).on('keyup','#fname',function(){
-        var n = $(this).val().trim();
+        var n = $(this).val();
+        
         fname = injectin_check(n);
         if(fname == true){
             $('#name_alert').html("");

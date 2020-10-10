@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!DOCTYPE html><?php SESSION_START(); ?>
@@ -261,14 +261,15 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
 <center>
 <div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "230px">
 					</div>
 				</div>
                 <br>
-                <br>
+                
 <div class="containter" style="width:90%;" align = "center">
  <div class = "whitebox" style = "width:90%" align = "center">
-  <form action="search.php"  method="post" style ="text-align:center;"><div style ="float:left"><?php echo $search_word; ?></div><button style ="float:right"type= "submit" >ค้นหาใหม่</button></form>
+  <form action="search.php"  method="post" style ="text-align:center;"><div style ="float:left"><?php echo $search_word; ?></div><button class= "btn btn-info" style ="float:right"type= "submit" >ค้นหาใหม่</button></form>
+  <br>
   <br>
   <form  align = "center" action="asset_update.php" method="post">
     <div  align = "center" style="height:400px;overflow-y:auto" >
@@ -308,11 +309,11 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                         <td align='left'>".$row['asset_nickname']."</td>
                         <td align='left'>".$st."</td>
                         <td align='left'>".$row['asset_type_name']."</td>
-                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-outline-danger' border-color:White; color:white'>รายละเอียด</button></a> ";
-                        echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-outline-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
+                        <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-primary' border-color:White; color:white'>รายละเอียด</button></a> ";
+                        echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
                         if($_SESSION['editop'] == 1){
-                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button'  class='btn btn-outline-success' border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a> ";
-                        echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' class='btn btn-outline-warning' border-color:White; color:white'>แก้ไข</button></a> "; }
+                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button'  class='btn btn-danger' border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a> ";
+                        echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' class='btn btn-warning' border-color:White; color:white'>แก้ไข</button></a> "; }
                          //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
                 echo "</td></tr>";
@@ -328,14 +329,17 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
 </div>
 <br>
 <div><?php // echo $sql; ?></div>
-<?php if($_SESSION['editop'] == 2){ }
+<?php if($_SESSION['editop'] == 2){  ?>
+    <a  href="allasset.php" target="_blank"><button type="button" class='btn btn-outline-success'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
+    <a  href="Export.php" target="_blank"><button type="button" class='btn btn-outline-success'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>
+<?php }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>
 <div style = "text-align: center">
-<input style= "text-align: center" class='btn btn-outline-success' type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
-<input style= "text-align: center"  class='btn btn-outline-success' type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
-<a  href="allasset.php" target="_blank"><button type="button" class='btn btn-outline-success'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
-<a  href="Export.php" target="_blank"><button type="button" class='btn btn-outline-success'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>
+<input style= "text-align: center" class='btn btn-warning' type="submit" id = 'x' name="stat_update" value="แก้ไขสถานะของครุภัณฑ์ที่เลือก">
+<input style= "text-align: center"  class='btn btn-warning' type="submit" id = 'y' name="room_update" value="แก้ไขห้องที่จัดเก็บของครุภัณฑ์ที่เลือก">
+<a  href="allasset.php" target="_blank"><button type="button" class='btn btn-info'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
+<a  href="Export.php" target="_blank"><button type="button" class='btn btn-primary'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>
 </div>
 <?php } ?>
 
