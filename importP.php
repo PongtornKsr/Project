@@ -39,6 +39,7 @@ if($_FILES["import_excel"]["name"] != '')
   $getMethod_ID = "";
   $dstat_ID ="";
   $asset_set  = "";
+  $astat = "";
   $idA = array();
   $idB = array();
   $a = array();
@@ -51,7 +52,7 @@ if($_FILES["import_excel"]["name"] != '')
       $Aloop = true;
     }
     else{
-
+      $astat = $row[20];
       $group_price = $row[14];
       if($asset_set == ""){
         $sql = "SELECT MAX(No) FROM asset";
@@ -267,6 +268,10 @@ if($_FILES["import_excel"]["name"] != '')
                     }
 
                   }
+      }
+
+      if($astat == "" || empty($astat)){
+        
       }
 
       $sql = "SELECT * FROM `respon_per` WHERE resper_firstname like '%ยังไม่กำหนด%'";

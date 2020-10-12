@@ -104,12 +104,12 @@ if(isset($_POST['sort'])){
       <td align='left'>".$datethai[0]."/".$datethai[1]."/".($datethai[2]+43)."  ".$datethai[3]."</td>
       <td align= 'center'>";
 
-      if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-outline-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
-      else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-outline-success'>Active</button></a>";}
+      if($row['ID_stat']==1){ $output.= " <button type='button' class='btn btn-danger' id = 'del_b' value = '".$row['ID']."' data-func='4'>ลบผู้ใช้งาน</button>";}                       
+      else { $output.= " <a href='usermanage.php?ID=".$row['ID']."&function=1'><button type='button' class='btn btn-success'>Active</button></a>";}
       
-      if($row['profile_ID']==2){ $output.= " <button type='button' value = '".$row['ID']."'  data-func='5' id = 'role_up' class='btn btn-outline-info'>ตั้งเป็นแอดมิน</button>";}                       
-      else { $output.= " <button type='button' value = '".$row['ID']."' id = 'role_down' data-func='6' class='btn btn-outline-warning''>ตั้งเป็นผู้ใช้ทั่วไป</button>";};
-      $output .= "  <a href='profile_edit.php?ID=".$row['ID']."'><button type='button' class='btn btn-outline-secondary' value = '".$row['ID']."'>แก้ไขข้อมูล</button></a>";
+      if($row['profile_ID']==2){ $output.= " <button type='button' value = '".$row['ID']."'  data-func='5' id = 'role_up' class='btn btn-info'>ตั้งเป็นแอดมิน</button>";}                       
+      else { $output.= " <button type='button' value = '".$row['ID']."' id = 'role_down' data-func='6' class='btn btn-warning''>ตั้งเป็นผู้ใช้ทั่วไป</button>";};
+      $output .= "  <a href='profile_edit.php?ID=".$row['ID']."'><button type='button' class='btn btn-success' value = '".$row['ID']."'>แก้ไขข้อมูล</button></a>";
       
       $output .="</td></tr>";
 
