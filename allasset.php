@@ -50,6 +50,9 @@ ob_start();
     div.a {
   text-align: right;
 }
+table.table-bordered > thead > tr > th{
+  border:1px solid black;
+}
 
 </style>
 </head>
@@ -81,7 +84,7 @@ while($row = $result->fetch_assoc()) {
 for ($x = 0; $x < count($setas) ; $x++) {
 $set = $setas[$x];
 $NO = $NOAS[$x];
-$sql = "SELECT * From asset WHERE asset_Set like '".$set."' ORDER BY CAST(asset_number AS INT) asc LIMIT 1";
+$sql = "SELECT * From asset WHERE asset_Set like '".$set."' ORDER BY id ASC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -89,7 +92,7 @@ $min .= $row['asset_ID'];
 }
 }
 $cmin = explode(" ",$min);
-$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY CAST(asset_number AS INT) DESC LIMIT 1";
+$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -218,6 +221,7 @@ if(count($e) == 2){
         
   }
   }else{
+    //echo "B";
     $aid = "";
     $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
     $result = $conn->query($sql);

@@ -22,12 +22,12 @@ $_SESSION['word_detail'] = $_SESSION['searchword'];
 <?php
       require 'connect.php';
  ?>
-<body>
+<body  class = "thsarabunnew">
 <?php require 'nav.php'; ?>
 
-<form align ="center" class="box" action='assetmanage.php'>
-<div class="head">รายละเอียดครุภัณฑ์</div>
-<a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+<form align ="center" class="box thsarabunnew" action='assetmanage.php'>
+<div class="head thsarabunnew">รายละเอียดครุภัณฑ์</div>
+<a href="assetmanage.php" style ="float:left" ><button class = "btn btn-danger">ย้อนกลับ</button></a>
 <br><br>
 <div align ="center">
 <center>

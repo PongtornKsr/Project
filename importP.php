@@ -40,10 +40,15 @@ if($_FILES["import_excel"]["name"] != '')
   $dstat_ID ="";
   $asset_set  = "";
   $astat = "";
+  $asstat = "";
+  $ddd = "";
   $idA = array();
   $idB = array();
   $a = array();
   $e = array();
+  $dd = array();
+  $setarr = array();
+  $setarr2 = array();
   $checkpoint= array();
   foreach($data as $row)
   {/*เก็บเป็นอาเรย์ ตามตำแหน่ง วนลูปตามจำนวนแถว */
@@ -52,38 +57,132 @@ if($_FILES["import_excel"]["name"] != '')
       $Aloop = true;
     }
     else{
-      $astat = $row[20];
-      $group_price = $row[14];
+      $setarr = [];
+      $astat = "";
+      $astat = $row[21];
+      $group_price = $row[15];
       if($asset_set == ""){
+
+        if(count(explode(',',$row[2])) > 1){
+          $sql = "SELECT MAX(No) FROM asset";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+          while($rows = $result->fetch_assoc()) {
+          if($rows['MAX(No)']==NULL)
+              { $NO = 1;}
+          else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+          }
+          }
+      $aa = explode(',',$row[2]);
+      for($v = 0; $v < count($aa); $v ++){
+      if(count(explode('-',$aa[$v])) > 1){
+          $k = explode('-',$aa[$v]);
+          for($r = $k[0];$r <= $k[1]; $r++ ){
+            array_push($setarr,$r);
+          }
+      }
+      else{
+      array_push($setarr,$aa[$v]);
+      }
+    }
+    }else{
+      if(count(explode('-',$row[2])) > 1){
         $sql = "SELECT MAX(No) FROM asset";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-        while($rows = $result->fetch_assoc()) {
-        if($rows['MAX(No)']==NULL)
-            { $NO = 1;}
-        else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
-        }
-        }
-        $asset_set = $row[2];
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+          while($rows = $result->fetch_assoc()) {
+          if($rows['MAX(No)']==NULL)
+              { $NO = 1;}
+          else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+          }
+          }
+          $k = explode('-',$row[2]);
+          for($r = $k[0];$r <= $k[1]; $r++ ){
+            array_push($setarr,$r);
+          }
+
+
+      }
+      else{
+        $sql = "SELECT MAX(No) FROM asset";
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+      while($rows = $result->fetch_assoc()) {
+      if($rows['MAX(No)']==NULL)
+          { $NO = 1;}
+      else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+      }
+      }
+      $asset_set = $row[2];
+      }
+    }
+    
+
       }else {
           if( $asset_set == $row[2]){
 
           }else if( $asset_set != $row[2] ){
-            $sql = "SELECT MAX(No) FROM asset";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-            while($rows = $result->fetch_assoc()) {
-            if($rows['MAX(No)']==NULL)
-                { $NO = 1;}
-            else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+            if(count(explode(',',$row[2])) > 1){
+                  $sql = "SELECT MAX(No) FROM asset";
+                  $result = $conn->query($sql);
+                  if ($result->num_rows > 0) {
+                  while($rows = $result->fetch_assoc()) {
+                  if($rows['MAX(No)']==NULL)
+                      { $NO = 1;}
+                  else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+                  }
+                  }
+              $aa = explode(',',$row[2]);
+              for($v = 0; $v < count($aa); $v ++){
+              if(count(explode('-',$aa[$v])) > 1){
+                  $k = explode('-',$aa[$v]);
+                  for($r = $k[0];$r <= $k[1]; $r++ ){
+                    array_push($setarr,$r);
+                  }
+              }
+              else{
+              array_push($setarr,$aa[$v]);
+              }
             }
+            }else{
+              if(count(explode('-',$row[2])) > 1){
+                $sql = "SELECT MAX(No) FROM asset";
+                  $result = $conn->query($sql);
+                  if ($result->num_rows > 0) {
+                  while($rows = $result->fetch_assoc()) {
+                  if($rows['MAX(No)']==NULL)
+                      { $NO = 1;}
+                  else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+                  }
+                  }
+                  $k = explode('-',$row[2]);
+                  for($r = $k[0];$r <= $k[1]; $r++ ){
+                    array_push($setarr,$r);
+                  }
+
+
+              }
+              else{
+                $sql = "SELECT MAX(No) FROM asset";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) {
+              while($rows = $result->fetch_assoc()) {
+              if($rows['MAX(No)']==NULL)
+                  { $NO = 1;}
+              else if ($rows['MAX(No)']!=NULL){ $NO = $rows['MAX(No)'] + 1; }
+              }
+              }
+              array_push($setarr,$row[2]);
+              $asset_set = $row[2];
+              }
             }
-            $asset_set = $row[2];
+            
+
           }
 
       }
-      $rm = $row[11];
-      if($rm == "" || empty($rm)){
+      $rm = $row[12];
+      if($rm == "" || empty($rm) || $rm == "-"){
         $rmn = str_replace(' ', '', $rm);
         if($rmn == ""){
           $sql = "SELECT room_ID FROM room WHERE room like '%ยังไม่กำหนด%'";
@@ -119,8 +218,8 @@ if($_FILES["import_excel"]["name"] != '')
                   }
       }
 
-      $astype  = $row[12];
-      if($astype == "" || empty($astype)){
+      $astype  = $row[13];
+      if($astype == "" || empty($astype) || $astype == "-"){
         $astypen = str_replace(' ', '', $astype);
         if($astypen == ""){
           $sql = "SELECT * FROM `assettype` WHERE asset_type_name like '%ยังไม่กำหนด%'";
@@ -132,7 +231,7 @@ if($_FILES["import_excel"]["name"] != '')
             }
 
         }
-      }else if($rm != ""){
+      }else if($astypen != ""){
         $astypen = str_replace(' ', '', $astype);
         $sql = "SELECT * FROM `assettype` WHERE asset_type_name like '%".$astypen."%'";
                         $result = $conn->query($sql);
@@ -160,7 +259,7 @@ if($_FILES["import_excel"]["name"] != '')
                   }
       }
 
-      $mid = $row[15];
+      $mid = $row[16];
       if($mid == "" || empty($mid)){
         $midn = str_replace(' ', '', $mid);
         if($midn == ""){
@@ -195,7 +294,7 @@ if($_FILES["import_excel"]["name"] != '')
                   }
       }
 
-      $getMethod_ID = $row[16];
+      $getMethod_ID = $row[17];
 
       if($getMethod_ID == "" || empty($getMethod_ID)){
         $getMethod_IDn = str_replace(' ', '', $getMethod_ID);
@@ -229,7 +328,7 @@ if($_FILES["import_excel"]["name"] != '')
            }
       }
       
-      $dstat_ID = $row[19];
+      $dstat_ID = $row[20];
       if($dstat_ID == "" || empty($dstat_ID)){
         $dstat_IDn = str_replace(' ', '', $dstat_ID);
         if($dstat_IDn == ""){
@@ -270,8 +369,36 @@ if($_FILES["import_excel"]["name"] != '')
                   }
       }
 
-      if($astat == "" || empty($astat)){
-        
+      if($astat == "" || empty($astat) || $astat == "-"){
+        $astat = str_replace(' ', '', $astat);
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ยังไม่กำหนด%'";
+        $result = $conn->query($sql);
+        if ($result->num_rows == 1) {
+
+          while($rows = $result->fetch_assoc()) {
+            $asstat  = $rows['asset_stat_ID'];
+          }
+        }
+      }
+      else if($astat != ""){
+          $astat = str_replace(' ', '', $astat);
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%".$astat."%'";
+        $result = $conn->query($sql);
+      if ($result->num_rows == 1) {
+
+        while($rows = $result->fetch_assoc()) {
+          $asstat = $rows['asset_stat_ID'];
+        }
+      }else{
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ยังไม่กำหนด%'";
+        $result = $conn->query($sql);
+        if ($result->num_rows == 1) {
+
+          while($rows = $result->fetch_assoc()) {
+            $asstat = $rows['asset_stat_ID'];
+          }
+        }
+      }
       }
 
       $sql = "SELECT * FROM `respon_per` WHERE resper_firstname like '%ยังไม่กำหนด%'";
@@ -288,7 +415,73 @@ while($rows = $result->fetch_assoc()) {
   $vendor = $rows['vendor_ID'];
 }
 }
+$ddd = $row[11];
+$ddd = str_replace(' ','',$ddd);
+if($ddd == "-" || $ddd == ""){
+  $ddd = date("d/m/Y");
+}else{
+  $ddd = $row[11];
+}
+$vt = $row[4];
+$vt = str_replace(' ', '', $vt);
+if($vt == "-" || $vt == ""){
+$vt = "";
+}else {
+  $vt = $row[4];
+}
+
+
 $e = [];
+if($row[3]=="" || empty($row[3]) || $row[3] == "-" || str_replace(' ','',$row[3]) == ""){
+
+  for($b = 0 ; $b < count($setarr); $b++){
+    array_push($a,$setarr[$b]);
+    $insert_data = array(
+      ':No'=> $NO,
+      ':order_number'=> $row[0],
+      ':asset_ID'=> $row[1]."/".$setarr[$b]." ".$vt,
+      ':asset_Set'=> $setarr[$b],
+      ':asset_number'=> $setarr[$b],
+      ':asset_setname'=> $row[5],
+      ':asset_nickname'=> $row[6],    
+      ':asset_name'=> $row[7],    
+      ':model'=> $row[8],
+      ':asset_order'=> $row[9],
+      ':property'=> $row[10],
+      ':addin_date'=> $ddd,
+      ':asset_location_ID'=> 1,
+      ':room_ID'=> $rm,
+      ':resper_ID'=> $resper,
+      ':vendor_ID'=> $vendor,
+      ':asset_type_ID'=> $astype,
+      ':quantity'=> 1,
+      ':price_per_qty' => $row[14],
+      ':group_price' => $group_price,
+      ':mid' => $mid,
+      ':getMethod_ID' => $getMethod_ID,
+      ':getm' => $row[18],
+      ':note' => $row[19],
+      ':dstat_ID' => $dstat_ID,
+     );
+     $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
+                                     asset_setname,asset_nickname,asset_name,model,asset_order,
+                                     property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                                     ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
+      
+                    VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
+                                    :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
+                                    :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                                    :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
+      
+      
+         $statement = $connn->prepare($query);
+         $statement->execute($insert_data);
+
+  }
+
+
+}
+else{
 $e = explode('-',$row[3]);
 if(count($e) > 1)
 {
@@ -296,9 +489,11 @@ if(count($e) > 1)
   $maxx = "";
 $checkpoint = [];
     $checkpoint = explode('.',$e[0]);
-    $minn = $checkpoint[1];
+      $minn = $checkpoint[1];
     $checkpoint = explode('.',$e[1]);
-    $maxx = $checkpoint[1];
+      $maxx = $checkpoint[1];
+   
+    
   
   if($minn != $maxx && $minn < $maxx){
       for($i = $minn ;$i<=$maxx;$i++){
@@ -306,28 +501,28 @@ $checkpoint = [];
         $insert_data = array(
           ':No'=> $NO,
           ':order_number'=> $row[0],
-          ':asset_ID'=> $row[1]."/".$asset_set.".".$i,
+          ':asset_ID'=> $row[1]."/".$asset_set.".".$i." ".$vt,
           ':asset_Set'=> $asset_set,
           ':asset_number'=> $asset_set.".".$i,
-          ':asset_setname'=> $row[4],
-          ':asset_nickname'=> $row[5],    
-          ':asset_name'=> $row[6],    
-          ':model'=> $row[7],
-          ':asset_order'=> $row[8],
-          ':property'=> $row[9],
-          ':addin_date'=> $row[10],
+          ':asset_setname'=> $row[5],
+          ':asset_nickname'=> $row[6],    
+          ':asset_name'=> $row[7],    
+          ':model'=> $row[8],
+          ':asset_order'=> $row[9],
+          ':property'=> $row[10],
+          ':addin_date'=> $ddd,
           ':asset_location_ID'=> 1,
           ':room_ID'=> $rm,
           ':resper_ID'=> $resper,
           ':vendor_ID'=> $vendor,
           ':asset_type_ID'=> $astype,
           ':quantity'=> 1,
-          ':price_per_qty' => $row[13],
+          ':price_per_qty' => $row[14],
           ':group_price' => $group_price,
           ':mid' => $mid,
           ':getMethod_ID' => $getMethod_ID,
-          ':getm' => $row[17],
-          ':note' => $row[18],
+          ':getm' => $row[18],
+          ':note' => $row[19],
           ':dstat_ID' => $dstat_ID,
          );
       
@@ -354,28 +549,28 @@ $checkpoint = [];
     $insert_data = array(
       ':No'=> $NO,
       ':order_number'=> $row[0],
-      ':asset_ID'=> $row[1]."/".$asset_set.".".$minn,
+      ':asset_ID'=> $row[1]."/".$asset_set.".".$minn." ".$vt,
       ':asset_Set'=> $asset_set,
       ':asset_number'=> $asset_set.".".$minn,
-      ':asset_setname'=> $row[4],
-      ':asset_nickname'=> $row[5],    
-      ':asset_name'=> $row[6],    
-      ':model'=> $row[7],
-      ':asset_order'=> $row[8],
-      ':property'=> $row[9],
-      ':addin_date'=> $row[10],
+      ':asset_setname'=> $row[5],
+      ':asset_nickname'=> $row[6],    
+      ':asset_name'=> $row[7],    
+      ':model'=> $row[8],
+      ':asset_order'=> $row[9],
+      ':property'=> $row[10],
+      ':addin_date'=> $ddd,
       ':asset_location_ID'=> 1,
       ':room_ID'=> $rm,
       ':resper_ID'=> $resper,
       ':vendor_ID'=> $vendor,
       ':asset_type_ID'=> $astype,
       ':quantity'=> 1,
-      ':price_per_qty' => $row[13],
+      ':price_per_qty' => $row[14],
       ':group_price' => $group_price,
       ':mid' => $mid,
       ':getMethod_ID' => $getMethod_ID,
-      ':getm' => $row[17],
-      ':note' => $row[18],
+      ':getm' => $row[18],
+      ':note' => $row[19],
       ':dstat_ID' => $dstat_ID,
      );
   
@@ -405,28 +600,28 @@ $checkpoint = [];
   $insert_data = array(
     ':No'=> $NO,
     ':order_number'=> $row[0],
-    ':asset_ID'=> $row[1]."/".$row[3],
+    ':asset_ID'=> $row[1]."/".$row[3]." ".$vt,
     ':asset_Set'=> $asset_set,
     ':asset_number'=> $row[3],
-    ':asset_setname'=> $row[4],
-    ':asset_nickname'=> $row[5],    
-    ':asset_name'=> $row[6],    
-    ':model'=> $row[7],
-    ':asset_order'=> $row[8],
-    ':property'=> $row[9],
-    ':addin_date'=> $row[10],
+    ':asset_setname'=> $row[5],
+    ':asset_nickname'=> $row[6],    
+    ':asset_name'=> $row[7],    
+    ':model'=> $row[8],
+    ':asset_order'=> $row[9],
+    ':property'=> $row[10],
+    ':addin_date'=> $ddd,
     ':asset_location_ID'=> 1,
     ':room_ID'=> $rm,
     ':resper_ID'=> $resper,
     ':vendor_ID'=> $vendor,
     ':asset_type_ID'=> $astype,
     ':quantity'=> 1,
-    ':price_per_qty' => $row[13],
+    ':price_per_qty' => $row[14],
     ':group_price' => $group_price,
     ':mid' => $mid,
     ':getMethod_ID' => $getMethod_ID,
-    ':getm' => $row[17],
-    ':note' => $row[18],
+    ':getm' => $row[18],
+    ':note' => $row[19],
     ':dstat_ID' => $dstat_ID,
    );
 
@@ -448,8 +643,7 @@ $checkpoint = [];
 
 }
 
-  
-
+}
 
 
   }
@@ -464,7 +658,7 @@ $checkpoint = [];
     while($row = $result->fetch_assoc()) {
         $assetnum = $row['id'];
         array_push($idA,$assetnum);
-        $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."',1)";
+        $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."','".$asstat."')";
         if ($conn->query($sqlsta) == TRUE) {
         //echo $sqlsta;
         }
@@ -484,22 +678,22 @@ $checkpoint = [];
       $Bloop = true;
     }
     else{
-      $asnumset = $row[22];
+      $asnumset = $row[23];
    $insert_data = array(
     ':time_now'=> $tn,
-    ':datee'=> $row[23],
-    ':report_NO'=> $row[24],
-    ':report_order'=> $row[25],
-    ':unit'=> $row[26],
-    ':price_per_unit'=> $row[27],
-    ':summary'=> $row[28],
-    ':life_time'=> $row[29],
-    ':Depreciation_rate'=> $row[30],
-    ':year_Depreciation'=> $row[31],
-    ':sum_Depreciation'=> $row[32],
-    ':net_value'=> $row[33],
-    ':Change_order'=> $row[34],
-    ':report_number'=> $row[35],
+    ':datee'=> $row[24],
+    ':report_NO'=> $row[25],
+    ':report_order'=> $row[26],
+    ':unit'=> $row[27],
+    ':price_per_unit'=> $row[28],
+    ':summary'=> $row[29],
+    ':life_time'=> $row[30],
+    ':Depreciation_rate'=> $row[31],
+    ':year_Depreciation'=> $row[32],
+    ':sum_Depreciation'=> $row[33],
+    ':net_value'=> $row[34],
+    ':Change_order'=> $row[35],
+    ':report_number'=> $row[36],
 
    );
 
@@ -524,9 +718,34 @@ $aid = "";
                    
                   }
                 }
-
-
-  $sql = "SELECT id FROM asset WHERE asset_Set = '".$asnumset."'" ;
+$dd = [];
+$setarr2 = [];
+if(count(explode(',',$asnumset))>1){
+  $dd = explode(',',$asnumset);
+  for($f = 0;$f < count($dd); $f++){
+    if(count(explode('-',$dd[$f]))>1){
+      $mindd = explode('-',$dd[$f]);
+      for($u = $mindd[0];$u <= $mindd[1]; $u++){
+        array_push($setarr2,$u);
+      }
+    }else{
+      array_push($setarr2,$dd[$f]);
+    }
+  }
+  
+}else{
+  if(count(explode('-',$asnumset))>1){
+    $mindd = explode('-',$asnumset);
+    for($u = $mindd[0];$u <= $mindd[1]; $u++){
+      array_push($setarr2,$u);
+    }
+  }else{
+    $setarr2 = [];
+    array_push($setarr2,$asnumset);
+  }
+}
+for($i = 0; $i < count($setarr2); $i++){
+  $sql = "SELECT id FROM asset WHERE asset_Set = '".$setarr2[$i]."'" ;
            $result = $conn->query($sql);
            if ($result->num_rows > 0) {
             while($rowse = $result->fetch_assoc()) {
@@ -538,7 +757,8 @@ $aid = "";
 
             }
            }
-
+          }
+          $setarr2 = [];
     }
 
  

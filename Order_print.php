@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="CSS/search.css">
     <link rel="stylesheet" href="CSS/Checckbox.css">
     <link rel="stylesheet" href="CSS/navbar.css">
-    
+    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="shortcut icon" href="img/computer.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />

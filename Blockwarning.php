@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="CSS/BG.css">
     <link rel="shortcut icon" href="img/computer.png">
+    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>CS_Asset</title>
 </head>
-<body background="img/BG.png" style ="
+<body class = "thsarabunnew" background="img/BG.png" style ="
   background-repeat: no-repeat;
   background-attachment: fixed; ">
 <br>

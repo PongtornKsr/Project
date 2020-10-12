@@ -22,7 +22,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
     </style>
     <title>CS_Asset</title>
 </head>
-<body background="img/BG.png">
+<body class = "thsarabunnew" background="img/BG.png">
     
 <?php  require 'connect.php';
        $sqla = "SELECT * FROM userdata WHERE name = '".$_SESSION['Account']."'";

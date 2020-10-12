@@ -1,4 +1,4 @@
-<body background="img/Bg.png" style ="
+<body class = "thsarabunnew" background="img/Bg.png" style ="
   background-repeat: no-repeat;
   background-attachment: fixed; ">
   <?php if(!isset($_SESSION['Account'])){

@@ -78,7 +78,7 @@ $set = $row['asset_Set'];
 }
 }
 
-$sql = "SELECT * From asset WHERE asset_Set like '".$set."' ORDER BY CAST(asset_number AS SIGNED) asc LIMIT 1";
+$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY id ASC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -86,14 +86,14 @@ $min .= $row['asset_ID'];
 }
 }
 $cmin = explode(" ",$min);
-$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY CAST(asset_number AS SIGNED) DESC LIMIT 1";
+$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $max .= $row['asset_ID'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."' order by CAST(asset_number AS SIGNED) DESC LIMIT 1";
+$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -221,7 +221,7 @@ $C .= $cmin[0];
   
 }
 }else{
-  echo "B";
+  //echo "B";
   $aid = "";
   $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
   $result = $conn->query($sql);
@@ -257,7 +257,7 @@ $C .= $cmin[0];
             if($tt == false){
                 $tt = true;
                 $C .= '-';
-            }else if($i < count($allid) && $tt == true ){
+            }else if($i == count($allid)-1 && $tt == true ){
               $C .= $allid[$i];
             }
         }

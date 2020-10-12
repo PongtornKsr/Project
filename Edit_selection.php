@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="CSS/navbar.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
   <script src="javascript/Edit_select.js"></script>
     <link rel="stylesheet" href="CSS/BG.css">
     <link rel="stylesheet" href="CSS/fixedheader.css">
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="img/computer.png">
     <title>CS_Asset</title>
 </head>
-<body>
+<body class = "thsarabunnew">
     <?php require 'nav.php'; ?>
    
     <br><br><br><br><br>

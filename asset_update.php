@@ -6,33 +6,33 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="stylesheet" href="CSS/navbar.css">
     <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
-    <link rel="stylesheet" href="Css/BG.css">
+    <link rel="stylesheet" href="CSS/BG.css">
     <link rel="shortcut icon" href="img/computer.png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
     <title>CS_Assert</title>
 </head>
 
-<body>
+<body class = "thsarabunnew">
     <?php require 'nav.php'; ?>
     <?php if(isset($_POST['stat_update'])){ 
         require 'connect.php';
         $_SESSION['id'] = $_POST['id'];
         ?>
         <div class = "box">
-        <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+        <a href="assetmanage.php" style ="float:left" ><button class = "btn btn-danger">ย้อนกลับ</button></a>
     <form id = "myform"action="rm_update_back.php" method="post">
     <div class="head">แก้ไขสถานะครุภัณฑ์</div>
     <br>
     <br><br>
         <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
         <div class="thsarabunnew"style="font-size:24px">เปลี่ยนสถานะเป็น <?php  
-        echo "<select id = 'selectst' onchange='checkselecttion()' name = 'stid'>
+        echo "<select id = 'selectst' onchange='checkselecttion()' class = 'form-control'name = 'stid'>
         <option value='0'>---สถานะครุภัณฑ์---</option>";
             $sql = "SELECT * FROM assetstat ";
             $result = $conn->query($sql);
@@ -43,9 +43,9 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
        echo  "</select>";
         ?></div>
      <br><br><br>
-     <input id= "a"style = "width:100px;height: 50px;"type="button" name = "StatUpdate" class="btn btn-outline-success" onclick="chackselecttion()"value="แก้ไข">
+     <input id= "a"type="button" name = "StatUpdate" class="btn btn-success" value="แก้ไขสถานะครุภัณฑ์">
      
-     <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกสถานะใหม่ของครุภัณฑ์ที่ต้องการเปลี่ยน</p>
+    <!-- <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกสถานะใหม่ของครุภัณฑ์ที่ต้องการเปลี่ยน</p> -->
     </form></div>
     <?php } ?>
 
@@ -61,14 +61,14 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
 
         ?>
     <div class="box">
-    <a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+    <a href="assetmanage.php" style ="float:left"><button lass = "btn btn-danger">ย้อนกลับ</button></a>
     <form  id ="myform"action="rm_update_back.php" method="post">
     <div class="head">แก้ไขที่จัดเก็บครุภัณฑ์</div>
     <br><br><br>
         <div class="thsarabunnew" style="font-size:24px">จำนวนครุภัณฑ์ที่เลือกคือ <?php echo count($_POST['id']); ?> รายการ</div>
         <div class="thsarabunnew"style="font-size:24px">เปลี่ยนสถานที่จัดเก็บใหม่เป็น 
         <?php  
-        echo "<select id = 'selectrm' onchange='checkselecttion()' name = 'rmid'>
+        echo "<select id = 'selectrm' onchange='checkselecttion()' class = 'form-control' name = 'rmid'>
         <option value='0'>---ห้องที่จัดเก็บ---</option>";
             $sql = "SELECT * FROM room ";
             $result = $conn->query($sql);
@@ -81,8 +81,8 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
         
      <!-- <input type="button" value="Cancel" onclick="window.location.href = '<?php //echo $_SERVER['HTTP_REFERER'] ?>';"> -->
      <br><br><br>
-     <input id= "a"style = "width:100px;height: 50px;"type="button" name = "RoomUpdate" class="btn btn-outline-success" onclick="chackselecttion()"value="แก้ไข">
-     <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกห้องที่ต้องการเปลี่ยนเพื่อจัดเก็บครุภัณฑ์</p>
+     <input id= "a"type="button" name = "RoomUpdate" class="btn btn-success" value="แก้ไขห้องที่จัดเก็บ">
+     <!-- <p id="hint1" style="color: red;font-size: 24px">กรุณาเลือกห้องที่ต้องการเปลี่ยนเพื่อจัดเก็บครุภัณฑ์</p> -->
     </form></div>
     <?php } ?>
     <?php require 'footer.php'; ?>
@@ -90,28 +90,31 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
 </html>
 <script type="text/javascript"> 
 
-window.onload = function(){
-    checkselecttion();
-}
-function checkselecttion(){ 
-    var x = document.getElementById('select').value;
-    if (x == 0){
-        document.getElementById('a').disabled = true;
-       
-        document.getElementById('hint1').style.display='block';
-    }
-    else if(x>0){
-        document.getElementById('a').disabled = false;
-      
-        document.getElementById('hint1').style.display='none';
-        
-    }
-}
+
+
 
 </script>
 <script>
 $(document).ready(function(){
-
+    var ru = $('#a').attr('name');
+        if(ru == "RoomUpdate"){
+            checkselect($('#selectrm').val());
+        }
+        else if(ru == "StatUpdate"){
+            checkselect($('#selectst').val());
+        }
+    function checkselect(x) {
+       
+        if(x == 0){
+            $('#a').prop('disabled', true);
+        }else{
+            $('#a').prop('disabled', false);
+        }
+    }
+    $('select').on('change',function(){
+        var s = $(this).val();
+        checkselect(s);
+    })
     $('#a').click(function(){
         var ru = $('#a').attr('name');
         if(ru == "RoomUpdate"){
