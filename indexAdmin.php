@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="CSS/BG.css">
     <link rel="shortcut icon" href="img/computer.png">
     <link rel="stylesheet" href="CSS/navbar.css">

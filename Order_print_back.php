@@ -286,9 +286,9 @@ ob_start();
         while($row = $result->fetch_assoc()) {
             echo "<tr>";
             for($i = 0 ; $i < count($se) ; $i++){
-                if($se[$i] == "resper_firstname|resper_lastname"){ $arr = explode("|",$se[$i]); echo "<td>".$row[$arr[0]]." ".$row[$arr[1]]."</td>"; }
+                if($se[$i] == "resper_firstname|resper_lastname"){ $arr = explode("|",$se[$i]); echo "<td align ='left'>".$row[$arr[0]]." ".$row[$arr[1]]."</td>"; }
                 else{
-                echo "<td>".$row[$se[$i]]."</td>";
+                echo "<td align ='left'>".$row[$se[$i]]."</td>";
                 }
             }
             echo "</tr>";

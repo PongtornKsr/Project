@@ -20,11 +20,15 @@ $(document).ready(function(){
         }
     }
     function init_require(){
+        $('#email').siblings("span").hide();
+        $('#fname').siblings("span").hide();
+        $('#lname').siblings("span").hide();
+        /*
         $('#fname').css('border','solid 2px red');
         $('#lname').css('border','solid 2px red');
         $('#email').css('border','solid 2px red');
         $('#username').css('border','solid 2px red');
-        $('#pass').css('border','solid 2px red');
+        $('#pass').css('border','solid 2px red');*/
     }
     $(document).on('keyup','#fname',function(){
         var n = $(this).val();
@@ -32,12 +36,15 @@ $(document).ready(function(){
         fname = injectin_check(n);
         if(fname == true){
             $('#name_alert').html("");
-            $('#fname').css('border','solid 2px green');
+            $('#name_alert').hide();
+           // $('#fname').css('border','solid 2px green');
         }
         else if(fname == false){
             $('#name_alert').html('กรุณากรอกข้อมูลที่ไม่ใช่ค่าว่าง และ ห้ามใช้ตัวอักษรพิเศษเช่น " * / < > ; , "' );
             $('#name_alert').css('color','red');
-            $('#fname').css('border','solid 2px red');
+            $('#name_alert').show();
+            
+           // $('#fname').css('border','solid 2px red');
         }
         condition_check();
     });
@@ -46,12 +53,14 @@ $(document).ready(function(){
         lname = injectin_check(n);
         if(lname == true){
             $('#lname_alert').html("");
-            $('#lname').css('border','solid 2px green');
+            $('#lname_alert').hide();
+           // $('#lname').css('border','solid 2px green');
         }
         if(lname == false){
             $('#lname_alert').html('กรุณากรอกข้อมูลที่ไม่ใช่ค่าว่าง และ ห้ามใช้ตัวอักษรพิเศษเช่น " * / < > ; , "' );
             $('#lname_alert').css('color','red');
-            $('#lname').css('border','solid 2px red');
+            $('#lname_alert').show();
+           // $('#lname').css('border','solid 2px red');
         }
         condition_check();
     });
@@ -86,18 +95,21 @@ $(document).ready(function(){
                 email = injectin_check(n);
                 if(email == true && ch == ""){
                     $('#email_alert').html("");
-                    $('#email').css('border','solid 2px green');
+                    //$('#email').css('border','solid 2px green');
+                    $('#email_alert').hide();
                 }
                 if(email == false){
                     $('#email_alert').html('กรุณากรอกข้อมูลที่ไม่ใช่ค่าว่าง และ ห้ามใช้ตัวอักษรพิเศษเช่น " * / < > ; , "' );
                     $('#email_alert').css('color','red');
-                    $('#email').css('border','solid 2px red');
+                   // $('#email').css('border','solid 2px red');
+                   $('#email_alert').show();
                 }
                 if(ch != ""){
                     $('#email_alert').html(ch);
                     $('#email_alert').css('color','red');
-                    $('#email').css('border','solid 2px red');
+                   // $('#email').css('border','solid 2px red');
                     email = false;
+                    $('#email_alert').show();
 
                 }
                 condition_check();

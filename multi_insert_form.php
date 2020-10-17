@@ -54,7 +54,7 @@
                     รายการที่ : <label style="color:red">*</label>
                 </td>
                 <td>
-                     <input type="text" name = "on[]" width="50" required>
+                     <input id = "noinput1" type="text" name = "on[]" width="50" required>
                 </td>
             </tr>
             <tr>
@@ -62,9 +62,96 @@
                     วันที่: <label style="color:red">*</label>
                 </td>
                 <td>
-                    <input type="date" style ="width: 100%" id= "datepick" class = "datepick" name = "addin_date[]" width="50" required>
+                    <input type="date" style ="width: 100%" id= "dateinput1" class = "datepick" name = "addin_date[]" width="50" required>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    ชื่อชุดครุภัณฑ์:
+                </td>
+                <td>
+                    <input id = "Setname1" type="text" name = "asset_setname[]" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "width="50">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ราคารวมต่อชุด: 
+                </td>
+                <td>    
+                    <input id = "gprice" type="text" name="gprice[]"placeholder="ใส่ราคากรณีเป็นครุภัณฑ์ชุด หากเป็นครุภัณฑ์เดี่ยวให้ใส่ 0 หรือ -" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ: <label style="color:red">*</label>
+                </td>
+                <td id = "kk">
+                <?php 
+                echo "<select class = 'asvensee' name = 'asven[]' id = '9'>
+                <option value='0'>---บริษัท---</option>";
+                    $sql = "SELECT * FROM vendor ";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                    echo "<option value=".$row['vendor_ID'].">".$row['vendor_company']."</option>";
+                    }     }
+               echo  "</select>";
+                ?>
+                </td>
+            </tr>
+            <tr> 
+            <td></td>
+                <td  id = "kk">
+                ชื่อบริษัท :
+                    <input type="text" class = "vendorcomm" name = "vendor_company[]" id ="10" width="50" required>
+                </td>
+                </tr>
+                <tr>
+                <td></td><td  id = "kk">ที่อยู่บริษัท :
+                    <input type="text" class = "vendorloo"name = "vendor_location[]" id ="10" width="50" required>
+                </td></tr>
+                <tr>
+                <td></td><td  id = "kk">โทรศัพท์ :
+                    <input type="text" class = "vendortell"name = "vendor_tel[]" id ="10" width="50" required>
+                </td></tr>
+                <tr>
+                <td></td><td  id = "kk">โทรสาร :
+                    <input type="text" class = "vendorfaxx" name = "fax[]" id ="10" width="50" required>
+                </td></tr>
+                <tr>
+                <td>วิธีการได้มา : <label style="color:red">*</label> </td>
+                <td> 
+                <select name="get[]" id = "gmt" class = "gett">
+                <option value="0">---ประเภทเงินงบประมาณ---</option> 
+                <?php 
+                $sql = "SELECT * FROM money_type";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo '<option value="'.$row["mid"].'">'.$row["money_type"].'</option>';
+                }     }
+
+                ?>
+                </select>
+                
+                <br>
+
+                <select name = "getmet[]" class = "gettt"><option value="0">---วิธีได้รับ---</option> 
+                <?php
+               
+                    $sql = "SELECT * FROM getmethod WHERE getMethod_ID NOT IN ('1', '2', '3','9');";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+						echo '<option value="'.$row["getMethod_ID"].'">'.$row["method"].'</option>';
+                    }     }
+
+                    ?>
+                </select>
+                <br>รายได้ปีงบประมาณ: <input type="text" id = "incomeyrd" class = "incomm" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled>  <!--อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>--> 
+                </td><td>
+                
+                </td></tr>
             <tr>
                 <td>
                     ประเภทของครุภัณฑ์: <label style="color:red">*</label> 
@@ -142,15 +229,6 @@
                 <td id ="keyy">    
                     <input type="text" style ="width:40%"name="asset_ID[]"required id = "ida" class = "">/<input style="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style="width:10%" type="text" name="assetid[]" id= "idc" class = "">
                     
-                </td>
-            </tr>
-           
-            <tr>
-                <td>
-                    ชื่อชุดครุภัณฑ์:
-                </td>
-                <td>
-                    <input type="text" name = "asset_setname[]" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "width="50">
                 </td>
             </tr>
             <tr>
@@ -242,108 +320,14 @@
                 ห้อง: <input type="text" name = "rmname[]"required id="8" width="50">
                 </td>
                 </tr>
-                <tr>
-                <td>
-                   ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ: <label style="color:red">*</label>
-                </td>
-                <td id = "kk">
-                <?php 
-                echo "<select name = 'asven[]' id = '9'>
-                <option value='0'>---บริษัท---</option>";
-                    $sql = "SELECT * FROM vendor ";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['vendor_ID'].">".$row['vendor_company']."</option>";
-                    }     }
-               echo  "</select>";
-                ?>
-                </td>
-            </tr>
-            <tr> 
-            <td></td>
-                <td  id = "kk">
-                ชื่อบริษัท :
-                    <input type="text" name = "vendor_company[]" id ="10" width="50" required>
-                </td>
-                </tr>
-                <tr>
-                <td></td><td  id = "kk">ที่อยู่บริษัท :
-                    <input type="text" name = "vendor_location[]" id ="10" width="50" required>
-                </td></tr>
-                <tr>
-                <td></td><td  id = "kk">โทรศัพท์ :
-                    <input type="text" name = "vendor_tel[]" id ="10" width="50" required>
-                </td></tr>
-                <tr>
-                <td></td><td  id = "kk">โทรสาร :
-                    <input type="text" name = "fax[]" id ="10" width="50" required>
-                </td></tr>
-                <tr>
-                <td>วิธีการได้มา : <label style="color:red">*</label> </td>
-                <td> 
-                <select name="get[]" id = "gmt">
-                <option value="0">---ประเภทเงินงบประมาณ---</option> 
-                <?php 
-                $sql = "SELECT * FROM money_type";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo '<option value="'.$row["mid"].'">'.$row["money_type"].'</option>';
-                }     }
-
-                ?>
-                </select>
-                <!--
-                <input type="radio" id="ft" name="get[]" value="1">
-                <label>เงินงบประมาณ(งปม.)</label>
-                <input type="radio" id="sd" name="get[]" value="2">
-                <label>เงินนอกงบประมาณ</label>
-                <input type="radio" id="trd" name="get[]" value="3">
-                <label>เงินบริจาค/เงินช่วยเหลือ</label>
-                <input type="radio" id="frt" name="get[]" value="4">
-                <label>อื่นๆ</label> -->
-                <br>
-
-                <select name = "getmet[]" ><option value="0">---วิธีได้รับ---</option> 
-                <?php
-                /*
-                $sql = "SELECT * FROM getmethod ";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        if($row['getMethod_ID'] == 2){echo "<input type='radio' name='gmet0' value=".$row['getMethod_ID'].">".$row['method']."รายได้ปี <input type='text' name = 'year[]' width='50'>";}
-                        else if ($row['getMethod_ID'] == 9) {echo "<input type='radio' name='gmet0' value=".$row['getMethod_ID'].">".$row['method']."<input type='text' name = 'els[]' width='50'>";}
-                        else {
-                    echo "<input type='radio' name='gmet0' value=".$row['getMethod_ID'].">".$row['method'];
-                    }}     } */ 
-                    $sql = "SELECT * FROM getmethod WHERE getMethod_ID NOT IN ('1', '2', '3','9');";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-						echo '<option value="'.$row["getMethod_ID"].'">'.$row["method"].'</option>';
-                    }     }
-
-                    ?>
-                </select>
-                <br>รายได้ปีงบประมาณ: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled>  <!--อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>--> 
-                </td><td>
                 
-                </td></tr>
+                
             <tr>
                 <td>
                     ราคาต่อหน่วย: 
                 </td>
                 <td>    
-                    <input type="text" name="price[]" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์เดี่ยว หากเป็นราคารวมชุดให้ใส่ 0 หรือ -" >
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ราคารวมต่อชุด: 
-                </td>
-                <td>    
-                    <input type="text" name="gprice[]"placeholder="ใส่ราคากรณีเป็นครุภัณฑ์ชุด หากเป็นครุภัณฑ์เดี่ยวให้ใส่ 0 หรือ -" >
+                    <input id = "price" type="text" name="price[]" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์เดี่ยว หากเป็นราคารวมชุดให้ใส่ 0 หรือ -" >
                 </td>
             </tr>
             <tr>
@@ -447,7 +431,7 @@
                           </div>  
                      </form>  
   </div>
- </body><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ </body><script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
@@ -455,6 +439,7 @@
 
 $(document).ready(function(){  
     
+   
     var array = [1,2,3,4,5,6,7,8,9,10];
     var keystone = [0];
     var num = 0;
@@ -471,7 +456,137 @@ $(document).ready(function(){
         else{ return 0; }
         
         }
+        var on_bool = false;
+        var date_bool = false;
+        var set_bool = false;
+        var gprice_bool = false;
+        function add_bool_check(){
+            if(on_bool == true && date_bool == true && set_bool == true && gprice_bool == true){
+                $('#add').prop('disabled',false);
+            }else {
+                $('#add').prop('disabled',true);
+            }
+        }
+        add_bool_check();
+        $(document).on('change','.gett',function(){
+            var s = $(this).val();
+            if(s != 2){
+                $('.incomm').val("");
+                $('.incomma').val("");
+            }
+            $('.getta').val(s);
+        });
+        $(document).on('change','.gettt',function(){
+            var s = $(this).val();
+            $('.gettta').val(s);
+        });
+        $(document).on('keyup','.incomm',function(){
+            var s = $(this).val();
+            $('.incomma').val(s);
+        })
+        $(document).on('change','.asvensee',function(){
+            var s = $(this).val();
+            var id = parseInt($(this).attr('id'));
+            var op = id + 1;
+            var value = $('#'+id).val();
+            $('#test').html(op);
+            if(value !="0"){
+                $(this).siblings('input').attr('disabled',true);
+                $('[id='+op+']').slice().prop("disabled", true);
+                $('[id='+op+']').slice().prop("required", false);
+                $(this).siblings('input').attr('required',false);
+            }
+            else{ $(this).siblings('input').attr('disabled',false);
+                $(this).siblings('input').attr('required',true);
+                $('[id='+op+']').slice().prop("disabled", false);
+                $('[id='+op+']').slice().prop("required", true);
+            }
+            $('.asvense').val(s);
+        });
+        $(document).on('keyup','.vendorcomm',function(){
+            var s = $(this).val();
+            $('.vendorcom').val(s);
+        });
+        $(document).on('keyup','.vendorloo',function(){
+            var s = $(this).val();
+            $('.vendorlo').val(s);
+        });
+        $(document).on('keyup','.vendortell',function(){
+            var s = $(this).val();
+            $('.vendortel').val(s);
+        })
+        $(document).on('keyup','.vendorfaxx',function(){
+            var s = $(this).val();
+            $('.vendorfax').val(s);
+        });
+        $(document).on('keyup','#price',function(){
+            var s = $(this).val();
+            var a = s.replace(" ","");
+            if(a!=''){
+                $('#gprice').prop('disabled',true); 
+            }else{
+                $('#gprice').prop('disabled',false); 
+            }
+           
+        });
+        $(document).on('keyup','#gprice',function(){
+            var s = $(this).val();
+            var a = s.replace(" ","");
+            if(a!=''){
+                gprice_bool = true;
+                $('#price').prop('disabled',true); 
+            }else{
+                gprice_bool = false;
+                $('#price').prop('disabled',false); 
+            }
+            $('.gpin').val(s);
+            add_bool_check();
+        });
+        $(document).on('keyup','#noinput1',function(){
+            var s = $(this).val();
+            var a = s.replace(" ","");
+            if(a!=''){
+                on_bool = true; 
+            }else{
+                 on_bool = false;
+            }
+            $('.onin').val(s);
+            add_bool_check();
+        });
+        $(document).on('change','#dateinput1',function(){
+            var s = $(this).val();
+            var a = s.replace(" ","");
+            if(a!=""){
+                date_bool = true;
+            }
+            else{
+                date_bool = false;
+            }
+            $('.datein').val(s);
+            add_bool_check();
+        });
+        $(document).on('keyup','#Setname1',function(){
+            var s = $(this).val();
+            var a = s.replace(" ","");
+            if(a!=""){
+                set_bool = true;
+            }else {
+                set_bool = false;
+            }
+            $('.setin').val(s);
+            add_bool_check();
+        });
       $('#add').click(function(){  
+          var onin1 = $('#noinput1').val();
+          var datein1 = $('#dateinput1').val();
+          var Setname1 = $('#Setname1').val();
+        var gp = $('#gprice').val();
+        var vendorop = $('.asvensee').val();
+        
+        var vendorcom = $('.vendorcomm').val();
+        var vendorlo = $('.vendorloo').val();
+        var vendortel = $('.vendortell').val();
+        var vendorfax = $('.vendorfaxx').val();
              asi +=1;
            for(var di = 1 ; di <= 10 ; di ++){
      	var q = false;
@@ -504,21 +619,21 @@ $(document).ready(function(){
   html += '<input type="hidden" name="num[]" >';
   html += '<hr width=80% size=3 style="color:black">';
   html += '<table Align = "center" style="width:90%">';
-  html += '<tr><td> รายการที่ : <label style="color:red">*</label></td><td> <input type="text" name = "on[]" width="50" required> </td></tr> <tr><td>วันที่: <label style="color:red">*</label></td><td><input type="date" id = "datepick" class ="datepick" name = "addin_date[]" style ="width: 100%" required></td></tr> <tr> <td>ประเภทของครุภัณฑ์: <label style="color:red">*</label> </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50">'; 
-  html += '</td></tr><tr><td>ลักษณะการติดตั้ง: <label style="color:red">*</label> </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
-  html += '<tr><td>ครุภัณฑ์:</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การไล่ลำดับเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: <label style="color:red">*</label> </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <label style="color:red">*</label> <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" name = "asset_setname[]" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "required width="50"></td></tr>';
+  html += '<tr><td> รายการที่ : <label style="color:red">*</label></td><td> <input type="text" class = "onin"value = "'+onin1+'" width="50" disabled> <input type="hidden" class = "onin" name="on[]" value = "'+onin1+'"></td></tr> <tr><td>วันที่: <label style="color:red">*</label></td><td><input type="date" id = "datepick" value = "'+datein1+'" class = "datein" style ="width: 100%" disabled><input type="hidden" class = "datein" name="addin_date[]" value = "'+datein1+'"></td></tr><tr><td>ชื่อชุดครุภัณฑ์:</td><td><input type="text" class = "setin" value = "'+Setname1+'" placeholder = "กรณีเป็นครุภัณฑ์เดี่ยวให้เว้นว่างหรือใส่ - "disabled width="50"><input type="hidden" class = "setin" name="asset_setname[]" value = "'+Setname1+'"></td></tr><tr><td>ราคารวมต่อชุด: </td><td><input class = "gpin" type="text" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์ชุด หากเป็นครุภัณฑ์เดี่ยวให้ใส่ 0 หรือ -" value = "'+gp+'" disabled><input type ="hidden" class = "gpin" value = "'+gp+'" name = "gprice[]"></td></tr> '; 
+  html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ: <label style="color:red">*</label></td><td id ="kk"><select class = "asvense" id = "'+array[array.length - 2]+'"  disabled><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select><input class = "asvense" type="hidden" name = "asven[]" value = "'+vendorop+'">';
+  html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" value = "'+vendorcom+'"class = "vendorcom" id = "'+array[array.length - 1]+'"width="50" disabled><input type = "hidden" class = "vendorcom" value = "'+vendorcom+'" name = "vendor_company[]"></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text"value = "'+vendorlo+'" class = "vendorlo" id = "'+array[array.length - 1]+'" width="50" disabled><input type = "hidden" name = "vendor_location[]" class = "vendorlo" value = "'+vendorlo+'"></td></tr>';
+  html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input value = "'+vendortel+'" class = "vendortel"type="text"  id = "'+array[array.length - 1]+'" width="50" disabled><input type ="hidden" class = "vendortel" name = "vendor_tel[]" value = "'+vendortel+'"></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" class = "vendorfax" value = "'+vendorfax+'"  id = "'+array[array.length - 1]+'" width="50"disabled><input type = "hidden" name = "fax[]" class = "vendorfax" value = "'+vendorfax+'"></td></tr>';
+  html += '<tr><td>วิธีการได้มา : <label style="color:red">*</label> </td><td> <select class = "getta" id = "gmt" disabled><option value="0">---ประเภทเงินงบประมาณ---</option><?php echo get_money_type(); ?></select><input type ="hidden" name = "get[]" class = "getta" value = ""><br><select class = "gettta" disabled><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><input type ="hidden" class = "gettta" value = "" name = "getmet[]"><br>รายได้ปีงบประมาณ: <input type="text" id = "incomeyrd" class = "incomma" placeholder="เงินนอกงบประมาณ" disabled><input type = "hidden" name = "incomeyrd[]" class = "incomma" value =""> </td></tr><tr> <td>ประเภทของครุภัณฑ์: <label style="color:red">*</label> </td><td id ="kk"> <select name = "assettype[]" id = "'+array[array.length - 10]+'"><option value="0">---ประเภทของครุภัณฑ์---</option> <?php echo select_atype(); ?> </select> <br>เพิ่มประเภทครุภัณฑ์ใหม่: <input type="text" id = "'+array[array.length - 9]+'" name = "type[]"required width="50"></td></tr><tr><td>ลักษณะการติดตั้ง: <label style="color:red">*</label> </td><td id ="kk"> <select name = "dstat_ID[]" id ="'+array[array.length - 8]+'"><option value="0">---ลักษณะการติดตั้ง---</option><?php echo select_dtype();  ?> </select> <br>เพิ่มลักษณะการติดตั้งใหม่: <input type="text" id ="'+array[array.length - 7]+'" name = "dtype[]"required width="50">'; 
+  html += '<tr><td>ครุภัณฑ์:</td><td><select name="setof[]" id="so"><option value="more">ครุภัณฑ์แบบชุด</option><option value="one">ครุภัณฑ์แบบเดี่ยว</option></select></td></tr><tr><td>การไล่ลำดับเลขรหัสครุภัณฑ์:</td><td><select readonly name="runnumber[]" id="rn"><option value="defaultex">ไล่ลำดับหมายเลขครุภัณฑ์</option><option value="notdefaultex">ไม่ไล่ลำดับหมายเลขครุภัณฑ์</option></select></td></tr><tr><td>จำนวน: <label style="color:red">*</label> </td><td>    <input type="text" name="quantity[]"required id= "idq" ><span style="float:right;"  class = "idx"></span></td></tr><tr><td>รหัสครุภัณฑ์เริ่มต้น: <label style="color:red">*</label> <input type="hidden" name="iforc" id = "iforc" value = "'+(i+1)+'"></td><td id ="keyy"><input type="text" name="asset_ID[]"required style ="width:40%" id = "ida" class = "">/<input style ="width:10%" type="text" name="asset_Set[]"required id = "idb" class = ""><input style ="width:10%" type="text" name="assetid[]" id= "idc" class = ""></td></tr>';
   html += '<tr><td>ชื่อครุภัณฑ์: <label style="color:red">*</label></td><td><input type="text" name = "asset_name[]"required width="50"></td></tr><tr><td>ชื่อเรียกครุภัณฑ์:</td><td><input type="text" name = "asset_nickname[]" width="50"></td></tr><tr><td>ลักษณะ/คุณลักษณะ:</td><td><input type="text" name = "property[]" width="50"></td></tr><tr><td>รุ่น/แบบ:</td><td><input type="text" name = "model[]" width="50"></td></tr>';
   html += '<tr><td>หมายเลขทะเบียน :</td><td><input type="text" name = "asset_order[]" width="50"></td></tr><tr><td>สถานที่ตั้ง / หน่วยงานที่รับผิดชอบ:</td><td><input type="text" value="คณะวิทยาศาสตร์และเทคโนโลยี" name = "assetloca[]" disabled>';
   html += '</td></tr><tr><td>ผู้รับผิดชอบ : <label style="color:red">*</label></td><td id ="kk"><select name = "resid[]" id="'+array[array.length - 6]+'"><option value="0">---ผู้รับผิดชอบ---</option><?php echo select_responper(); ?></select> <br>ชื่อ: <input type="text" name = "resfname[]"required id="'+array[array.length - 5]+'" width="50">นามสกุล: <input type="text" name = "reslname[]"required id ="'+array[array.length - 5]+'" width="50">';
   html += '</td></tr><tr><td>ห้องที่จัดเก็บ : <label style="color:red">*</label></td><td id ="kk"><select name = "rmid[]" id ="'+array[array.length - 4]+'"><option value="0">---ห้องที่จัดเก็บ---</option><?php echo select_room(); ?></select> <br>ห้อง: <input type="text" name = "rmname[]"required id ="'+array[array.length -3]+'" width="50">';
-  html += '</td></tr><tr><td>ชื่อผู้ขาย/ผู้รับจ้าง/ผู้บริการ: <label style="color:red">*</label></td><td id ="kk"><select name = "asven[]" id = "'+array[array.length - 2]+'"><option value="0">---บริษัท---</option><?php echo select_vendor(); ?></select>';
-  html += '</td></tr><tr> <td></td><td id ="kk">ชื่อบริษัท :<input type="text" name = "vendor_company[]" id = "'+array[array.length - 1]+'"width="50" required></td></tr><tr><td></td><td id ="kk">ที่อยู่บริษัท :<input type="text" name = "vendor_location[]" id = "'+array[array.length - 1]+'" width="50" required></td></tr>';
-  html += '<tr><td></td><td id ="kk">โทรศัพท์ :<input type="text" name = "vendor_tel[]" id = "'+array[array.length - 1]+'" width="50" required></td></tr><tr><td></td><td id ="kk">โทรสาร :<input type="text" name = "fax[]" id = "'+array[array.length - 1]+'" width="50"required></td></tr>';
-  html += '<tr><td>วิธีการได้มา : <label style="color:red">*</label> </td><td> <select name="get[]" id = "gmt"><option value="0">---ประเภทเงินงบประมาณ---</option><?php echo get_money_type(); ?></select><br><select name = "getmet[]"><option value="0">---วิธีได้รับ---</option> <?php echo select_getmethod();  ?></select><br>รายได้ปีงบประมาณ: <input type="text" id = "incomeyrd" name = "incomeyrd[]"placeholder="เงินนอกงบประมาณ" disabled> <!--อื่นๆ: <input type="text" id = "els" name="els[]" placeholder="default:อื่นๆ" disabled>--></td></tr><tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" name="price[]" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์เดี่ยว หากเป็นราคารวมชุดให้ใส่ 0 หรือ -" ></td></tr><tr><td>ราคารวมต่อชุด: </td><td><input type="text" name="gprice[]"placeholder="ใส่ราคากรณีเป็นครุภัณฑ์ชุด หากเป็นครุภัณฑ์เดี่ยวให้ใส่ 0 หรือ -" ></td></tr>';
+  html += '<tr><td>ราคาต่อหน่วย: </td><td>    <input type="text" placeholder="ใส่ราคากรณีเป็นครุภัณฑ์เดี่ยว หากเป็นราคารวมชุดให้ใส่ 0 หรือ -" disabled><input type ="hidden"  name="price[]" value = ""></td></tr>';
   html += '<tr><td>หมายเหตุ: </td><td><input type="text" name="note[]"></td></tr></table>';
   
   //html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
-          
+  
            var html2 = "";
            html2 += '<table id = "'+asi+'"><thead><tr id ="treport_tr"><td id = "treport_td" rowspan="2"><div>วัน/เดือน/ปี</div></td><td id ="treport_td" rowspan="2"><div>ที่เอกสาร</div></td><td id = "treport_td" rowspan="2"><div>รายการ</div></td>';
   html2 += '<td id = "treport_td" rowspan="2"> <div>จำนวนหน่วย</div></td><td id = "treport_td" rowspan="2"><div>ราคาต่อ หน่วย/ชุด/กลุ่ม</div></td><td id = "treport_td" rowspan="2"><div>มูลค่ารวม</div></td><td id = "treport_td" rowspan="2"><div>อายุการใช้งาน</div></td><td id = "treport_td" rowspan="2">';
@@ -542,6 +657,13 @@ $(document).ready(function(){
   //$('#asi_report').append(html2);
   $('#dynamic_field').append('<tr id="'+i+'t"><td style="width:90%">'+html+'</td><td><button type="button" name="remove" id="'+i+'t" class="btn btn-danger btn_remove">X</button></td></tr><tr id="'+i+'tt" ><td class = "container-fluid" colspan="2"><div height = "200px">'+html2+'</div></td></tr>');  
            i++;
+           $('.asvense').val(vendorop);
+           var getopp = $('.gett').val();
+           $('.getta').val(getopp);
+           var getbopp = $('.gettt').val();
+           $('.gettta').val(getbopp);
+           var inc = $('.incomm').val();
+           $('.incomma').val(inc);
       });  
       $(document).on('click', '.btn_remove', function(){  
            var button_id = $(this).attr("id");
@@ -586,15 +708,41 @@ $(document).ready(function(){
             else if(run == "notdefaultex"){ }
         }
     	
-        
-        
-       
-        
     });
+   
     $(document).on('keyup','input[id=idb]' , function(){
         var idb_value = $(this).val();
+        var text = "";
+        
+        var elee = document.getElementsByClassName("idx");
+            var qe = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+        $.ajax({
+            url: "check_duplicate.php",
+            method:"POST",
+            data:{
+                'sett': idb_value
+            },success:function(respons){
+                if(respons == "taken"){
+                   
+                alert("มีครุภัณฑ์หมายเลขดังกล่าวในระบบแล้ว กรุณากรอกหมายเลขครุภัณฑ์ใหม่");
+                elee[qe].innerHTML= "";
+                $('#submit').prop('disabled',true);
+                }else {
+                    $('#submit').prop('disabled',false);
+                }
+            }
+        })
+        
+            
+           /* var ele = document.getElementsByClassName("idx");
+            var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+            ele[q].innerHTML= "";*/
+            
+            
+        
+        
         if (isNaN(idb_value / 1) == true || idb_value <= 0 || idb_value.includes(".")) {
-            alert("กรุณาเติมค่าเป็นตัวเลข และ มีค่ามากกว่า 0");
+            alert("กรุณาเติมค่าเป็นตัวเลข และ มีค่ามากกว่า 0"+text);
             var ele = document.getElementsByClassName("idx");
             var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
             ele[q].innerHTML= "";
@@ -679,7 +827,24 @@ $(document).ready(function(){
             var ele = document.getElementsByClassName("idx");
             var q = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
             ele[q].innerHTML= "";
+            var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
+            var o = $(this).parents().parents().siblings().children().children('input[id=iforc]').val();
             $(this).val('');
+            if(asd == "one"){
+                var htmlq = "";
+                htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:10%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
+                $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+                $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+            }else if(asd == "more"){
+                var htmlq = "";
+                var run =  $(this).parents().parents().siblings().children().children('select[id=rn]').val();
+                if(run == "notdefaultex"){ 
+                    var o = $(this).parents().parents().siblings().children().children('input[id=iforc]').val();
+                    htmlq+= '<input type="text" style ="width:40%" name="asset_ID'+o+'[]" id = "ida"required class = "">/<input style ="width:20%" type="text" name="asset_Set'+o+'[]" id = "idb"required class = ""> . <input style ="width:10%" type ="text" name= "asset_n'+o+'[]"required ><input style ="width:10%" type="text" name="assetid'+o+'[]" id= "idc" class = "">';
+                    $(this).parents().parents().siblings().children('td[id=keyy]').html('');
+                  $(this).parents().parents().siblings().children('td[id=keyy]').append(htmlq);
+                }
+            }
         }else{
         var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
         var o = $(this).parents().parents().siblings().children().children('input[id=iforc]').val();

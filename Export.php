@@ -352,11 +352,12 @@ $spreadsheet->getActivesheet()->getStyle('A2')->getAlignment()->setHorizontal(Al
     $active->setCellValue('G5', 'จำนวนเงิน (บาท)');
     $active->setCellValue('H5', 'หมายเหตุ');
 
-$sql = "SELECT No FROM asset GROUP BY No";
+$sql = "SELECT No,asset_Setname FROM asset GROUP BY No";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
     array_push($NO,$row['No']);
+    //array_push($Settname,$row['asset_Setname']);
 }
 };
  // หาแถวข้อมูลสุดท้าย ไม่รวมแถวหัวข้อ
@@ -403,7 +404,7 @@ while($row = $result->fetch_assoc()) {
             $active->setCellValue( 'F'.($i+$rowstart).'', my_money_format($gprice));
             $active->setCellValue( 'G'.($i+$rowstart).'', my_money_format($gprice));
             $active->setCellValue( 'H'.($i+$rowstart).'', $note);
-            $sql = "SELECT * , COUNT(quantity) as ct FROM asset NATURAL JOIN assettype WHERE No = '".$NO[$i]."' GROUP by asset_Set";
+            $sql = "SELECT * , COUNT(quantity) as ct FROM asset NATURAL JOIN assettype WHERE No = '".$NO[$i]."' GROUP by asset_name";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $p = 1;
@@ -439,7 +440,7 @@ while($row = $result->fetch_assoc()) {
             }
         }
         else {
-            $sql = "SELECT * , COUNT(quantity) as ct , SUM(price_per_qty) as ppq FROM asset NATURAL JOIN assettype WHERE No = '".$NO[$i]."' GROUP by asset_Set";
+            $sql = "SELECT * , COUNT(quantity) as ct , SUM(price_per_qty) as ppq FROM asset NATURAL JOIN assettype WHERE No = '".$NO[$i]."' GROUP by asset_Setname";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $p = 1;

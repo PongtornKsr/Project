@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="CSS/navbar.css">
     <link rel="stylesheet" href="CSS/formstyle.css">
     <link rel="shortcut icon" href="img/computer.png">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
     
     <title>CS_Asset</title>
 </head>
@@ -59,51 +59,52 @@
         }
 ?>
 <br><br><br>
-<form class = "form">
+<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+
+	<div style = "width: 500px;height:auto">
+<form class = "whitebox" >
 <a href='AccountManage.php'> <button type='button' class='btn btn-default' >ย้อนกลับ</button></a>
-  <h2>แก้ไขข้อมูลผู้ใช้</h2>
-  <h4 id = "error_msg" style="text-align:center; color:red">df</h4>
-  <br>
-		<p>
-			<label class="floatLabel">อีเมล</label>
-			<input class="w3-input" id="email" name="email" value ="<?php echo $email; ?>"type="text" <?php if($email == "fams.rmutk@gmail.com"){ echo "disabled" ;} ?> required>
-            <span id = "hint2"></span>
-        </p>
-        <p>
-			<label  class="floatLabel">ชื่อ</label>
-			<input class="w3-input"  id = "fname" name="fname" value ="<?php echo $fname; ?>" type="text" required>
-            <span id = "hint2"></span>
-        </p>
-        <p>
-			<label  class="floatLabel">นามสกุล</label>
-			<input  class="w3-input" id = "lname" name="lname" value ="<?php echo $lname; ?>" type="text" required>
-            <span id = "hint2"></span>
-        </p>
-        <!-- 
-        <p>
-			<label  class="floatLabel">ชื่อผู้ใช้</label>
-			<input  class="w3-input" id = "username" name="uname" value ="<?php  echo $uname; ?>" type="text" required>
-            <span id = "hint2"></span>
-		</p>
-		<p>
-			<label for="password" class="floatLabel">รหัสผ่าน</label>
-			<input class="w3-input" id="password" onkeyup = "passcount()" value ="<?php echo $pass; ?>" name="password" type="password">
-			<span id = "hint1">Enter a password longer than 8 characters</span>
-		</p>
-		<p>
-			<label for="confirm_password" class="floatLabel">ยืนยันรหัสผ่าน</label>
-			<input class="w3-input" id="password2" onkeyup= "passcheck()" value ="<?php echo $pass; ?>" name="confirm_password" type="password">
-			<span id = "hint2">Your passwords do not match</span>
-        </p>
-        -->
+  <div><h2>แก้ไขข้อมูลผู้ใช้</h2></div>
+  <div><h4 id = "error_msg" style="text-align:center; color:red">df</h4></div>
+  
+  <div class="form-group">
+	<label style= "float:left">ชื่อ<b style = "color:red">*</b></label>
+    <input type="text" class="form-control" name = "fname" id="fname" value = "<?php echo $fname; ?>" placeholder="ชื่อ">
+	<span id = "name_alert" style = "color:red" ></span>
+		</div>
+	
+	<div class="form-group">
+    <label  style= "float:left">นามสกุล<b style = "color:red">*</b></label>
+    <input type="text" class="form-control" name = "lname" id="lname"  value = "<?php echo $lname; ?>"placeholder="นามสกุล">
+	<span id = "lname_alert" style = "color:red"></span>
+		</div>
+			
+		<div class="form-group">
+	<label  style= "float:left">อีเมล<b style = "color:red">*</b></label>
+    <input class="form-control" id="email" name="email" value ="<?php echo $email; ?>"type="text" <?php if($email == "fams.rmutk@gmail.com"){ echo "disabled" ;} ?> required>
+	<span id = "email_alert" style = "color:red"></span>
+	</div>
         <center>
         <br>
-		<p>
+		
             <button type="button" class= "btn btn-success"name="update_button" id="update_button">&nbsp;แก้ไขข้อมูล&nbsp;</button>
             <input type="hidden" name="uid" id ="uid" value = "<?php echo $uid; ?>">
-		</p></center>
+		</center>
 	</form>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
 <?php require 'footer.php'; ?>
 </body>
 </html>
@@ -115,120 +116,50 @@ $('document').ready(function(){
     var lname_state = true;
     var passwordin_state = true;
     var passwordinc_state = true;
+    start();
     function start(){
         $('#email').siblings("span").hide();
         $('#username').siblings("span").hide();
         $('#fname').siblings("span").hide();
         $('#lname').siblings("span").hide();
         $('#error_msg').hide();
+        $('span').hide();
     }
     function check_stat(){
         if (fname_state == false || email_state == false || lname_state == false) {
-            e.preventDefault();
-            $('#error_msg').show();
-            $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
+           // e.preventDefault();
+           // $('#error_msg').show();
+          //  $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
             $('#update_button').attr('disabled',true);
         } else {
             $('#error_msg').hide();
             $('#update_button').attr('disabled',false);
         }
     }
-    /*
-    function check(){
-        var value = $('#password').val();
-        if(value.length < 8 && value != "Default text"){
-            passwordin_state = false;
-            $('#password').parent().removeClass();
-            $('#password').parent().addClass('form_error');
-            $('#password').siblings("span").text("รหัสผ่านต้องมี8ตัวอักษรหรือมากกว่า");
-            $('#password').siblings("span").show();
-        } 
-        else{
-            passwordin_state = true;
-            $('#password').parent().removeClass();
-            $('#password').parent().addClass('form_success');
-            $('#password').siblings("span").text("");
-            $('#password').siblings("span").hide();
-            $('#password').parent().removeClass();
-        }
-        var passwordin1 = $('#password').val();
-        var passwordin2 = $('#password2').val();
-        if(passwordin2 != passwordin1){
-            passwordinc_state = false;
-            $('#password2').parent().removeClass();
-            $('#password2').parent().addClass('form_error');
-            $('#password2').siblings("span").text("รหัสผ่านไม่ตรงกัน");
-            $('#password2').siblings("span").show();
-        }
-        else{
-            passwordinc_state = true;
-            $('#password2').parent().removeClass();
-            $('#password2').parent().addClass('form_success');
-            $('#password2').siblings("span").text("");
-            $('#password2').siblings("span").hide();
-            $('#password2').parent().removeClass();
-        }
-    }*/
-    start();
-    //check();
+    
 
-    $('#password').on('keyup',function(){
-       //check();
-       check_stat();
-    });
-    $('#password2').on('keyup',function(){
-       // check();
-        check_stat();
-    });
     function injectin_check(ijtext){
         if(ijtext == "" || ijtext.trim() == "" || ijtext.includes("'") || ijtext.includes("*") || ijtext.includes(";") || ijtext.includes("<") || ijtext.includes(">") || ijtext.includes(",")){
             return false;
         }
         else { return true; }
     }
-   /* $('#username').on('keyup', function() {
-        var username = $('#username').val();
-       
-        username_state  = injectin_check(username);
-        $.ajax({
-            url: 'update_profile.php',
-            type: 'post',
-            data: {
-                'username_check': 1,
-                'username': username
-            },
-            success: function(response) {
-                if (response == 'taken') {
-                    username_state = false;
-                    $('#username').parent().removeClass();
-                    $('#username').parent().addClass('form_error');
-                    $('#username').siblings("span").text("ชื่อผู้ใช้มีการลงทะเบียนในระบบแล้ว");
-                    $('#username').siblings("span").show();
-                    check_stat();
-                } else if (response == "not_taken") {
-                    username_state = true;
-                    $('#username').parent().removeClass();
-                    $('#username').parent().addClass('form_success');
-                    $('#username').siblings("span").text("ชื่อผู้ใช้สามารถใช้ได้");
-                    $('#username').siblings("span").hide();
-                    check_stat();
-                }
-            }
-        })
-    });
-*/
+   
     $('#email').on('keyup', function() {
         var email = $('#email').val();
         email_state = injectin_check(email);
         if (email_state == false) {
             email_state = false;
-            $('#email').parent().removeClass();
-                    $('#email').parent().addClass('form_error');
+           // $('#email').parent().removeClass();
+                 //   $('#email').parent().addClass('form_error');
                     $('#email').siblings("span").text("กรุณาใส่อีเมลที่ไม่ใช้ค่าว่าง และ ตัวอักษรพิเศษ");
                     $('#email').siblings("span").show();
+                    check_stat();
             return;
         }else{
+            email_state = true;
             $('#email').siblings("span").hide();
+            check_stat()
         }
         $.ajax({
             url: 'update_profile.php',
@@ -263,28 +194,35 @@ $('document').ready(function(){
         fname_state = injectin_check(name);
         if (fname_state == false) {
             fname_state = false;
-            $(this).parent().removeClass();
-                    $(this).parent().addClass('form_error');
+          //  $(this).parent().removeClass();
+                   // $(this).parent().addClass('form_error');
                     $(this).siblings("span").text("กรุณาใส่ค่าที่ไม่ใช้ค่าว่าง และ ตัวอักษรพิเศษ");
                     $(this).siblings("span").show();
-            return;
+                    check_stat();
+            
         }else{
             $(this).siblings("span").hide();
+            check_stat();
+            
         }
         
     });
     $('#lname').on('keyup', function() {
         var name = $(this).val();
         lname_state = injectin_check(name);
-        if (fname_state == false) {
-            fname_state = false;
-            $(this).parent().removeClass();
-                    $(this).parent().addClass('form_error');
+        if (lname_state == false) {
+            lname_state = false;
+           // $(this).parent().removeClass();
+                  //  $(this).parent().addClass('form_error');
                     $(this).siblings("span").text("กรุณาใส่ค่าที่ไม่ใช้ค่าว่าง และ ตัวอักษรพิเศษ");
                     $(this).siblings("span").show();
-            return;
+                    check_stat();
+                   
         }else{
+            lname_state = true;
             $(this).siblings("span").hide();
+            check_stat();
+
         }
         
     });
@@ -299,8 +237,8 @@ $('document').ready(function(){
         var uid = $("#uid").val();
         if ( email_state == false || fname_state == false || lname_state == false) {
             e.preventDefault();
-            $('#error_msg').show();
-            $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
+           // $('#error_msg').show();
+           // $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
             
         } else {
             $.ajax({

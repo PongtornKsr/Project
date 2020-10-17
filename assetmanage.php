@@ -49,7 +49,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
      if(!empty($_POST['searchtxt'])){
          $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
             $c = "asset_ID";
-            $_SESSION['sqlx'] = $sql .= $clause."`".$c."` LIKE '%{$s}%' OR asset_name LIKE '%{$s}%'";
+            $_SESSION['sqlx'] = $sql .= $clause."(`".$c."` LIKE '%{$s}%' OR asset_name LIKE '%{$s}%')";
          $clause = " and ";//Change  to OR after 1st WHERE
          $sortway.= $c." = ".$s;
         }
@@ -328,10 +328,10 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
     </table>
 </div>
 <br>
-<div><?php // echo $sql; ?></div>
+<div><?php  //echo $sql; ?></div>
 <?php if($_SESSION['editop'] == 2){  ?>
-    <a  href="allasset.php" target="_blank"><button type="button" class='btn btn-outline-success'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
-    <a  href="Export.php" target="_blank"><button type="button" class='btn btn-outline-success'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>
+    <a  href="allasset.php" target="_blank"><button type="button" class='btn btn-info'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
+    <a  href="Export.php" target="_blank"><button type="button" class='btn btn-primary'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>
 <?php }
 else if($_SESSION['editop'] == 1){ ?>
 <p id = "q"style="color: red;font-size: 24px">โปรดเลือกรายการครุภัณฑ์ที่ต้องการแก้ไข</p>

@@ -580,7 +580,7 @@ else if($initop == 6){
     }
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM respon_per WHERE resper_ID Like '%".$s."%' OR resper_firstname Like '%".$s."%' OR resper_lastname LIKE '%".$s."%' AND resper_ID NOT IN ('48')";
+        $sql = "SELECT * FROM respon_per WHERE (resper_ID Like '%".$s."%' OR resper_firstname Like '%".$s."%' OR resper_lastname LIKE '%".$s."%') AND (resper_ID NOT IN ('48'))";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {

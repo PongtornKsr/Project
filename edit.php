@@ -35,10 +35,8 @@ $_SESSION['word_edi'] = $_SESSION['searchword'];
     <title>CS_Asset</title>
 </head>
 <?php require 'nav.php'; ?>
-<br>
-<br>
-<div>
-<br><br>
+<div align = "center">
+
 <?php 
 $asnum = $_GET['asset_number'];
 $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE asset_number = '".$_GET['asset_number']."'";
@@ -81,12 +79,10 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 
 ?>
 <br >
-<div class="box" align = "center" style="height: 830px;">
-<a href="assetmanage.php" style ="float:left"><button>ย้อนกลับ</button></a>
+<div align = "center" class="whitebox" style ="width:40%;height:90%" >
+<a href="assetmanage.php" style ="float:left"><button class = "btn btn-danger">ย้อนกลับ</button></a>
 <form  style="height: 800px;" action="edit2.php" method="POST">
-
 <div class="head">แก้ไขรายละเอียดครุภัณฑ์</div>
-<br>
 <div align = "center">
 <table style ="width:80%">
 <tr><td>รายการที่ : </td><td><input style ="width:100%;text-align:left" id= "tx "type="text" name = "onum" value = "<?php echo $O_N; ?>" ></td></tr>

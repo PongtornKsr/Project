@@ -169,13 +169,18 @@ require 'connect.php';
     
     
                 } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = '".$vendor_company."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $asven = $row['vendor_ID'];
+                    }
+                    }
                 }
                 }
                 else{
-                    $sql= "INSERT INTO vendor ( vendor_company , vendor_location , vendor_tel , fax ) VALUES ('ค่าว่าง','ค่าว่าง','ค่าว่าง','ค่าว่าง')";           
-                if ($conn->query($sql) == TRUE) {
-                    $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = 'ค่าว่าง'";
+                    
+                    $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = 'ยังไม่กำหนดบริษัท'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
@@ -184,16 +189,9 @@ require 'connect.php';
                     }
     
     
-                } else {
-                    $sql = "SELECT vendor_ID FROM vendor WHERE vendor_company = 'ค่าว่าง'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        $asven = $row['vendor_ID'];
-                    }
-                    }
+            
                 }
-                }
+                
                 
             }else{
                 $asven = $_POST['asven'][$count];

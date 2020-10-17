@@ -48,6 +48,7 @@ if($_FILES["import_excel"]["name"] != '')
   $e = array();
   $dd = array();
   $setarr = array();
+  $mindd = array();
   $setarr2 = array();
   $checkpoint= array();
   foreach($data as $row)
@@ -231,7 +232,7 @@ if($_FILES["import_excel"]["name"] != '')
             }
 
         }
-      }else if($astypen != ""){
+      }else if($astype != ""){
         $astypen = str_replace(' ', '', $astype);
         $sql = "SELECT * FROM `assettype` WHERE asset_type_name like '%".$astypen."%'";
                         $result = $conn->query($sql);
@@ -371,10 +372,9 @@ if($_FILES["import_excel"]["name"] != '')
 
       if($astat == "" || empty($astat) || $astat == "-"){
         $astat = str_replace(' ', '', $astat);
-        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ยังไม่กำหนด%'";
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ใช้งานได้%'";
         $result = $conn->query($sql);
         if ($result->num_rows == 1) {
-
           while($rows = $result->fetch_assoc()) {
             $asstat  = $rows['asset_stat_ID'];
           }
@@ -390,7 +390,7 @@ if($_FILES["import_excel"]["name"] != '')
           $asstat = $rows['asset_stat_ID'];
         }
       }else{
-        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ยังไม่กำหนด%'";
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ใช้งานได้%'";
         $result = $conn->query($sql);
         if ($result->num_rows == 1) {
 
@@ -720,14 +720,24 @@ $aid = "";
                 }
 $dd = [];
 $setarr2 = [];
+$mindd = [];
 if(count(explode(',',$asnumset))>1){
   $dd = explode(',',$asnumset);
   for($f = 0;$f < count($dd); $f++){
     if(count(explode('-',$dd[$f]))>1){
       $mindd = explode('-',$dd[$f]);
+      if(count(explode('.',$mindd[0])) > 1 && count(explode('.',$mindd[1])) > 1)
+    {
+      $mdd1 = explode('.',$mindd[0]);
+      $mdd2 = explode('.',$mindd[1]);
+      for($u = $mdd1[1];$u <= $mdd2[1]; $u++){
+      array_push($setarr2,$mdd1[0].".".$u);
+    }
+    }else{
       for($u = $mindd[0];$u <= $mindd[1]; $u++){
         array_push($setarr2,$u);
       }
+    }
     }else{
       array_push($setarr2,$dd[$f]);
     }
@@ -736,35 +746,48 @@ if(count(explode(',',$asnumset))>1){
 }else{
   if(count(explode('-',$asnumset))>1){
     $mindd = explode('-',$asnumset);
-    for($u = $mindd[0];$u <= $mindd[1]; $u++){
-      array_push($setarr2,$u);
+    if(count(explode('.',$mindd[0])) > 1 && count(explode('.',$mindd[1])) > 1)
+    {
+      $mdd1 = explode('.',$mindd[0]);
+      $mdd2 = explode('.',$mindd[1]);
+      for($u = $mdd1[1];$u <= $mdd2[1]; $u++){
+      array_push($setarr2,$mdd1[0].".".$u);
     }
+    }else{
+      for($u = $mindd[0];$u <= $mindd[1]; $u++){
+        array_push($setarr2,$u);
+      }
+    }
+    
   }else{
-    $setarr2 = [];
+    //$setarr2 = [];
     array_push($setarr2,$asnumset);
   }
 }
 for($i = 0; $i < count($setarr2); $i++){
-  $sql = "SELECT id FROM asset WHERE asset_Set = '".$setarr2[$i]."'" ;
+  //echo $setarr2[$i];
+  $sql = "SELECT id FROM asset WHERE asset_number = '".$setarr2[$i]."'" ;
            $result = $conn->query($sql);
            if ($result->num_rows > 0) {
             while($rowse = $result->fetch_assoc()) {
               $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$rowse['id']."','".$aid."')";
               if ($conn->query($sqll) == TRUE) {
-                //echo "ok";
+               // echo "ok";
+              }else{
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
               }
                    
 
             }
            }
           }
-          $setarr2 = [];
+          
     }
 
  
 
     }
-
+    $setarr2 = [];
 
 $message = '<div class="alert alert-success">Data Imported Successfully</div>';
   

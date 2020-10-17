@@ -3,7 +3,9 @@
   background-attachment: fixed; ">
   <?php if(!isset($_SESSION['Account'])){
       header('location: login.php');
-    } ?>
+    } 
+    include 'session_check.php';
+    ?>
          <!--
           <nav class="navbar navbar-light" style="background-color: #B3EE3A;" width = "100%">
           <?php 
@@ -103,6 +105,13 @@
 
   <a class = "a" href="logout.php"><img src="img/loout.png" width="30" height="30" alt=""> ออกจากระบบ</a>
   <a class = "a"href="Asset_prereport.php"><img src="img/pie.png" width="30" height="30" alt=""> ภาพรวมครุภัณฑ์</a>
+  <?php 
+                          require 'connect.php';
+                          $sql = "SELECT *  FROM userdata WHERE name = '".$_SESSION['Account']."'";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                          if($row['profile_ID'] == 1 ){ ?>
   <div class="dropdownnav">
     <button class="dropbtnnav"><img src="img/userex.png" width="30" height="30" alt=""> จัดการบัญชีผู้ใช้ 
       <i class="fa fa-caret-down"></i>
@@ -123,7 +132,7 @@
                           ?>
                           
     </div>
-  </div> 
+    </div> <?php } } } ?>
   <div class="dropdownnav">
     <button class="dropbtnnav"><img src="img/computer.png" width="30" height="30" alt=""> จัดการครุภัณฑ์ 
       <i class="fa fa-caret-down"></i>
@@ -135,12 +144,13 @@
                           $result = $conn->query($sql);
                           if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
+                            $_SESSION['OPs'] = $row['profile_ID'];
                           if($row['profile_ID'] == 1 ){ //echo "<a href='assetinsert.php' class='dropdown-item'>เพิ่มครุภัณฑ์เดี่ยว</a>";
                            echo "<a href='multi_insert_form.php' class='dropdown-item'>เพิ่มครุภัณฑ์</a>
                             <a href='Search.php' class='dropdown-item'>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</a>";
                             echo "<a href='Order_print.php' class='dropdown-item'>พิมพ์รายการครุภัณฑ์</a>";
                             echo "<a href='ImportF.php' class='dropdown-item'>นำเข้าข้อมูลครุภัณฑ์</a>";
-                            echo "<a href='Edit_selection.php' class='dropdown-item'>แก้ไขตัวเลือก</a>";
+                            echo "<a href='Edit_selection.php' class='dropdown-item'>ตั้งค่า</a>";
                           } 
                             elseif($row['profile_ID'] == 2){ echo "<a href='Search.php' class='dropdown-item'>ค้นหาและตรวจสอบข้อมูลครุภัณฑ์</a>";
                               echo "<a href='Order_print.php' class='dropdown-item'>พิมพ์รายการครุภัณฑ์</a>"; }

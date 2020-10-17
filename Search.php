@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include('search_backend.php'); ?>
+<?php include('search_backend.php');  ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="CSS/search.css">
    <link rel="stylesheet" href="CSS/navbar.css">
    <link rel="shortcut icon" href="img/computer.png">
+   <link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -35,7 +36,7 @@
     <div id= "bodytext">
     <form class="searchbox" id="sbox" action ="assetmanage.php" method= "post">
     <br>
-    <div><h1>ค้นหาและแก้ไขข้อมูลครุภัณฑ์</h1></div>
+    <div><h1><?php if($_SESSION['OPs'] == 1){ echo "ค้นหาและแก้ไขข้อมูลครุภัณฑ์"; }else if($_SESSION['OPs'] == 2){ echo "ค้นหาและตรวจสอบข้อมูลครุภัณฑ์"; } ?></h1></div>
     <br>
     <div class="form__group">
     <input type="text" class="form__input" name ="searchtxt"id="searchtxt" placeholder="รหัสครุภัณฑ์/ชื่อครุภัณฑ์" />

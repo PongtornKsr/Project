@@ -4,11 +4,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="Css/BG.css">
+	<link rel="stylesheet" href="CSS/BG.css">
 	<link rel="stylesheet" href="CSS/navbar.css">
 	<link rel="stylesheet" href="CSS/formstyle.css">
 	<link rel="shortcut icon" href="img/computer.png">
 	<link rel="stylesheet" href="CSS/fonts/thsarabunnew.css" />
+	<link rel="stylesheet" href="CSS/Editpro.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -31,42 +32,31 @@
 <br>
 <br>
     <br>
-	<div class = "whitebox" style = "width: 500px;height:auto">
-	<div><h3>เพิ่มผู้ใช้งานใหม่</h3></div>
+	<div style = "width: 500px;height:auto">
+	
 
-    <form action="usermanage.php?function=2" method = "POST" Align = "center">
+    <form class = "whitebox" action="usermanage.php?function=2" method = "POST" Align = "center">
+	<div><h2>เพิ่มผู้ใช้งานใหม่</h2></div>
     <input type="hidden" value = "2" name = "function">
       
 		<div class="form-group">
-	<label style= "float:left">ชื่อ</label>
+	<label style= "float:left">ชื่อ<b style = "color:red">*</b></label>
     <input type="text" class="form-control" name = "fname" id="fname"  placeholder="ชื่อ">
-	<div id = "name_alert" tyle = "color:red" ></div>
+	<span id = "name_alert" style = "color:red" ></span>
 		</div>
 	
 	<div class="form-group">
-    <label  style= "float:left">นามสกุล</label>
+    <label  style= "float:left">นามสกุล<b style = "color:red">*</b></label>
     <input type="text" class="form-control" name = "lname" id="lname"  placeholder="นามสกุล">
-	<div id = "lname_alert" tyle = "color:red"></div>
+	<span id = "lname_alert" style = "color:red"></span>
 		</div>
 			
 		<div class="form-group">
-	<label  style= "float:left">อีเมล</label>
+	<label  style= "float:left">อีเมล<b style = "color:red">*</b></label>
     <input type="email" class="form-control"  name = "email" id="email"  placeholder="อีเมล">
-	<div id = "email_alert" style = "color:red"></div>
+	<span id = "email_alert" style = "color:red"></span>
 	</div>
-	
-	<!--<div class="form-group">
-	<label  style= "float:left">ชื่อผู้ใช้งาน</label>
-    <input type="text" class="form-control"  name = "username" id="username"  placeholder="ชื่อผู้ใช้">
-	<div id = "username_alert" style = "color:red"></div>
-	</div>
-	
-	<div class="form-group">
-	<label style= "float:left">รหัสผ่าน</label>
-    <input type="password" class="form-control"  name = "pass" id="pass"  placeholder="รหัสผ่าน">
-	<div id = "pass_alert" style = "color:red"></div>
-	</div>
-	-->
+
   <label  style= "float:left">ประเภทบัญชี</label>
   <select class="form-control form-control-sm" name = "Type">
   <option value="2">ผู้ใช้งานทั่วไป</option>
@@ -89,8 +79,7 @@
 		</div>
 	</center>
       
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src ="javascript/user_check.js"></script>
   </body>

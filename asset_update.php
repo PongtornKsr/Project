@@ -61,7 +61,7 @@ $_SESSION['word_st'] = $_SESSION['searchword'];
 
         ?>
     <div class="box">
-    <a href="assetmanage.php" style ="float:left"><button lass = "btn btn-danger">ย้อนกลับ</button></a>
+    <a href="assetmanage.php" style ="float:left"><button class = "btn btn-danger">ย้อนกลับ</button></a>
     <form  id ="myform"action="rm_update_back.php" method="post">
     <div class="head">แก้ไขที่จัดเก็บครุภัณฑ์</div>
     <br><br><br>
