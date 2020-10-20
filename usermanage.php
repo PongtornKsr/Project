@@ -104,7 +104,8 @@ function useractive(){
 function userinsert(){
     require 'connect.php';
     $name = $_POST['fname']." ".$_POST['lname']; 
-    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`,`username`,`password`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."','".$_POST['username']."','".$_POST['pass']."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')),'".$_POST['Type']."','1')";
+    $pass = base64_encode($_POST['pass']);
+    $sqla = "INSERT INTO `userdata`(`givenName`, `familyName`, `name`, `email`,`username`,`password`, last_update , `profile_ID`, ID_stat) VALUES ('".$_POST['fname']."','".$_POST['lname']."','".$name."','".$_POST['email']."','".$_POST['username']."','".$pass."',(SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')),'".$_POST['Type']."','1')";
     if ($conn->query($sqla) === TRUE) {
         $log = new Log();
         insert_action("เพิ่ม ".$name." เป็นผู้ใช้ใหม่");

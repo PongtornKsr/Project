@@ -42,26 +42,9 @@
    </div>
 <br>
                              <div class = "whitebox" style="width:80%">  
-                                
-                                
-                   
-                      
-                        
-                          
-
-                               
-                                
-                                  
                                   <div style ="font-size: 35px">จัดการผู้ใช้งาน</div>
                                  <div><label style ="float:left"><img src="img/magnifying-glass.png" class="brand_logo" alt="Logo" height= "35px"> ค้นหาผู้ใช้งาน : </label><span style = "display:block;overflow:hidden;">  <input type="text" style ="width:20%;float:left" name="search_text" id="search_text" placeholder="ค้นหา" class="form-control" /></span></div>
                                  
-                          
-                                
-                                
-                             
-                        
-                      
-                     
                     <br>
 
     <div  id="sort_table" style="height:450px;width:100%;overflow-y:auto ">

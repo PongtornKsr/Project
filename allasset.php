@@ -256,6 +256,9 @@ if(count($e) == 2){
               if($tt == false){
                   $tt = true;
                   $C .= '-';
+                  if($i+1 == count($allid)){
+                    $C .= $allid[$i];
+                  }
               }else if($i == count($allid)-1 && $tt == true ){
                 $C .= $allid[$i];
               }

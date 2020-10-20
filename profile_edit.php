@@ -64,7 +64,7 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "190">
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
@@ -89,8 +89,18 @@
 			
 		<div class="form-group">
 	<label  style= "float:left">อีเมล<b style = "color:red">*</b></label>
-    <input class="form-control" id="email" name="email" value ="<?php echo $email; ?>"type="text" <?php if($email == "fams.rmutk@gmail.com"){ echo "disabled" ;} ?> required>
+    <input class="form-control" id="email" name="email" value ="<?php echo $email; ?>"type="email" <?php if($email == "fams.rmutk@gmail.com"){ echo "disabled" ;} ?> placeholder="email" required>
 	<span id = "email_alert" style = "color:red"></span>
+	</div>
+    <div class="form-group">
+	<label  style= "float:left">ชื่อผู้ใช้งาน<b style = "color:red">*</b></label>
+    <input class="form-control" id="username" name="username" value ="<?php echo $uname; ?>"type="text" placeholder="ชื่อผู้ใช้" required>
+	<span id = "username_alert" style = "color:red"></span>
+	</div>
+    <div class="form-group">
+	<label  style= "float:left">รหัสผ่าน<b style = "color:red">*</b></label>
+    <input class="form-control" id="pass" name="password" value ="<?php echo $pass; ?>"type="text" placeholder="รหัสผ่าน" required>
+	<span id = "pass_alert" style = "color:red"></span>
 	</div>
         <center>
         <br>
@@ -120,13 +130,14 @@ $('document').ready(function(){
     function start(){
         $('#email').siblings("span").hide();
         $('#username').siblings("span").hide();
+        $('#pass').siblings("span").hide();
         $('#fname').siblings("span").hide();
         $('#lname').siblings("span").hide();
         $('#error_msg').hide();
         $('span').hide();
     }
     function check_stat(){
-        if (fname_state == false || email_state == false || lname_state == false) {
+        if (fname_state == false || email_state == false || lname_state == false || username_state == false || passwordin_state == false) {
            // e.preventDefault();
            // $('#error_msg').show();
           //  $("#error_msg").text("กรุณากรอกข้อมูลให้ถูกต้องก่อนดำเนินการ");
@@ -171,17 +182,60 @@ $('document').ready(function(){
             success: function(response) {
                 if (response == 'taken') {
                     email_state = false;
-                    $('#email').parent().removeClass();
-                    $('#email').parent().addClass('form_error');
+                    //$('#email').parent().removeClass();
+                    //$('#email').parent().addClass('form_error');
                     $('#email').siblings("span").text("อีเมลนี้มีการใช้งานในระบบแล้ว");
                     $('#email').siblings("span").show();
                     check_stat();
                 } else if (response == "not_taken") {
                     email_state = true;
-                    $('#email').parent().removeClass();
-                    $('#email').parent().addClass('form_success');
+                    //$('#email').parent().removeClass();
+                   // $('#email').parent().addClass('form_success');
                     $('#email').siblings("span").text("อีเมลสามารถใช้ได้");
                     $('#email').siblings("span").hide();
+                    check_stat();
+       
+                }
+            }
+        })
+    });
+    $('#username').on('keyup', function() {
+        var username = $('#username').val();
+        username_state = injectin_check(username);
+        if (username_state == false) {
+            username_state = false;
+           // $('#email').parent().removeClass();
+                 //   $('#email').parent().addClass('form_error');
+                    $('#username').siblings("span").text("กรุณาใส่อีเมลที่ไม่ใช้ค่าว่าง และ ตัวอักษรพิเศษ");
+                    $('#username').siblings("span").show();
+                    check_stat();
+            return;
+        }else{
+            username_state = true;
+            $('#username').siblings("span").hide();
+            check_stat()
+        }
+        $.ajax({
+            url: 'update_profile.php',
+            type: 'post',
+            data: {
+                'username_check': 1,
+                'username': username
+            },
+            success: function(response) {
+                if (response == 'taken') {
+                    username_state = false;
+                   // $('#username').parent().removeClass();
+                    //$('#username').parent().addClass('form_error');
+                    $('#username').siblings("span").text("ชื่อผู้ใช้งานนี้มีการใช้งานในระบบแล้ว");
+                    $('#username').siblings("span").show();
+                    check_stat();
+                } else if (response == "not_taken") {
+                    username_state = true;
+                   // $('#username').parent().removeClass();
+                    //$('#username').parent().addClass('form_success');
+                    $('#username').siblings("span").text("ชื่อผู้ใช้งานสามารถใช้ได้");
+                    $('#username').siblings("span").hide();
                     check_stat();
        
                 }
@@ -226,12 +280,30 @@ $('document').ready(function(){
         }
         
     });
+    $('#pass').on('keyup', function() {
+        var pass = $(this).val();
+       passwordin_state = injectin_check(pass);
+        if (passwordin_state == false) {
+            passwordin_state = false;
+           // $(this).parent().removeClass();
+                  //  $(this).parent().addClass('form_error');
+                    $(this).siblings("span").text("กรุณาใส่ค่าที่ไม่ใช้ค่าว่าง และ ตัวอักษรพิเศษ");
+                    $(this).siblings("span").show();
+                    check_stat();
+                   
+        }else{
+            passwordin_state = true;
+            $(this).siblings("span").hide();
+            check_stat();
 
+        }
+        
+    });
 
     $('#update_button').on("click", function(e) {
         var username = $("#username").val();
         var email = $("#email").val();
-        var password = $("#password").val();
+        var password = $("#pass").val();
         var fname = $("#fname").val();
         var lname = $("#lname").val();
         var uid = $("#uid").val();
@@ -247,8 +319,8 @@ $('document').ready(function(){
                 data: {
                     'save': 1,
                     'email': email,
-                    'username': '',
-                    'password': '',
+                    'username': username,
+                    'password': password,
                     'fname' : fname,
                     'lname' : lname,
                     'uid' : uid

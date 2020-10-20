@@ -11,7 +11,7 @@ $(document).ready(function(){
     }
 
     function condition_check(){
-        if(fname == true && lname == true && email == true){
+        if(fname == true && lname == true && email == true && username == true && pass == true){
             $('#accsubmit').attr('disabled',false);
         }
         else{
@@ -23,6 +23,8 @@ $(document).ready(function(){
         $('#email').siblings("span").hide();
         $('#fname').siblings("span").hide();
         $('#lname').siblings("span").hide();
+        $('#pass').siblings("span").hide();
+        $('#username').siblings("span").hide();
         /*
         $('#fname').css('border','solid 2px red');
         $('#lname').css('border','solid 2px red');
@@ -70,12 +72,14 @@ $(document).ready(function(){
         pass = injectin_check(n);
         if(pass == true){
             $('#pass_alert').html("");
-            $('#pass').css('border','solid 2px green');
+            $('#pass_alert').hide();
+           // $('#pass').css('border','solid 2px green');
         }
         if(pass == false){
             $('#pass_alert').html('กรุณากรอกข้อมูลที่ไม่ใช่ค่าว่าง และ ห้ามใช้ตัวอักษรพิเศษเช่น " * / < > ; , "' );
             $('#pass_alert').css('color','red');
-            $('#pass').css('border','solid 2px red');
+            $('#pass_alert').show();
+           // $('#pass').css('border','solid 2px red');
         }
         condition_check();
     });
@@ -131,17 +135,20 @@ $(document).ready(function(){
                     username = injectin_check(n);
                     if(username == true && ch == ""){
                         $('#username_alert').html("");
-                        $('#username').css('border','solid 2px green');
+                      //  $('#username').css('border','solid 2px green');
+                      $('#username_alert').hide();
                     }
                     if(username == false){
                         $('#username_alert').html('กรุณากรอกข้อมูลที่ไม่ใช่ค่าว่าง และ ห้ามใช้ตัวอักษรพิเศษเช่น " * / < > ; , "' );
                         $('#username_alert').css('color','red');
-                        $('#username').css('border','solid 2px red');
+                        $('#username_alert').show();
+                        //$('#username').css('border','solid 2px red');
                     }
                     if(ch != ""){
                         $('#username_alert').html(ch);
                         $('#username_alert').css('color','red');
-                        $('#username').css('border','solid 2px red');
+                      //  $('#username').css('border','solid 2px red');
+                      $('#username_alert').show();
                         username = false;
     
                     }

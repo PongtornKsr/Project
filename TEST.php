@@ -78,7 +78,7 @@ $set = $row['asset_Set'];
 }
 }
 
-$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY id ASC limit 1";
+$sql = "SELECT asset_ID From asset natural join asset_report_text WHERE asset_Set like '".$set."' ORDER BY id ASC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -86,21 +86,21 @@ $min .= $row['asset_ID'];
 }
 }
 $cmin = explode(" ",$min);
-$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
+$sql = "SELECT asset_ID From asset natural join asset_report_text WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $max .= $row['asset_ID'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
+$sql = "SELECT asset_number From asset natural join asset_report_text WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $mas .= $row['asset_number'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."'";
+$sql = "SELECT asset_number From asset natural join asset_report_text WHERE asset_Set like '".$set."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -116,7 +116,7 @@ if(count($e) > 1){
   $cu = count($cun);
   $mod = fmod($cu,2);
 if(count($cun) == $e[1]){
-  echo "A";
+  //echo "A";
   if($min == $max){
   $C .= $min;
   }else {
@@ -223,7 +223,7 @@ $C .= $cmin[0];
 }else{
   //echo "B";
   $aid = "";
-  $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
+  $sql = " SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
@@ -257,6 +257,9 @@ $C .= $cmin[0];
             if($tt == false){
                 $tt = true;
                 $C .= '-';
+                if($i+1 == count($allid)){
+                  $C .= $allid[$i];
+                }
             }else if($i == count($allid)-1 && $tt == true ){
               $C .= $allid[$i];
             }
@@ -293,7 +296,7 @@ $B = $row['asset_type_name'];
 
 $D = $row['property'];
 $E = $row['model'];
-
+$years = $row['getm'];
 $F = $row['asset_location'];
 $G = $row['vendor_company'];
 
@@ -369,7 +372,7 @@ echo "<br>"  ;
    <tr>
    <td></td>
    <td><input type="RADIO"  value="1" align = "center" <?php if($mt == 1){ echo "checked='checked'"; } ?> >&nbsp; &nbsp;  เงินงบประมาณ(งปม.) </td>
-   <td><input type="RADIO"  <?php if($mt == 2){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; เงินนอกงบประมาณ </td>
+   <td><input type="RADIO"  <?php if($mt == 2){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; เงินนอกงบประมาณ<?php if($mt == 2){ echo "(".$years.")"; } ?>  </td>
    <td><input type="RADIO"  <?php if($mt == 3){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; เงินบริจาคช่วยเหลือ   </td>
    <td><input type="RADIO"  <?php if($mt == 4){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; อื่นๆ  <br></td>
    </tr>
@@ -458,7 +461,7 @@ echo "<br>"  ;
    <tr>
    <td></td>
    <td><input type="RADIO"  value="1" align = "center" <?php if($mt == 1){ echo "checked='checked'"; } ?> >&nbsp; &nbsp;  เงินงบประมาณ(งปม.) </td>
-   <td><input type="RADIO"  <?php if($mt == 2){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; เงินนอกงบประมาณ </td>
+   <td><input type="RADIO"  <?php if($mt == 2){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; เงินนอกงบประมาณ<?php if($mt == 2){ echo "(".$years.")"; } ?></td>
    <td><input type="RADIO"  <?php if($mt == 3){ echo "checked='checked'"; } ?> >&nbsp; &nbsp; เงินบริจาคช่วยเหลือ   </td>
    <td><input type="RADIO"  <?php if($mt == 4){ echo "checked='checked'"; } ?> > &nbsp; &nbsp; อื่นๆ  <br></td>
    </tr>

@@ -156,6 +156,7 @@ function find_my_Id($setn){
           }
     
       }
+      
       if(!empty($cmin[1])){
         $C .= ' '.$cmin[1];
       }
@@ -197,6 +198,7 @@ function find_my_Id($setn){
                   }
             
               }
+              
               if(!empty($cmin[1])){
                 $C .= ' '.$cmin[1];
               }
@@ -238,6 +240,9 @@ function find_my_Id($setn){
               if($tt == false){
                   $tt = true;
                   $C .= '-';
+                  if($i+1 == count($allid)){
+                    $C .= $allid[$i];
+                  }
               }else if($i == count($allid)-1 && $tt == true ){
                 $C .= $allid[$i];
               }
@@ -254,6 +259,7 @@ function find_my_Id($setn){
            
   
     }
+
     if(!empty($cmin[1])){
       $C .= ' '.$cmin[1];
     }

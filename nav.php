@@ -101,7 +101,7 @@
                           }
                         }
                           ?>
-    <img src="img/logomini.png" width="70" height="30" alt=""></a> <div class= "band"><img src="<?php echo $_SESSION['userData']['picture']; ?>" width="30" height="30" alt=""> <?php echo $_SESSION['Account']; ?></div>
+    <img src="img/logomini.png" width="70" height="30" alt=""></a> <div class= "band"><img src="<?php if(isset($_SESSION['userData']['picture'])){ echo $_SESSION['userData']['picture']; }else{ echo "img/user.png"; } ?>" width="30" height="30" alt=""> <?php echo $_SESSION['Account']; ?></div>
 
   <a class = "a" href="logout.php"><img src="img/loout.png" width="30" height="30" alt=""> ออกจากระบบ</a>
   <a class = "a"href="Asset_prereport.php"><img src="img/pie.png" width="30" height="30" alt=""> ภาพรวมครุภัณฑ์</a>

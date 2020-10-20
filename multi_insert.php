@@ -91,7 +91,13 @@ require 'connect.php';
     
     
                 } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    $sql = "SELECT asset_type_ID FROM assettype WHERE asset_type_name = '".$type."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $assettype = $row['asset_type_ID'];
+                    }
+                    }
                 }
                 }else{
                     $sql = "SELECT * FROM `assettype` WHERE asset_type_name like '%ยังไม่กำหนด%'";
@@ -123,27 +129,22 @@ require 'connect.php';
                         }
                         }
                     } else {
-                        echo "Error: " . $sql . "<br>" . $conn->error;
+                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = '".$dtype."'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $dstat_ID = $row['dstat_ID'];
+                        }
+                        }
                     }
                     }else{
-                        $sql = "INSERT INTO deploy_stat (  dstat ) VALUES ('ค่าว่าง')"; 
-                    if ($conn->query($sql) == TRUE) {
-                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = 'ค่าว่าง'";
+                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat like '%ยังไม่กำหนด%'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             $dstat_ID = $row['dstat_ID'];
                         }
                         }
-                    } else {
-                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = 'ค่าว่าง'";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $dstat_ID = $row['dstat_ID'];
-                        }
-                        }
-                    }
                     }
                     
                 }
@@ -210,6 +211,14 @@ require 'connect.php';
                         $rmid = $row['room_ID'];
                     }
                 }
+            }else {
+                $sql = "SELECT room_ID FROM room WHERE room = '".$rmname."'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $rmid = $row['room_ID'];
+                    }
+                }
             }
                 }
                 else{
@@ -245,26 +254,15 @@ require 'connect.php';
             }
                 }
                 else{
-                    $sql = "INSERT INTO respon_per ( resper_firstname , resper_lastname ) VALUE ( 'ค่าว่าง','ค่าว่าง' )";
-                    if ($conn->query($sql) == TRUE) {
-                        $sql = "SELECT 	resper_ID FROM  respon_per WHERE resper_firstname = 'ค่าว่าง' and resper_lastname = 'ค่าว่าง' " ;
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $resid = $row['resper_ID'];
-                        }
-                    }
-                }else{
-                    $sql = "SELECT 	resper_ID FROM  respon_per WHERE resper_firstname = 'ค่าว่าง' and resper_lastname = 'ค่าว่าง' " ;
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $resid = $row['resper_ID'];
-                        }
+                    $sql = "SELECT 	resper_ID FROM  respon_per WHERE resper_firstname like '%ยังไม่กำหนด%' " ;
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $resid = $row['resper_ID'];
                     }
                 }
-
                 }
+                
                 
             }else {
                 $resid = $_POST['resid'][$count];
@@ -276,7 +274,7 @@ require 'connect.php';
                     if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         if($gmet == 2){
-                        $get = $row['money_type']." ".$year;
+                        $get = "รายได้ปี ".$year;
                         }
                         /*else if($gmet == 9)
                         {$get = "อื่นๆ : ".$els; }*/
@@ -303,6 +301,8 @@ require 'connect.php';
                 if($setof == "more"){
                     if($runnumber == "defaultex"){
                         $c = 1;
+                        echo "default";
+                        echo $asset_Set;
                          while($c <= $qty){
                             $datestring = date("d/m/Y", strtotime($adate));
                             array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
@@ -314,6 +314,7 @@ require 'connect.php';
                     }
                     else if($runnumber == "notdefaultex"){
                         $c = 1;
+                        echo "notdefault";
                          while($c <= $qty){
                              $asidas = 'asset_ID'.''.($count+1).'';
                              $asas = 'asset_Set'.''.($count+1).'';
@@ -337,6 +338,7 @@ require 'connect.php';
                 }
                 else if($setof == "one"){
                         $c = 1;
+                        echo "one";
                          while($c <= $qty){
                             $asidas = 'asset_ID'.''.($count+1).'';
                             $asas = 'asset_Set'.''.($count+1).'';
@@ -504,7 +506,7 @@ require 'connect.php';
       //print_r($a);
       //echo $sqlst;
       //echo $sqlsta;
-      header('Location: assetmanage.php');
+      header('Location: multi_insert_form.php');
       /*
       echo $_POST['asset_name'];
       echo $_POST['num'];

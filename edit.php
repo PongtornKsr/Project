@@ -70,8 +70,10 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
     $vtel =  $row['vendor_tel'];
     $vfax = $row['fax'];
     $mid = $row['mid'];
+    $getmm = $row['getm'];
     $price = $row['price_per_qty'];
     $gprice = $row['group_price'];
+    $not = $row['note'];
     $dateex = explode("/",$date);
     $dateaf = $dateex[2]."-".$dateex[1]."-".$dateex[0];
 }
@@ -195,14 +197,13 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 </select></td></tr>
 <tr><td>ราคาต่อหน่วย :</td><td><input style ="width:100%;text-align:left"name = "price" type="text" value = "<?php echo $price; ?>" ></td></tr>
 <tr><td>ราคารวมชุด :</td><td><input style ="width:100%;text-align:left"name = "gprice" type="text" value = "<?php echo $gprice; ?>" ></td></tr>
+<tr><td>หมายเหตุ :</td><td><input style ="width:100%;text-align:left"name = "note" type="text" value = "<?php echo $not; ?>" ></td></tr>
+<tr><td>ปีงบประมาณ[เงินนอกงบประมาณ] :</td><td><input style ="width:100%;text-align:left"name = "getm" type="text" value = "<?php echo $getmm; ?>" ></td></tr>
 </table>
 </div><br>
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
 
 <button type="submit" name = "action" value = "Single" class="btn btn-success">แก้ไขรายการเดียว</button>
-
-<br>
-
 <select name="num1" id="">
     <?php $sql = "SELECT asset_number FROM asset WHERE asset_number = '".$asnum."'";
                     $result = $conn->query($sql);

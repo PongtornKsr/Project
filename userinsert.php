@@ -25,16 +25,13 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
 					<div class="brand_logo_container">
-						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "200">
+						<img src="img/LOGOxx.png" class="brand_logo" alt="Logo" height= "190">
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-<br>
-<br>
-    <br>
-	<div style = "width: 500px;height:auto">
-	
 
+   
+	<div style = "width: 600px;height:auto">
     <form class = "whitebox" action="usermanage.php?function=2" method = "POST" Align = "center">
 	<div><h2>เพิ่มผู้ใช้งานใหม่</h2></div>
     <input type="hidden" value = "2" name = "function">
@@ -44,26 +41,33 @@
     <input type="text" class="form-control" name = "fname" id="fname"  placeholder="ชื่อ">
 	<span id = "name_alert" style = "color:red" ></span>
 		</div>
-	
 	<div class="form-group">
     <label  style= "float:left">นามสกุล<b style = "color:red">*</b></label>
     <input type="text" class="form-control" name = "lname" id="lname"  placeholder="นามสกุล">
 	<span id = "lname_alert" style = "color:red"></span>
-		</div>
-			
+		</div>	
 		<div class="form-group">
 	<label  style= "float:left">อีเมล<b style = "color:red">*</b></label>
     <input type="email" class="form-control"  name = "email" id="email"  placeholder="อีเมล">
 	<span id = "email_alert" style = "color:red"></span>
 	</div>
-
+	<div class="form-group">
+	<label style= "float:left">ชื่อผู้ใช้งาน<b style = "color:red">*</b></label>
+    <input type="text" class="form-control" name = "username" id="username"  placeholder="ชื่อผู้ใช้งาน">
+	<span id = "username_alert" style = "color:red" ></span>
+		</div>
+	<div class="form-group">
+    <label  style= "float:left">รหัสผ่าน<b style = "color:red">*</b></label>
+    <input type="text" class="form-control" name = "pass" id="pass"  placeholder="รหัสผ่าน">
+	<span id = "pass_alert" style = "color:red"></span>
+		</div>
   <label  style= "float:left">ประเภทบัญชี</label>
   <select class="form-control form-control-sm" name = "Type">
   <option value="2">ผู้ใช้งานทั่วไป</option>
 <option value="1">เจ้าหน้าที่ระบบ</option>   
  
   </select>
-  <br><br>
+  
 					<div class="d-flex justify-content-center mt-3 login_container">
 					
 				 	<button type="submit" id = "accsubmit" class="btn btn-success">Accept</button>&nbsp&nbsp

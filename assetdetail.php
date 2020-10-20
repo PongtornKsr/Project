@@ -74,6 +74,7 @@ $sql = "SELECT * FROM asset  natural join assettype natural join asset_location 
     echo "<tr><td>ห้องที่จัดเก็บ :</td><td>".$row['room']."</td></tr>";
     echo "<tr><td>ชื่อผู้รับผิดชอบ :</td><td>".$row['resper_firstname']." ".$row['resper_lastname']."</td></tr>";
     echo "<tr><td>สถานะการติดตั้ง :</td><td>".$row['dstat']."</td></tr>";
+    echo "<tr><td>หมายเหตุ :</td><td>".$row['note']."</td></tr>";
     echo "<tr><td>สถานะการใช้งาน :</td><td>".$st."</td></tr>";
     
 }

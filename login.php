@@ -30,23 +30,23 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 					<form action = "login2.php" method="POST">
-					<!-- <div class="input-group mb-2">
+					 <div class="input-group mb-2">
 						
 						<div class="input-group-append">
 						<span class="input-group-text"><i class="fas fa-user"></i></span>
-					</div> -->
-					<!--<input type="Text" name = "uname" class="form-control input_pass"  placeholder="USERNAME"> 
+					</div> 
+					<input type="Text" name = "uname" class="form-control input_pass"  placeholder="USERNAME"> 
 					</div>
 						<div class="input-group mb-3">
-						-->
-						<!--	<input type="password" name = "password" class="form-control input_user" placeholder="PASSWORD">
-						</div> -->
+						
+						<input type="password" name = "password" class="form-control input_user" placeholder="PASSWORD">
+						</div> 
 						
 						<!-- <a style = "float: right"href="Setnewpass.php">ลืมรหัสผ่าน</a> 
 						</div>-->
 						
 							<div class="d-flex justify-content-center mt-3 login_container">
-							<!-- <button class="btn btn-success" type="submit"><img src="img/in.png" width="20" height="20" alt=""> LOGIN</button> -->
+							 <button class="btn btn-success" type="submit"><img src="img/in.png" width="20" height="20" alt=""> LOGIN</button> &nbsp&nbsp
 					
 				<!--	<button type="button" onclick = "window.location ='Register.php'">Register</button>
 					&nbsp&nbsp -->
