@@ -675,6 +675,30 @@ $(document).ready(function(){
            
       });
       $(document).on('keyup','input[id=ida]' , function(){
+        var idb_value = $(this).siblings('input[id=idb]').val();
+        var ida_value = $(this).val();
+        var id = ida_value+"/"+idb_value;
+        var text = "";
+        
+        var elee = document.getElementsByClassName("idx");
+            var qe = $(this).parents().parents().parents().parents().parents().parents().attr('id').replace(/t/, '');
+        $.ajax({
+            url: "check_duplicate.php",
+            method:"POST",
+            data:{
+                'sett': id
+            },success:function(respons){
+                if(respons == "taken"){
+                   
+                alert("มีครุภัณฑ์หมายเลขดังกล่าวในระบบแล้ว กรุณากรอกหมายเลขครุภัณฑ์ใหม่");
+                elee[qe].innerHTML= "";
+                $('#submit').prop('disabled',true);
+                }else {
+                    $('#submit').prop('disabled',false);
+                }
+            }
+        })
+        
         var asd =  $(this).parents().parents().siblings().children().children('select[id=so]').val();
         if(asd == "one"){
 
@@ -712,6 +736,8 @@ $(document).ready(function(){
    
     $(document).on('keyup','input[id=idb]' , function(){
         var idb_value = $(this).val();
+        var ida_value = $(this).siblings('input[id=ida]').val();
+        var id = ida_value+"/"+idb_value;
         var text = "";
         
         var elee = document.getElementsByClassName("idx");
@@ -720,7 +746,7 @@ $(document).ready(function(){
             url: "check_duplicate.php",
             method:"POST",
             data:{
-                'sett': idb_value
+                'sett': id
             },success:function(respons){
                 if(respons == "taken"){
                    

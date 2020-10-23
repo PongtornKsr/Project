@@ -111,14 +111,14 @@ $(document).ready(function(){
       processData:false,
       beforeSend:function(){
         $('#import').attr('disabled', 'disabled');
-        $('#import').val('Importing...');
+        $('#import').val('กำลังนำเข้า...');
       },
       success:function(data)
       {
         $('#message').html(data);
         $('#import_excel_form')[0].reset();
         $('#import').attr('disabled', false);
-        $('#import').val('Import');
+        $('#import').val('นำเข้า');
       }
     })
   });

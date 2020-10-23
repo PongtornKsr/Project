@@ -73,18 +73,22 @@ $cmin = array();
 $rowc= array();
 $setas = array();
 $NOAS = array();
-$sql = "SELECT * FROM `asset` GROUP by No ORDER BY `asset`.`asset_setname` DESC ";
+$asID = array();
+$sql = "SELECT * FROM `asset` GROUP by asset_name ORDER BY `asset`.`asset_setname` DESC ";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
     array_push($setas,$row['asset_Set']);
     array_push($NOAS,$row['No']);
+    $AAA = explode('.',$row['asset_ID']);
+    array_push($asID,$AAA[0]);
 }
 }
 for ($x = 0; $x < count($setas) ; $x++) {
 $set = $setas[$x];
+$asset_ID = $asID[$x];
 $NO = $NOAS[$x];
-$sql = "SELECT * From asset WHERE asset_Set like '".$set."' ORDER BY id ASC limit 1";
+$sql = "SELECT * From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' ORDER BY id ASC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -92,21 +96,21 @@ $min .= $row['asset_ID'];
 }
 }
 $cmin = explode(" ",$min);
-$sql = "SELECT asset_ID From asset WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
+$sql = "SELECT asset_ID From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $max .= $row['asset_ID'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."' order by id DESC LIMIT 1";
+$sql = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' order by id DESC LIMIT 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $mas .= $row['asset_number'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_Set like '".$set."'";
+$sql = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -286,7 +290,7 @@ if(count($e) == 2){
 
 
 
-$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where No = '".$NO."' GROUP BY No";
+$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_ID like '".$asset_ID."%' and asset_Set = '".$set."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -308,7 +312,7 @@ $J = $row['fax'];
 }
 }
 
- $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_Set = '".$set."' and asset_number = ( SELECT MIN(asset_number) FROM asset WHERE asset_Set = '".$set."' ) ";
+ $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' and asset_number = ( SELECT MIN(asset_number) FROM asset WHERE asset_Set = '".$set."' ) ";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {

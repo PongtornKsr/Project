@@ -55,6 +55,7 @@ ob_start();
 <?php 
 
 $as = $_GET['asset_number'];
+$asset_ID = $_GET['asset_ID'];
 $rowc= array();
 $mt = "";
 $mo = "";
@@ -70,7 +71,7 @@ $cmin = array();
 $allid = array();
 $b = array();
 $f = array();
-$sql = "SELECT asset_Set FROM asset WHERE asset_number = '".$as."'";
+$sql = "SELECT asset_Set FROM asset WHERE asset_ID like '".$asset_ID."%' and asset_number = '".$as."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -78,7 +79,7 @@ $set = $row['asset_Set'];
 }
 }
 
-$sql = "SELECT asset_ID From asset natural join asset_report_text WHERE asset_Set like '".$set."' ORDER BY id ASC limit 1";
+$sql =  "SELECT * From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' ORDER BY id ASC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -86,21 +87,21 @@ $min .= $row['asset_ID'];
 }
 }
 $cmin = explode(" ",$min);
-$sql = "SELECT asset_ID From asset natural join asset_report_text WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
+$sql =  "SELECT asset_ID From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' ORDER BY id DESC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $max .= $row['asset_ID'];
 }
 }
-$sql = "SELECT asset_number From asset natural join asset_report_text WHERE asset_Set like '".$set."' ORDER BY id DESC limit 1";
+$sql = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' order by id DESC LIMIT 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
 $mas .= $row['asset_number'];
 }
 }
-$sql = "SELECT asset_number From asset natural join asset_report_text WHERE asset_Set like '".$set."'";
+$sql = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -112,11 +113,11 @@ $e = explode(".",$mas);
 //echo count($cun);
 //echo $e[1];
 
-if(count($e) > 1){
+if(count($e) == 2){
   $cu = count($cun);
   $mod = fmod($cu,2);
 if(count($cun) == $e[1]){
-  //echo "A";
+  echo "A";
   if($min == $max){
   $C .= $min;
   }else {
@@ -131,53 +132,55 @@ if(count($cun) == $e[1]){
   }
 }else {
   if($mod == 1){
-$C .= $cmin[0];
-  $t = false;
-  $rr = false;
-  $l = false;
-  $b = [];
-  $f = [];
-  for($i = 1; $i < count($cun);$i++){
-    if($i == (count($cun)-1)){
-      $rr = true;
-    }
-      $b = explode('.',$cun[$i-1]);
-      $f = explode('.',$cun[$i]);
-      if(($b[1]+1) == $f[1]){
-          if($i != (count($cun)-1) && $t == false && $rr == false){
-              $t = true;
-              $C .= '-';
-              $l = true;
-          }
-          else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] && $rr == true && $l ==false){
+    $C .= $cmin[0];
+    $t = false;
+    $rr = false;
+    $l = false;
+    $b = [];
+    $f = [];
+    for($i = 1; $i < count($cun);$i++){
+      if($i == (count($cun)-1)){
+        $rr = true;
+      }
+        $b = explode('.',$cun[$i-1]);
+        $f = explode('.',$cun[$i]);
+        if(($b[1]+1) == $f[1]){
+            if($i != (count($cun)-1) && $t == false && $rr == false){
+                $t = true;
+                $C .= '-';
+                $l = true;
+            }
+            else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] && $rr == true && $l ==false){
+              
+              $C .= "-".$cun[$i];
+            }
+            else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] && $rr == true && $l ==true){
+              $C .= $cun[$i];
+            }
             
-            $C .= "-".$cun[$i];
-          }
-          else if($i == (count($cun)-1) && ($b[1]+1) == $f[1] && $rr == true && $l ==true){
-            $C .= $cun[$i];
-          }
-          
-      }
-      else if(($b[1]+1) != $f[1]){
-          if($t == true){
-              $t = false;
-              $C .= $cun[$i-1].','.$cun[$i];
+        }
+        else if(($b[1]+1) != $f[1]){
+            if($t == true){
+                $t = false;
+                $C .= $cun[$i-1].','.$cun[$i];
+                $l = false;
+            }
+            else if($t == false){
               $l = false;
-          }
-          else if($t == false){
-            $l = false;
-              $C .= ','.$cun[$i]; 
-          }
-         
-      }
-
-  }
-  if(!empty($cmin[1])){
-    $C .= ' '.$cmin[1];
-  }
+                $C .= ','.$cun[$i]; 
+            }
+           
+        }
+  
+    }
+    if(!empty($cmin[1])){
+      $C .= ' '.$cmin[1];
+    }
+  
 
   }elseif($mod == 0){
 
+    
     $C .= $cmin[0];
     $t = false;
     $rr = false;
@@ -223,7 +226,7 @@ $C .= $cmin[0];
 }else{
   //echo "B";
   $aid = "";
-  $sql = " SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1";
+  $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
@@ -240,7 +243,7 @@ $C .= $cmin[0];
       //echo " d ".$row['asset_number']; 
     }
   }
-  if(count($allid) ==1){
+  if(count($allid) == 1){
     $C .= $min;
     
   }
@@ -250,10 +253,9 @@ $C .= $cmin[0];
     $tt = false;
     
     for($i = 1; $i < count($allid);$i++){
-
+     
         
         if(($allid[$i-1]+1) == $allid[$i]){
-          
             if($tt == false){
                 $tt = true;
                 $C .= '-';
@@ -283,8 +285,9 @@ $C .= $cmin[0];
 
 
 
+
 }
-$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_number = '".$as."'";
+$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_ID like '".$asset_ID."%' and asset_number = '".$as."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -306,7 +309,7 @@ $J = $row['fax'];
 }
 }
 
- $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_number = '".$as."' ";
+ $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_ID like '".$asset_ID."%' and asset_number = '".$as."' ";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {

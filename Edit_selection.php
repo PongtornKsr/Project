@@ -23,12 +23,12 @@
 <div class="tab"style="text-align: center;">
   <button class="tablinks" id = "tabstat">สถานะครุภัณฑ์</button>
   <button class="tablinks" id = "tabtype">ประเภทครุภัณฑ์</button>
-  <button class="tablinks" id = "tabdtype">ประเภทการติดตั้ง</button>
+  <button class="tablinks" id = "tabdtype">ลักษณะการติดตั้ง</button>
   <!--<button class="tablinks" id = "tabgm">วิธีการได้รับ</button>-->
   <!--<button class="tablinks" id = "tabmt">ประเภทเงินงบประมาณ</button>-->
   <button class="tablinks" id = "tabrp">ผู้รับผิดชอบ</button>
   <button class="tablinks" id = "tabrm">ห้องที่จัดเก็บ</button>
-  <button class="tablinks" id = "tabvd">บริษัทผู้ค้า</button>
+  <button class="tablinks" id = "tabvd">ข้อมูลบริษัทผู้ค้า</button>
 </div>
 
 <div id="stat" class="tabcontent">
@@ -238,7 +238,7 @@
   <div align= "center" >
   <br><br>
   <div align= "center"style ="width:90%">
-  <h2 id = "vd_da">ข้อมูลผู้ค้า</h2><br>
+  <h2 id = "vd_da">ข้อมูลบริษัทผู้ค้า</h2><br>
      <input type="text" placeholder= "ค้นหาผู้ค้า"style = "float:right" id = "vd_search"> <button style = "float:left" type="button" name="add" id="addvd" class="btn btn-info">เพิ่มผู้ค้า</button>
      <br>
   

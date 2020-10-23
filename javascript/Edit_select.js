@@ -492,10 +492,11 @@ $(document).ready(function(){
 
         $(document).on('click','#s_insert',function(){
             var s = $('#stat_name').val().trim();
+            var color = $('#favcolor').val();
             $.ajax({
                 url:"Edit_select_back.php",
                 method:"POST",
-                data:{ 'insertop' : 1 , 'stat_name' : s},
+                data:{ 'insertop' : 1 , 'stat_name' : s , 'favcolor' : color},
                 success:function(){
                     stat_init();
                 }

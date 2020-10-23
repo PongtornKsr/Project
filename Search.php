@@ -50,7 +50,7 @@
             <div >
             
                 <select name="gm[]" id = "gm" multiple="true">
-                <option placeholder="" value="">วิธีที่ได้รับมา</option>
+                <option placeholder="" value="0">วิธีที่ได้รับมา</option>
                     <?php 
                         $sql = "SELECT * FROM getmethod ";
                         $result = $conn->query($sql);
@@ -65,7 +65,7 @@
         <td class="tdsp">
             <div >
                 <select name="rm[]" id = "rm" multiple="true">
-                <option placeholder="" value="">ห้องที่จัดเก็บครุภัณฑ์</option>
+                <option placeholder="" value="0">ห้องที่จัดเก็บครุภัณฑ์</option>
                     <?php $sql = "SELECT * FROM room ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -79,7 +79,7 @@
         <td class="tdsp">
             <div >
                 <select name="tp[]" id ="tp" multiple="true">
-                <option placeholder="" value="" >ประเภทของครุภัณฑ์</option>
+                <option placeholder="" value="0" >ประเภทของครุภัณฑ์</option>
                     <?php $sql = "SELECT * FROM assettype ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -94,7 +94,7 @@
         <td class="tdsp">
             <div >
                 <select name="stt[]" id ="stt" multiple="true">
-                <option placeholder="" value="">สถานะการใช้งาน</option>
+                <option placeholder="" value="0">สถานะการใช้งาน</option>
                     <?php $sql = "SELECT * FROM assetstat ";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -107,7 +107,7 @@
         <td class="tdsp">
             <div >
                 <select name="dstt[]" id = "dstt" multiple="true">
-                <option placeholder="" value="">ลักษณะการติดตั้ง</option>
+                <option placeholder="" value="0">ลักษณะการติดตั้ง</option>
                         <?php 
                             $sql = "SELECT * FROM deploy_stat ";
                             $result = $conn->query($sql);
@@ -122,7 +122,7 @@
         <td class="tdsp">
             <div >
                 <select name="rp[]" id ="rp"multiple="true">
-                <option placeholder="" value="">ผู้รับผิดชอบ</option>
+                <option placeholder="" value="0">ผู้รับผิดชอบ</option>
                     <?php 
                         $sql = "SELECT * FROM respon_per ";
                         $result = $conn->query($sql);

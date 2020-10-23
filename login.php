@@ -46,7 +46,7 @@
 						</div>-->
 						
 							<div class="d-flex justify-content-center mt-3 login_container">
-							 <button class="btn btn-success" type="submit"><img src="img/in.png" width="20" height="20" alt=""> LOGIN</button> &nbsp&nbsp
+							 <button class="btn btn-success" type="submit"><img src="img/in.png" width="20" height="20" alt=""> เข้าสู่ระบบ</button> &nbsp&nbsp
 					
 				<!--	<button type="button" onclick = "window.location ='Register.php'">Register</button>
 					&nbsp&nbsp -->

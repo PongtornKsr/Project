@@ -85,6 +85,9 @@ ob_start();
            
            $_SESSION['sqlxe'] = $sql .= $clause." (";
            foreach($_POST['rm'] as $w){
+            if($w == 0){
+                $w = 64;
+            }
                 $sqlss = "SELECT * FROM room WHERE room_ID = '".$w."'";
             $result = $conn->query($sqlss);
             if ($result->num_rows > 0) {
@@ -93,7 +96,12 @@ ob_start();
                     $search_word .= $row['room']." ";
                    $r = $w;
                    $c = "room_ID";
-                   $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                   if($rmb == false){
+                        $_SESSION['sqlxe'] = $sql .= "`".$c."` = {$r} ";
+                   }else{
+                        $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                   }
+                   
                    $clause = " or ";
                    $sortway.= $c." = ".$r;
                    }
@@ -126,6 +134,9 @@ ob_start();
             $search_word .= " [ประเภทครุภัณฑ์: ";
             $_SESSION['sqlxe'] = $sql .= $clause." (";
             foreach($_POST['tp'] as $w){
+                if($w == 0){
+                    $w = 23;
+                }
              $sqlss = "SELECT * FROM assettype WHERE asset_type_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -134,7 +145,12 @@ ob_start();
                         $search_word .= $row['asset_type_name']." ";
                         $r = $w;
                         $c = "asset_type_ID";
-                        $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                        if($tpb == false){
+                            $_SESSION['sqlxe'] = $sql .= "`".$c."` = {$r} ";
+                        }else{
+                             $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                        }
+                       
                         $clause = " or ";
                         $sortway.= $c." = ".$r;
                       }
@@ -169,6 +185,9 @@ ob_start();
             $search_word .= " [สถานะครุภัณฑ์: ";
             $_SESSION['sqlxe'] = $sql .= $clause." (";
             foreach($_POST['stt'] as $w){
+                if($w == 0){
+                    $w = 15;
+                }
              $sqlss = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -177,7 +196,12 @@ ob_start();
                      $search_word .= $row['asset_stat_name']." ";
                      $r = $w;
                     $c = "asset_stat_ID";
-                    $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                    if($sttb == false){
+                        $_SESSION['sqlxe'] = $sql .= "`".$c."` = {$r} ";
+                    }else{
+                        $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                    }
+                    
                     $clause = " or ";
                     $sortway.= $c." = ".$r;
                     }else{
@@ -210,6 +234,9 @@ ob_start();
             $search_word .= " [ลักษณะการติดตั้ง: ";
             $_SESSION['sqlxe'] = $sql .= $clause." (";
             foreach($_POST['dstt'] as $w){
+                if($w == 0){
+                    $w = 12;
+                }
              $sqlss = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -218,7 +245,12 @@ ob_start();
                      $search_word .= $row['dstat']." ";
                      $r = $w;
                      $c = "dstat_ID";
-                     $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                     if($dsttb == false){
+                        $_SESSION['sqlxe'] = $sql .= "`".$c."` = {$r} ";
+                     }else{
+                        $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                     }
+                     
                      $clause = " or ";
                      $sortway.= $c." = ".$r;
                     }else{
@@ -251,6 +283,9 @@ ob_start();
             $search_word .= " [ผู้รับผิดชอบ: ";
             $_SESSION['sqlxe'] = $sql .= $clause." (";
             foreach($_POST['rp'] as $w){
+                if($w == 0){
+                    $w = 48;
+                }
              $sqlss = "SELECT * FROM respon_per WHERE resper_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -258,7 +293,12 @@ ob_start();
                     if(++$i === $numItems) {
                         $r = $w;
                         $c = "resper_ID";
-                        $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                        if($rpb == false){
+                            $_SESSION['sqlxe'] = $sql .= "`".$c."` = {$r} ";
+                        }else{
+                            $_SESSION['sqlxe'] = $sql .= $clause."`".$c."` = {$r} ";
+                        }
+                        
                         $clause = " or ";
                         $sortway.= $c." = ".$r;
                      $search_word .= $row['resper_firstname']." ".$row['resper_lastname']." ";
@@ -291,6 +331,9 @@ ob_start();
             $search_word .= " [วิธีได้รับ: ";
             $_SESSION['sqlx'] = $sql .= $clause." (";
             foreach($_POST['gm'] as $w){
+                if($w == 0){
+                    $w = 13;
+                }
              $sqlss = "SELECT * FROM getmethod WHERE getMethod_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -299,7 +342,12 @@ ob_start();
                      $search_word .= $row['method']." ";
                      $r = $w;
                      $c = "getMethod_ID";
-                     $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                     if($gmb == false){
+                        $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                     }else{
+                          $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                     }
+                    
                      $clause = " or ";
                      $sortway.= $c." = ".$r;
                     }else{

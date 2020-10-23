@@ -136,7 +136,7 @@ $_SESSION['word_text'] = $_SESSION['searchword'];
                                <br>
                                <input type = "hidden" id = "count_re" name ="count_re">
                               <br>
-                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit"/> </center> 
+                               <center><input type="submit" name="submit" id="submit" class="btn btn-info" value="บันทึก"/> </center> 
               </form>     
               <br>           
               

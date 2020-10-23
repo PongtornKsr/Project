@@ -911,9 +911,9 @@ else if($initop == 8){
 if(isset($insertop)){
     if($insertop == 1){
         $statname = mysqli_real_escape_string($conn, $_POST['stat_name']);
-        $sql = "INSERT INTO assetstat ( asset_stat_color , asset_stat_name ) VALUE ( '".$_POST['favcolor']."''".$statname."' )";
+        $sql = "INSERT INTO assetstat ( asset_stat_color , asset_stat_name ) VALUE ( '".$_POST['favcolor']."','".$statname."' )";
         if ($conn->query($sql) == TRUE) {
-            insert_action("เพิ่มตัวเลือก สถานะครุภัณฑืใหม่ ".$statname);
+            insert_action("เพิ่มตัวเลือก สถานะครุภัณฑืใหม่ ".$statname.$_POST['favcolor']);
             exit();
         }
         else {

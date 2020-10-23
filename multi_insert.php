@@ -117,19 +117,21 @@ require 'connect.php';
             
             if($dstat_ID == 0)
                 {
+                    
                     $dtp = str_replace(' ', '', $dtype);
                     if($dtp!=""){
-                        $sql = "INSERT INTO deploy_stat (  dstat ) VALUES ('".$dtype."')"; 
+                        
+                        $sql = "INSERT INTO deploy_stat ( dstat ) VALUES ('".$dtype."')"; 
                     if ($conn->query($sql) == TRUE) {
-                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = '".$dtype."'";
-                        $result = $conn->query($sql);
+                        $sqld = "SELECT dstat_ID FROM deploy_stat WHERE dstat = '".$dtype."'";
+                        $result = $conn->query($sqld);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             $dstat_ID = $row['dstat_ID'];
                         }
                         }
                     } else {
-                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat = '".$dtype."'";
+                        $sql = "SELECT dstat_ID FROM deploy_stat WHERE dstat = '".$dtype."'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -138,7 +140,7 @@ require 'connect.php';
                         }
                     }
                     }else{
-                        $sql = "SELECT dstat_ID FROM deplpoy_stat WHERE dstat like '%ยังไม่กำหนด%'";
+                        $sql = "SELECT dstat_ID FROM deploy_stat WHERE dstat like '%ยังไม่กำหนด%'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -307,7 +309,7 @@ require 'connect.php';
                             $datestring = date("d/m/Y", strtotime($adate));
                             array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
                             ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
-                            array_push($a,"$asset_Set".".$c");
+                            array_push($a,$asset_ID."/".$asset_Set.".".$c." ".$assetid);
                             $c++;
                         }
 
@@ -329,7 +331,7 @@ require 'connect.php';
                             $datestring = date("d/m/Y", strtotime($adate));
                             array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
                             ('".$NO."','".$order_number."','".$p1."/".$p2.".".$p3." ".$p4."','".$p2."','".$p2.".".$p3."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
-                            array_push($a,"$p2".".$p3");
+                            array_push($a,$p1."/".$p2.".".$p3." ".$p4);
                             $c++;
                         }
 
@@ -351,7 +353,7 @@ require 'connect.php';
                             $datestring = date("d/m/Y", strtotime($adate));
                             array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price ,`mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
                             ('".$NO."','".$order_number."','".$p1."/".$p2." ".$p4."','".$p2."','".$p2."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
-                            array_push($a,"$p2");
+                            array_push($a,$p1."/".$p2." ".$p4);
                             $c++;
                          }
 
@@ -375,7 +377,7 @@ require 'connect.php';
                  for($x = 0; $x< count($a); $x++){
             $q = $a[$x];
             echo $q." ";
-            $sqlst = "SELECT * FROM asset WHERE asset_number = '".$q."' ORDER BY CAST(`asset_number` AS SIGNED) ASC LIMIT 1 ";
+            $sqlst = "SELECT * FROM asset WHERE asset_ID = '".$q."' ORDER BY CAST(`asset_ID` AS SIGNED) ASC LIMIT 1 ";
             $result = $conn->query($sqlst);
             if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -506,7 +508,7 @@ require 'connect.php';
       //print_r($a);
       //echo $sqlst;
       //echo $sqlsta;
-      header('Location: multi_insert_form.php');
+      header('Location: assetmanage.php');
       /*
       echo $_POST['asset_name'];
       echo $_POST['num'];

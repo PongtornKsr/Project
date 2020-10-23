@@ -66,6 +66,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
            
            $_SESSION['sqlx'] = $sql .= $clause." (";
            foreach($_POST['rm'] as $w){
+            if($w == 0){
+                $w = 64;
+            }
                 $sqlss = "SELECT * FROM room WHERE room_ID = '".$w."'";
             $result = $conn->query($sqlss);
             if ($result->num_rows > 0) {
@@ -74,7 +77,12 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                     $search_word .= $row['room']." ";
                    $r = $w;
                    $c = "room_ID";
-                   $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                   if($rmb == false){
+                    $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                   }else{
+                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                   }
+                  
                    $clause = " or ";
                    $sortway.= $c." = ".$r;
                    }
@@ -107,6 +115,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " [ประเภทครุภัณฑ์: ";
             $_SESSION['sqlx'] = $sql .= $clause." (";
             foreach($_POST['tp'] as $w){
+                if($w == 0){
+                    $w = 23;
+                }
              $sqlss = "SELECT * FROM assettype WHERE asset_type_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -115,7 +126,12 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                         $search_word .= $row['asset_type_name']." ";
                         $r = $w;
                         $c = "asset_type_ID";
-                        $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                        if($tpb == false){
+                            $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                        }else{
+                            $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                        }
+                        
                         $clause = " or ";
                         $sortway.= $c." = ".$r;
                       }
@@ -150,6 +166,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " [สถานะครุภัณฑ์: ";
             $_SESSION['sqlx'] = $sql .= $clause." (";
             foreach($_POST['stt'] as $w){
+                if($w == 0){
+                    $w = 15;
+                }
              $sqlss = "SELECT * FROM assetstat WHERE asset_stat_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -158,7 +177,12 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                      $search_word .= $row['asset_stat_name']." ";
                      $r = $w;
                     $c = "asset_stat_ID";
-                    $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                    if($sttb == false){
+                        $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                    }else{
+                         $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                    }
+                   
                     $clause = " or ";
                     $sortway.= $c." = ".$r;
                     }else{
@@ -191,6 +215,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " [ลักษณะการติดตั้ง: ";
             $_SESSION['sqlx'] = $sql .= $clause." (";
             foreach($_POST['dstt'] as $w){
+                if($w == 0){
+                    $w = 12;
+                }
              $sqlss = "SELECT * FROM deploy_stat WHERE dstat_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -199,7 +226,12 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                      $search_word .= $row['dstat']." ";
                      $r = $w;
                      $c = "dstat_ID";
-                     $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                     if($dsttb == false){
+                        $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                     }else{
+                         $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                     }
+                     
                      $clause = " or ";
                      $sortway.= $c." = ".$r;
                     }else{
@@ -232,6 +264,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " [ผู้รับผิดชอบ: ";
             $_SESSION['sqlx'] = $sql .= $clause." (";
             foreach($_POST['rp'] as $w){
+                if($w == 0){
+                    $w = 48;
+                }
              $sqlss = "SELECT * FROM respon_per WHERE resper_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -239,7 +274,12 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                     if(++$i === $numItems) {
                         $r = $w;
                         $c = "resper_ID";
-                        $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                        if($rpb == false){
+                            $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                        }else {
+                            $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                        }
+                        
                         $clause = " or ";
                         $sortway.= $c." = ".$r;
                      $search_word .= $row['resper_firstname']." ".$row['resper_lastname']." ";
@@ -272,6 +312,9 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " [วิธีได้รับ: ";
             $_SESSION['sqlx'] = $sql .= $clause." (";
             foreach($_POST['gm'] as $w){
+                if($w == 0){
+                    $w = 13;
+                }
              $sqlss = "SELECT * FROM getmethod WHERE getMethod_ID = '".$w."'";
              $result = $conn->query($sqlss);
              if ($result->num_rows > 0) {
@@ -280,7 +323,10 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                      $search_word .= $row['method']." ";
                      $r = $w;
                      $c = "getMethod_ID";
-                     $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} ";
+                     if($gmb == false){
+                          $_SESSION['sqlx'] = $sql .= "`".$c."` = {$r} ";
+                     }
+                    else { $_SESSION['sqlx'] = $sql .= $clause."`".$c."` = {$r} "; }
                      $clause = " or ";
                      $sortway.= $c." = ".$r;
                     }else{
@@ -384,6 +430,8 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                 }
                 
                 $an = $row['asset_number'];
+                $assetID = explode('.',$row['asset_ID']);
+                $asID = $assetID[0];
                 echo
                     "<tr>
                         <td><input type='checkbox' name='id[]' id= 'cbx' onClick='checkboxes()' value = '".$row['id']."'></td>
@@ -393,7 +441,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                         <td align='left'>".$st."</td>
                         <td align='left'>".$row['asset_type_name']."</td>
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-primary' border-color:White; color:white'>รายละเอียด</button></a> ";
-                        echo "<a target='_blank' href='test.php?asset_number=".$an."'><button type='button' class='btn btn-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
+                        echo "<a target='_blank' href='test.php?asset_number=".$an."&asset_ID=".$asID."'><button type='button' class='btn btn-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
                         if($_SESSION['editop'] == 1){
                         echo "<a href='text_report.php?asset_number=".$an."'><button type='button'  class='btn btn-danger' border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a> ";
                         echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' class='btn btn-warning' border-color:White; color:white'>แก้ไข</button></a> "; }
@@ -411,7 +459,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
     </table>
 </div>
 <br>
-<div><?php // echo $sql; ?></div>
+<div><?php //  echo $sql; ?></div>
 <?php if($_SESSION['editop'] == 2){  ?>
     <a  href="allasset.php" target="_blank"><button type="button" class='btn btn-info'>พิมพ์ทะเบียนคุมทรัพย์สินทั้งหมด</button></a>
     <a  href="Export.php" target="_blank"><button type="button" class='btn btn-primary'>นำออกข้อมูลครุภัณฑ์คงเหลือในระบบเป็นExcel</button></a>

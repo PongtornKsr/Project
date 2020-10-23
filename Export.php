@@ -49,9 +49,11 @@ $asset_number_min = "";
 $asset_number_max = "";
 $asnummin = array();
 $asnummax = array();
-function find_my_Id($setn){
+function find_my_Id($asID,$setn){
 
     require 'connect.php';
+    $assetID = explode('.',$asID);
+    $asset_ID = $assetID[0];
     $C = "";
     $min = "";
     $max = "";
@@ -62,7 +64,7 @@ function find_my_Id($setn){
     $cmin = [];
     $asnummin = [];
     $asnummax = [];
-    $sqlx = "SELECT * From asset WHERE asset_Set like '".$setn."' ORDER BY CAST(asset_number AS INT) asc LIMIT 1";
+    $sqlx = "SELECT * From asset WHERE asset_ID like '".$asset_ID."%' ORDER BY CAST(asset_number AS INT) asc LIMIT 1";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($rowx = $resultx->fetch_assoc()) {
@@ -70,26 +72,21 @@ function find_my_Id($setn){
     }
     }
     $cmin = explode(" ",$min);
-    $sqlx = "SELECT asset_ID From asset WHERE asset_Set like '".$setn."' ORDER BY CAST(asset_number AS INT) DESC LIMIT 1";
+    $sqlx = "SELECT asset_ID From asset WHERE asset_ID like '".$asset_ID."%' ORDER BY CAST(asset_number AS INT) DESC LIMIT 1";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($row = $resultx->fetch_assoc()) {
     $max .= $rowx['asset_ID'];
     }
     }
-
-   
-
-
-
-    $sqlx = "SELECT asset_number From asset WHERE asset_Set like '".$setn."' order by id DESC LIMIT 1";
+    $sqlx = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' order by id DESC LIMIT 1";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($rowx = $resultx->fetch_assoc()) {
     $mas .= $rowx['asset_number'];
     }
     }
-    $sqlx = "SELECT asset_number From asset WHERE asset_Set like '".$setn."'";
+    $sqlx = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%'";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($rowx = $resultx->fetch_assoc()) {
@@ -416,7 +413,7 @@ while($row = $result->fetch_assoc()) {
                 $p = 1;
                 while($row = $result->fetch_assoc()) {
                     $rowstart+=1;
-                    $active->setCellValue( 'B'.($i+$rowstart).'', find_my_Id($row['asset_Set']));
+                    $active->setCellValue( 'B'.($i+$rowstart).'', find_my_Id($row['asset_ID'],$row['asset_Set']));
                     if($row['model'] == NULL || $row['model'] == "-" || $row['model'] == ""){
                         if($row['property'] == NULL || $row['property'] == "-" || $row['property'] == ""){
                             $active->setCellValue( 'C'.($i+$rowstart).'', $p.'.'.$row['asset_name']);
@@ -452,7 +449,7 @@ while($row = $result->fetch_assoc()) {
                 $p = 1;
                 while($row = $result->fetch_assoc()) {
                     
-                    $active->setCellValue( 'B'.($i+$rowstart).'', find_my_Id($row['asset_Set']));
+                    $active->setCellValue( 'B'.($i+$rowstart).'', find_my_Id($row['asset_ID'],$row['asset_Set']));
                     if($row['model'] == NULL || $row['model'] == "-" || $row['model'] == ""){
                         if($row['property'] == NULL || $row['property'] == "-" || $row['property'] == ""){
                             $active->setCellValue( 'C'.($i+$rowstart).'', $row['asset_name']);

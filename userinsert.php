@@ -70,7 +70,7 @@
   
 					<div class="d-flex justify-content-center mt-3 login_container">
 					
-				 	<button type="submit" id = "accsubmit" class="btn btn-success">Accept</button>&nbsp&nbsp
+				 	<button type="submit" id = "accsubmit" class="btn btn-success">บันทึก</button>&nbsp&nbsp
 				    <!-- <a href="indexadmin.php"><button type="submit" class="btn btn-outline-danger">Back</button></a> -->
 				   </div>
 				   

@@ -435,7 +435,7 @@ $e = [];
 if($row[3]=="" || empty($row[3]) || $row[3] == "-" || str_replace(' ','',$row[3]) == ""){
 
   for($b = 0 ; $b < count($setarr); $b++){
-    array_push($a,$setarr[$b]);
+    array_push($a,$row[1]."/".$setarr[$b]." ".$vt);
     $insert_data = array(
       ':No'=> $NO,
       ':order_number'=> $row[0],
@@ -497,7 +497,7 @@ $checkpoint = [];
   
   if($minn != $maxx && $minn < $maxx){
       for($i = $minn ;$i<=$maxx;$i++){
-        array_push($a,$asset_set.".".$i);
+        array_push($a,$row[1]."/".$asset_set.".".$i." ".$vt);
         $insert_data = array(
           ':No'=> $NO,
           ':order_number'=> $row[0],
@@ -545,7 +545,7 @@ $checkpoint = [];
 
       }
   }else if($minn == $maxx){
-    array_push($a,$asset_set.".".$minn);
+    array_push($a,$row[1]."/".$asset_set.".".$minn." ".$vt);
     $insert_data = array(
       ':No'=> $NO,
       ':order_number'=> $row[0],
@@ -596,7 +596,7 @@ $checkpoint = [];
 
 }else{
 
-  array_push($a,$row[3]);
+  array_push($a,$row[1]."/".$row[3]." ".$vt);
   $insert_data = array(
     ':No'=> $NO,
     ':order_number'=> $row[0],
@@ -652,7 +652,7 @@ $checkpoint = [];
   for($x = 0; $x< count($a); $x++){
     $q = $a[$x];
     //echo $q;
-    $sqlst = "SELECT * FROM asset WHERE asset_number = '".$q."'";
+    $sqlst = "SELECT * FROM asset WHERE asset_ID = '".$q."'";
     $result = $conn->query($sqlst);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -678,22 +678,23 @@ $checkpoint = [];
       $Bloop = true;
     }
     else{
-      $asnumset = $row[23];
+
+      $asnumset = $row[24];
    $insert_data = array(
     ':time_now'=> $tn,
-    ':datee'=> $row[24],
-    ':report_NO'=> $row[25],
-    ':report_order'=> $row[26],
-    ':unit'=> $row[27],
-    ':price_per_unit'=> $row[28],
-    ':summary'=> $row[29],
-    ':life_time'=> $row[30],
-    ':Depreciation_rate'=> $row[31],
-    ':year_Depreciation'=> $row[32],
-    ':sum_Depreciation'=> $row[33],
-    ':net_value'=> $row[34],
-    ':Change_order'=> $row[35],
-    ':report_number'=> $row[36],
+    ':datee'=> $row[25],
+    ':report_NO'=> $row[26],
+    ':report_order'=> $row[27],
+    ':unit'=> $row[28],
+    ':price_per_unit'=> $row[29],
+    ':summary'=> $row[30],
+    ':life_time'=> $row[31],
+    ':Depreciation_rate'=> $row[32],
+    ':year_Depreciation'=> $row[33],
+    ':sum_Depreciation'=> $row[34],
+    ':net_value'=> $row[35],
+    ':Change_order'=> $row[36],
+    ':report_number'=> $row[37],
 
    );
 
@@ -766,13 +767,15 @@ if(count(explode(',',$asnumset))>1){
 }
 for($i = 0; $i < count($setarr2); $i++){
   //echo $setarr2[$i];
-  $sql = "SELECT id FROM asset WHERE asset_number = '".$setarr2[$i]."'" ;
+  echo count($setarr2)."<br>";
+  echo $row[23]."/".$setarr2[$i]."<br>";
+  $sql = "SELECT asset_ID,id FROM asset WHERE asset_ID like '".$row[23]."/".$setarr2[$i]."%' " ;
            $result = $conn->query($sql);
            if ($result->num_rows > 0) {
             while($rowse = $result->fetch_assoc()) {
               $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$rowse['id']."','".$aid."')";
               if ($conn->query($sqll) == TRUE) {
-               // echo "ok";
+                echo $rowse['asset_ID']."<br>";
               }else{
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
               }

@@ -17,7 +17,7 @@
 <?php include 'nav.php'; ?>
 <div align= "center" style= "margin-top:10%;">
 <div class= "whitebox" style= "width:80%;align:center;height:30%;">
-    <h1>ตรวจสอบภาพรวมครุภัณฑ์</h1>
+    <h1>ภาพรวมครุภัณฑ์</h1>
     <br>
     <form action="asset_report.php" method="POST">
     <table>
