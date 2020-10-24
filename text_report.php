@@ -96,7 +96,8 @@ $_SESSION['word_text'] = $_SESSION['searchword'];
 
                                     $c = 1;
                                     $as = $_GET['asset_number'];
-                                    $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_number = '".$as."' ";
+                                    $assetID = $_GET['asset_ID'];
+                                    $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_ID like '".$assetID."%' and asset_number = '".$as."' ";
                                     $result = $conn->query($sql);
                                     if ($result->num_rows > 0) {
                                     while($row = $result->fetch_assoc()) {

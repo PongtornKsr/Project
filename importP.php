@@ -61,7 +61,7 @@ if($_FILES["import_excel"]["name"] != '')
       $setarr = [];
       $astat = "";
       $astat = $row[21];
-      $group_price = $row[15];
+      $group_price = 0;
       if($asset_set == ""){
 
         if(count(explode(',',$row[2])) > 1){
@@ -344,7 +344,7 @@ if($_FILES["import_excel"]["name"] != '')
         }
       }else if($dstat_ID != ""){
         $dstat_IDn = str_replace(' ', '', $dstat_ID);
-        $sql = "SELECT * FROM `deploy_stat` WHERE dstat like '%".$dstat_IDn."%'";
+        $sql = "SELECT * FROM `deploy_stat` WHERE dstat like '%".$dstat_IDn."%' limit 1";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                         while($rows = $result->fetch_assoc()) {
@@ -372,7 +372,7 @@ if($_FILES["import_excel"]["name"] != '')
 
       if($astat == "" || empty($astat) || $astat == "-"){
         $astat = str_replace(' ', '', $astat);
-        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%ใช้งานได้%'";
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE 'ใช้งานได้%'";
         $result = $conn->query($sql);
         if ($result->num_rows == 1) {
           while($rows = $result->fetch_assoc()) {
@@ -382,7 +382,7 @@ if($_FILES["import_excel"]["name"] != '')
       }
       else if($astat != ""){
           $astat = str_replace(' ', '', $astat);
-        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%".$astat."%'";
+        $sql = "SELECT * FROM assetstat WHERE asset_stat_name LIKE '%".$astat."%' limit 1";
         $result = $conn->query($sql);
       if ($result->num_rows == 1) {
 
@@ -400,21 +400,54 @@ if($_FILES["import_excel"]["name"] != '')
         }
       }
       }
-
-      $sql = "SELECT * FROM `respon_per` WHERE resper_firstname like '%ยังไม่กำหนด%'";
+if($row[15] != "" || $row[15] != "-" || !empty($row[15])){
+  $funame = explode(' ',$row[15]);
+  if(count($funame) == 2){
+    $sql = "SELECT * FROM `respon_per` WHERE resper_firstname like '%".$funame[0]."%' and resper_lastname like '%".$funame[1]."%' limit 1";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+    while($rows = $result->fetch_assoc()) {
+      $resper = $rows['resper_ID'];
+  }
+  }
+  }else{
+    $sql = "SELECT * FROM `respon_per` WHERE resper_firstname like '%".$funame[0]."%' limit 1";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+  while($rows = $result->fetch_assoc()) {
+    $resper = $rows['resper_ID'];
+}
+}
+  }
+  
+}else{
+  $sql = "SELECT * FROM `respon_per` WHERE resper_firstname like '%ยังไม่กำหนด%'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
       while($rows = $result->fetch_assoc()) {
         $resper = $rows['resper_ID'];
 }
 }
-$sql = "SELECT * FROM `vendor` WHERE vendor_company like '%ยังไม่กำหนด%'";
+}
+      
+if($row[5] != "" || $row[5] != "-" || !empty($row[5])){
+  $sql = "SELECT * FROM `vendor` WHERE vendor_company like '%".$row[5]."%' limit 1";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+  while($rows = $result->fetch_assoc()) {
+    $vendor = $rows['vendor_ID'];
+  }
+  }
+}else{
+  $sql = "SELECT * FROM `vendor` WHERE vendor_company like '%ยังไม่กำหนด%'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($rows = $result->fetch_assoc()) {
   $vendor = $rows['vendor_ID'];
 }
 }
+}
+
 $ddd = $row[11];
 $ddd = str_replace(' ','',$ddd);
 if($ddd == "-" || $ddd == ""){
@@ -442,7 +475,7 @@ if($row[3]=="" || empty($row[3]) || $row[3] == "-" || str_replace(' ','',$row[3]
       ':asset_ID'=> $row[1]."/".$setarr[$b]." ".$vt,
       ':asset_Set'=> $setarr[$b],
       ':asset_number'=> $setarr[$b],
-      ':asset_setname'=> $row[5],
+      ':asset_setname'=> "-",
       ':asset_nickname'=> $row[6],    
       ':asset_name'=> $row[7],    
       ':model'=> $row[8],
@@ -454,6 +487,7 @@ if($row[3]=="" || empty($row[3]) || $row[3] == "-" || str_replace(' ','',$row[3]
       ':resper_ID'=> $resper,
       ':vendor_ID'=> $vendor,
       ':asset_type_ID'=> $astype,
+      ':asset_stat_ID'=> 1,
       ':quantity'=> 1,
       ':price_per_qty' => $row[14],
       ':group_price' => $group_price,
@@ -465,12 +499,12 @@ if($row[3]=="" || empty($row[3]) || $row[3] == "-" || str_replace(' ','',$row[3]
      );
      $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
                                      asset_setname,asset_nickname,asset_name,model,asset_order,
-                                     property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                                     property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,asset_stat_ID,quantity
                                      ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
       
                     VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
                                     :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
-                                    :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                                    :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:asset_stat_ID,:quantity,
                                     :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
       
       
@@ -504,7 +538,7 @@ $checkpoint = [];
           ':asset_ID'=> $row[1]."/".$asset_set.".".$i." ".$vt,
           ':asset_Set'=> $asset_set,
           ':asset_number'=> $asset_set.".".$i,
-          ':asset_setname'=> $row[5],
+          ':asset_setname'=> "-",
           ':asset_nickname'=> $row[6],    
           ':asset_name'=> $row[7],    
           ':model'=> $row[8],
@@ -516,6 +550,7 @@ $checkpoint = [];
           ':resper_ID'=> $resper,
           ':vendor_ID'=> $vendor,
           ':asset_type_ID'=> $astype,
+          ':asset_stat_ID'=> 1,
           ':quantity'=> 1,
           ':price_per_qty' => $row[14],
           ':group_price' => $group_price,
@@ -528,12 +563,12 @@ $checkpoint = [];
       
          $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
                                      asset_setname,asset_nickname,asset_name,model,asset_order,
-                                     property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                                     property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,asset_stat_ID,quantity
                                      ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
       
                     VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
                                     :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
-                                    :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                                    :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:asset_stat_ID,:quantity,
                                     :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
       
       
@@ -552,7 +587,7 @@ $checkpoint = [];
       ':asset_ID'=> $row[1]."/".$asset_set.".".$minn." ".$vt,
       ':asset_Set'=> $asset_set,
       ':asset_number'=> $asset_set.".".$minn,
-      ':asset_setname'=> $row[5],
+      ':asset_setname'=> "-",
       ':asset_nickname'=> $row[6],    
       ':asset_name'=> $row[7],    
       ':model'=> $row[8],
@@ -564,6 +599,7 @@ $checkpoint = [];
       ':resper_ID'=> $resper,
       ':vendor_ID'=> $vendor,
       ':asset_type_ID'=> $astype,
+      ':asset_stat_ID'=> 1,
       ':quantity'=> 1,
       ':price_per_qty' => $row[14],
       ':group_price' => $group_price,
@@ -576,12 +612,12 @@ $checkpoint = [];
   
      $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
                                  asset_setname,asset_nickname,asset_name,model,asset_order,
-                                 property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                                 property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,asset_stat_ID,quantity
                                  ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
   
                 VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
                                 :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
-                                :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                                :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:asset_stat_ID,:quantity,
                                 :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
   
   
@@ -603,7 +639,7 @@ $checkpoint = [];
     ':asset_ID'=> $row[1]."/".$row[3]." ".$vt,
     ':asset_Set'=> $asset_set,
     ':asset_number'=> $row[3],
-    ':asset_setname'=> $row[5],
+    ':asset_setname'=> "-",
     ':asset_nickname'=> $row[6],    
     ':asset_name'=> $row[7],    
     ':model'=> $row[8],
@@ -615,6 +651,7 @@ $checkpoint = [];
     ':resper_ID'=> $resper,
     ':vendor_ID'=> $vendor,
     ':asset_type_ID'=> $astype,
+    ':asset_stat_ID'=> 1,
     ':quantity'=> 1,
     ':price_per_qty' => $row[14],
     ':group_price' => $group_price,
@@ -627,12 +664,12 @@ $checkpoint = [];
 
    $query = "INSERT INTO asset(No,order_number,asset_ID,asset_Set,asset_number,
                                asset_setname,asset_nickname,asset_name,model,asset_order,
-                               property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,quantity
+                               property,addin_date,asset_location_ID,room_ID,resper_ID,vendor_ID,asset_type_ID,asset_stat_ID,quantity
                                ,price_per_qty,group_price,mid,getMethod_ID,getm,note,dstat_ID)
 
               VALUES (:No,:order_number,:asset_ID,:asset_Set,:asset_number,
                               :asset_setname,:asset_nickname,:asset_name,:model,:asset_order,
-                              :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:quantity,
+                              :property,:addin_date,:asset_location_ID,:room_ID,:resper_ID,:vendor_ID,:asset_type_ID,:asset_stat_ID,:quantity,
                               :price_per_qty,:group_price,:mid,:getMethod_ID,:getm,:note,:dstat_ID)";
 
 
@@ -767,15 +804,15 @@ if(count(explode(',',$asnumset))>1){
 }
 for($i = 0; $i < count($setarr2); $i++){
   //echo $setarr2[$i];
-  echo count($setarr2)."<br>";
-  echo $row[23]."/".$setarr2[$i]."<br>";
+  //echo count($setarr2)."<br>";
+  //echo $row[23]."/".$setarr2[$i]."<br>";
   $sql = "SELECT asset_ID,id FROM asset WHERE asset_ID like '".$row[23]."/".$setarr2[$i]."%' " ;
            $result = $conn->query($sql);
            if ($result->num_rows > 0) {
             while($rowse = $result->fetch_assoc()) {
               $sqll = "INSERT INTO `asset_report_text`( `id`, `aid`) VALUES ('".$rowse['id']."','".$aid."')";
               if ($conn->query($sqll) == TRUE) {
-                echo $rowse['asset_ID']."<br>";
+                //echo $rowse['asset_ID']."<br>";
               }else{
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
               }

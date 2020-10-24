@@ -36,7 +36,7 @@ exit();
 }else if(isset($_POST['StatUpdate'])){
     $st = $_POST['stid'];
     foreach ($aid as $x){
-        $sql = "UPDATE asset_stat_overview SET asset_stat_ID = '".$st."' WHERE id = '".$x."'";
+        $sql = "UPDATE asset SET asset_stat_ID = '".$st."' WHERE id = '".$x."'";
         if ($conn->query($sql) === TRUE) {
             
                 $sql = "SELECT * FROM asset WHERE id  = '".$x."' ";

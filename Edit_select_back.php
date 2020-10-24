@@ -93,9 +93,11 @@ if($initop == 1){
             
             <td class = "wideb"style= "text-align:center;vertical-align:middle">'.$name.'</td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="'.$row['asset_stat_color'].'" disabled></td>
-            <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_edit" value ="'.$id.'">แก้ไข</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_delete" value ="'.$id.'">ลบ</button>
-            </td>
+            <td  class = "wideb"style= "text-align:center;vertical-align:middle"> <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_edit" value ="'.$id.'">แก้ไข</button>';
+            if($id != 1){
+                $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_delete" value ="'.$id.'">ลบ</button>';
+            }
+            $output .= '</td>
             </tr>';
 
         }
@@ -127,9 +129,12 @@ if($initop == 1){
             <td  class = "wideb"style= "text-align:center;vertical-align:middle">'.$name.'</td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"><input type="color" id="favcolor" name="favcolor" value="'.$row['asset_stat_color'].'" disabled></td>
             <td  class = "wideb"style= "text-align:center;vertical-align:middle"> 
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_edit" value ="'.$id.'">แก้ไข</button>
-            <button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_delete" value ="'.$id.'">ลบ</button>
-            </td>
+            <button style = "font-size: 15px;" type="button" class="btn btn-outline-warning" id = "s_edit" value ="'.$id.'">แก้ไข</button>';
+            if($id != 1){
+                $output .= '<button style = "font-size: 15px;" type="button" class="btn btn-outline-danger" id = "s_delete" value ="'.$id.'">ลบ</button>';
+            }
+            
+            $output .= '</td>
             </tr>';
 
         }
@@ -1121,7 +1126,7 @@ if(isset($del)){
             insert_action("ลบตัวเลือก สถานะครุภัณฑ์ ".$row['asset_stat_name']);
         }
         }
-        $sqlq = "UPDATE asset_stat_overview SET asset_stat_ID = '15' WHERE asset_stat_ID = '".$_POST['id']."'";
+        $sqlq = "UPDATE asset SET asset_stat_ID = '15' WHERE asset_stat_ID = '".$_POST['id']."'";
     }
     else if($del == 2){
         $sqlq = "UPDATE asset SET asset_type_ID = '23' WHERE asset_type_ID = '".$_POST['id']."'";

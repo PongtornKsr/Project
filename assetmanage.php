@@ -45,7 +45,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
      }
      
      $clause = " WHERE ";
-     $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat";//Query stub
+     $_SESSION['sqlx'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod  NATURAL JOIN assetstat";//Query stub
      if(!empty($_POST['searchtxt'])){
          $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
             $c = "asset_ID";
@@ -350,7 +350,7 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
             $search_word .= " ] ";
             $clause = " and ";
          }
-         $_SESSION['sqlx'] = $sql .= " order by asset_ID ASC ";
+         $_SESSION['sqlx'] = $sql .= " order by id ASC ";
                 $_SESSION['searchword'] = $search_word;
                 $search_word = $_SESSION['searchword'];
                 if(isset($_SESSION['sql_detail'])){
@@ -443,8 +443,8 @@ table th:nth-child(6), td:nth-child(6) { min-width: 350px;  max-width: 350px; }*
                         <td><a href='assetdetail.php?asset_number=".$row['id']."&function=3'><button type='button' class='btn btn-primary' border-color:White; color:white'>รายละเอียด</button></a> ";
                         echo "<a target='_blank' href='test.php?asset_number=".$an."&asset_ID=".$asID."'><button type='button' class='btn btn-info' border-color:White; color:white'>พิมพ์ทะเบียนคุมทรัพย์สิน</button></a> "; 
                         if($_SESSION['editop'] == 1){
-                        echo "<a href='text_report.php?asset_number=".$an."'><button type='button'  class='btn btn-danger' border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a> ";
-                        echo "<a href='edit.php?asset_number=".$an."&function=4'><button type='button' class='btn btn-warning' border-color:White; color:white'>แก้ไข</button></a> "; }
+                        echo "<a href='text_report.php?asset_number=".$an."&asset_ID=".$asID."'><button type='button'  class='btn btn-danger' border-color:White; color:white'>แก้ไขทะเบียนคุมทรัพย์สิน</button></a> ";
+                        echo "<a href='edit.php?asset_number=".$an."&function=4&asset_ID=".$asID."'><button type='button' class='btn btn-warning' border-color:White; color:white'>แก้ไข</button></a> "; }
                          //<input type = 'button' onClick= 'deletethis(".$row['asset_number'].")' name = 'Del' value = 'Delete' >    
                 
                 echo "</td></tr>";

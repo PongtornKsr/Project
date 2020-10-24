@@ -307,8 +307,8 @@ require 'connect.php';
                         echo $asset_Set;
                          while($c <= $qty){
                             $datestring = date("d/m/Y", strtotime($adate));
-                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
-                            ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
+                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`,`asset_stat_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
+                            ('".$NO."','".$order_number."','".$asset_ID."/".$asset_Set.".".$c." ".$assetid."','".$asset_Set."','".$asset_Set.".".$c."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
                             array_push($a,$asset_ID."/".$asset_Set.".".$c." ".$assetid);
                             $c++;
                         }
@@ -326,11 +326,11 @@ require 'connect.php';
                              $p1 = $_POST[$asidas][0];
                              $p2 = $_POST[$asas][0];
                              $p3 = $_POST[$asn][$c-1];
-                             $p4 = $_POST[$asidid][$c-1];
+                             $p4 = $_POST[$asidid][0];
                              echo $p1;
                             $datestring = date("d/m/Y", strtotime($adate));
-                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
-                            ('".$NO."','".$order_number."','".$p1."/".$p2.".".$p3." ".$p4."','".$p2."','".$p2.".".$p3."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
+                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`,`asset_stat_ID`, `quantity`, `price_per_qty`,group_price, `mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
+                            ('".$NO."','".$order_number."','".$p1."/".$p2.".".$p3." ".$p4."','".$p2."','".$p2.".".$p3."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
                             array_push($a,$p1."/".$p2.".".$p3." ".$p4);
                             $c++;
                         }
@@ -346,13 +346,13 @@ require 'connect.php';
                             $asas = 'asset_Set'.''.($count+1).'';
                             $asidid = 'assetid'.''.($count+1).'';
                             echo '<br> asset_ID :'.$asidas;
-                            $p1 = $_POST[$asidas][$c-1];
+                            $p1 = $_POST[$asidas][0];
                             $p2 = $_POST[$asas][$c-1];
-                            $p4 = $_POST[$asidid][$c-1];
+                            $p4 = $_POST[$asidid][0];
                             echo '<br> r : '.$p1;
                             $datestring = date("d/m/Y", strtotime($adate));
-                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`, `quantity`, `price_per_qty`,group_price ,`mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
-                            ('".$NO."','".$order_number."','".$p1."/".$p2." ".$p4."','".$p2."','".$p2."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
+                            array_push($sqlm,"INSERT INTO `asset`(`No`, `order_number`, `asset_ID`, `asset_Set`, `asset_number`, `asset_name`,`asset_setname`,`asset_nickname`, `model`, `asset_order`, `property`,`addin_date`, `asset_location_ID`, `room_ID`, `resper_ID`, `vendor_ID`, `asset_type_ID`,`asset_stat_ID`, `quantity`, `price_per_qty`,group_price ,`mid`, `getMethod_ID`,`getm`, `note`, `dstat_ID`) VALUES 
+                            ('".$NO."','".$order_number."','".$p1."/".$p2." ".$p4."','".$p2."','".$p2."','".$asset_name."','".$aset_name."','".$anick_name."','".$model."','".$asset_order."','".$property."','".$datestring."','".$assetloca."','".$rmid."','".$resid."','".$asven."','".$assettype."','1','1','".$price."','".$gprice."','".$gett."','".$gmet."','".$get."','".$note."','".$dstat_ID."')"); 
                             array_push($a,$p1."/".$p2." ".$p4);
                             $c++;
                          }
@@ -384,11 +384,7 @@ require 'connect.php';
                 $assetnum = $row['id'];
                 echo $assetnum."<br>";
                 array_push($idA,$assetnum);
-                $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."',1)";
-                if ($conn->query($sqlsta) == TRUE) {
-                //echo $sqlsta;
-                
-                }
+               
             }
         }
         }

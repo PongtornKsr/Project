@@ -64,7 +64,7 @@ function find_my_Id($asID,$setn){
     $cmin = [];
     $asnummin = [];
     $asnummax = [];
-    $sqlx = "SELECT * From asset WHERE asset_ID like '".$asset_ID."%' ORDER BY CAST(asset_number AS INT) asc LIMIT 1";
+    $sqlx = "SELECT * From asset WHERE asset_ID like '".$asset_ID."%' ORDER BY id asc LIMIT 1";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($rowx = $resultx->fetch_assoc()) {
@@ -72,7 +72,7 @@ function find_my_Id($asID,$setn){
     }
     }
     $cmin = explode(" ",$min);
-    $sqlx = "SELECT asset_ID From asset WHERE asset_ID like '".$asset_ID."%' ORDER BY CAST(asset_number AS INT) DESC LIMIT 1";
+    $sqlx = "SELECT asset_ID From asset WHERE asset_ID like '".$asset_ID."%' ORDER BY id DESC LIMIT 1";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($row = $resultx->fetch_assoc()) {
@@ -86,7 +86,7 @@ function find_my_Id($asID,$setn){
     $mas .= $rowx['asset_number'];
     }
     }
-    $sqlx = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%'";
+    $sqlx = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' order by id";
     $resultx = $conn->query($sqlx);
     if ($resultx->num_rows > 0) {
     while($rowx = $resultx->fetch_assoc()) {

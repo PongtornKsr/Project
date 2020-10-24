@@ -32,7 +32,7 @@
         
       }
       if(isset($_POST['ustat'])){
-        $sqlstat= "SELECT asset_stat_ID , asset_stat_name , COUNT(asset_type_ID) AS cnt FROM asset NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat GROUP BY asset_stat_ID , asset_stat_name";
+        $sqlstat= "SELECT asset_stat_ID , asset_stat_name , COUNT(asset_type_ID) AS cnt FROM asset  NATURAL JOIN assetstat GROUP BY asset_stat_ID , asset_stat_name";
         
       }
       if(isset($_POST['astyp'])){

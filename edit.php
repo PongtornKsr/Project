@@ -39,13 +39,14 @@ $_SESSION['word_edi'] = $_SESSION['searchword'];
 
 <?php 
 $asnum = $_GET['asset_number'];
-$sql = "SELECT * FROM asset  natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE asset_number = '".$_GET['asset_number']."'";
+$_SESSION['asset_ID'] = $assetID = $_GET['asset_ID'];
+$sql = "SELECT * FROM asset  natural join assetstat natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room natural join vendor WHERE asset_ID like '".$assetID."%' and asset_number = '".$_GET['asset_number']."'";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {
-    $set = $row['asset_Set'];
+    $_SESSION['editset'] = $set = $row['asset_Set'];
     $O_N = $row['order_number'];
-    $asid = $row['asset_ID'];
+    $_SESSION['thisID'] = $asid = $row['asset_ID'];
     $a_sn = $row['asset_setname'];
     $a_nn = $row['asset_nickname'];
     $asname = $row['asset_name'];
@@ -204,34 +205,8 @@ $sql = "SELECT * FROM asset  natural join assetstat natural join assettype natur
 <input type="hidden" name="asnum" value = "<?php echo $asnum; ?>">
 
 <button type="submit" name = "action" value = "Single" class="btn btn-success">แก้ไขรายการเดียว</button>
-<select name="num1" id="">
-    <?php $sql = "SELECT asset_number FROM asset WHERE asset_number = '".$asnum."'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_number'].">".$row['asset_number']."</option>";
-                    }     } 
-                    $sql = "SELECT asset_number FROM asset WHERE (asset_number NOT IN ('".$asnum."') and asset_Set IN ('".$set."')) ";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_number'].">".$row['asset_number']."</option>";
-                    }     }?>   
-    </select>ถึง<select name="num2" id="">
-    <?php $sql = "SELECT asset_number FROM asset WHERE asset_number = '".$asnum."'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_number'].">".$row['asset_number']."</option>";
-                    }     } 
-                    $sql = "SELECT asset_number FROM asset WHERE (asset_number NOT IN ('".$asnum."') and asset_Set IN ('".$set."')) ";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row['asset_number'].">".$row['asset_number']."</option>";
-                    }     }?>   
-    </select>
-    <button type="submit" name = "action" value = "Multi" class="btn btn-danger">แก้ไขหลายรายการ</button>
+
+    <button type="submit" name = "action" value = "Multi" class="btn btn-danger">แก้ไขรายการที่มีรหัสครุภัณฑ์เดียวกันทั้งหมด</button>
 </form>
 </div>
 </div>

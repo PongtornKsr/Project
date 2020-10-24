@@ -64,7 +64,7 @@ ob_start();
      $sortway = "";
      $s = $_POST['searchtxt'];
      $clause = " WHERE ";
-     $_SESSION['sqlxee'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod NATURAL JOIN asset_stat_overview NATURAL JOIN assetstat";//Query stub
+     $_SESSION['sqlxee'] = $sql="SELECT * FROM asset natural join assettype natural join asset_location natural join deploy_stat natural join respon_per NATURAL join room NATURAL JOIN getmethod  NATURAL JOIN assetstat";//Query stub
      if($_POST['searchtxt'] != ''){
          $search_word .= " [รหัสหรือชื่อครุภัณฑ์: ".$_POST['searchtxt']."] ";
             $c = "asset_ID";

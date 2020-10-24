@@ -101,7 +101,7 @@ while($row = $result->fetch_assoc()) {
 $mas .= $row['asset_number'];
 }
 }
-$sql = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."'";
+$sql = "SELECT asset_number From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' order by id";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {

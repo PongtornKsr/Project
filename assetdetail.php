@@ -37,7 +37,7 @@ $_SESSION['word_detail'] = $_SESSION['searchword'];
 $number = $_GET['asset_number'];
 $st= "";
     $id ="";
-    $sqlq = "SELECT * FROM asset natural join asset_stat_overview natural join assetstat WHERE id = $number";
+    $sqlq = "SELECT * FROM asset natural join assetstat WHERE id = $number";
     $result = $conn->query($sqlq);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
