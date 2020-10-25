@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<?php include('search_backend.php');  ?>
+<?php //include('search_backend.php'); 
+
+SESSION_START();
+
+require 'connect.php';
+require 'connect_b.php';
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="Css/BG.css">
+    <link rel="stylesheet" href="CSS/BG.css">
     <link rel="stylesheet" href="CSS/search.css">
    <link rel="stylesheet" href="CSS/navbar.css">
    <link rel="shortcut icon" href="img/computer.png">
@@ -34,7 +40,7 @@
    
     <center>
     <div id= "bodytext">
-    <form class="searchbox" id="sbox" action ="assetmanage.php" method= "post">
+    <form class="searchbox" id="sbox" action ="assetmanage.php" method= "POST">
     <br>
     <div><h1><?php if($_SESSION['OPs'] == 1){ echo "ค้นหาและแก้ไขข้อมูลครุภัณฑ์"; }else if($_SESSION['OPs'] == 2){ echo "ค้นหาและตรวจสอบข้อมูลครุภัณฑ์"; } ?></h1></div>
     <br>

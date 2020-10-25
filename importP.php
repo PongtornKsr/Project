@@ -430,13 +430,21 @@ if($row[15] != "" || $row[15] != "-" || !empty($row[15])){
 }
 }
       
-if($row[5] != "" || $row[5] != "-" || !empty($row[5])){
+if($row[5] != "" && $row[5] != "-" && !empty($row[5])){
   $sql = "SELECT * FROM `vendor` WHERE vendor_company like '%".$row[5]."%' limit 1";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
   while($rows = $result->fetch_assoc()) {
     $vendor = $rows['vendor_ID'];
   }
+  }else{
+    $sql = "SELECT * FROM `vendor` WHERE vendor_company like '%ยังไม่กำหนด%'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while($rows = $result->fetch_assoc()) {
+  $vendor = $rows['vendor_ID'];
+}
+}
   }
 }else{
   $sql = "SELECT * FROM `vendor` WHERE vendor_company like '%ยังไม่กำหนด%'";
@@ -695,10 +703,7 @@ $checkpoint = [];
     while($row = $result->fetch_assoc()) {
         $assetnum = $row['id'];
         array_push($idA,$assetnum);
-        $sqlsta = "INSERT INTO `asset_stat_overview`( `id`, `asset_stat_ID`) VALUES('".$assetnum."','".$asstat."')";
-        if ($conn->query($sqlsta) == TRUE) {
-        //echo $sqlsta;
-        }
+        
     }
 }
 }

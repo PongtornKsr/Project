@@ -2,7 +2,11 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!DOCTYPE html><?php SESSION_START(); ?>
+<!DOCTYPE html><?php 
+
+SESSION_START(); 
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

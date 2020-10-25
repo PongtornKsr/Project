@@ -59,7 +59,15 @@ table.table-bordered > thead > tr > th{
 <body>
 
 <?php 
+function my_money_format($money){
+  if(is_numeric($money)){
+      return number_format($money,2);
+  }
+  else{
+      return $money;
+  }
 
+}
 $mt = "";
 $getm = "";
 $C = "";
@@ -73,6 +81,7 @@ $cmin = array();
 $rowc= array();
 $setas = array();
 $NOAS = array();
+$asnnn = array();
 $asID = array();
 $sql = "SELECT * FROM `asset` GROUP by asset_name ORDER BY `asset`.`asset_setname` DESC ";
 $result = $conn->query($sql);
@@ -82,12 +91,16 @@ while($row = $result->fetch_assoc()) {
     array_push($NOAS,$row['No']);
     $AAA = explode('.',$row['asset_ID']);
     array_push($asID,$AAA[0]);
+    array_push($asnnn,$row['asset_number']);
+    //echo $AAA[0]."<br>";
+    //echo $row['asset_Set'].'<br>';
 }
 }
 for ($x = 0; $x < count($setas) ; $x++) {
 $set = $setas[$x];
 $asset_ID = $asID[$x];
 $NO = $NOAS[$x];
+$as = $asnnn[$x];
 $sql = "SELECT * From asset WHERE asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' ORDER BY id ASC limit 1";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -227,7 +240,7 @@ if(count($e) == 2){
   }else{
     //echo "B";
     $aid = "";
-    $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
+    $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_ID like '".$asset_ID."%' and asset_number = '".$mas."' LIMIT 1 ";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -236,7 +249,7 @@ if(count($e) == 2){
       }
     }
    $allid = [];
-    $sql = "SELECT asset_number FROM asset_report_text NATURAL join asset WHERE aid = '".$aid."'";
+    $sql = "SELECT asset_number FROM asset_report_text NATURAL join asset WHERE  aid = '".$aid."'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -290,7 +303,7 @@ if(count($e) == 2){
 
 
 
-$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_ID like '".$asset_ID."%' and asset_Set = '".$set."'";
+$sql = "SELECT * FROM asset natural join asset_location natural join vendor natural join assettype natural join money_type natural join getmethod where asset_ID like '".$asset_ID."%' and asset_number = '".$as."'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
@@ -312,7 +325,7 @@ $J = $row['fax'];
 }
 }
 
- $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_ID like '".$asset_ID."%' and asset_Set = '".$set."' and asset_number = ( SELECT MIN(asset_number) FROM asset WHERE asset_Set = '".$set."' ) ";
+ $sql = "SELECT * FROM asset natural join asset_report_text natural join asset_report where asset_ID like '".$asset_ID."%' and asset_number = '".$as."'  ";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  while($row = $result->fetch_assoc()) {
@@ -322,13 +335,13 @@ array_push($rowc , '
 <td align="center" width = "50px">'.$row['report_NO'].'</td> <!--เลขเอกสาร-->
 <td align="left" width = "300px">'.$row['report_order'].'</td> <!--รายการ-->
 <td align="center" width = "50px">'.$row['unit'].'</td>  <!--จำนวนชุด-->
-<td align="right"width = "50px">'.$row['price_per_unit'].'</td>  <!--ราคาต่อหน่วย-->
-<td align="right" width = "100px">'.$row['summary'].'</td>  <!--ราคารวม-->
+<td align="right"width = "50px">'.my_money_format($row['price_per_unit']).'</td>  <!--ราคาต่อหน่วย-->
+<td align="right" width = "100px">'.my_money_format($row['summary']).'</td>  <!--ราคารวม-->
 <td align="right" width = "50px">'.$row['life_time'].'</td>  <!--ค่าเสื่อมประจำปี-->
 <td align="right"width = "50px">'.$row['Depreciation_rate'].'</td>  <!--ค่าเสื่อมประจำปี-->
-<td align="right"width = "50px">'.$row['year_Depreciation'].'</td> <!--ค่าเสื่อมสะสม-->
-<td align="right"width = "50px">'.$row['sum_Depreciation'].'</td> <!--มูลค่าสุทธื-->
-<td align="right"width = "100px">'.$row['net_value'].'</td> <!--มูลค่าสุทธื-->
+<td align="right"width = "50px">'.my_money_format($row['year_Depreciation']).'</td> <!--ค่าเสื่อมสะสม-->
+<td align="right"width = "50px">'.my_money_format($row['sum_Depreciation']).'</td> <!--มูลค่าสุทธื-->
+<td align="right"width = "100px">'.my_money_format($row['net_value']).'</td> <!--มูลค่าสุทธื-->
 <td align="center"width = "50px">'.$row['Change_order'].'</td>  <!--รายการเปลี่ยนแปลง-->
 <td align="center"width = "50px">'.$row['report_number'].'</td>  <!--เลขที่เอกสาร-->   
   </tr>') ;}      }
@@ -422,7 +435,10 @@ echo "<br>"  ;
     echo $rowc[$q];
   }
     echo '</table>';
-    echo '<pagebreak/>';
+    if($forin > 0){
+      echo '<pagebreak/>';
+    }
+    
   }
 if( $forin > 0){
   
@@ -511,7 +527,14 @@ echo "<br>"  ;
       echo $rowc[$u];
   }
   echo '</table>';
-  echo '<pagebreak/>';
+  if($forin > 0){
+    if($x==(count($setas)-1)){
+
+    }else{
+      echo '<pagebreak/>';
+    }
+     
+  }
 }
   
 

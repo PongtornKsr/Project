@@ -23,7 +23,7 @@ else if ($_POST['action']=="Multi")
 
 if ($conn->query($sql) === TRUE) {
     insert_action("แก้ไขข้อมูลครุภัณฑ์รายการทั้งหมดที่มีอยู่ในรหัสเดียวกันกับ".$_SESSION['thisID']);
-  // header('Location: assetmanage.php');
+   header('Location: assetmanage.php');
   unset($_SESSION['thisID']);
   unset($_SESSION['asset_ID']);
   unset($_SESSION['editset']);

@@ -5,6 +5,7 @@
       header('location: login.php');
     } 
     include 'session_check.php';
+    header('Cache-Control:  no-cache, must-revalidate, max-age=0');
     ?>
          <!--
           <nav class="navbar navbar-light" style="background-color: #B3EE3A;" width = "100%">

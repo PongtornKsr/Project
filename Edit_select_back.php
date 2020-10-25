@@ -201,7 +201,7 @@ else if($initop == 2){
     
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM assettype WHERE asset_type_ID Like '%".$s."%' OR asset_type_name Like '%".$s."%' OR noun Like '%".$s."%' AND asset_type_ID NOT IN ('23')";
+        $sql = "SELECT * FROM assettype WHERE (asset_type_ID Like '%".$s."%' OR asset_type_name Like '%".$s."%' OR noun Like '%".$s."%') AND asset_type_ID NOT IN ('23')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -856,7 +856,7 @@ else if($initop == 8){
     }
     if(isset($_POST['query'])&&!isset($addop)){
         $s = mysqli_real_escape_string($conn, $_POST['query']);
-        $sql = "SELECT * FROM vendor WHERE vendor_ID Like '%".$s."%' OR vendor_company Like '%".$s."%' OR vendor_location Like '%".$s."%' OR vendor_tel Like '%".$s."%' OR fax Like '%".$s."%' AND vendor_ID NOT IN ('49')";
+        $sql = "SELECT * FROM vendor WHERE (vendor_ID Like '%".$s."%' OR vendor_company Like '%".$s."%' OR vendor_location Like '%".$s."%' OR vendor_tel Like '%".$s."%' OR fax Like '%".$s."%') AND vendor_ID NOT IN ('49')";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {

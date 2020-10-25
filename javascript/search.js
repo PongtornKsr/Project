@@ -23,7 +23,6 @@ $('document').ready(function(){
                     $('#newsearch').show();
                 }
         });
-
     });
 
     $('#newsearch').on('click',function(){

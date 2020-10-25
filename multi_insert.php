@@ -204,7 +204,7 @@ require 'connect.php';
             {
                 $rmn = str_replace(' ', '', $rmname);
                 if($rmn != ""){
-                     $sql = "INSERT INTO room ( room ) VALUE ( '".$rmname."' )";
+                     $sql = "INSERT INTO room ( room,resper_IDs ) VALUE ( '".$rmname."','48' )";
                 if ($conn->query($sql) == TRUE) {
                     $sql = "SELECT room_ID FROM room WHERE room = '".$rmname."'";
                     $result = $conn->query($sql);

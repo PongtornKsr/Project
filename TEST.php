@@ -27,6 +27,17 @@ $mpdf = new \Mpdf\Mpdf([
 ]);
 ob_start();
 
+
+function my_money_format($money){
+  if(is_numeric($money)){
+      return number_format($money,2);
+  }
+  else{
+      return $money;
+  }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +128,7 @@ if(count($e) == 2){
   $cu = count($cun);
   $mod = fmod($cu,2);
 if(count($cun) == $e[1]){
-  echo "A";
+  //echo "A";
   if($min == $max){
   $C .= $min;
   }else {
@@ -226,7 +237,7 @@ if(count($cun) == $e[1]){
 }else{
   //echo "B";
   $aid = "";
-  $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE asset_number = '".$mas."' LIMIT 1 ";
+  $sql = "SELECT aid From asset NATURAL JOIN asset_report_text natural join asset_report WHERE  asset_ID like '".$asset_ID."%' and asset_number = '".$mas."' LIMIT 1 ";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
@@ -319,13 +330,13 @@ array_push($rowc, '
 <td align="center" width = "50px">'.$row['report_NO'].'</td> <!--เลขเอกสาร-->
 <td align="left" width = "300px">'.$row['report_order'].'</td> <!--รายการ-->
 <td align="center" width = "50px">'.$row['unit'].'</td>  <!--จำนวนชุด-->
-<td align="right" width = "50px">'.$row['price_per_unit'].'</td>  <!--ราคาต่อหน่วย-->
-<td align="right" width = "100px">'.$row['summary'].'</td>  <!--ราคารวม-->
-<td align="right" width = "50px">'.$row['life_time'].'</td>  <!--ค่าเสื่อมประจำปี-->
+<td align="right" width = "50px">'.my_money_format($row['price_per_unit']).'</td>  <!--ราคาต่อหน่วย-->
+<td align="right" width = "100px">'.my_money_format($row['summary']).'</td>  <!--ราคารวม-->
+<td align="center" width = "50px">'.$row['life_time'].'</td>  <!--ค่าเสื่อมประจำปี-->
 <td align="right" width = "50px">'.$row['Depreciation_rate'].'</td>  <!--ค่าเสื่อมประจำปี-->
-<td align="right" width = "50px">'.$row['year_Depreciation'].'</td> <!--ค่าเสื่อมสะสม-->
-<td align="right" width = "50px">'.$row['sum_Depreciation'].'</td> <!--มูลค่าสุทธื-->
-<td align="right" width = "100px">'.$row['net_value'].'</td> <!--มูลค่าสุทธื-->
+<td align="right" width = "50px">'.my_money_format($row['year_Depreciation']).'</td> <!--ค่าเสื่อมสะสม-->
+<td align="right" width = "50px">'.my_money_format($row['sum_Depreciation']).'</td> <!--มูลค่าสุทธื-->
+<td align="right" width = "100px">'.my_money_format($row['net_value']).'</td> <!--มูลค่าสุทธื-->
 <td align="center" width = "50px">'.$row['Change_order'].'</td>  <!--รายการเปลี่ยนแปลง-->
 <td align="center" width = "50px">'.$row['report_number'].'</td>  <!--เลขที่เอกสาร-->   
 </tr>') ;}      }
@@ -419,7 +430,9 @@ echo "<br>"  ;
     echo $rowc[$q];
   }
     echo '</table>';
+    if( $forin > 0){
     echo '<pagebreak/>';
+    }
   }
 if( $forin > 0){
   
