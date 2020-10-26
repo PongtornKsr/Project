@@ -5,7 +5,7 @@ $asset_ID= "";
 $r_ID ="";
 $s_ID = "";
 require 'connect.php';
-include 'action_insert.php';
+
 if(isset($_POST['RoomUpdate'])){
     $rm = $_POST['rmid'];
 foreach ($aid as $x){
@@ -25,7 +25,7 @@ foreach ($aid as $x){
                     $r_ID = $row['room'];
                 }
             }
-            insert_action("เปลี่ยนห้องที่จัดเก็บครุภัณฑ์ ". $asset_ID." ไปยังห้อง ".$r_ID);
+           // insert_action("เปลี่ยนห้องที่จัดเก็บครุภัณฑ์ ". $asset_ID." ไปยังห้อง ".$r_ID);
     } else {
         echo "Error updating record: " . $conn->error;
     }
@@ -53,7 +53,7 @@ exit();
                             $s_ID = $row['asset_stat_name'];
                         }
                     }
-                    insert_action("เปลี่ยนสถานะครุภัณฑ์ครุภัณฑ์ ". $asset_ID." เป็นสถานะ ".$s_ID);
+                    //insert_action("เปลี่ยนสถานะครุภัณฑ์ครุภัณฑ์ ". $asset_ID." เป็นสถานะ ".$s_ID);
         } else {
             echo "Error updating record: " . $conn->error;
         }

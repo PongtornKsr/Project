@@ -1,7 +1,7 @@
 <?php 
 SESSION_START();
 require 'connect.php';
-include 'action_insert.php';
+
 $db = mysqli_connect('localhost', 'admin', '1234', 'prodata');
 
 
@@ -40,6 +40,7 @@ if(isset($_POST['save'])){
     $name = $fname." ".$lname;
     $sql ="UPDATE `userdata` SET `givenName`='".$fname."',`familyName`='".$lname."',`name`='".$name."',`email`='".$email."',`username`='".$uname."',`password`='".$pass."',`last_update`=(SELECT DATE_FORMAT(NOW(),'%d/%m/%y/%H:%i')) WHERE ID = '".$uid."'";
     $results = mysqli_query($db, $sql);
+    $_SESSION['Account'] = $fname.' '.$lname;
     echo 'Saved';
     $idid ="";
     $sqlr = "SELECT ID FROM userdata WHERE name = '".$_SESSION['Account']."'";
@@ -60,9 +61,9 @@ if(isset($_POST['save'])){
         {
             if($idid == $uid){
                 $_SESSION['Account'] = $row['givenName']." ".$row['familyName'];
-                insert_action("แก้ไขข้อมูลบัญชีผู้ใช้งาน ".$_SESSION['Account']);
+               // insert_action("แก้ไขข้อมูลบัญชีผู้ใช้งาน ".$_SESSION['Account']);
             }else{
-                insert_action("แก้ไขข้อมูลบัญชีผู้ใช้งาน ".$row['givenName']." ".$row['familyName']);
+              //  insert_action("แก้ไขข้อมูลบัญชีผู้ใช้งาน ".$row['givenName']." ".$row['familyName']);
             }
             
             
